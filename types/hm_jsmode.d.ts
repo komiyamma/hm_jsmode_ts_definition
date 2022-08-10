@@ -13052,7 +13052,7 @@ declare function setmenudelay(millisecond: number): number;
  * @param message_default
  * 入力欄にあらかじめ入力されている内容を指定します。
  * 
- * @param input_dialog_type
+ * @param input_prop
  * ダイアログを出す位置の決め方と、入力欄の種類を指定します。
  * ダイアログを出す位置と入力欄の種類は以下の値を指定することができます。
  * - 0x00　通常（省略と同じ）
