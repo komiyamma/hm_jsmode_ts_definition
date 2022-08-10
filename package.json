@@ -1,0 +1,26 @@
+{
+  "name": "hm_jsmode",
+  "version": "1.0.0",
+  "description": "hidemaru jsmode typescript difinition and tsconfig",
+  "main": "types/hm_jsmode.d.ts",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/komiyamma/hm_jsmode.git"
+  },
+  "keywords": [
+    "hidemaru",
+    "jsmode",
+    "javascript",
+    "typescript",
+    "typescript-difinition"
+  ],
+  "author": "Akitsugu Komiyama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/komiyamma/hm_jsmode/issues"
+  },
+  "homepage": "https://github.com/komiyamma/hm_jsmode#readme"
+}
