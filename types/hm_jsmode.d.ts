@@ -13674,7 +13674,6 @@ declare function endgroupundo(): number;
 findspecial ★ function() { var m = "findspecial"; eval(st); return r; }
 setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return r; }
 getstaticvariable ★ function() { var m = "getstaticvariable"; eval(fs); return r; }
-setregularcache ★ function() { var m = "setregularcache"; eval(st); return r; }
 
 /**
  * s
