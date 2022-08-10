@@ -13194,17 +13194,18 @@ saveconfig ★ function() { var m = "saveconfig"; eval(st); return r; }
  * 
  * saveconfig文は、ファイルタイプ別の設定を保存します。    
  * 
- * @filepath
+ * @param filepath 
  * パラメータを指定しない場合、ファイルタイプ別の設定ダイアログで「OK」を押したのと同じです。    
  * たとえ(一時的な設定)になっていたとしても、強制的に保存します。
  * 
  * パラメータに文字列を指定すると、指定した設定名として保存します。
  * 現在の状態は何も変わりません。
- *
- * @param filepath 
  * 
  * 参照：
  * @see setconfigstate
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
  */
 declare function saveconfig(filepath?: string): number;
 
