@@ -13187,7 +13187,6 @@ config ★ function() { var m = "config"; eval(st); return r; }
 getconfig ★ function() { var m = "getconfig"; eval(fsn); return r; }
 configcolor ★ function() { var m = "configcolor"; eval(st); return r; }
 getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
-saveconfig ★ function() { var m = "saveconfig"; eval(st); return r; }
 
 /**
  * s
@@ -13677,6 +13676,50 @@ setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return
 getstaticvariable ★ function() { var m = "getstaticvariable"; eval(fs); return r; }
 setregularcache ★ function() { var m = "setregularcache"; eval(st); return r; }
 
+/**
+ * s
+ * 
+ * setregularcache文は、検索のための正規表現のキャッシュの具合を指定します。    
+ * 正規表現パターンの文字列を、正規表現DLLによって解析する段階のキャッシュです。    
+ * 検索を実行することそのものには影響ありません。
+ * 
+ * @param cache_mode    
+ * マクロ内のキャッシュのモードを指定します。    
+ * - 数値に0を指定すると、キャッシュしません。既にキャッシュされているものがあれば破棄します。    
+ * - 数値に1を指定すると、マクロ内で使われた正規表現の検索をキャッシュし、マクロ実行中に同じ正規表現が使われたときはキャッシュを使います。マクロが終了したらキャッシュは無くなります。    
+ * - 数値に2を指定すると、マクロ内で使われた正規表現の検索をキャッシュし、同じ正規表現が使われたときはキャッシュを使います。マクロを終了してもキャッシュを保持します。    
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setregularcache(cache_mode: number): number;
+
+/**
+ * s
+ * 
+ * setregularcache文は、検索のための正規表現のキャッシュの具合を指定します。    
+ * 正規表現パターンの文字列を、正規表現DLLによって解析する段階のキャッシュです。    
+ * 検索を実行することそのものには影響ありません。
+ * 
+ * @param cache_mode 
+ * 文字列を指定すると、文字列の正規表現のキャッシュ格納だけを行います。    
+ * 
+ * @param is_keep_cache
+ * 0を指定すると、マクロ内だけキャッシュを保持し、マクロが終了したらキャッシュは無くなります。    
+ * 省略するか、もしくは1を指定すると、マクロが終了してもキャッシュを保持します。    
+ * 
+ * @param is_ignore_case
+ * 省略するか、0を指定すると、大文字/小文字の区別ありとして文字列を正規表現DLLにそのまま渡して解析します。    
+ * 1を指定すると、大文字/小文字の区別なしで検索される想定として、小文字に変換した文字列を正規表現DLLに渡して解析します。    
+ * 
+ * @comment
+ * キャッシュされる数は上限があります。getmaxinfo(8)によって取得できます。    
+ * 
+ * @returns
+ * キャッシュ格納に成功すれば１が返る。    
+ * 正規表現が不正な文字列であることなどが原因により、キャッシュ格納に失敗すれば０が返る。
+ */
+ declare function setregularcache(cache_regexp: string, is_keep_cache?: number, is_ignore_case?: number): number;
 
 /**
  * f
