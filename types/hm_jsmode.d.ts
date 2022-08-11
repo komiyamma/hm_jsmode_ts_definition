@@ -1422,6 +1422,8 @@ declare function monitorcount(): number;
  * k    
  * 
  * タブモード（ウィンドウ一覧のタブ）が有効であるかを表します。    
+ * 
+ * @comment
  * 参照：
  * @see settabmode 
  * 
@@ -1458,6 +1460,7 @@ declare function tabmode(): number;
  * @comment
  * openfile("/h");した後のステルスモードでは-1になります。
  * 
+ * @comment
  * 参照：
  * @see settabgroup 
  * 
@@ -1565,6 +1568,7 @@ declare function tabgrouptotal(): number;
  * 
  * 画面の先頭の行のy座標を表します。    
  * 
+ * @comment
  * 参照：    
  * @see enabledraw 文
  * 
@@ -1577,8 +1581,10 @@ declare function screentopy(): number;
  * 
  * 横スクロール位置のx座標を表します。    
  * 
+ * @comment
  * 参照：    
  * @see enabledraw 文
+ * 
  * @returns 横スクロール位置のx座標。
  */
 declare function screenleftx(): number;
@@ -1589,6 +1595,7 @@ declare function screenleftx(): number;
  * 他の秀丸エディタと内容比較をしている場合、    
  * 比較中のウィンドウハンドルを表します。    
  * 
+ * @comment
  * 参照：
  * @see compfile 文    
  * 
@@ -1603,6 +1610,7 @@ declare function compfilehandle(): number;
  * 他の秀丸エディタと同時スクロールしている場合、    
  * 同時スクロール中のウィンドウハンドルを表します。    
  * 
+ * @comment
  * 参照：    
  * @see scrolllink 文
  * @returns 他の秀丸エディタと同時スクロールしている場合、同時スクロール中のウィンドウハンドルを返す    
@@ -1786,6 +1794,7 @@ declare function directory3(hidemaru_handle?: number): number;
  * すべて小文字です。    
  * ファイルの拡張子を表すときは必ず先頭にピリオド（.）が入ります。
  *
+ * @comment
  * 参照：    
  * @see setfiletype
  * 
@@ -2059,6 +2068,7 @@ declare function browsemode(): number;
  * としてIMEをOFFにすると取得できます。    
  * iskeydownはIMEがONでも取得できます。    
  * 
+ * @comment
  * 参照：    
  * @see iskeydown    
  * @see inputchar    
@@ -2269,6 +2279,7 @@ declare function searchbuffer(): string;
  * setsearch("test", #word | #casesense);
  * finddown();
  * 
+ * @comment
  * 参照：    
  * @see searchoption2
  * @see setsearch
@@ -2303,6 +2314,7 @@ declare function searchoption(): number;
  * var fGrepFormHitOnly =     0x00000010;
  * var fGrepFormSortDate =    0x00000020;
  * 
+ * @comment
  * 参照：    
  * @see setsearch 
  * 
@@ -2330,6 +2342,7 @@ declare function targetcolormarker(): string;
  * 
  * 置換バッファの内容を表します。
  * 
+ * @comment
  * 参照：    
  * @see setreplace 
  * 
@@ -2345,6 +2358,7 @@ declare function replacebuffer(): string;
  *「(現在の内容)」でgrepした後は、   
  * 先頭に制御コードの\x01が入った文字列になります。
  * 
+ * @comment
  * 参照：    
  * @see setgrepfile 
  * 
@@ -2650,6 +2664,7 @@ declare function argcount(): number;
  * 
  * setcompatiblemodeの現在の状態を表します。
  * 
+ * @comment
  * 参照：    
  * @see setcompatiblemode
  * 
@@ -2728,6 +2743,7 @@ declare function stophistory(): number;
  * プロポーショナルフォントとして振る舞っているときも、    
  * 0x0001が有効になります。    
  * 
+ * @comment
  * 参照：    
  * @see config 文のxTabMode
  * 
@@ -2741,6 +2757,7 @@ declare function fontmode(): number;
  * 
  * 整形ラインの表示の有無を表します。    
  * 
+ * @comment
  * 参照：    
  * @see showformline 
  * 
@@ -2755,6 +2772,7 @@ declare function formline(): number;
  * 現在の「設定のリスト」の名前を表します。    
  * 「共通」の場合は無名になります。
  * 
+ * @comment
  * 参照：    
  * @see configset
  * 
@@ -2771,8 +2789,10 @@ declare function currentconfigset(): string;
  * - 0x0001(ビット0) 一時的な設定かどうか    
  * (現在はビット0しかありませんが将来的に拡張されるかもしれないので、
  *  以下のように判定してください。)
+ * 
  * @example
- *     configstate() & 0x0001
+ * configstate() & 0x0001
+ * 
  * @comment
  * 参照：    
  * @see setconfigstate
@@ -3111,6 +3131,7 @@ declare function outlinesize(): number;
  * 
  * アウトライン解析の枠にある項目の数を表します。    
  * 
+ * @comment
  * 参照：    
  * @see getoutlineitem    
  * 
@@ -3132,6 +3153,7 @@ declare function outlineitemcount(): number;
  * @example
  * message(str(100)); // "100"
  * 
+ * @comment
  * 参照：    
  * @see val 関数
  * @see str 関数
@@ -3165,6 +3187,7 @@ declare function str(num_value: number): string;
  * 
  * var a = (+"100") + (+"23"); // JavaScriptでは数字に+を付けると数値になる
  * 
+ * @comment
  * 参照：    
  * @see val 関数
  * @see str 関数
@@ -3245,6 +3268,7 @@ declare function unichar(unichar_code: number): string;
  * 
  * hex関数は、数値を16進数の文字列に変換します。
  * 
+ * @comment
  * 参照：    
  * @see val 関数
  * @see str 関数
@@ -5238,6 +5262,7 @@ declare function getgrepfilehist(history_ix: number, is_pin: 1 | number): "0" | 
  * var l = ytolineno(x, y);
  * message(str(c)+" "+str(l));
  * 
+ * @comment
  * 参照：    
  * @see ytolineno    
  * 
@@ -5262,6 +5287,7 @@ declare function xtocolumn(pos_x: number, pos_y: number): number
  * var l = ytolineno(x, y);
  * message(str(c)+" "+str(l));
  * 
+ * @comment
  * 参照：    
  * @see xtocolumn    
  * 
@@ -5286,6 +5312,7 @@ declare function ytolineno(pos_x: number, pos_y: number): number
  * var y = linenotoy(column, lineno);
  * message(str(c)+" "+str(l));
  * 
+ * @comment
  * 参照：    
  * @see linenotoy    
  * 
@@ -5310,6 +5337,7 @@ declare function columntox(pos_column: number, pos_lineno: number): number
  * var y = linenotoy(column, lineno);
  * message(str(c)+" "+str(l));
  * 
+ * @comment
  * 参照：    
  * @see columntox    
  * 
@@ -5407,6 +5435,7 @@ declare function getlinecount(text: string, pos: number, return_obj: { column: n
  * var c = charcount( 0x00000088 );
  * message(str(c));
  * 
+ * @comment
  * 参照：
  * @see showcharcount
  * 
@@ -5663,6 +5692,7 @@ declare function getoutlineitem(outline_ix: number, outline_attr: number): strin
  * execmacroを呼ぶ前に、一度別の変数に退避しておく必要があります。    
  * /a や execmacroで渡す引数の上限は31個です。
  * 
+ * @comment
  * 参照：
  * @see execmacro 文    
  * @see argcount キーワード    
@@ -6368,7 +6398,7 @@ declare function strreplace(text: string, search_text: string, replace_text): st
  * }
  * endmacro;
  * 
- * 
+ * @comment
  * 参照：
  * @see 秀丸エディタ管理
  * 
@@ -6394,7 +6424,9 @@ declare function newfile(): number
  * 新しい秀丸エディタが起動して、そこに開きます。    
  * マクロの実行は、新しい秀丸エディタに切り替わります。    
  * 
- * 参照：秀丸エディタ管理
+ * @comment
+ * 参照：
+ * @see 秀丸エディタ管理
  * 
  * @param fileoption_flag 
  * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
@@ -6466,7 +6498,10 @@ declare function newfile(): number
  * openfile("C:\\folder\\*.txt"); ディレクトリ付きのフルパスで指定すると、カレントディレクトリの指定を含む形でダイアログボックスを表示します。
  * 
  * @comment
- * 参照：@see hidemaru.exeを起動するオプション
+ * 参照：
+ * @see hidemaru.exeを起動するオプション
+ * 
+ * @comment
  * openfile文で起動オプションの指定    
  * openfileのパラメータには、hidemaru.exeを起動するオプション がそのまま指定できます。    
  * openfileのパラメータには、hidemaru.exeを起動するオプション がそのまま指定できます。    
@@ -7149,6 +7184,7 @@ declare function stophistoryswitch(): number;
 /**
  * openfileのダイアログボックス版。
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -7164,6 +7200,7 @@ declare function OPEN(): number;
 /**
  * saveasのダイアログボックス版。
  * 
+ * @comment
  * 参照：
  * @see getresultex
 
@@ -7178,6 +7215,7 @@ declare function SAVEAS(): number;
 /**
  * loadfileのダイアログボックス版。
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -7193,6 +7231,7 @@ declare function LOAD(): number;
 /**
  * appendsaveのダイアログボックス版。
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -7216,6 +7255,7 @@ declare function CHANGENAME(): number;
 /**
  * insertfileのダイアログボックス版。
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -8171,6 +8211,7 @@ declare function moveto_gcu(pos_column_gcu: number, pos_lineno: number): number;
  * @example
  * nextpage(0, 1);
  * 
+ * @comment
  * 参照：    
  * @see prevpage
  * 
@@ -8201,6 +8242,7 @@ declare function nextpage(addition_line?: number, is_cursor_keep?: number): numb
  * @example
  * prevpage(0, 1);
  * 
+ * @comment
  * 参照：    
  * @see nextpage
  * 
@@ -8231,6 +8273,7 @@ declare function prevpage(addition_line?: number, is_cursor_keep?: number): numb
  * @example
  * halfnextpage(0, 1);
  * 
+ * @comment
  * 参照：    
  * @see halfprevpage
  * 
@@ -8261,6 +8304,7 @@ declare function halfnextpage(addition_line?: number, is_cursor_keep?: number): 
  * @example
  * halfprevpage(0, 1);
  * 
+ * @comment
  * 参照：    
  * @see halfnextpage
  * 
@@ -8478,6 +8522,7 @@ declare function prevpos(): number;
  * prevpos文で移動した履歴は記憶されているため、    
  * このprevposhistbackで移動した軌跡を過去へたどることが出来ます。
  * 
+ * @comment
  * 参照：
  * @see prevposhistforward
  * 
@@ -8492,6 +8537,7 @@ declare function prevposhistback(): number;
  * prevpos文で移動した履歴は記憶されているため、    
  * このprevposhistbackで履歴を遡ってカーソル移動します。
  * 
+ * @comment
  * 参照：
  * @see prevposhistforward
  * 
@@ -8505,6 +8551,7 @@ declare function prevposhistback(): number;
  * 
  * prevposhistbackとは逆の動作で、履歴を戻している場合、進めます。
  * 
+ * @comment
  * 参照：
  * @see prevposhistback
  * 
@@ -8520,6 +8567,7 @@ declare function prevposhistforward(): number;
  * マークがなければ、マークします。    
  * 要するに現行行に対して「マーク⇔マーク解除」の切り替えをします。
  * 
+ * @comment
  * 参照：
  * @see marked
  * 
@@ -9441,6 +9489,7 @@ declare function beginclipboardread(): number;
  * getclipboard()を続けて呼ぶことができるのは、同じ秀丸エディタ内のみです。    
  * newfileやsetactivehidemaruで別の秀丸エディタに切り替わった場合は、getclipboard()は続けて呼ぶことはできません。    
  * 
+ * @comment
  * 参照：    
  * @see beginclipboardread
  * 
@@ -9993,6 +10042,7 @@ declare function shifttab(): number;
  * selectline();
  * toupper(0x01 | 0x02);
  * 
+ * @comment
  * 参照：    
  * @see toupper 
  * @see tolower
@@ -10029,6 +10079,7 @@ declare function toupper(target_char_group_flag?: number): 0;
  * var a = "HankakuＺｅｎｋａｋｕ";
  * var b = toupper( a, 0x01 | 0x02 );
  * 
+ * @comment
  * 参照：    
  * @see toupper
  * @see tolower
@@ -10062,6 +10113,7 @@ declare function toupper(text: string, target_char_group_flag?: number): string;
  * selectline();
  * tolower(0x01 | 0x02);
  * 
+ * @comment
  * 参照：    
  * @see tolower 
  * @see toupper
@@ -10098,6 +10150,7 @@ declare function tolower(target_char_group_flag?: number): 0;
  * var a = "HankakuＺｅｎｋａｋｕ";
  * var b = tolower( a, 0x01 | 0x02 );
  * 
+ * @comment
  * 参照：    
  * @see tolower
  * @see toupper
@@ -10427,6 +10480,7 @@ declare function find1(): number;
  * - searchoptionの状態フラグ、    
  * - find2文の直前にforceinselect文が実行されていれば、その指定が有効となります。    
  * 
+ * @comment
  * 参照：
  * @see searchbuffer
  * @see searchoption
@@ -10505,6 +10559,7 @@ setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
  * 検索/置換文字列には上限があります。    
  * 上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。    
  * 
+ * @comment
  * 参照：
  * @see 検索と置換文字列の上限について
  * 
@@ -10691,6 +10746,7 @@ declare function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
  * @example
  * setgrepfile("*.txt");
  * 
+ * @comment
  * 参照：
  * @see grepfilebuffer
  * 
@@ -10747,6 +10803,7 @@ declare function goupdateup(): number;
  * forceinselect(1);
  * finddown();
  * 
+ * @comment
  * 参照：
  * @see escapeinselect
  * @see searchdown
@@ -10779,6 +10836,7 @@ declare function clearupdates(): number;
  * @example
  * grepdialog();
  * 
+ * @comment
  * 参照：
  * @see grep
  * @see grepdialog
@@ -10804,6 +10862,7 @@ grepreplacedialog2 ★ function() { var m = "grepreplacedialog2"; eval(st); retu
  * 
  * escapeinselect文は、「選択した範囲」動作を取り消す。
  * 
+ * @comment
  * 参照：    
  * @see forceinselect 
  * 
@@ -10822,6 +10881,7 @@ declare function escapeinselect(): number;
  * 1 を指定すると強調オンになります。    
  * 省略すると、オンとオフを切り替えます。    
  * 
+ * @comment
  * 参照：    
  * @see foundhilighting
  * 
@@ -10998,6 +11058,7 @@ declare function setinselect2(): number;
  * searchdown等の直前に指定するようにしてください。    
  * searchdown等でinselect2を指定して検索した後は、targetcolormarkerは上書きされ、文字単位の選択用の予約された文字列になります。    
  * 
+ * @comment
  * 参照：
  * @see searchdown 等
  * @see targetcolormarker
@@ -11240,6 +11301,7 @@ declare function split(split_type?: number, split_switch?: number, split_pos?: n
  * @param setting_value
  * フォーカスが無いほうの分割のスクロールする量を指定して、スクロールさせます。    
  * 
+ * @comment
  * 参照：    
  * @see split
  * @see splitswitch
@@ -11325,6 +11387,7 @@ declare function windowlist(): number;
  * is_after_cursorに 1 を指定することで、    
  * カーソル位置以降の異なる部分をカラーマーカーで色付けすることができます。    
  * 
+ * @comment
  * 参照：
  * @see compfilehandle
  * @see COMPFILE
@@ -11399,6 +11462,7 @@ declare function alwaystopswitch(): number;
  * @example
  * settabmode(1);
  * 
+ * @comment
  * 参照：
  * @see tabmode
  * @see 秀丸エディタ管理(タブ編)
@@ -11449,6 +11513,7 @@ declare function settabmode(to_tabmode: number): number;
  *     i = i + 1;
  * }
  * 
+ * @comment
  * 参照：    
  * @see tabgroup
  * @see 秀丸エディタ管理(タブ編)
@@ -11482,6 +11547,7 @@ declare function settabgroup(hidemaru_handle?: number, groupid?: number): number
  *     i = i + 1;
  * }
  * 
+ * @comment
  * 参照：    
  * @see taborder
  * @see 秀丸エディタ管理(タブ編)
@@ -11521,6 +11587,7 @@ declare function fullscreen(): number;
  * 
  * backtagjump文は、バックタグジャンプを実行します。
  * 
+ * @comment
  * 参照：    
  * @see savebacktagjump
  * 
@@ -11534,12 +11601,14 @@ declare function backtagjump(): number;
  * 
  * directtagjump文は、ダイレクトタグジャンプを実行します。
  * 
+ * @comment
  * 参照：    
  * @see savebacktagjump
  * 
  * @example
  * directtagjump
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -11765,6 +11834,7 @@ declare function showlineno(): number;
  *     gofileend();
  * }
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * @see savebacktagjump
@@ -11889,6 +11959,7 @@ declare function autospellcheckswitch(): number;
  * 
  * spellcheckdialog文は、「スペルミスの修正...」コマンドを実行します。
  * 
+ * @comment
  * 参照：
  * @see getresultex
  * 
@@ -11915,6 +11986,7 @@ declare function spellcheckdialog(): number;
  * @example
  * savebacktagjump();
  * 
+ * @comment
  * 参照：    
  * @see tagjump
  * @see directtagjump
@@ -11943,6 +12015,7 @@ declare function savebacktagjump(): number;
  * - 0x0040    空行区切り 
  * - 0x0080    行の強調表示区切り 
  * 
+ * @comment
  * 参照：
  * @see foldall
  * 
@@ -11956,6 +12029,7 @@ declare function fold(fold_condition_flag?: number): number;
  * 
  * unfold文は「展開」を実行します。
  * 
+ * @comment
  * 参照：
  * @see unfoldall
  * 
@@ -11994,6 +12068,7 @@ declare function unfold(): number;
  * @example
  * foldall(0x0002); //インデントの深さで折りたたみ
  * 
+ * @comment
  * 参照：
  * @see fold
  * 
@@ -12007,6 +12082,7 @@ declare function foldall(fold_condition_flag?: number, is_show_dialog?: number):
  * 
  * unfold文は「全て展開」を実行します。
  * 
+ * @comment
  * 参照：
  * @see unfold
  * 
@@ -12390,6 +12466,7 @@ declare function beep(): number;
  * WAVファイルの再生の終了を待たずにマクロの実行を継続します。    
  * 再生が終了するまで待つ場合、play文ではなく、playsync文を使います。
  * 
+ * @comment
  * 参照：
  * @see playsync
  * 
@@ -12413,6 +12490,7 @@ declare function play(wav_filepath: string): number;
  * WAVファイルの再生が終了するまで待ちます。    
  * 再生の終了を待たずにマクロの実行を継続するには、playsync文ではなく、play文を使います。
  * 
+ * @comment
  * 参照：
  * @see play
  * 
@@ -12450,6 +12528,7 @@ declare function debuginfo(output_mode: number): number;
  * @example
  * debuginfo(2);
  *  
+ * @comment
  * 参照：    
  * @see showvars
  * @see execmacro で別のマクロを実行する場合
@@ -12488,6 +12567,7 @@ declare function debuginfo(output_mode: number): number;
  * debuginfo(2);
  * debuginfo("アウトプット枠\r\n");
  * 
+ * @comment
  * 参照：    
  * @see showvars
  * @see execmacro で別のマクロを実行する場合
@@ -12506,6 +12586,7 @@ declare function debuginfo(message: string): number;
  * 実際に表示させるためには、debuginfo文でデバッグメッセージの表示が許可されている必要があります。    
  * debuginfo文で数値で2を指定している場合はアウトプット枠に出力します。    
  * 
+ * @comment
  * 参照：    
  * @see debuginfo
  * 
@@ -12540,6 +12621,7 @@ declare function showvars(): number;
  * title("ステータスバーです", 1);
  * title(-1, 1);	//ステータスバーを維持する場合にも第２パラメータを指定
  * 
+ * @comment
  * 参照：    
  * @see gettitle
  * 
@@ -12585,6 +12667,7 @@ declare function title(title_text: string, target_location: number): number;
  * title("ステータスバーです", 1);
  * title(-1, 1);	//ステータスバーを維持する場合にも第２パラメータを指定
  * 
+ * @comment
  * 参照：    
  * @see gettitle
  * 
@@ -12616,6 +12699,7 @@ disabledraw2 ★ function() { var m = "disabledraw2"; eval(st); return r; }
  * 
  * enablebreak文はdisablebreakされた状態を解除します。
  * 
+ * @comment
  * 参照：    
  * @see enablebreak
  * @see execmacroで別のマクロを実行する場合
@@ -12647,6 +12731,7 @@ declare function enablebreak(): number;
  * enableinvert文は、disableinvertを解除します。    
  * マクロ実行中の反転表示は目ざわりな場合が多いので、その場合はあらかじめdisableinvertしてから範囲選択すれば、画面上では反転せずに範囲選択されます。
  * 
+ * @comment
  * 参照：    
  * @see enableinvert
  * @see execmacroで別のマクロを実行する場合
@@ -12662,6 +12747,7 @@ declare function disableinvert(): number;
  * 
  * enableinvert文は、disableinvertを解除します。    
  * 
+ * @comment
  * 参照：    
  * @seedisableinvert
  * 
@@ -12687,6 +12773,7 @@ declare function enableinvert(): number;
  * - disableerrormsg文を実行した場合はエラーになっていてもエラーダイアログが出なくなるため、    
  * 以後エラーの処理を正しく行うようにしてください。
  * 
+ * @comment
  * 参照：
  * @see enableerrormsg
  * 
@@ -12701,6 +12788,7 @@ declare function disableerrormsg(): number;
  * enableerrormsg文は、disableerrormsg文によって抑制されたエラーメッセージを表示を、    
  * 元の表示される状態へと戻します。
  * 
+ * @comment
  * 参照：
  * @see disableerrormsg
  * 
@@ -12731,6 +12819,7 @@ declare function enableerrormsg(): number;
  * - 0x0080 は、マクロ実行中に開いたファイルは、マクロが終了した後もヒストリに残らなくなります。
  * - 0x0100 は、マクロ実行中にファイルを開かなくても、自分自身がヒストリに残らないようになります。一般的にはファイルを開いていた時点で既にヒストリにあるので効果は無いですが、changenameした場合に効果があります。
  * 
+ * @comment
  * 参照：    
  * @see execmacroで別のマクロを実行する場合
  * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
@@ -12782,6 +12871,7 @@ declare function sleep(millisecond: number): number;
  * 
  * 秀丸エディタ64bit版の浮動小数点版においては、setfloatmode 0;の状態では、数値は通常版32bitと同じ扱いになります。    
  * 
+ * @comment
  * 参照：
  * @see 浮動小数点数モード
  * @see HideMath.dll
@@ -12884,6 +12974,7 @@ declare function inputpos(text: string): number;
  * 
  * message(selected);
  * 
+ * @comment
  * 参照：    
  * @see mousemenu
  * @see menuarray
@@ -12922,6 +13013,7 @@ declare function menu(item1: string, ...optional_items: string[]): number;
  *     message("Cが選ばれました。");
  * }
  * 
+ * @comment
  * 参照：    
  * @see menu
  * @see setmenudelay
@@ -12960,6 +13052,7 @@ declare function mousemenu(item1: string, ...optional_items: string[]): number;
  * 指定の数値のメニューの個数まで、メニュー項目を表示するという、どこまで表示するかを指定することが出来ます。    
  * 省略した場合は、全てのメニュー項目を表示します。    
  * 
+ * @comment
  * 参照：
  * @see menu
  * @see mousemenuarray
@@ -12999,6 +13092,7 @@ declare function menuarray(menu_items: string[], menu_len?: number): number;
  * 指定の数値のメニューの個数まで、メニュー項目を表示するという、どこまで表示するかを指定することが出来ます。    
  * 省略した場合は、全てのメニュー項目を表示します。    
  * 
+ * @comment
  * 参照：
  * @see menu
  * @see mousemenuarray
@@ -13150,6 +13244,7 @@ declare function input(message_text: string, message_default?: string, input_pro
  * var c = inputchar("キーを入力してください",5000);
  * message(hex(c));
  * 
+ * @comment
  * 参照：
  * @see iskeydown
  * @see keypressed
@@ -13200,6 +13295,7 @@ getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
  * パラメータに文字列を指定すると、指定した設定名として保存します。
  * 現在の状態は何も変わりません。
  * 
+ * @comment
  * 参照：
  * @see setconfigstate
  * 
@@ -13224,6 +13320,7 @@ declare function saveconfig(filepath?: string): number;
  * 「ファイルタイプ別の設定」のダイアログボックスでOKを押すと、    
  * 他の秀丸エディタにも反映されます。（同じファイルタイプであれば）
  * 
+ * @comment
  * 参照：
  * @see configstate
  * 
@@ -13252,6 +13349,7 @@ declare function setconfigstate(config_flag: number): number;
  * @example
  * setfiletype(".mytxt", 1);
  * 
+ * @comment
  * 参照：
  * @see filetype
  * @see configset
@@ -13286,6 +13384,7 @@ declare function setfiletype(extension: string, is_read_setting_file): number;
  * ただし、ファイルタイプ別の設定が一時的な設定になっている場合は、反映されません。    
  * 一時的な設定かどうかはconfigstateで判断できます。
  * 
+ * @comment
  * 参照：
  * @see writeregstr
  * @see writeregnum
@@ -13311,6 +13410,7 @@ declare function envchanged(): number;
  * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
  * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
  * 
+ * @comment
  * 参照：
  * @see savekeyassign
  * 
@@ -13341,6 +13441,7 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
  * @example
  * savekeyassign("temp.key", 0, 1);
  * 
+ * @comment
  * 参照：
  * @see loadkeyassign
  * 
@@ -13422,6 +13523,7 @@ declare function setfontchangemode(n_mode: number): number;
  * 列の幅はA列=10, B列=20, C列=5で、C列以降はずっと5になります。    
  * タブの文字数が固定の場合は、自動的に自由配置モードになります。    
  * 
+ * @comment
  * 参照：    
  * @see gettabstop
  * 
@@ -13456,6 +13558,7 @@ declare function settabstop(n_prop: 0|number, tab_width_settings:string): 0;
  *     message(e);
  * }
  * 
+ * @comment
  * 参照：    
  * @see settabstop
  * 
@@ -13607,6 +13710,7 @@ declare function setwindowsize(width_column: number, height_lineno): number;
  * - 4  ファイルマネージャ枠
  * - 5  アウトプット枠
  * 
+ * @comment
  * 参照：    
  * @see getfocus
  * 
@@ -13634,6 +13738,7 @@ declare function setfocus(window_target: number): number;
  * これは全置換のためのグループ化ということを意味しています。    
  * undo文でやり直しをまとめてするか１つずつするかの指定が適用されるようになります。    
  * 
+ * @comment
  * 参照：
  * @see endgroupundo
  * @see undo
@@ -13661,6 +13766,7 @@ declare function begingroupundo(): number;
  * これは全置換のためのグループ化ということを意味しています。    
  * undo文でやり直しをまとめてするか１つずつするかの指定が適用されるようになります。    
  * 
+ * @comment
  * 参照：
  * @see begingroupundo
  * @see undo
@@ -13748,6 +13854,7 @@ declare function hidemaruorder(hidemaru_handle: number): number;
  * @example
  * var c = hidemarucount();
  * 
+ * @comment
  * 参照：    
  * @see 秀丸エディタ管理 
  * 
@@ -13786,6 +13893,7 @@ declare function hidemarucount(): number;
  * @comment
  * ウィンドウ番号からウィンドウハンドルを得るのは、hidemaruhandleを使用します。
  * 
+ * @comment
  * 参照：
  * @see hidemaruhandle
  * 
@@ -13859,8 +13967,57 @@ declare function closehidemaru(hidemaru_handle: number): number;
  */
 declare function closehidemaruforced(hidemaru_handle: number): number;
 
-getcurrenttab ★ function() { var m = "getcurrenttab"; eval(fn); return r; }
-gettabhandle ★ function() { var m = "gettabhandle"; eval(fn); return r; }
+/**
+ * f
+ * 
+ * getcurrenttab関数は、タブモードのとき、グループ内の選択されているタブに対応する    
+ * 秀丸エディタのウィンドウハンドルを取得します。
+ * 
+ * @param id_type 
+ * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。
+ * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。
+ * 
+ * @param tab_group_id
+ * id_typeが0の場合、グループIDを指定します。
+ * id_typeがが1の場合、0から数えたグループの順番を指定します。自分自身は0になります。
+ * 
+ * @comment
+ * 参照：
+ * @see 秀丸エディタ管理(タブ編)
+ * 
+ * @returns
+ * 秀丸エディタのウィンドウハンドルを返します。    
+ * 引数に対応するようなタブが存在しない時は、-1を返す。
+ */
+declare function getcurrenttab(id_type: number, tab_group_id): number;
+
+/**
+ * f
+ * 
+ * gettabhandle関数は、タブモードのとき、各タブのウィンドウハンドルを取得します。（
+ * グループとタブの順番を指定して、秀丸エディタのウィンドウハンドルを取得することができます。
+ * 
+ * @param id_type 
+ * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。
+ * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。
+ * 
+ * @param tab_group_id
+ * id_typeが0の場合、グループIDを指定します。
+ * id_typeがが1の場合、0から数えたグループの順番を指定します。自分自身は0になります。
+ * 
+ * @param tab_order
+ * グループ内のタブの順番を指定します。
+ * 
+ * @comment
+ * 参照：
+ * @see 秀丸エディタ管理(タブ編)
+ * 
+ * @returns
+ * 秀丸エディタのウィンドウハンドルを返します。    
+ * 引数に対応するようなタブが存在しない時は、-1を返す。
+ */
+declare function gettabhandle(id_type: number, tab_group_id, tab_order:number): number;
+
 getclipboardinfo ★ function() { var m = "getclipboardinfo"; eval(fs); return r; }
 loaddll ★ function(s) { return hidemaru.LoadDll(s); }
 createobject ★ function() { eval(co2); return r; }
