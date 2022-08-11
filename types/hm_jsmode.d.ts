@@ -50,8 +50,8 @@ declare namespace hidemaru {
    * DLLに存在する関数をメソッドとして呼び出すことができます。    
    * 予約された名前は使うことができません。    
    * DLLで決められた呼び出し方法で呼び出さないとクラッシュする可能性があるので注意が必要です。    
-   * 呼び出し方法は、hidemaru.loadDllで取得したILoadDllResult型のうち、    
-   * DllFuncManagerオブジェクトのプロパティである
+   * 呼び出し方法は、hidemaru.loadDllで取得したILoadDllResult型ののプロパティうち、    
+   * DllFuncManager型である
    * - dllFunc
    * - dllFuncStr
    * - dllFuncW
