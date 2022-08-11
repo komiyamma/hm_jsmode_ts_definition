@@ -13397,6 +13397,7 @@ declare function input(message_text: string, message_default?: string, input_pro
 declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number;
 
 iskeydown ★ function() { var m = "iskeydown"; eval(fn); return r; }
+
 getininum ★ function() { var m = "getininum"; eval(fn); return r; }
 getininumw ★ function() { var m = "getininumw"; eval(fn); return r; }
 getinistr ★ function() { var m = "getinistr"; eval(fs); return r; }
@@ -13405,6 +13406,7 @@ writeininum ★ function() { var m = "writeininum"; eval(st); return r; }
 writeininumw ★ function() { var m = "writeininumw"; eval(st); return r; }
 writeinistr ★ function() { var m = "writeinistr"; eval(st); return r; }
 writeinistrw ★ function() { var m = "writeinistrw"; eval(st); return r; }
+
 openreg ★ function() { var m = "openreg"; eval(st); return r; }
 createreg ★ function() { var m = "createreg"; eval(st); return r; }
 closereg ★ function() { var m = "closereg"; eval(st); return r; }
