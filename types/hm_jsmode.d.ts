@@ -13396,12 +13396,228 @@ declare function input(message_text: string, message_default?: string, input_pro
  */
 declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number;
 
-iskeydown ★ function() { var m = "iskeydown"; eval(fn); return r; }
+/**
+ * s
+ * 
+ * iskeydown関数は、指定されたキーの状態を取得します。
+ * 
+ * @example
+ * var f =iskeydown( 'A' );
+ * 
+ * @param virtual_key 
+ * 仮想キーコードを指定します。
+ * 
+ * そのキーが押されている場合は 1、そうでない場合は 0 を返します。    
+ * 主なキーコードは以下の通りです。このキーコードは、inputcharが返す値とは違う値なので注意してください。
+ * 
+ * - Shift    0x10 
+ * - Ctrl    0x11 
+ * - Alt    0x12 
+ * - 左    0x25 
+ * - 上    0x26 
+ * - 右    0x27 
+ * - 下    0x28 
+ * - 0～9    0x30～0x39 
+ * - A～Z    0x41～0x5A 
+ * 
+ * 実はこの関数は、Win32APIであるGetKeyState()を呼び出しているだけです。    
+ * Win32APIのリファレンスの仮想キーコードの一覧を見ると調べることが出来ます。    
+ * 
+ * この関数を利用すれば、キー割り当てで、たくさんのキーに同じマクロを割り当てても、    
+ * 「マクロ開始時になんのキーをおしているか？」でマクロファイル内で分岐する処理が可能になります。    
+ * たとえば、Ctrl+上,下,左,右のキーに全て「マクロ1」を割り当てます。
+ * 
+ * @example
+ * if( iskeydown(0x25) ) { 「←」の処理 }
+ * if( iskeydown(0x26) ) { 「↑」の処理 }
+ * if( iskeydown(0x27) ) { 「→」の処理 }
+ * if( iskeydown(0x28) ) { 「↓」の処理 }
+ * 
+ * @comment
+ * マクロ起動直後のキー状態が取得できるのは、マクロ実行開始から１秒以内です。
+ * また、１秒以内であっても以下の関数・文を呼んだ後では起動直後のキー状態は取得できません。
+ * keypressed, ddewaitadvice, localgrep, runsync, menu系文
+ * 
+ * @param key_info_type 
+ * 省略するか0を指定すると、キーが押されているかどうかを取得します。    
+ * 1 を指定すると、キーのトグル状態を取得します。    
+ * トグルとは「CapsLock」キーや「半角・全角・漢字」や「NumLock」キーなど、    
+ * キーを押すと、（押しっぱなしでなくとも）状態が変わることです。
+ * 
+ * @example
+ * 例 
+ * if( iskeydown( 0x14, 1 ) ) { 「CapsLock」が有効のときの処理 }
+ * 
+ * @comment
+ * 参照：
+ * @see inputchar
+ * @see keypressed
+ * @see keypressedex
+ * 
+ * @returns
+ * キーの状態を返します。    
+ * 
+ * key_info_typeが0もしくは省略した場合、    
+ * virtual_keyが押されている場合は 1、そうでない場合は 0 を返します。    
+ * 
+ * key_info_typeが1の時、    
+ * 対象のvirtual_keyのトグル状態を示す値を返します。
+ */
+declare function iskeydown(virtual_key: string, key_info_type?: number): number;
 
-getininum ★ function() { var m = "getininum"; eval(fn); return r; }
-getininumw ★ function() { var m = "getininumw"; eval(fn); return r; }
-getinistr ★ function() { var m = "getinistr"; eval(fs); return r; }
-getinistrw ★ function() { var m = "getinistrw"; eval(fs); return r; }
+/**
+ * f
+ * 
+ * getininum関数は、INIファイルから数値を取得します。 
+ * 文字列を取り出す場合は、この関数ではなく、getinistr関数を使ってください。
+ * 
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @example
+ * // INIファイルの例 
+ * [Hello]
+ * Number=123
+ * String=XYZ
+ * 
+ * var a = getininum("C:\\Folder\\Test.ini","Hello","Number");
+ * message(a);
+ *
+ * @comment
+ * 参照：
+ * @see getinistr
+ * @see writeinistr
+ * @see writeininum
+ *
+ * @returns 
+ * 値を数値に変換して返します。    
+ * 取り出した値が数値に変換不能な場合は0が返ります。
+ */
+declare function getininum(ini_filepath: string, section_name: string, key_name: string): number;
+
+/**
+ * f
+ * 
+ * getininumwは、getininumのUnicode版です。    
+ * 使い方はgetininumと同じです。
+ * 
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @example
+ * // INIファイルの例 
+ * [Hello]
+ * Number=123
+ * String=XYZ
+ * 
+ * var a = getininum("C:\\Folder\\Test.ini","Hello","Number");
+ * message(a);
+ *
+ * @comment
+ * 参照：
+ * @see getinistrw
+ * @see writeinistrw
+ * @see writeininumw
+ *
+ * @returns 
+ * 値を数値に変換して返します。    
+ * 取り出した値が数値に変換不能な場合は0が返ります。
+ */
+declare function getininumw(ini_filepath: string, section_name: string, key_name: string): number;
+
+/**
+ * f
+ * 
+ * getinistr関数は、INIファイルから文字列を取得します。 
+ * 数値を取り出す場合は、この関数ではなく、getininum関数を使ってください。
+ * 
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @example
+ * // INIファイルの例 
+ * [Hello]
+ * Number=123
+ * String=XYZ
+ * 
+ * var a = getinistr("C:\\Folder\\Test.ini","Hello","String");
+ * message(a);
+ *
+ * @comment
+ * 参照：
+ * @see getininum
+ * @see writeinistr
+ * @see writeinistr
+ *
+ * @returns 
+ * 値を数値に変換して返します。    
+ * 取り出した値が数値に変換不能な場合は0が返ります。
+ */
+declare function getinistr(ini_filepath: string, section_name: string, key_name: string): number;
+
+/**
+ * f
+ * 
+ * getinistrwは、getinistrのUnicode版です。    
+ * 使い方はgetinistrと同じです。
+ * 
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @example
+ * // INIファイルの例 
+ * [Hello]
+ * Number=123
+ * String=XYZ
+ * 
+ * var a = getinistr("C:\\Folder\\Test.ini","Hello","String");
+ * message(a);
+ *
+ * @comment
+ * 参照：
+ * @see getininumw
+ * @see writeinistrw
+ * @see writeinistrw
+ *
+ * @returns 
+ * 値を数値に変換して返します。    
+ * 取り出した値が数値に変換不能な場合は0が返ります。
+ */
+declare function getinistrw(ini_filepath: string, section_name: string, key_name: string): number;
+
+
 writeininum ★ function() { var m = "writeininum"; eval(st); return r; }
 writeininumw ★ function() { var m = "writeininumw"; eval(st); return r; }
 writeinistr ★ function() { var m = "writeinistr"; eval(st); return r; }
