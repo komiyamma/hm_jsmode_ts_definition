@@ -41,14 +41,154 @@ declare namespace console {
 declare namespace hidemaru {
   function createObject(progID: string): any;
 
-  interface IResultLoadDll {
-    readonly dllFunc: any;
-    readonly dllFuncW: any;
-    readonly dllFuncStr: any;
-    readonly dllFuncStrW: any;
+  type DllFuncManager = any
+
+  /**
+   * hidemaru.loadDll関数の返り値。    
+   * 
+   * @comment
+   * DLLに存在する関数をメソッドとして呼び出すことができます。    
+   * 予約された名前は使うことができません。    
+   * DLLで決められた呼び出し方法で呼び出さないとクラッシュする可能性があるので注意が必要です。    
+   * 呼び出し方法は、hidemaru.loadDllで取得したILoadDllResult型のうち、    
+   * DllFuncManagerオブジェクトのプロパティである
+   * - dllFunc
+   * - dllFuncStr
+   * - dllFuncW
+   * - dllFuncStrW
+   * 内のメソッドとして呼び出すことで、明示的に指定できます。    
+   * 
+   * @example
+   * var dll = hidemaru.loadDll("HmJre.dll");
+   * var obj1 = dll.dllFunc;
+   * var obj2 = dll.dllFuncStr;
+   * var num = obj1.FindRegular( "[a-z]", "123 abc"), 0 );
+   * var str = obj2.ReplaceRegular("([a-z]+)([0-9]+)", "--abcdefg1234567--", 0, "\\2\\1" );
+   * 
+   * @comment
+   * DLL側の関数名の制限
+   * - loadDllFile
+   * - dllFuncExist
+   * - setDllDetachFunc
+   * - dllFunc
+   * - dllFuncW
+   * - dllFuncStr
+   * - dllFuncStrW    
+   * 
+   * これらの名前はDLLの関数名として使うことはできません。
+   */
+  interface ILoadDllResult {
+
+    /**
+     * 読み込まれているDLLファイルのパスを返します
+     */
+    readonly loadDllFile: string;
+
+    /**
+     * DllFuncManagerオブジェクト。    
+     * 引数が数値もしくはマルチバイト(char)文字列で、数値を返す関数であることを意味する。    
+     * メソッドには秀丸エディタのdllfuncの呼び出し方法で呼び出される関数群があります。
+     */
+    readonly dllFunc: DllFuncManager;
+
+    /**
+     * DllFuncManagerオブジェクト。    
+     * 引数が数値もしくはワイド(wchar)文字列で、数値を返す関数であることを意味する。    
+     * メソッドには秀丸エディタのdllfuncwの呼び出し方法で呼び出される関数群があります。
+     */
+    readonly dllFuncW: DllFuncManager;
+
+    /**
+     * DllFuncManagerオブジェクト。    
+     * 引数が数値もしくはマルチバイト(char)文字列で、マルチバイト(char)文字列を返す関数であることを意味する。    
+     * メソッドには秀丸エディタのdllfuncstrの呼び出し方法で呼び出される関数群があります。
+     */
+    readonly dllFuncStr: DllFuncManager;
+
+    /**
+     * DllFuncManagerオブジェクト。    
+     * 引数が数値もしくはワイド(wchar)文字列で、ワイド(wchar)文字列を返す関数であることを意味する。    
+     * メソッドには秀丸エディタのdllfuncstrwの呼び出し方法で呼び出される関数群があります。
+     */
+    readonly dllFuncStrW: DllFuncManager;
+
+    /**
+     * 関数名が存在するかどうかを返します。    
+     * 秀丸マクロのdllfuncexistに対応する関数です。
+     * 
+     * @param funcname
+     * 関数名を指定します。
+     * 
+     * @comment
+     * @参照：
+     * @see dllfuncexist
+     * 
+     * @returns
+     * 存在すれば１を返す、存在しなければ０を返す。
+     */
+    dllFuncExist(funcname: string): number
+
+    /**
+     * DLLが解放されるタイミングで呼び出される関数名を指定します。    
+     * 秀丸マクロのsetdlldetachfuncに対応する関数です。
+     * 
+     * @example
+     * var dll = loaddll("C:\\abc\\abc.dll");
+     * dll.setDllDetachFunc("MyDllDetachFunc");
+     * 
+     * @comment
+     * この文を実行せず、DLL側に"DllDetachFunc_After_Hm866"という関数がエクスポートされていれば、    
+     * dll.setDllDetachFunc("DllDetachFunc_After_Hm866");    
+     * をしているのと同じになります。
+     *
+     * DLL側の関数はdllfuncと同じように定義します。
+     *
+     * @example
+     * extern "C" __declspec( dllexport )
+     * intptr_t MyDllDetachFunc( intptr_t n_reason ) {
+     *    if(n_reason == 1 ) {
+     *      // freedll
+     *    } else if( n_reason == 2 ) {
+     *      // loaddll文による入れ替え
+     *    } else if( n_reason == 3 ) {
+     *      // プロセス終了時
+     *    } else if (n_reason == 4 ) {
+     *      // マクロ終了時(keepdll #dll,0;のとき)(
+     *    }
+     *    return 0;
+     * }
+     * 
+     * @param funcname 
+     * 開放時に実行する関数名を指定します。
+     * 
+     * @comment
+     * @参照：
+     * @see dllfuncexist
+     * 
+     * @returns
+     * 通常は１が返ってくるが、返ってくる値に意味はない。
+     */
+    setDllDetachFunc(funcname: string): number
   };
 
-  function loadDll(dllpath: string): IResultLoadDll;
+  /**
+   * adDllメソッドは、秀丸用のdllfunc対応のDLLを読み込みます。
+   * @param dllpath 
+   * DLLのファイル名を指定します。
+   *
+   * @example
+   * var dll = hidemaru.loadDll("c:\\folder\\mydll.dll");
+   * 
+   * @comment
+   * 参照：
+   * @see loaddll
+   * @see hidemaru.ILoadDllResult
+   * 
+   * @returns
+   * 読み込みに成功した場合、hidemaru.ILoadDllResultを満たすオブジェクトを返します。    
+   * 失敗した場合、undefinedを返します。
+   */
+  function loadDll(dllpath: string): ILoadDllResult | undefined;
 
 
   /**
@@ -10476,8 +10616,8 @@ declare function find1(): number;
  * s
  * 
  * find2文は、検索ダイアログを出します。    
- * - searchbufferで得られる内容    
- * - searchoptionの状態フラグ、    
+ * - searchbufferで得られる検索文字列を利用
+ * - searchoptionで得られるオプション状態を利用
  * - find2文の直前にforceinselect文が実行されていれば、その指定が有効となります。    
  * 
  * @comment
@@ -14018,8 +14158,46 @@ declare function getcurrenttab(id_type: number, tab_group_id): number;
  */
 declare function gettabhandle(id_type: number, tab_group_id, tab_order:number): number;
 
-getclipboardinfo ★ function() { var m = "getclipboardinfo"; eval(fs); return r; }
-loaddll ★ function(s) { return hidemaru.LoadDll(s); }
+/**
+ * f
+ * 
+ * getclipboardinfo関数は、現在のクリップボードの状態を取得します。
+ * 
+ * @param info_type
+ * 0 を指定すると、クリップボードにテキストがあるかどうかを返します。    
+ * 1 を指定すると、クリップボードが秀丸エディタのBOX選択をコピーしたものであるかどうかを返します。
+ * 
+ * @returns
+ * info_typeが0の場合、クリップボードにテキストがあるかどうかを返します。    
+ * テキストなら1、テキストでないなら0を返す    
+ * 
+ * info_typeが1の場合、クリップボードが秀丸エディタのBOX選択をコピーしたものであるかどうかを返します。
+ * BOX選択をコピーしたものなら1、そうでないなら0を返す。
+ */
+declare function getclipboardinfo(info_type: number): number;
+
+/**
+ * f
+ * 
+ * loaddll関数は、hidemaru.loadDll関数の別名となります。
+ * 
+ * @param dllpath
+ * DLLのファイル名を指定します。
+ * 
+ * @example
+ * var dll = loaddll("c:\\folder\\mydll.dll");
+ * 
+ * @comment
+ * 参照：
+ * @see hidemaru.loadDll
+ * @see hidemaru.ILoadDllResult
+ * 
+ * @returns
+   * 読み込みに成功した場合、hidemaru.ILoadDllResultを満たすオブジェクトを返します。    
+   * 失敗した場合、undefinedを返します。
+ */
+declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
+
 createobject ★ function() { eval(co2); return r; }
 
 /**
