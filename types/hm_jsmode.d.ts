@@ -14137,7 +14137,52 @@ declare function endgroupundo(): number;
 
 findspecial ★ function() { var m = "findspecial"; eval(st); return r; }
 setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return r; }
-getstaticvariable ★ function() { var m = "getstaticvariable"; eval(fs); return r; }
+
+/**
+ * f
+ * 
+ * getstaticvariable関数は、静的な変数を取得します。
+ * 
+ * @param key 
+ * 変数名を指定します。大文字と小文字の区別はされません。    
+ * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。
+ * 
+ * @param scope_type
+ * 共有されている静的な変数かどうかを指定します。    
+ * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+ * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+ * - 1 を指定すると、全ての秀丸エディタで有効です。    
+ * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+ * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+ * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+ * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+ * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+ * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+ * 他のマクロとの競合はありません。
+ *
+ * @example
+ * setstaticvariable("TestA", "全ての秀丸エディタで有効",1);
+ * message(getstaticvariable( "TestA", 1 ));
+ * 
+ * setstaticvariable("TestB", "現在の秀丸エディタで有効",0);
+ * message(getstaticvariable( "TestB", 0 ));
+ * 
+ * message("共有されている名前一覧:\n"+getstaticvariable( "", 1 ));
+ * message("現在の秀丸エディタ内の名前一覧:\n"+getstaticvariable( "", 0 ));
+ * 
+ * setstaticvariable("TestC", "長大なテキスト文字列", -1); // -1 はメモリ制限を受けない
+ * message(getstaticvariable( "TestC", -1 )); // 秀丸マクロ変数で受け取らず、直接返り値を利用すればメモリ制限を受けない
+ * 
+ * @comment
+ * 参照：
+ * @see setstaticvariable
+ * @see Hidemaru_GetStaticVariable
+ * 
+ * @returns
+ * keyとscope_typeで指定された静的変数の内容を返す。    
+ * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
+ */
+declare function getstaticvariable(key:string, scope_type: number): string;
 
 /**
  * s
