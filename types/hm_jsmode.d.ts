@@ -2478,7 +2478,7 @@ declare function searchbuffer(): string;
  * @example
  * var word =                 0x00000001;
  * var casesense =            0x00000002;
- * setsearch("test", #word | #casesense);
+ * setsearch("test", word | casesense);
  * finddown();
  * 
  * @comment
@@ -10747,8 +10747,74 @@ findup2 ★ function() { var m = "findup2"; eval(st); return r; }
  */
 declare function getsearch(): number;
 
-setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
 
+/**
+ * s
+ * 
+ * setsearch文は、秀丸エディタが内部で保持している検索文字列と検索オプションの内容を設定します。    
+ * 
+ * @param search_text
+ * 検索文字列を指定します。
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * 検索文字列と検索オプションは、「上候補」や「下候補」などで参照され、検索が終わった後も保持しています。    
+ * 例えば、setsearch文で設定してからfinddownを実行すると、searchdownを実行したのと同じ結果が得られます。    
+ * setsearchと逆に、検索バッファの内容を参照するには、searchbuffer, searchoption, searchoption2という値を使います。    
+ * 
+ * マクロの中でsearchdown等を使うと、検索文字列と検索オプションの内容が書き換えられてしまいます。    
+ * そうすると、次に上候補/下候補コマンドを使った時に予期しない動作をしてしまうことがあります。    
+ * そのため、マクロ実行開始時に値を記憶し、マクロが終わるときにsetsearchを使って復元させることができます。    
+ * 
+ * @example
+ * var s = searchbuffer();
+ * var f = searchoption();
+ * var f2 = searchoption2();
+ * var r = replacebuffer();
+ * …
+ * 処理本体…
+ * …
+ * setsearch(s, f, f2);
+ * setreplace(r);
+ * 
+ * @comment
+ * 「setcompatiblemode(0x20000);」を最初に実行しておくと、    
+ * 上記の保存して復元するのと同じことを簡単にする方法もあります。
+ * 
+ * @example
+ * setcompatiblemode(0x20000);
+ * …
+ * 処理本体…
+ * …
+ * 
+ * @comment
+ * 「検索文字列の強調」を変更する場合は、searchoption相当の値（パラメータ２）の0x00002000を同時にセットしないといけません。    
+ * 例えば、0x00000000を指定すると、「検索文字列の強調」の状態はONにもOFFにも変更されず、維持されます。    
+ * 0x00002000（つまり0x00002000 | 0x00000000 | 0x00000000）を指定すると、検索文字列の強調はOFFになります。    
+ * 0x00003800（つまり0x00002000 | 0x00001000 | 0x00000800）を指定すると、検索文字列の強調はONになります。（検索時，置換時とも変更する場合）    
+ * 実際に検索文字列の強調をさせるには、hilightfound文で行います。    
+ * 
+ * searchoption2相当の値（パラメータ３）を設定するには、searchoption（パラメータ２）で0x80000000のビットを立てる必要があります。
+ * 
+ * 「選択した範囲」に相当する値はありません。    
+ * forceinselectを使って「選択した範囲」の指定をすることができます。    
+ * 
+ * 検索文字列には上限があります。上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。
+ * 
+ * @comment
+ * 参照：    
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function setsearch(search_text: string, searchoption_flag: number, searchoption2_flag?: number): number;
 
 /**
  * s
