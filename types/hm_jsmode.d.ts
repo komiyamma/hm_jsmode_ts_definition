@@ -14603,6 +14603,10 @@ declare function createobject(prog_id: string): any | undefined;
  * - dllがnet framework 4.xで作成したクラスライブラリをCOMとして使用可能にしているとき、    
  * ProgIDを記述することで、現在のユーザーに対して登録し、COMオブジェクトとして作成することができます。    
  * (COMの登録は自動的に「HmRegasm.exe」という秀丸エディタに付属の実行ファイルで行われます、この実行ファイルは.net framework 4.5以上必要です。)    
+ * - dllが「.NET 7, .NET 6, .NET 5, .NET Core 3.1」でCOMとして公開可能でIDispatchに対応したDLLを作成している場合、    
+ * コンパイル時に末尾に.comhost.dllというファイル名のDLLも同時に生成されますので、どちらのdllを対象にcreateobjectします。    
+ * 例えばSample.dllというDLL本体があった場合、Sample.comhost.dllというDLLがセットでできます。    
+ * .comhost.dllというファイル名が付いたDLLは、C++等のネイティブコードと同じ互換性のある形式で扱うことが可能です。
  * 
  * @example
  * // ネイティブの場合
@@ -14617,6 +14621,11 @@ declare function createobject(prog_id: string): any | undefined;
  * @example
  * // .NET 4.xの場合
  * var obj=createobject("C:\\Folder\\ClassLibrary1.dll","ClassLibrary1.Test1");
+ * 
+ * @example
+ * // .NET 7, .NET 6, .NET 5, .NET Core 3.1
+ * var obj = createobject("C:\\Folder\\Sample32.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
+ * obj = createobject("C:\\Folder\\Sample64.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
  * 
  * @returns
  * 読み込みに成功した場合、COMオブジェクトを返します。    
