@@ -10725,8 +10725,40 @@ finddown2 ★ function() { var m = "finddown2"; eval(st); return r; }
 findup ★ function() { var m = "findup"; eval(st); return r; }
 findup2 ★ function() { var m = "findup2"; eval(st); return r; }
 
-getsearch ★ function() { var m = "getsearch"; eval(st); return r; }
-gosearchstarted ★ function() { var m = "gosearchstarted"; eval(st); return r; }
+/**
+ * s
+ * 
+ * getsearch文は、カーソル位置の単語を検索文字列として取り込みます。    
+ * 
+ * 範囲選択されている場合は、範囲選択の内容を取り込みます。    
+ * 検索文字列の強調がされている場合、検索文字列の強調も更新されます。    
+ * 
+ * @example
+ * getsearch;
+ * 
+ * @comment
+ * 参照：
+ * @see setsearch 
+ * @see hilightfound
+ * 
+ * @returns
+ * 成功した場合は、resultは0以外になります。    
+ * 失敗した場合は、resultは0になります。    
+ */
+declare function getsearch(): number;
+検索開始位置へ戻る
+
+/**
+ * s
+ * 
+ * gosearchstarted文は、「検索開始位置へ戻る」を実行します。
+ * 
+ * @returns
+ * 成功した場合は、resultは0以外になります。    
+ * 失敗した場合は、resultは0になります。    
+ */
+declare function gosearchstarted(): number;
+
 setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
 
 /**
