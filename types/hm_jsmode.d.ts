@@ -39,7 +39,7 @@ declare namespace console {
 }
 
 declare namespace hidemaru {
- 
+
   type DllFuncManager = any
   /**
    * hidemaru.loadDll関数の返り値。    
@@ -11177,7 +11177,7 @@ declare function foundlistoutline(): number;
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
  */
- declare function findmarkerlist(): number;
+declare function findmarkerlist(): number;
 
 /**
  * s
@@ -13445,7 +13445,7 @@ declare function setmenudelay(millisecond: number): number;
  * 「OK」を押したならinput実行直後、result()は1になります。    
  * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
  */
-declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number ): number;
+declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): number;
 
 
 /**
@@ -14008,7 +14008,7 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
  * 保存に成功した場合、１を返す。    
  * 保存に失敗した場合は、０を返す。
  */
-declare function savekeyassign(filepath: string, n_target?:number, is_settingdir?: number): number;
+declare function savekeyassign(filepath: string, n_target?: number, is_settingdir?: number): number;
 
 loadhilight ★ function() { var m = "loadhilight"; eval(st); return r; }
 savehilight ★ function() { var m = "savehilight"; eval(st); return r; }
@@ -14089,7 +14089,7 @@ declare function setfontchangemode(n_mode: number): number;
  * @returns
  * ０が返ります。
  */
-declare function settabstop(n_prop: 0|number, tab_width_settings:string): 0;
+declare function settabstop(n_prop: 0 | number, tab_width_settings: string): 0;
 
 /**
  * f
@@ -14127,7 +14127,7 @@ declare function settabstop(n_prop: 0|number, tab_width_settings:string): 0;
  * C列以降はずっと5になっています。    
  * タブ文字数が固定の場合は、""を返します。    
  */
-declare function gettabstop(n_prop: 0|number): string;
+declare function gettabstop(n_prop: 0 | number): string;
 
 /**
  * s
@@ -14383,7 +14383,7 @@ setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return
  * keyとscope_typeで指定された静的変数の内容を返す。    
  * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
  */
-declare function getstaticvariable(key:string, scope_type: number): string;
+declare function getstaticvariable(key: string, scope_type: number): string;
 
 /**
  * f
@@ -14435,7 +14435,7 @@ declare function getstaticvariable(key:string, scope_type: number): string;
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。    
  */
-declare function setstaticvariable(key:string, value:string, scope_type: number): string;
+declare function setstaticvariable(key: string, value: string, scope_type: number): string;
 
 /**
  * s
@@ -14480,7 +14480,7 @@ declare function setregularcache(cache_mode: number): number;
  * キャッシュ格納に成功すれば１が返る。    
  * 正規表現が不正な文字列であることなどが原因により、キャッシュ格納に失敗すれば０が返る。
  */
- declare function setregularcache(cache_regexp: string, is_keep_cache?: number, is_ignore_case?: number): number;
+declare function setregularcache(cache_regexp: string, is_keep_cache?: number, is_ignore_case?: number): number;
 
 /**
  * f
@@ -14672,7 +14672,7 @@ declare function getcurrenttab(id_type: number, tab_group_id): number;
  * 秀丸エディタのウィンドウハンドルを返します。    
  * 引数に対応するようなタブが存在しない時は、-1を返す。
  */
-declare function gettabhandle(id_type: number, tab_group_id, tab_order:number): number;
+declare function gettabhandle(id_type: number, tab_group_id, tab_order: number): number;
 
 /**
  * f
