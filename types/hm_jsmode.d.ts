@@ -39,10 +39,8 @@ declare namespace console {
 }
 
 declare namespace hidemaru {
-  function createObject(progID: string): any;
-
+ 
   type DllFuncManager = any
-
   /**
    * hidemaru.loadDll関数の返り値。    
    * 
@@ -190,6 +188,70 @@ declare namespace hidemaru {
    */
   function loadDll(dllpath: string): ILoadDllResult | undefined;
 
+
+  /**
+   * s
+   * 
+   * createobject関数は、COMオブジェクトを作成します。
+   * 
+   * @param progid 
+   * 登録されたCOMオブジェクトのProgIdを指定します。
+   * 
+   * @example
+   * var fso = hidemaru.createObject("Scripting.FileSystemObject");
+   * var file = fso.OpenTextFile("c:\\folder\\test_utf16.txt",1,0,-1);
+   * var line = file.ReadLine();
+   * file.Close();
+   * 
+   * @returns
+   * 読み込みに成功した場合、COMオブジェクトを返します。    
+   * 失敗した場合、undefinedを返します。    
+   */
+  declare function createoOject(progid: string): any | undefined;
+
+  /**
+   * s
+   * 
+   * createobject関数は、COMオブジェクトを作成します。
+   * 
+   * @param dllpath 
+   * DLLのファイル名をフルパスで指定します。
+   * 
+   * @param typeid 
+   * - dllがネイティブのCOMの場合、typeidにCLSIDを記述することで、    
+   * 登録なしでCOMオブジェクトを作成することができます。    
+   * 対応できるインターフェイスはIDispatch（またはデュアルインターフェース）である必要があります。    
+   * - dllがnet framework 4.xで作成したクラスライブラリをCOMとして使用可能にしているとき、    
+   * ProgIDを記述することで、現在のユーザーに対して登録し、COMオブジェクトとして作成することができます。    
+   * (COMの登録は自動的に「HmRegasm.exe」という秀丸エディタに付属の実行ファイルで行われます、この実行ファイルは.net framework 4.5以上必要です。)    
+   * - dllが「.NET 7, .NET 6, .NET 5, .NET Core 3.1」でCOMとして公開可能でIDispatchに対応したDLLを作成している場合、    
+   * コンパイル時に末尾に.comhost.dllというファイル名のDLLも同時に生成されますので、どちらのdllを対象にcreateobjectします。    
+   * 例えばSample.dllというDLL本体があった場合、Sample.comhost.dllというDLLがセットでできます。    
+   * .comhost.dllというファイル名が付いたDLLは、C++等のネイティブコードと同じ互換性のある形式で扱うことが可能です。
+   * 
+   * @example
+   * // ネイティブの場合
+   * var obj = null;
+   * if(platform() & 0x00080000){
+   *     obj = hidemaru.createObject("C:\\Program Files\\Hidemaru\\hmpv64.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+   * } else {
+   *     obj = hideamru.createObject("C:\\Program Files\\Hidemaru\hmpv.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+   * }
+   * obj.ShowDialog(hidemaruhandle(0));
+   * 
+   * @example
+   * // .NET 4.xの場合
+   * var obj = hideamru.createObject("C:\\Folder\\ClassLibrary1.dll","ClassLibrary1.Test1");
+   * 
+   * @example
+   * // .NET 7, .NET 6, .NET 5, .NET Core 3.1の場合
+   * var obj = hidemaru.createObject("C:\\Folder\\Sample.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
+   * 
+   * @returns
+   * 読み込みに成功した場合、COMオブジェクトを返します。    
+   * 失敗した場合、undefinedを返します。    
+   */
+  function createObject(dllpath: string, typeid: string): any | undefined;
 
   /**
    * loadTextFileメソッドは、テキストファイルを読み込んで文字列で取得します。
@@ -14571,13 +14633,13 @@ declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
 /**
  * s
  * 
- * createobject関数は、COMオブジェクトを作成します。
+ * createobject関数は、hidemaru.createObject関数の別名となります。
  * 
- * @param prog_id 
+ * @param progid 
  * 登録されたCOMオブジェクトのProgIdを指定します。
  * 
  * @example
- * var fso = hidemaru.createObject("Scripting.FileSystemObject");
+ * var fso = createobject("Scripting.FileSystemObject");
  * var file = fso.OpenTextFile("c:\\folder\\test_utf16.txt",1,0,-1);
  * var line = file.ReadLine();
  * file.Close();
@@ -14586,12 +14648,12 @@ declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
  * 読み込みに成功した場合、COMオブジェクトを返します。    
  * 失敗した場合、undefinedを返します。    
  */
-declare function createobject(prog_id: string): any | undefined;
+declare function createobject(progid: string): any | undefined;
 
 /**
  * s
  * 
- * createobject関数は、COMオブジェクトを作成します。
+ * createobject関数は、hidemaru.createObject関数の別名となります。
  * 
  * @param dllpath 
  * DLLのファイル名をフルパスで指定します。
@@ -14612,20 +14674,19 @@ declare function createobject(prog_id: string): any | undefined;
  * // ネイティブの場合
  * var obj = null;
  * if(platform() & 0x00080000){
- *     obj=createobject("C:\\Program Files\\Hidemaru\\hmpv64.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+ *     obj = createobject("C:\\Program Files\\Hidemaru\\hmpv64.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
  * } else {
- *     obj=createobject("C:\\Program Files\\Hidemaru\hmpv.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+ *     obj = createobject("C:\\Program Files\\Hidemaru\hmpv.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
  * }
  * obj.ShowDialog(hidemaruhandle(0));
  * 
  * @example
  * // .NET 4.xの場合
- * var obj=createobject("C:\\Folder\\ClassLibrary1.dll","ClassLibrary1.Test1");
+ * var obj = createobject("C:\\Folder\\ClassLibrary1.dll","ClassLibrary1.Test1");
  * 
  * @example
- * // .NET 7, .NET 6, .NET 5, .NET Core 3.1
- * var obj = createobject("C:\\Folder\\Sample32.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
- * obj = createobject("C:\\Folder\\Sample64.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
+ * // .NET 7, .NET 6, .NET 5, .NET Core 3.1の場合
+ * var obj = createobject("C:\\Folder\\Sample.comhost.dll","{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}");
  * 
  * @returns
  * 読み込みに成功した場合、COMオブジェクトを返します。    
