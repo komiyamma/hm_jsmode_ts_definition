@@ -13923,6 +13923,10 @@ openreg ★ function() { var m = "openreg"; eval(st); return r; }
  * レジストリのオープン状態は、現在の秀丸エディタだけで有効です。nexthidemaru等で秀丸エディタを切り替えた先では有効ではありません。    
  * 管理者権限の注意、64bit版/32bit版の注意、持ち出しキットの注意などもopenregと同じです。
  * 
+ * @comment
+ * 参照：
+ * @see openreg
+ * 
  * @returns
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。
@@ -13973,12 +13977,92 @@ declare function closereg(): number;
  */
 declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
 
+/**
+ * f
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ *
+ * 値を書き込むにはwriteregbinaryを使います。
+ * 
+ * @param seek_cur 
+ * 0から数えた何バイト目から取得するかを指定します。    
+ * 省略した場合は0になります。
+ * 
+ * @param read_size 
+ * 何バイト分取得するかのサイズを指定します。    
+ * 省略した場合は全てのサイズになります。    
+ * サイズは2000バイト分が上限です。
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ * var s = getregbinary( "TabEditMouse", 0, 10 );
+ * closereg();
+ * message(s);
+ * 
+ * @comment
+ * 参照：
+ * @see writeregbinary
+ * 
+ * @returns
+ * 16進数の文字列として、１バイトあたり２文字の文字列で返します。
+ */
+declare function getregbinary(name: string, seek_cur?: number, read_size?: number): string;
+
+/**
+ * getregnum関数は、オープンされたレジストリからREG_DWORD型の値を数値を取得します。    
+ * 
+ * REG_DWORD型の値を書き込むには、writeregnumを使います。    
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var n = getregnum( "RegVer")
+ * closereg();
+ * message(hex(n));
+ * 
+ * @comment
+ * 参照：
+ * @see writeregnum
+ * 
+ * @returns
+ * 数値の内容を返します。
+ */
+declare function getregnum(name: string): number;
+
+/**
+ * f
+ * 
+ * getregstr関数は、オープンされたレジストリからREG_SZ型の文字列値を取得します。    
+ * 
+ * REG_SZ型の値を書き込むには、writeregstrを使います。
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var s = getregstr( "Spec");
+ * closereg();
+ * message(s);
+ * 
+ * @comment
+ * 参照：    
+ * @see writeregstr
+ * 
+ * @returns
+ * 文字列値の内容を返します。
+ */
+declare function getregstr(name: string): string;
+
 writeregbinary ★ function() { var m = "writeregbinary"; eval(st); return r; }
 writeregnum ★ function() { var m = "writeregnum"; eval(st); return r; }
 writeregstr ★ function() { var m = "writeregstr"; eval(st); return r; }
-getregbinary ★ function() { var m = "getregbinary"; eval(fs); return r; }
-getregnum ★ function() { var m = "getregnum"; eval(fn); return r; }
-getregstr ★ function() { var m = "getregstr"; eval(fs); return r; }
+
 enumregkey ★ function() { var m = "enumregkey"; eval(fs); return r; }
 enumregvalue ★ function() { var m = "enumregvalue"; eval(fs2rn); arguments[1].regtype = getVar("###2"); return r; }
 configset ★ function() { var m = "configset"; eval(st); return r; }
@@ -14482,7 +14566,6 @@ declare function begingroupundo(): number;
 declare function endgroupundo(): number;
 
 findspecial ★ function() { var m = "findspecial"; eval(st); return r; }
-setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return r; }
 
 /**
  * f
