@@ -13617,11 +13617,118 @@ declare function getinistr(ini_filepath: string, section_name: string, key_name:
  */
 declare function getinistrw(ini_filepath: string, section_name: string, key_name: string): number;
 
+/**
+ * s
+ * 
+ * writeininum文は、INIファイルに数値のデータを書き込みます。
+ * 文字列を書き込む場合は、この関数ではなく、writeinistr関数を使ってください。
+ *
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @param num_value
+ * 書き込む内容の数値を指定します。
+ * 
+ * @example
+ * writeininum("C:\\MyFolder\\Test.ini", "TestSec", "TestNumKey", #a + 10);
+ * 
+ * @returns 
+ * 返り値は意味を持ちません。
+ */
+declare function writeininum(ini_filepath: string, section_name: string, key_name: string, num_value: number): number;
 
-writeininum ★ function() { var m = "writeininum"; eval(st); return r; }
-writeininumw ★ function() { var m = "writeininumw"; eval(st); return r; }
-writeinistr ★ function() { var m = "writeinistr"; eval(st); return r; }
-writeinistrw ★ function() { var m = "writeinistrw"; eval(st); return r; }
+/**
+ * s
+ * 
+ * writeininumw文は、writeininumのUnicode版です。    
+ * 使い方はwriteininumと同じです。
+ *
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @param num_value
+ * 書き込む内容の数値を指定します。
+ * 
+ * @example
+ * writeininumw("C:\\MyFolder\\Test.ini", "TestSec", "TestNumKey", #a + 10);
+ * 
+ * @returns 
+ * 返り値は意味を持ちません。
+ */
+declare function writeininumw(ini_filepath: string, section_name: string, key_name: string, num_value: number): number;
+
+/**
+ * s
+ * 
+ * writeinistr文は、INIファイルに文字列のデータを書き込みます。
+ * 数値を書き込む場合は、この関数ではなく、writeininum関数を使ってください。
+ *
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @param str_value
+ * 書き込む内容の文字列を指定します。
+ * 
+ * @example
+ * writeinistr("C:\\MyFolder\\Test.ini", "TestSec", "TestNumKey", #a + 10);
+ * 
+ * @returns 
+ * 返り値は意味を持ちません。
+ */
+declare function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: strber): strber;
+
+/**
+ * s
+ * 
+ * writeinistrw文は、writeinistrのUnicode版です。    
+ * 使い方はwriteinistrと同じです。
+ *
+ * @param ini_filepath 
+ * INIファイルのファイル名を指定します。    
+ * INIファイル名は、フルパスで書いてください。    
+ * 拡張子が.iniである必要はなく、どんな拡張子でもかまいません。    
+ * 
+ * @param section_name
+ * セクション名を指定します。
+ *  
+ * @param key_name 
+ * キー名を指定します。
+ * 
+ * @param str_value
+ * 書き込む内容の文字列を指定します。
+ * 
+ * @example
+ * writeinistrw("C:\\MyFolder\\Test.ini", "TestSec", "TestNumKey", #a + 10);
+ * 
+ * @returns 
+ * 返り値は意味を持ちません。
+ */
+declare function writeinistrw(ini_filepath: string, section_name: string, key_name: string, str_value: strber): strber;
+
 
 openreg ★ function() { var m = "openreg"; eval(st); return r; }
 createreg ★ function() { var m = "createreg"; eval(st); return r; }
