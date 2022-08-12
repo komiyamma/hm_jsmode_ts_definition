@@ -13980,6 +13980,8 @@ declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?:
 /**
  * f
  * 
+ * getregbinary関数は、レジストリからREG_BINARY型のバイナリ値を、文字列に変換して取得します。
+ * 
  * @param name 
  * 値の名前を指定します。    
  *
@@ -14010,6 +14012,8 @@ declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?:
 declare function getregbinary(name: string, seek_cur?: number, read_size?: number): string;
 
 /**
+ * f
+ * 
  * getregnum関数は、オープンされたレジストリからREG_DWORD型の値を数値を取得します。    
  * 
  * REG_DWORD型の値を書き込むには、writeregnumを使います。    
@@ -14059,9 +14063,99 @@ declare function getregnum(name: string): number;
  */
 declare function getregstr(name: string): string;
 
-writeregbinary ★ function() { var m = "writeregbinary"; eval(st); return r; }
-writeregnum ★ function() { var m = "writeregnum"; eval(st); return r; }
-writeregstr ★ function() { var m = "writeregstr"; eval(st); return r; }
+/**
+ * s
+ * 
+ * writeregbinary文は、レジストリにREG_BINARY型のバイナリ値を書き込みます。    
+ *
+ * 値を読み込むにはgetregbinaryを使います。    
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 
+ * @param value
+ * バイナリ値を16進数の文字列として1バイトを2文字として指定します。
+ * 
+ * @param seek_cur 
+ * 値を上書きする場合、0から数えた何バイト目から上書きするかを指定します。    
+ * 省略した場合は0になります。    
+ * 
+ * @param write_mode 
+ * 値を上書きする場合、全体のサイズを切り詰めるかどうかを指定します。    
+ * 0を指定すると切り詰め、1を指定すると切り詰めません。    
+ * 省略した場合は0と同じになります。
+ * 
+ * @example
+ * // TabEditMouseの最初から６バイトぶんを上書き、７バイト目以降はそのまま残す
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ * writeregbinary("TabEditMouse", "0100FFFF0000", 0, 1);
+ * closereg();
+ * 
+ * @comment
+ * 参照：
+ * @see getregbinary
+ * 
+ * @returns
+ * 成功した場合はresultは0以外になります。    
+ * 失敗した場合はresultは0になります。    
+ */
+declare function writeregbinary(name: string, value:string, seek_cur?: number, write_mode?: number): string;
+
+/**
+ * s
+ * 
+ * writeregnum文は、レジストリにREG_DWORD型の値を書き込みます。    
+ * 
+ * REG_DWORD型の値を読み込むにはgetregnumを使います。    
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 
+ * @param value
+ * 数値で値を指定します。
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ * writeregnum("HorzScroll", 1);
+ * closereg();
+ * envchanged();
+ * 
+ * @comment
+ * 参照：
+ * @see getregnum
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function writeregnum(name: string, value: number): number;
+
+/**
+ * s
+ * 
+ * writeregstr文は、レジストリにREG_SZ型の値を書き込みます。    
+ * 
+ * REG_SZ型の値を読み込むにはgetregstrを使います。    
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 
+ * @param value
+ * 文字列値で値を指定します。
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ * writeregstr("Spec", "*.*");
+ * closereg();
+ * envchanged();
+ * 
+ * @comment
+ * 参照：
+ * @see getregstr
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function writeregstr(name: string, value: string): number;
 
 enumregkey ★ function() { var m = "enumregkey"; eval(fs); return r; }
 enumregvalue ★ function() { var m = "enumregvalue"; eval(fs2rn); arguments[1].regtype = getVar("###2"); return r; }
