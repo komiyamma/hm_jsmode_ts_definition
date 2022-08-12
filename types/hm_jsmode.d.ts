@@ -10746,7 +10746,9 @@ findup2 ★ function() { var m = "findup2"; eval(st); return r; }
  * 失敗した場合は、resultは0になります。    
  */
 declare function getsearch(): number;
-検索開始位置へ戻る
+
+setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
+
 
 /**
  * s
@@ -10758,8 +10760,6 @@ declare function getsearch(): number;
  * 失敗した場合は、resultは0になります。    
  */
 declare function gosearchstarted(): number;
-
-setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
 
 /**
  * s
