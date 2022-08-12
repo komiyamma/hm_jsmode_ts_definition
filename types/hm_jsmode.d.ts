@@ -14568,7 +14568,61 @@ declare function getclipboardinfo(info_type: number): number;
  */
 declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
 
-createobject ★ function() { eval(co2); return r; }
+/**
+ * s
+ * 
+ * createobject関数は、COMオブジェクトを作成します。
+ * 
+ * @param prog_id 
+ * 登録されたCOMオブジェクトのProgIdを指定します。
+ * 
+ * @example
+ * var fso = hidemaru.createObject("Scripting.FileSystemObject");
+ * var file = fso.OpenTextFile("c:\\folder\\test_utf16.txt",1,0,-1);
+ * var line = file.ReadLine();
+ * file.Close();
+ * 
+ * @returns
+ * 読み込みに成功した場合、COMオブジェクトを返します。    
+ * 失敗した場合、undefinedを返します。    
+ */
+declare function createobject(prog_id: string): any | undefined;
+
+/**
+ * s
+ * 
+ * createobject関数は、COMオブジェクトを作成します。
+ * 
+ * @param dllpath 
+ * DLLのファイル名をフルパスで指定します。
+ * 
+ * @param typeid 
+ * - dllがネイティブのCOMの場合、typeidにCLSIDを記述することで、    
+ * 登録なしでCOMオブジェクトを作成することができます。    
+ * 対応できるインターフェイスはIDispatch（またはデュアルインターフェース）である必要があります。    
+ * - dllがnet framework 4.xで作成したクラスライブラリをCOMとして使用可能にしているとき、    
+ * ProgIDを記述することで、現在のユーザーに対して登録し、COMオブジェクトとして作成することができます。    
+ * (COMの登録は自動的に「HmRegasm.exe」という秀丸エディタに付属の実行ファイルで行われます、この実行ファイルは.net framework 4.5以上必要です。)    
+ * 
+ * @example
+ * // ネイティブの場合
+ * var obj = null;
+ * if(platform() & 0x00080000){
+ *     obj=createobject("C:\\Program Files\\Hidemaru\\hmpv64.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+ * } else {
+ *     obj=createobject("C:\\Program Files\\Hidemaru\hmpv.dll","{609E0957-143D-45CB-986E-5365B7A3ED26}");
+ * }
+ * obj.ShowDialog(hidemaruhandle(0));
+ * 
+ * @example
+ * // .NET 4.xの場合
+ * var obj=createobject("C:\\Folder\\ClassLibrary1.dll","ClassLibrary1.Test1");
+ * 
+ * @returns
+ * 読み込みに成功した場合、COMオブジェクトを返します。    
+ * 失敗した場合、undefinedを返します。    
+ */
+declare function createobject(dllpath: string, typeid: string): any | undefined;
 
 /**
  * s    
