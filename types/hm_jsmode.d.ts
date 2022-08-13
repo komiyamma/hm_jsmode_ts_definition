@@ -11196,10 +11196,70 @@ colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
 nextcolormarker ★ function() { var m = "nextcolormarker"; eval(st); return r; }
 prevcolormarker ★ function() { var m = "prevcolormarker"; eval(st); return r; }
 colormarkerdialog ★ function() { var m = "colormarkerdialog"; eval(st); return r; }
+
+
 deletecolormarker ★ function() { var m = "deletecolormarker"; eval(st); return r; }
-deletecolormarkerall ★ function() { var m = "deletecolormarkerall"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * deletecolormarkerall文は、カラーマーカーを全て消去します。
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 省略した場合は、「一時的なカラーマーカー」が対象になります。    
+ * レイヤー名を指定すると、指定したレイヤーに属するものだけを消去します。
+ * 「一時的なカラーマーカー」のレイヤー名は""です。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diff というキーワードを指定します。    
+
+ * @comment
+ * 参照：    
+ * @see colormarker
+ * @see findmarker
+ * @see diff
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * ユーザーデータを指定すると、ユーザーデータに一致するものを全て消去します。    
+ * ユーザーデータを指定しない場合は、同じレイヤーの全てのカラーマーカーが対象になります。    
+ * ユーザーデータに0は指定できません。
+ *
+ * @example
+ * deletecolormarkerall();
+ * 
+ * @example
+ * var layer = "レイヤー名";
+ * var userdata = 2
+ * deletecolormarkerall(layer, userdata);
+ * 
+ * @returns
+ * 成功した場合は、0以外を返す。    
+ * 失敗した場合は、0を返す。    
+ */
+declare function deletecolormarkerall(layer_name?: string, user_data?: number): number;
+
+
 selectcolormarker ★ function() { var m = "selectcolormarker"; eval(st); return r; }
-selectallfound ★ function() { var m = "selectallfound"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * selectallfound文は、「すべての候補を選択」を実行します。
+ * 
+ * @comment
+ * 注意：複数選択対応のマクロは次のようにsetcompatiblemodeでマクロの互換モードを指定しておく必要があります。
+ * 
+ * @example
+ * setcompatiblemode(0x00100000);
+ * 
+ * @returns
+ * 成功した場合は、ヒットした個数を返す。    
+ * 失敗した場合は、０を返す。    
+ */
+declare function selectallfound(): number;
+
+
 colormarkerallfound ★ function() { var m = "colormarkerallfound"; eval(st); return r; }
 
 /**
