@@ -11239,8 +11239,51 @@ deletecolormarker ★ function() { var m = "deletecolormarker"; eval(st); return
  */
 declare function deletecolormarkerall(layer_name?: string, user_data?: number): number;
 
+/**
+ * s
+ * 
+ * selectcolormarker文は、カラーマーカーで色付けされている部分を全て選択します。（
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 省略するか、""とした場合は、「一時的なカラーマーカー」を対象にします。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diff というキーワードを指定します。    
 
-selectcolormarker ★ function() { var m = "selectcolormarker"; eval(st); return r; }
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 0以外の値を指定すると、一致するユーザーデータのみを対象にします。    
+ * 省略するか0の場合は、ユーザーデータを問わず対象にします。    
+ * 
+ * @example
+ * selectcolormarker();
+ * 
+ * @example
+ * var layer = "レイヤー名";
+ * selectcolormarker(layer);
+ * 
+ * @example
+ * var layer = "レイヤー名";
+ * var userdata = 2
+ * selectcolormarker(layer, userdata);
+ * 
+ * @comment
+ * 注意：複数選択対応のマクロは次のようにsetcompatiblemodeでマクロの互換モードを指定しておく必要があります。
+ * 
+ * @example
+ * setcompatiblemode(0x00100000);
+ * 
+ * @comment
+ * 参照：    
+ * @see colormarker
+ * @see findmarker
+ * @see diff
+ * 
+ * @returns
+ * 成功時は0以外を返す。    
+ * 失敗時は0を返す。
+ */
+declare function selectcolormarker(layer_name?: string, user_data?: number): number;
 
 /**
  * s
