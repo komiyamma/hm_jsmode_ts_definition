@@ -13889,8 +13889,53 @@ declare function writeinistr(ini_filepath: string, section_name: string, key_nam
  */
 declare function writeinistrw(ini_filepath: string, section_name: string, key_name: string, str_value: string): number;
 
-
-openreg ★ function() { var m = "openreg"; eval(st); return r; }
+/**
+ * s
+ * 
+ * openreg文は、レジストリをオープンします。
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ *
+ * @param root_key
+ * ルートとなるキー名を指定します。    
+ * 以下の文字列が指定可能です。    
+ * - "CLASSESROOT"（HKEY_CLASSES_ROOTに対応）
+ * - "CURRENTUSER"（HKEY_CURRENT_USERに対応）
+ * - "LOCALMACHINE"（HKEY_LOCAL_MACHINEに対応）
+ * - "USERS"（HKEY_USERSに対応）
+ * 
+ * @param sub_key
+ * サブキー名を指定します。
+ * 
+ * @param own_hidemaru_reg
+ * 指定しないか0を指定する場合、32bit版は32bit版の情報、64bit版は64bit版の情報にそのままアクセスします。    
+ * 1を指定すると、32bit版でも64bitの情報にアクセスします。    
+ * 2を指定すると、64bit版でも32bitの情報にアクセスします。    
+ * 
+ * @comment
+ * 64bit版/32bit版の注意：    
+ * 64bit版のWindowsにおける、64bit版の秀丸エディタと32bit版の秀丸エディタでは参照するレジストリの場所が異なる場合があります。    
+ * 32bit版の「HKEY_LOCAL_MACHINE\SOFTWARE」配下は、64bit版の「HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node」配下と同じになります。   
+ * 64bit版の「HKEY_LOCAL_MACHINE\SOFTWARE」配下は、32bit版ではそのままではアクセスできません。    
+ * HKEY_CURRENT_USERは32bitでも64bitでも同じです。    
+ * 
+ * @comment
+ * openregは、指定されたサブキーが存在しない場合に失敗となります。    
+ * createregは、指定されたサブキーが存在しない場合は新たに作成してからオープンします。    
+ * 複数のレジストリを同時にオープンすることはできません。    
+ * レジストリのオープン状態は、現在の秀丸エディタだけで有効です。    
+ * nexthidemaru等で秀丸エディタを切り替えた先では有効ではありません。    
+ * 
+ * @comment
+ * 管理者権限の注意：    
+ * HKEY_CURRENT_USER以外は管理者権限がないと書き込みはできません。    
+ * 
+ * @returns
+ * 成功したら0以外を返す。    
+ * 失敗したら0を返す。
+ */
+declare function openreg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
 
 /**
  * s
