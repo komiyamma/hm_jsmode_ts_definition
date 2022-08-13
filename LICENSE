@@ -1,6 +1,13 @@
-MIT License
+- hm_jsmode.d.ts
 
-Copyright (c) 2022 komiyamma
+- TypeScript Definition (TypeScript定義ファイル化)
+    Copyright (c) 2022 Akitsugu Komiyama
+
+- Descriptive text for each function (各関数の説明文章)
+    Copyright (c) SAITO-KIKAKU CORPORATION
+
+
+The MIT License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
