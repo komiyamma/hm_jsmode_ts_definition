@@ -11193,8 +11193,94 @@ declare function hilightfound(is_on?: number): number;
 
 
 colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
-nextcolormarker ★ function() { var m = "nextcolormarker"; eval(st); return r; }
-prevcolormarker ★ function() { var m = "prevcolormarker"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * prevcolormarker文は、カラーマーカーで色付けされている前の場所に移動します。
+ * 次のカラーマーカーに移動するにはnextcolormarker文を使います。    
+ * 全ての引数を省略すると、カラーマーカーで色付けされている前の開始位置に移動します。    
+ * 
+ * @param target_flag 
+ * 対象を指定します。以下の値をOR演算した値を指定します。    
+ * - 0x01 カラーマーカーの開始位置
+ * - 0x02 カラーマーカーの終了位置
+ * - 0x04 ユーザーデータと一致するものを探す
+ * - 0x08 カーソル位置を含めて検索する    
+ * 省略すると0x01と同じです。
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 引数にtarget_flagに0x04が含まれる場合に使われます。    
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 指定したレイヤーに属するものだけに移動します。    
+ * 省略すると、""の一時的なカラーマーカーと同じです。    
+ * 
+ * @example
+ * prevcolormarker(0x01, 0, "");
+ * 
+ * @comment
+ * 「一時的なカラーマーカー」のレイヤー名は""です。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ *
+ * @comment
+ * 参照：
+ * @see nextcolormarker
+ * @see findmarker
+ * @see diff
+ * 
+ * @returns
+ * 移動した場合は、0以外を返す。    
+ * 移動しなかった場合は、0を返す。
+ */
+declare function prevcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
+
+/**
+ * s
+ * 
+ * nextcolormarker文は、カラーマーカーで色付けされている次の場所に移動します。
+ * 前のカラーマーカーに移動するにはprevcolormarker文を使います。    
+ * 全ての引数を省略すると、カラーマーカーで色付けされている次の開始位置に移動します。    
+ * 
+ * @param target_flag 
+ * 対象を指定します。以下の値をOR演算した値を指定します。    
+ * - 0x01 カラーマーカーの開始位置
+ * - 0x02 カラーマーカーの終了位置
+ * - 0x04 ユーザーデータと一致するものを探す
+ * - 0x08 カーソル位置を含めて検索する    
+ * 省略すると0x01と同じです。
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 引数にtarget_flagに0x04が含まれる場合に使われます。    
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 指定したレイヤーに属するものだけに移動します。    
+ * 省略すると、""の一時的なカラーマーカーと同じです。    
+ * 
+ * @example
+ * nextcolormarker(0x01, 0, "");
+ * 
+ * @comment
+ * 「一時的なカラーマーカー」のレイヤー名は""です。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ *
+ * @comment
+ * 参照：
+ * @see prevcolormarker
+ * @see findmarker
+ * @see diff
+ * 
+ * @returns
+ * 移動した場合は、0以外を返す。    
+ * 移動しなかった場合は、0を返す。
+ */
+declare function nextcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
 
 /**
  * s
