@@ -5640,6 +5640,7 @@ declare function getlinecount(text: string, pos: number, return_obj: { column: n
  * @comment
  * 参照：
  * @see showcharcount
+ * @see getresultex(23)
  * 
  * @returns
  * 数えられる上限は2147483647(16進数にして0x7fffffff)までで、    
@@ -12394,7 +12395,7 @@ declare function showlineno(): number;
  * 
  * @comment
  * 参照：
- * @see getresultex
+ * @see getresultex(7)
  * @see savebacktagjump
  * 
  * @returns
@@ -12519,7 +12520,7 @@ declare function autospellcheckswitch(): number;
  * 
  * @comment
  * 参照：
- * @see getresultex
+ * @see getresultex(16)
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。    
@@ -13234,8 +13235,74 @@ declare function title(title_text: string, target_location: number): number;
  */
 declare function title(title_behavior: number, target_location: number): number;
 
+/**
+ * s
+ * 
+ * run文は、他のプログラムを実行します。    
+ * 
+ * @param expression
+ * コマンドの文字列を指定します。
+ * 
+ * @example
+ * run("notepad.exe");
+ * 
+ * @comment
+ * run文はプログラムを起動したあと、マクロの次行以降をすぐに続行します。（標準入出力のリダイレクトが無ければ）    
+ * 実行して待機する、runsync文, runsync2文もあります。    
+ * 詳細なパラメータ指定する方法のrunex文もあります。    
+ * 
+ * @example
+ * run("notepad.exe c:\\folder\\test.txt");
+ * message("a");
+ * 
+ * @comment
+ * run文は、"<con" や ">con" などを付けることにより標準入出力のリダイレクトが可能です。    
+ * 詳細は、秀丸エディタヘルプの「プログラム実行の詳細」の項目を参照して下さい。    
+ * 
+ * 「<con」は、現在の秀丸の内容をShift-JISに変換してプログラムに渡します。    
+ * 「>con」は、プログラムからの出力をShift-JISであると解釈して秀丸エディタに出力します。    
+ * 範囲選択されている場合は範囲を置き換えます。新しい秀丸エディタで実行した場合は、    
+ * その新しい秀丸エディタに出力します。    
+ * 何かファイルを開いている場合は、新しい秀丸エディタに出力します。    
+ * エンコードをそのまま扱いたい場合は、「<filename 」や「>filename」で直接入出力してください。    
+ * run文で「>con」を指定して秀丸エディタが新しく起動する場合でも、    
+ * マクロの実行が継続される秀丸は切り替わりません。    
+ * 
+ * @example
+ * var shell = getenv("COMSPEC");
+ * var command = shell + " /c echo %PATH% >con";
+ * run(command);
+ * 
+ * @comment
+ * run文に「%f」「%d」「%b」という文字を書いておくと、この文字は、それぞれ現在のファイル名やフォルダ名に置換されます。    
+ * - %f    フルパスのファイル名 
+ * - %d    フォルダ名 
+ * - %b    フォルダを除いたファイル名 
+ * - %%    % に置き換わります 
+ * 
+ * @example
+ * run("notepad %f");
+ * 
+ * @comment
+ * 参照：    
+ * @see runex
+ * @see runsync
+ * @see runsync2
+ * @see ファイルのエンコードのまま実行するマクロ
+ * 
+ * @comment
+ * runex文を使うと、パラメータで細かく動作を指定できます。    
+ * run "xxx.exe <con >con";    
+ * と同じような処理を、    
+ * runex "xxx.exe", 0, 1, "", 1, "", 1, "", 1, "", 0, 0, 0;    
+ * というような細かいパラメータを指定して行うことができ、run文では指定できない同期/非同期を指定できます。
+ * 
+ * @returns
+ * プログラムの起動に失敗すると0を返す。    
+ * プログラムの起動に成功すると0以外を返す。
+ */
+declare function run(): number;
 
-★★★run ★ function() { var m = "run"; eval(st); return r; }
 ★★★runsync ★ function() { var m = "runsync"; eval(st); return r; }
 ★★★runsync2 ★ function() { var m = "runsync2"; eval(st); return r; }
 ★★★runex ★ function() { var m = "runex"; eval(st); return r; }
