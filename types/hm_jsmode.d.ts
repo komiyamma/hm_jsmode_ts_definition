@@ -11195,9 +11195,17 @@ declare function hilightfound(is_on?: number): number;
 colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
 nextcolormarker ★ function() { var m = "nextcolormarker"; eval(st); return r; }
 prevcolormarker ★ function() { var m = "prevcolormarker"; eval(st); return r; }
-colormarkerdialog ★ function() { var m = "colormarkerdialog"; eval(st); return r; }
 
-
+/**
+ * s
+ * 
+ * colormarkerdialog文は、「一時的なカラーマーカー...」コマンド相当のダイアログを表示します。    
+ * 
+ * @returns
+ * OKしてカラーマーカーが付けられたときに1を返します。    
+ * キャンセルされたときはresultに0を返します。    
+ */
+declare function colormarkerdialog(): number;
 
 /**
  * s
