@@ -1,4 +1,4 @@
-# hm_jsmode_
+# hm_jsmode_ts_difinition
 
 秀丸マクロの jsmode 用の TypeScript 定義ファイル とその構成一式
 
