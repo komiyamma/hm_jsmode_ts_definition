@@ -13240,7 +13240,7 @@ declare function title(title_behavior: number, target_location: number): number;
  * 
  * run文は、他のプログラムを実行します。    
  * 
- * @param expression
+ * @param command
  * コマンドの文字列を指定します。
  * 
  * @example
@@ -13301,10 +13301,67 @@ declare function title(title_behavior: number, target_location: number): number;
  * プログラムの起動に失敗すると0を返す。    
  * プログラムの起動に成功すると0以外を返す。
  */
-declare function run(): number;
+declare function run(command: string): number;
 
-★★★runsync ★ function() { var m = "runsync"; eval(st); return r; }
-★★★runsync2 ★ function() { var m = "runsync2"; eval(st); return r; }
+/**
+ * s
+ * 
+ * runsync文は、他のプログラムを実行し、プログラムが終了するまで待機します。    
+ * プログラムを起動したあと、コマンドが終了するまで秀丸を最小化状態にして待機します。    
+ *
+ * @param command 
+ * コマンドの文字列を指定します。
+ * 
+ * @example
+ * runsync("notepad.exe");
+ *
+ * @comment
+ * runsync文とrunsync2文は、標準入出力のリダイレクトはできません。    
+ * 標準入出力をリダイレクトするには、run文, runex文を使ってください。    
+ * run文のような「%f」「%d」「%b」の置換はありません。    
+ * 
+ * @comment
+ * 参照：    
+ * @see getresultex(9)
+ * @see runex
+ * @see run
+ * 
+ * @returns
+ * プログラムの起動に失敗すると0を返す。    
+ * プログラムの起動に成功すると0以外を返す。    
+ * 起動に成功した場合の、commandにて実行したプログラムの終了ステータスはgetresultex(9)で取得可能です。
+ */
+declare function runsync(command: string): number;
+
+/**
+ * s
+ * 
+ * runsync2文はrunsync文と同様ですが、アイコン状態にしないで待機します。
+ * 
+ * @param command 
+ * コマンドの文字列を指定します。
+ * 
+ * @comment
+ * runsync文とrunsync2文は、標準入出力のリダイレクトはできません。    
+ * 標準入出力をリダイレクトするには、run文, runex文を使ってください。    
+ * run文のような「%f」「%d」「%b」の置換はありません。    
+ * 
+ * @example
+ * runsync("notepad.exe c:\\folder\\test.txt");
+ * message("a");
+ * 
+ * 参照：    
+ * @see getresultex(9)
+ * @see runex
+ * @see run
+ * 
+ * @returns
+ * プログラムの起動に失敗すると0を返す。    
+ * プログラムの起動に成功すると0以外を返す。    
+ * 起動に成功した場合の、commandにて実行したプログラムの終了ステータスはgetresultex(9)で取得可能です。
+ */
+declare function runsync2(command: string): number;
+
 ★★★runex ★ function() { var m = "runex"; eval(st); return r; }
 
 
