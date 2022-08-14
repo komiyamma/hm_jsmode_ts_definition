@@ -14519,6 +14519,7 @@ declare function envchanged(): number;
  * パラメータでキー割り当てファイルの名前を指定してください。    
  * 
  * @param filepath 
+ * ファイルのパスを指定します。
  * 
  * @example
  * loadkeyassign("default.key");
@@ -14544,6 +14545,7 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
  * パラメータでキー割り当てファイルの名前を指定してください。    
  * 
  * @param filepath 
+ * ファイルのパスを指定します。
  * 
  * @param n_target
  * 0か1かの数字を指定します。    
@@ -14568,8 +14570,78 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
  */
 declare function savekeyassign(filepath: string, n_target?: number, is_settingdir?: number): number;
 
-loadhilight ★ function() { var m = "loadhilight"; eval(st); return r; }
-savehilight ★ function() { var m = "savehilight"; eval(st); return r; }
+/**
+ * s
+ * 
+ * loadhilight文は、パラメータで指定された強調表示ファイルを読み込み，画面を再描画します。
+ * 
+ * @param filepath 
+ * 
+ * @param is_temp
+ * 0か1かの数字を指定します。    
+ * - 0にすると読み込んだものは一時的な設定になり、保存させません。（ファイルタイプ別の設定で「保存しないで更新」を押したときの状態）    
+ * - 1にすると、設定は保存されます。（「OK」を押したときの状態）
+ * 
+ * 強調表示は、ファイルタイプ別の設定の強調表示の設定もONになっている必要があります。（マクロの config "y+"; 相当)    
+ * 強調表示ファイルは普通のテキストファイルなので、マクロで内容を書き換える等してからloadhilightするという使い方もできます。
+ *
+ * @example
+ * loadhilight("C-language.hilight", 0);
+ * 
+ * @param read_flag
+ * 読み込む対象を指定できます。    
+ * 省略すると1を指定したことと同じとなり、強調表示が対象となります。    
+ * 
+ * 以下の値をOR演算した値を指定します。    
+ * - 0x00000001    強調表示 
+ * - 0x00000002    複数行の強調 
+ * - 0x00000004    ツリー定義 
+ * - 0x00000008    カラー 
+ * - 0x00000010    #ifdef等の詳細 
+ * - 0x80000000    実際に読み込みをせずresultだけを得る 
+ * 
+ * @comment
+ * 参照：
+ * @see getresultex(13)
+ * 
+ * @returns
+ * 読み込まれた内容のフラグが格納されます。    
+ * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
+ */
+declare function loadhilight(filepath: string, is_temp: number, read_flag?: number): number;
+
+/**
+ * s
+ * 
+ * savehilight文は、パラメータで指定された強調表示ファイルに書き込みます。
+ * 
+ * @param filepath 
+ * 
+ * @example
+ * savehilight("C-language.hilight");
+ * 
+ * @param read_flag
+ * 書き込む対象を指定できます。    
+ * 省略すると1を指定したことと同じとなり、強調表示が対象となります。    
+ * 
+ * 以下の値をOR演算した値を指定します。    
+ * - 0x00000001    強調表示 
+ * - 0x00000002    複数行の強調 
+ * - 0x00000004    ツリー定義 
+ * - 0x00000008    カラー 
+ * - 0x00000010    #ifdef等の詳細 
+ * - 0x80000000    実際に読み込みをせずresultだけを得る 
+ * 
+ * @comment
+ * 参照：
+ * @see getresultex(13)
+ * 
+ * @returns
+ * 読み込まれた内容のフラグが格納されます。    
+ * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
+ */
+declare function savehilight(filepath: string, read_flag?: number): number;
+
 
 /**
  * s
