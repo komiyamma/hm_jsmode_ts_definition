@@ -13287,10 +13287,97 @@ declare function sleep(millisecond: number): number;
  */
 declare function setfloatmode(to_floatmode_on: number): number;
 
+/**
+ * f
+ * 
+ * seterrormode関数は、マクロ実行中に各種エラーを出すかどうかを指示します。    
+ * 
+ * @example
+ * var ret = seterrormode(0, 0);
+ * 
+ * @param n_type 
+ * 設定する種類を指定します。
+ * 
+ * @param n_value 
+ * - n_type が0の場合    
+ * disableerrormsg相当。    
+ *   - n_type の意味：    
+ *     - 0x00000000 enableerrormsgの状態    
+ *     - 0x00000001 disableerrormsgの状態    
+ * 
+ * - n_type が1の場合    
+ * 10秒待っても切り替えできないエラーを表示するどうか。    
+ *   - n_type の意味：    
+ *     - 0x00000000 表示しない(抑制する)    
+ *     - 0x00000001 表示する(抑制しない)    
+ * 
+ * - n_type が2の場合        
+ * 開くときのエンコードの種類関連。    
+ *   - n_type の意味：マスク値(論理積した値)    
+ *     - 0x0000000f 変換できない文字（デフォルトOFF）    
+ *     - 0x000000f0 NULL文字（デフォルトOFF）    
+ *     - 0x00000f00 複数マッチエンコードの選択（デフォルトOFF）    
+ *     - 0x0000f000 書き込み許可で開くことができないときのエラー（デフォルトは動作環境に従う）    
+ *     - 0x000f0000 改行文字のエラー（デフォルトOFF）    
+ *     - 0x00f00000 見つからないときの新規作成の問い合わせ（デフォルトOFF）／選択結果はgetresultex(22)（V8.92以降）    
+ *     - 0x0f000000 ファイル検索パスの問い合わせ（デフォルトON）／選択結果はgetresultex(21)（V8.92以降）    
+ *   - マスクされたビットが 0 でデフォルト、1でON、2でOFFです。    
+ *     （例：0x02002000 で、書き込み許可で開くことができないときのエラーをOFF、ファイル検索パスをOFF）    
+ *   - 上記 0 のデフォルトというのは、「開く」「名前を付けて保存」などから操作した場合と同じ動作になるという意味ではありません。    
+ *     マクロにとってのデフォルトということで、従来通りのマクロの既定の動作になります。    
+ * 
+ * - n_type が3の場合    
+ * 開くときのエンコードの種類関連。    
+ *   - n_type の意味：マスク値(論理積した値)    
+ *     - 0x0000000f 上書き保存時の変換できない文字がある場合の問い合わせ（デフォルトON）    
+ *     - 0x000000f0 ?に変換した後のメッセージ（デフォルトON）    
+ *     - 0x00000f00 空だったとき（デフォルトON）    
+ *     - 0x0000f000 無題で更新で空のとき（デフォルトOFF）    
+ *   - マスクされたビットが 0 でデフォルト、1でON、2でOFFです。    
+ *     （例：0x00000200 で、空だったときのエラーをOFF）    
+ *   - 上記 0 のデフォルトというのは、「開く」「名前を付けて保存」などから操作した場合と同じ動作になるという意味ではありません。    
+ *     マクロにとってのデフォルトということで、従来通りのマクロの既定の動作になります。    
+ * 
+ * - n_type が4の場合    
+ * OKボタンだけがある一般的なメッセージを表示するかどうか。    
+ *   - n_type の意味：マスク値(論理積した値)    
+ *     - 0x00000000 表示しない(抑制する)    
+ *     - 0x00000001 表示する(抑制しない)    
+ * 
+ * - n_type が5の場合    
+ * call/gotoでラベルが見つからないときにエラーを出してマクロを中断するかどうか。    
+ *   - n_type の意味：マスク値(論理積した値)    
+ *     - 0x00000000 エラーを表示せず(抑制して)、次の文へマクロの実行を継続    
+ *     - 0x00000001 エラーを表示して(抑制せず)、マクロの実行を中断    
+ *   - エラーを表示しない場合、ラベルが見つからずに次の文に来たかどうかはgetresultex(17)で知ることができます。    
+ * 
+ * @comment
+ * 参照：
+ * @see seterrormode
+ * @see disableerrormsg
+ * @see enableerrormsg
+ * @see execmacroで別のマクロを実行する場合    
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * 
+ * @comment
+ * この関数の実行で変更されるのはパラメータ１の値に対応する状態のみで、    
+ * パラメータ１以外のほかの状態には影響を与えません。    
+ * （たとえばseterrormode 0,1;とした場合、以前に行ったseterrormode1,1;はそのまま保持される）    
+ * 
+ * @returns
+ * 対象のn_typeに設定されているseterrormodeをする前の値が帰ってきます。    
+ * これは設定状況を元へと戻すことを容易にするためです。    
+ * 
+ * @example
+ *
+ * var n_type = 0;
+ * var new_value = 1;
+ * var old_value = seterrormode(n_type, new_value);として、設定すると同時に直前の値を知ることもできます。
+ * message("設定前：0x"+hex(old_value)+"\n"+"設定後：0x"+hex(new_value));
+ */
+declare function seterrormode(n_type: number, n_value: number): number;
 
-seterrormode ★ function() { var m = "seterrormode"; eval(st); return r; }
 setbackgroundmode ★ function() { var m = "setbackgroundmode"; eval(st); return r; }
-
 
 
 /**
