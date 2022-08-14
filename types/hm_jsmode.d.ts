@@ -5564,8 +5564,8 @@ declare function linenotoy(pos_column: number, pos_lineno: number): number
  * 
  * @param return_obj    
  * 行数が数えられた後の、余りの文字の位置（0から数えた桁位置）を格納するためのオブジェクトを渡します。    
- * オブジェクトを渡し、オブジェクトのcolumnメンバに値が格納されます。
- * 例えば、以下のようなオブジェクトです。
+ * オブジェクトを渡し、オブジェクトのcolumnメンバに値が格納されます。    
+ * 例えば、以下のようなオブジェクトです。    
  * 
  * @example
  * var obj = {column: 0} ;
@@ -5578,7 +5578,7 @@ declare function linenotoy(pos_column: number, pos_lineno: number): number
  * 0から数えた行数を返します。
  * 
  */
-declare function getlinecount(text: string, pos: number, return_obj: { column: number }): number
+declare function getlinecount(text: string, pos: number, return_obj: { column: number } | {}): number
 
 /**
  * f
@@ -11198,7 +11198,68 @@ prevcolormarker ★ function() { var m = "prevcolormarker"; eval(st); return r; 
 colormarkerdialog ★ function() { var m = "colormarkerdialog"; eval(st); return r; }
 
 
-deletecolormarker ★ function() { var m = "deletecolormarker"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * deletecolormarker文は、範囲選択されている部分のカラーマーカーを消去します。
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * パラメータが無い場合は、「一時的なカラーマーカー」のうち、範囲選択されている部分を消去します。    
+ * レイヤー名を指定すると、指定したレイヤーの、範囲選択されている部分を消去します。
+ * 
+ * @example
+ * var layer_name = "何かレイヤー名";
+ * deletecolormarker(layer_name);
+ * 
+ * @comment
+ * 「一時的なカラーマーカー」のレイヤー名は""です。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。
+ * 
+ * @comment
+ * 参照：    
+ * @see colormarker
+ * @see findmarker
+ * @see diff
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * ユーザーデータを指定すると、ユーザーデータに一致するものを全て消去します。    
+ * ユーザーデータを指定しない場合は、範囲選択が対象になります。    
+ * ユーザーデータが0の場合、bgn_column以降の引数を使って、開始行, 開始桁, 終了行, 終了桁を指定して、消去する範囲を明示指定できます。    
+ *
+ * @example
+ * var layer = "レイヤー名";
+ * var userdata = 2
+ * deletecolormarkerall(layer, userdata);
+ * 
+ * @comment
+ * ユーザーデータが0の場合、開始行, 開始桁, 終了行, 終了桁を指定して、消去する範囲を明示指定できます。    
+ * lineno, column相当の行と桁で表します。
+ * 
+ * @param bgn_column 範囲の開始位置の桁位置を指定します。0から数えます。
+ * 
+ * @param bgn_lineno 範囲の開始位置の行番号を指定します。1から数えます。
+ * 
+ * @param end_column 範囲の終了位置の桁位置を指定します。0から数えます。
+ * 
+ * @param end_lineno 範囲の終了位置の行番号を指定します。1から数えます。
+ * 
+ * @example
+ * var layer = "レイヤー名";
+ * var lineno1 = 1;
+ * var column1 = 3;
+ * var lineno2 = 10;
+ * var column2 = 30;
+ * deletecolormarker(layer, 0, lineno1, column1, lineno2, column2);
+ * 
+ * @returns
+ * 成功した場合は、0以外を返す。    
+ * 失敗した場合は、0を返す。    
+ */
+declare function deletecolormarker(layer_name?: string, user_data?: number, bgn_column?: number, bgn_lineno?: number, end_column?: number, end_lineno?: number): number;
 
 /**
  * s
@@ -14334,7 +14395,7 @@ declare function getregstr(name: string): string;
  * 成功した場合はresultは0以外になります。    
  * 失敗した場合はresultは0になります。    
  */
-declare function writeregbinary(name: string, value:string, seek_cur?: number, write_mode?: number): string;
+declare function writeregbinary(name: string, value: string, seek_cur?: number, write_mode?: number): string;
 
 /**
  * s
@@ -14392,8 +14453,85 @@ declare function writeregnum(name: string, value: number): number;
  */
 declare function writeregstr(name: string, value: string): number;
 
-enumregkey ★ function() { var m = "enumregkey"; eval(fs); return r; }
-enumregvalue ★ function() { var m = "enumregvalue"; eval(fs2rn); arguments[1].regtype = getVar("###2"); return r; }
+/**
+ * f
+ * 
+ * enumregkey関数は、オープンされたレジストリのサブキーを列挙します。
+ * 
+ * @param subkey_ix 
+ * 0から始まるサブキーのインデックスを指定します。
+ * 
+ * 0から順番に呼んで、""を返したら終わりです。
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var i = 0;
+ * while(true) {
+ *    var a = enumregkey(i);
+ *    if (a=="") {
+ *        break;
+ *    }
+ *    insert(a+"\n");
+ *    i++;
+ * }
+ * closereg();
+ * 
+ * @comment
+ * 参照：
+ * @see openreg
+ * @see closereg
+ * 
+ * @returns
+ * サブキーを文字列で返します。    
+ * ""を返したらこれ以上のサブキーはありません。    
+ */
+declare function enumregkey(subkey_ix: number): string;
+
+/**
+ * f
+ * 
+ * enumregvalue関数は、オープンされたレジストリの値名と値の種類を列挙します。
+ * 
+ * @param subkey_ix 
+ * 0から始まるサブキーのインデックスを指定します。
+ * 0から順番に呼んで、""を返したら終わりです。
+ * 
+ * @param return_obj    
+ * 値の種類を受け取るオブジェクトを渡します。    
+ * オブジェクトを渡し、オブジェクトのregtypeメンバに値が格納されます。    
+ * 例えば、以下のようなオブジェクトです。    
+ * 
+ * 値の種類は、以下の値になります。    
+ * - REG_SZ 1 (getregstrに対応)    
+ * - REG_BINARY 3 (getregbinaryに対応)    
+ * - REG_DWORD 4 (getregnumに対応)    
+ * 
+ * これ以外の種類の場合は違う値になりますが、対応する読み込む関数はありません。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var i = 0;
+ * while( 1 ) {
+ *    var obj = { regtype:0 };
+ *    var strVal = enumregvalue( i, obj );
+ *    var nRegType = obj.regtype;
+ *    if( strVal == "" ) { break; }
+ *       insert( strVal + "\t" + nRegType + "\n" );
+ *    i++;
+ * }
+ * closereg();
+ * 
+ * @comment
+ * 参照：
+ * @see openreg
+ * @see closereg
+ * 
+ * @returns
+ * 値名を文字列で返します。    
+ * ""を返したらこれ以上の値はありません。
+ */
+declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
+
 configset ★ function() { var m = "configset"; eval(st); return r; }
 config ★ function() { var m = "config"; eval(st); return r; }
 getconfig ★ function() { var m = "getconfig"; eval(fsn); return r; }
