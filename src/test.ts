@@ -7,3 +7,4 @@ var b: number = input("aaa", "デフォルト", 0x00, 3, 10);
 var c = loaddll("abc");
 var d:string = c.loadDllFile;
 
+runex("abc", 1, )
