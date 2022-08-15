@@ -13502,11 +13502,167 @@ declare function runsync2(command: string): number;
  */
 declare function runex(command: string, is_wait_sync?: number, stdin_prop?: number, in_filepath?: string, stdout_prop?: number, out_filepath?: string, stderr_prop?: number, err_filepath?: string, work_folder_prop?: number, work_folderpath?: string, show_window_prop?: number, is_hide_redirect?: number, n_encode?: number, extension_flags?: number): number;
 
+/**
+ * s
+ * 
+ * disabledraw文は、画面の書き換えを禁止します。    
+ *
+ * マクロ起動時は許可状態になっています。    
+ * 長い編集作業を短時間で終わらせたい場合に、まずdisabledrawして作業を開始し、    
+ * 編集が終わったらenabledrawすると効果的です。     
+ * 
+ * ただし、enabledrawを実行するときに画面をすべて書き直すことになるので、    
+ * 短時間で終わる処理をdisabledraw/enabledrawで囲むとかえって処理速度が低下することに注意してください。    
+ * 
+ * disabledrawの状態は、ウィンドウごとに状態を覚えています。    
+ * disabledrawしてから、setactivehidemaruなどをして他の秀丸エディタに移すとdisabledrawの状態は解除されるので注意が必要です。    
+ * 単純に描画だけをしないdisabledraw2もあります。    
+ * 
+ * @example
+ * disabledraw();
+ * gofiletop();
+ * beginsel();
+ * gofileend();
+ * cut();
+ * enabledraw();
+ * 
+ * @comment
+ * disabledrawしたのにenabledrawを忘れたままマクロの実行が終了すると、自動的に画面をすべて書き換えます。    
+ * 
+ * enabledrawが実行された時、カーソルが画面のどの位置に表示されるかは秀丸エディタ側が適当に決めてしまいます。    
+ * これをマクロ側で制御するには、enabledraw文のパラメータで画面の一番上の行番号（ワープロ的に計算した行番号）を指定してください。    
+ * enabledrawのパラメータで指定されるスクロール位置は、現在のカーソル位置(y)が収まる範囲に自動的に調整されます。    
+ * 画面は、カーソル上下キーで自動的にスクロールする範囲も除外されます。    
+ * 例えば、現在のカーソル位置(y)が1000で、画面が50行で、カーソル上下でスクロールする領域が画面上3行、画面下3行の場合、enabledrawで指定できる範囲は、1000-3=997から、1000-50+3=953の範囲になります。    
+ * この範囲から外れる場合は自動調整されます。    
+ * disabledrawする前の、現在のスクロール位置はscreentopy, screenleftxで取得できます。    
+ * 
+ * @example
+ * disabledraw();
+ * searchdown("abc");
+ * enabledraw(y - windowheight / 2);
+ * 
+ * @comment
+ * enabledrawの第２引数で、横スクロール位置のx座標を指定できます。    
+ * disabledrawする前の、現在のスクロール位置はscreentopy, screenleftxで取得できます。    
+ * 
+ * @example
+ * var _screentopy = screentopy();
+ * var _screenleftx = screenleftx();
+ * disabledraw();
+ * //～何らかの処理
+ * enabledraw(_screentopy, _screenleftx);
+ *
+ * @comment
+ * disabledraw中は、内部的にはウィンドウサイズをゼロとして高速に処理しています。    
+ * enabledraw後にスクロール位置がずれるのもそのためです。rollup,rolldown等も正しいスクロール量でスクロールしません。    
+ * 
+ * disabledrawをすると、検索後のカーソル状態の情報は失われ、searchdown2などの連続した検索の動作に違いが出てきます。    
+ * この問題を解消するには、setcompatiblemodeで0x00800000を指定すると、disabledrawの有無に関わらず、検索後のカーソル状態は維持されます。    
+ * 
+ * @comment
+ * 参照：
+ * @see enabledraw    
+ * @see disabledraw2    
+ * @see execmacroで別のマクロを実行する場合    
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 
+*/
+declare function disabledraw(): number;
 
-disabledraw ★ function() { var m = "disabledraw"; eval(st); return r; }
-enabledraw ★ function() { var m = "enabledraw"; eval(st); return r; }
-disabledraw2 ★ function() { var m = "disabledraw2"; eval(st); return r; }
+/**
+ * s
+ * 
+ * enabledraw文は、画面書き換えを許可します。    
+ *
+ * マクロ起動時は許可状態になっています。    
+ * 長い編集作業を短時間で終わらせたい場合に、まずdisabledrawして作業を開始し、    
+ * 編集が終わったらenabledrawすると効果的です。     
+ * 
+ * ただし、enabledrawを実行するときに画面をすべて書き直すことになるので、    
+ * 短時間で終わる処理をdisabledraw/enabledrawで囲むとかえって処理速度が低下することに注意してください。    
+ * 
+ * disabledrawの状態は、ウィンドウごとに状態を覚えています。    
+ * disabledrawしてから、setactivehidemaruなどをして他の秀丸エディタに移すとdisabledrawの状態は解除されるので注意が必要です。    
+ * 単純に描画だけをしないdisabledraw2もあります。    
+ * 
+ * @example
+ * disabledraw();
+ * gofiletop();
+ * beginsel();
+ * gofileend();
+ * cut();
+ * enabledraw();
+ * 
+ * @comment
+ * disabledrawしたのにenabledrawを忘れたままマクロの実行が終了すると、自動的に画面をすべて書き換えます。    
+ * 
+ * @param pos_y
+ * enabledrawが実行された時、カーソルが画面のどの位置に表示されるかは秀丸エディタ側が適当に決めてしまいます。    
+ * これをマクロ側で制御するには、enabledraw文のパラメータで画面の一番上の行番号（ワープロ的に計算した行番号）を指定してください。    
+ * enabledrawのパラメータで指定されるスクロール位置は、現在のカーソル位置(y)が収まる範囲に自動的に調整されます。    
+ * 画面は、カーソル上下キーで自動的にスクロールする範囲も除外されます。    
+ * 例えば、現在のカーソル位置(y)が1000で、画面が50行で、カーソル上下でスクロールする領域が画面上3行、画面下3行の場合、enabledrawで指定できる範囲は、1000-3=997から、1000-50+3=953の範囲になります。    
+ * この範囲から外れる場合は自動調整されます。    
+ * disabledrawする前の、現在のスクロール位置はscreentopy, screenleftxで取得できます。    
+ * 
+ * @example
+ * disabledraw();
+ * searchdown("abc");
+ * enabledraw(y - windowheight / 2);
+ * 
+ * @param pos_x
+ * enabledrawの第２引数で、横スクロール位置のx座標を指定できます。    
+ * disabledrawする前の、現在のスクロール位置はscreentopy, screenleftxで取得できます。    
+ * 
+ * @example
+ * var _screentopy = screentopy();
+ * var _screenleftx = screenleftx();
+ * disabledraw();
+ * //～何らかの処理
+ * enabledraw(_screentopy, _screenleftx);
+ *
+ * @comment
+ * disabledraw中は、内部的にはウィンドウサイズをゼロとして高速に処理しています。    
+ * enabledraw後にスクロール位置がずれるのもそのためです。rollup,rolldown等も正しいスクロール量でスクロールしません。    
+ * 
+ * disabledrawをすると、検索後のカーソル状態の情報は失われ、searchdown2などの連続した検索の動作に違いが出てきます。    
+ * この問題を解消するには、setcompatiblemodeで0x00800000を指定すると、disabledrawの有無に関わらず、検索後のカーソル状態は維持されます。    
+ * 
+ * @comment
+ * 参照：
+ * @see enabledraw    
+ * @see disabledraw2    
+ * @see execmacroで別のマクロを実行する場合    
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 
+*/
+declare function enabledraw(pos_y?: number, pos_x?: number): number;
 
+/**
+ * s
+ * 
+ * disabledraw2文は、画面の書き換えを禁止します。    
+ * 
+ * disabledrawとは違い、シンプルに描画だけをしないようになります。    
+ * enabledrawでカーソル位置やスクロール位置がずれるということも無いです。    
+ * マクロ終了後やenabledrawで自動的に再描画もしないので、必要に応じてredrawを実行する必要があります。
+ * 
+ * @comment
+ * 参照：
+ * @see redraw    
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 
+ */
+declare function disabledraw2(): number;
 
 /**
  * s
