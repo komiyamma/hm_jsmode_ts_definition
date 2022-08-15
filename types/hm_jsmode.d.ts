@@ -13362,7 +13362,145 @@ declare function runsync(command: string): number;
  */
 declare function runsync2(command: string): number;
 
-★★★runex ★ function() { var m = "runex"; eval(st); return r; }
+/**
+ * s
+ * 
+ * runex文は、詳細なパラメータを指定してプログラムを実行します。    
+ * 
+ * @param command 
+ * 実行するコマンドを文字列で指定します。    
+ * ファイル名はrun文と同様に「%f」「%d」「%b」という文字を解釈します。    
+ * %そのものを表す場合は「%%」と記述します。    
+ * 
+ * @param is_wait_sync 
+ * 同期して実行するかどうかを指定します。
+ * - 0:非同期
+ * - 1:同期    
+ * 
+ * 非同期を指定していても、標準出力のパラーメータで、マクロを実行している秀丸エディタ自身で標準出力を受け取る場合は同期と同じになります。
+ * 
+ * @param stdin_prop 
+ * 標準入力の方法を指定します。
+ * - 0:なし
+ * - 1:自動
+ * - 2:ファイルの内容
+ * - 3:(予約)
+ * - 4:現在の内容
+ * - 5:範囲選択の内容
+ * 
+ * @param in_filepath 
+ * stdin_propが2のとき、ファイル名を指定します。    
+ * それ以外では使わない場合でも""を指定してください。
+ * 
+ * @param stdout_prop 
+ * - 0:なし
+ * - 1:自動 (新規作成状態または範囲選択されている場合は挿入/置き換え、そうでなければ新規)
+ * - 2:ファイルへ出力
+ * - 3:ファイルへ追加
+ * - 4:新規
+ * - 5:挿入
+ * - 6:範囲選択を置き換え
+ * - 7:アウトプット枠へ出力(注)
+ * - 8:アウトプット枠へ出力(消さずに追加)
+ * 
+ * @param out_filepath 
+ * stdout_propが2または3のとき、ファイル名を指定します。    
+ * それ以外では使わない場合でも""を指定してください。
+ * 
+ * @param stderr_prop 
+ * 標準エラー出力の方法を指定します。
+ * - 0:なし
+ * - 1:標準出力と同じ または 自動
+ * - 2:ファイルへ出力
+ * - 3:ファイルへ追加
+ * - 4:新規
+ * - 5:挿入
+ * - 6:範囲選択を置き換え
+ * - 7:アウトプット枠へ出力(注)
+ * - 8:アウトプット枠へ出力(消さずに追加)    
+ * 
+ * 標準出力フラグが 0 以外の時は、1～3 か、標準出力フラグと同じ値しか指定できません。
+ * 
+ * @param err_filepath 
+ * stderr_propが2または3のとき、ファイル名を指定します。    
+ * それ以外では使わない場合でも""を指定してください。
+ * 
+ * @param work_folder_prop 
+ * 作業フォルダの決め方を指定します。    
+ * - 0:指定なし
+ * - 1:現在のファイルのフォルダ
+ * - 2:フォルダを指定
+ * - 3:(予約)
+ * - 4:実行ファイルのフォルダ    
+ *     作業フォルダは、実行するプログラムのカレントフォルダです。    
+ *     標準入出力でファイルを指定している場合の相対パスの基準には使われません。    
+ * 
+ * @param work_folderpath
+ * work_folder_propが2のとき、フォルダ名を指定します。
+ * 
+ * @param show_window_prop 
+ * ウィンドウ表示の方法を指定します。
+ * - 0:   自動
+ * - 1:   表示
+ * - 2:   非表示(SW_HIDE相当)    
+ * 
+ * 3以降はWindowsAPIのShellExecuteのnShowCmd相当に変換される値
+ * - 3:   SW_SHOWMAXIMIZED/SW_MAXIMIZE
+ * - 4:   SW_SHOWNOACTIVATE
+ * - 5:   SW_SHOW
+ * - 6:   SW_MINIMIZE
+ * - 7:   SW_SHOWMINNOACTIVE
+ * - 8:   SW_SHOWNA
+ * - 9:   SW_RESTORE
+ * - 10:  SW_SHOWDEFAULT
+ * - 11:  SW_FORCEMINIMIZE
+ * - 12:  SW_SHOWNORMAL
+ * - 13:  SW_SHOWMINIMIZED
+ * 
+ * @param is_hide_redirect 
+ * 標準出力をリダイレクト中、描画しないかどうかを指定します。    
+ * - 0:描画する
+ * - 1:標準出力をリダイレクト中は描画しない
+ * 
+ * @param n_encode 
+ * エンコードの種類を指定します。
+ * - 0:ANSI
+ * - 2:Unicode(UTF-16)
+ * - 6:Unicode(UTF-8)
+ * それ以外のエンコードは指定できません。
+ * 
+ * @param extension_flags
+ * 拡張フラグです。    
+ * 以下の値の論理和です。    
+ * - 0x0001:ファイル名部分で%の解釈をしないようになります。%を表す場合は「%」をそのまま書けるようになります。    
+ * 
+ * @example
+ * runex(
+ *    "filename.exe"
+ *     , 1     //sync   0:async, 1:sync
+ *     , 0, "" //stdin  0:none, 1:auto, 2:<file, 3:(reserved),
+ *             //       4:current content, 5:selection
+ *     , 1, "" //stdout 0:none, 1:auto, 2:>file 3:>>file, 4:new window,
+ *             //       5:insert, 6:replace, 7:>output pane, 8:>>output pane
+ *     , 0, "" //stderr 0:none, 1:auto or >>stdout, 2-8:same as stdout's param
+ *     , 0, "" //folder 0:none, 1:current, 2:specify 3:(reserved), 4:exe's
+ *     , 1     //show   0:auto, 1:show, 2:hide, 3-13:ShellExecute()'s SW_*
+ *     , 1     //draw   0:draw, 1:no draw when stdout redirected
+ *     , 0     //encode 0:ansi, 2:utf-16, 6:utf-8
+ *     , 0     //extended flags
+ *  );
+ * 
+ * @comment
+ * 参照：
+ * @see run
+ * @see getresultex(9)
+ * 
+ * @returns
+ * 成功時は0以外を返す。    
+ * 失敗時は0を返す。    
+ * getresultex(9)で同期実行したときの終了ステータスを取得できます。   
+ */
+declare function runex(command: string, is_wait_sync?: number, stdin_prop?: number, in_filepath?: string, stdout_prop?: number, out_filepath?: string, stderr_prop?: number, err_filepath?: string, work_folder_prop?: number, work_folderpath?: string, show_window_prop?: number, is_hide_redirect?: number, n_encode?: number, extension_flags?: number): number;
 
 
 disabledraw ★ function() { var m = "disabledraw"; eval(st); return r; }
