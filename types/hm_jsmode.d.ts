@@ -13942,7 +13942,6 @@ declare function setfloatmode(to_floatmode_on: number): number;
  * これは設定状況を元へと戻すことを容易にするためです。    
  * 
  * @example
- *
  * var n_type = 0;
  * var new_value = 1;
  * var old_value = seterrormode(n_type, new_value);として、設定すると同時に直前の値を知ることもできます。
@@ -13950,8 +13949,97 @@ declare function setfloatmode(to_floatmode_on: number): number;
  */
 declare function seterrormode(n_type: number, n_value: number): number;
 
-setbackgroundmode ★ function() { var m = "setbackgroundmode"; eval(st); return r; }
 
+/**
+ * s
+ * 
+ * setbackgroundmode文は、マクロを非アクティブな状態で実行できるようにします。    
+ * この文をJavaScriptで使用するのは適していないかもしれません。    
+ * 
+ * setbackgroundmode(1);とすると、バックグラウンドモードが有効になります。    
+ * setbackgroundmodeの主な目的は、setactivehidemaru等で２つの秀丸エディタを切り替えながら実行するマクロがあると、    
+ * ウィンドウが前面に来てしまうことを防ぐためにあります。    
+ * 例えば以下のマクロだと、非タブモードでウィンドウが２つある場合に前面に来てしまい、    
+ * 他のアプリの操作や、手動起動で操作する秀丸エディタの操作が困難ですが、    
+ * setbackgroundmode 1;をすると前面に来ないようになります。    
+ * @example
+ * // ウィンドウを切り替えながら実行するマクロの例
+ * js {
+ *     setbackgroundmode(1);
+ *     setVar("#tabmode", tabmode());
+ *     settabmode(0); // タブモードをやめる
+ * }
+ * 
+ * newfile;
+ * #a = hidemaruhandle(0);
+ * setwindowpos 100, 200;
+ * newfile;
+ * #b = hidemaruhandle(0);
+ * setwindowpos 200, 300;
+ * setactivehidemaru #a;
+ * #ix = 0;
+ * while(#ix < 100){
+ *     setactivehidemaru #a;
+ *     insert "Aです\n";
+ *     setactivehidemaru #b;
+ *     insert "Bです\n";
+ *     #ix = #ix + 1;
+ * }
+ * 
+ * // settabmode #tabmode; とかは入れてもとへと戻そうとしては駄目。
+ * // setbackgroundmode中にタブモードになると、マクロが終了時に不正な状態となってしまう。
+ * 
+ * endmacro; // setbackgroundmode(0)というものは存在しない。マクロが終了する必要がある。
+ * 
+ * @comment
+ * 一度有効にすると、マクロが終了するまでは無効にすることはできません。    
+ * バックグラウンドモードは、マクロ実行中の秀丸エディタが非アクティブな状態になっても、    
+ * 実行中のマクロはその秀丸エディタ上で継続されます。    
+ * openfileやnewfileで新しい秀丸エディタのウィンドウができる場合は、    
+ * バックグラウンドモードでないときと同じように、新しい秀丸エディタにマクロの実行は切り替わります。    
+ * バックグラウンドモードでは以下の制約があります。    
+ * アクティブ切り替えは、順番による指定はできません。    
+ * setactivehidemaru(1);で次の秀丸エディタをアクティブ、nexthidemaruで次の秀丸エディタをアクティブなど、順番の指定はできません。    
+ * ウィンドウハンドルを指定して、setactivehidemaru #handle;とすることは可能です。    
+ * 
+ * @example
+ * // できない例
+ * setbackgroundmode 1;
+ * //----
+ * newfile;
+ * setactivehidemaru 1;
+ * 
+ * @example
+ * // できない例を回避する例
+ * setbackgroundmode 1;
+ * //----
+ * #handle = hidemaruhandle(0);
+ * newfile;
+ * setactivehidemaru #handle;
+ * 
+ * @comment
+ * - 他の秀丸エディタの情報取得で、順番の指定はできません。    
+ * #a = hidemaruhandle(1);で次の秀丸エディタの情報を得るなど、順番による指定ではできません。    
+ * #a = hidemaruhandle(0);として、自分自身の情報を得ることは可能です。    
+ * 
+ * - 特定の秀丸エディタの操作が制限される場合があります。    
+ * マクロの実行を開始した秀丸エディタでなくても、    
+ * setactivehidemaru等でマクロ実行を一度でも切り替えた秀丸エディタは、    
+ * マクロが終了するまではキー入力などはできないようになります。    
+ * 
+ * - 検索バッファは個別になります。
+ * 
+ * @comment 
+ * 参考：    
+ * @see execmacroで別のマクロを実行する場合
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * 
+ * @param to_background 
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setbackgroundmode(to_background: 1): number;
 
 /**
  * s
