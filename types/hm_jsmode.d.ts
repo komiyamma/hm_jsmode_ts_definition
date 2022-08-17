@@ -12304,10 +12304,13 @@ declare function hidemaruhelp(): number;
  * 
  * macrohelp文は、「秀丸マクロヘルプ」を実行します。
  * 
+ * @param keyword
+ * keywordを指定した場合、指定したキーワードで呼び出します
+ * 
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function macrohelp(): number;
+declare function macrohelp(keyword?: string): number;
 
 /**
  * s
