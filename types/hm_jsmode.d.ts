@@ -10708,11 +10708,255 @@ declare function find1(): number;
  */
 declare function findword(): number;
 
-searchdialog ★ function() { var m = "searchdialog"; eval(st1s); return r; }
-searchdown ★ function() { var m = "searchdown"; eval(st1s); return r; }
-searchdown2 ★ function() { var m = "searchdown2"; eval(st1s); return r; }
-searchup ★ function() { var m = "searchup"; eval(st1s); return r; }
-searchup2 ★ function() { var m = "searchup2"; eval(st1s); return r; }
+/**
+ * s
+ * 
+ * searchdialog文は、検索ダイアログを出して検索します。
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @example
+ * searchdialog("文字");
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * - word(0x00000001)    
+ * wordを指定すると、単語検索になります。
+ * 
+ * - casesense(0x00000002), nocasesense(0x00000000)    
+ * casesenseは大文字／小文字の区別をするという意味です。    
+ * nocasesenseは大文字／小文字の区別をしません。    
+ * casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 正規表現(regular)の指定があるときは自動的にcasesenseの指定になり、    
+ * 正規表現の指定がないときは自動的にnocasesenseの指定になります。    
+ * 
+ * - regular(0x00000010), noregular(0x00000000)    
+ * regularを付けると正規表現で検索します。    
+ * regularを付けて、casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 自動的にcasesense相当（大文字/小文字の区別をする）になります。    
+ * noregularを付けると正規表現でない通常の検索をします。    
+ * noregularを付けて、casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 自動的にnocasesense相当（大文字/小文字の区別をしない）になります。
+ * regularとnoregularのいずれも指定しない場合は、    
+ * あいまい検索(fuzzy)の指定があるときは自動的にregularの指定になり、    
+ * あいまい検索の指定がないときは自動的にnoregularの指定になります。
+ * 
+ * - fuzzy(0x00000020)    
+ * fuzzyを付けるとあいまい検索をします。    
+ * fuzzyを付けて、regularとnoregularのいずれも指定しない場合は、自動的にregular相当（正規表現あり）になります。    
+ * fuzzyを付けず、regularとnoregularのいずれも指定しない場合は、自動的にnoregular相当（正規表現なし）になります。    
+ * 
+ * - linknext(0x00000080)    
+ * linknextを付けると次の秀丸エディタも続けて検索します。    
+ * 
+ * - hilight(0x00003800), nohilight(0x00002000)    
+ * hilightを付けると「検索文字列の強調」になります。    
+ * nohilightを付けると「検索文字列の強調」が無効になります。    
+ * 
+ * - masknormal(0x00010000), maskcomment(0x00020000), maskifdef(0x00040000), maskscript(0x00080000), maskstring(0x00100000), masktag(0x00200000), maskonly(0x00400000)    
+ * masknormalは、追加の条件の「普通の文字」です。    
+ * maskcommentは、追加の条件の「コメント」です。    
+ * maskifdefは、追加の条件の「#ifdef等の無効部分」です。    
+ * maskscriptは、追加の条件の「スクリプト部分」です。    
+ * maskstringは、追加の条件の「文字定数」です。    
+ * masktagは、追加の条件の「HTML/XMLタグ」です。    
+ * maskonlyを付けない場合は、追加の条件は「を除く」です。maskonlyを付けると「のみ」になります。    
+ * 
+ * - loop(0x01000000)    
+ * loopを付けると「一周する」になります。    
+ * 
+ * - noclose(0x02000000)    
+ * nocloseを付けると「検索したら閉じる」をOFFにします。（searchdialogのみ）    
+ * 
+ * - incolormarker(0x00000002)    
+ * incolormarkerは、追加の条件の「指定の範囲/カラーマーカー内」を有効にします。    
+ * 対象となる範囲は、settargetcolormarkerで指定します。    
+ * 
+ * @example
+ * searchdialog("test", 0x00000001 | 0x00000002);
+ * 
+ * @comment
+ * 検索文字列には上限があります。上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。    
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see searchdown
+ * @see searchdown2
+ * @see 検索／置換文字列の上限について
+ * 
+ * searchdownは、カーソル位置の次の文字から検索を開始します。    
+ * カーソル位置から検索するには、searchdown2を使います。    
+ * 
+ * 検索にヒットした後、選択されるか点滅表示になるかは動作環境によって違います。    
+ * 違いを無くすにはsetcompatiblemode文を使います。    
+ * 
+ * searchdown等の文を使うと、検索ダイアログボックスの中の検索条件（大文字/小文字の区別、正規表現のON/OFF等）がマクロ内で実行した検索条件に書き換わってしまいます。    
+ * マクロでsearchdown文などを使っても検索ダイアログの検索条件を変わらないようにするには、searchdown等を実行する前に、「setcompatiblemode 0x20000;」を実行する方法があります。    
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ * ダイアログでキャンセルした場合は -2 になります。    
+ */
+declare function searchdialog(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * searchdownは、カーソル位置の次の文字から下検索をします。
+ *
+ * パラメータの意味はsearchdialog文と同じです。    
+ * カーソル位置から検索するには、searchdownではなく、searchdown2を使います。    
+ * 
+ * @example
+ * searchdown("文字");
+ * 
+ * @example
+ * var flag_word = 0x00000001;
+ * searchdown("abc", flag_word);
+ * 
+ * @param search_text 
+ * 検索文字列を指定します
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag 
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see searchdown2
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function searchdown(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * searchdown2は、カーソル位置の文字から下検索をします。
+ *
+ * パラメータの意味はsearchdown文と同じです。    
+ * カーソル位置の次の文字から検索するには、searchdown2ではなく、searchdownを使います。    
+ * 
+ * @example
+ * searchdown("文字");
+ * 
+ * @example
+ * var flag_word = 0x00000001;
+ * searchdown2("abc", flag_word);
+ * 
+ * @param search_text 
+ * 検索文字列を指定します
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag 
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see searchdown
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function searchdown2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * searchupは、上検索をします。    
+ * カーソルの位置にある単語も検索に含める場合は、searchupではなく、searchup2を使います。
+ *
+ * パラメータの意味はsearchdialog文と同じです。    
+ * 
+ * @example
+ * searchup("文字");
+ * 
+ * @example
+ * var flag_word = 0x00000001;
+ * searchup("abc", flag_word);
+ * 
+ * @param search_text 
+ * 検索文字列を指定します
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag 
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see searchup2
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function searchup(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * searchup2は、上検索をします。    
+ * カーソルの位置から検索するため、カーソルの位置にある単語を検索に含めます。    
+ * カーソルの位置にある単語を含みたくない場合、searchup2ではなく、searchupを使います。
+ *
+ * パラメータの意味はsearchdialog文と同じです。    
+ * 
+ * @example
+ * searchup("文字");
+ * 
+ * @example
+ * var flag_word = 0x00000001;
+ * searchup("abc", flag_word);
+ * 
+ * @param search_text 
+ * 検索文字列を指定します
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag 
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see searchup
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function searchup2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
 replace1 ★ function() { var m = "replace"; eval(st); return r; }
 replacedialog ★ function() { var m = "replacedialog"; eval(st1s2s); return r; }
 replacedown ★ function() { var m = "replacedown"; eval(st1s2s); return r; }
@@ -10811,6 +11055,8 @@ declare function getsearch(): number;
  * @comment
  * 参照：    
  * @see 検索／置換文字列の上限について
+ * @see searchoption
+ * @see searchoption2
  * 
  * @returns
  * 返り値は意味を持ちません。
