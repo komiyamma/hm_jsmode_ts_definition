@@ -10981,9 +10981,183 @@ declare function searchup2(search_text: string, searchoption_flag?: number, sear
  */
 declare function replace1(): number;
 
-replacedialog ★ function() { var m = "replacedialog"; eval(st1s2s); return r; }
-replacedown ★ function() { var m = "replacedown"; eval(st1s2s); return r; }
-replaceup ★ function() { var m = "replaceup"; eval(st1s2s); return r; }
+/**
+ * s
+ * 
+ * replacedialog文は、置換ダイアログを出して置換します。
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replacedialog("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @comment
+ * - word(0x00000001)    
+ * wordを指定すると、単語検索になります。
+ * 
+ * - casesense(0x00000002), nocasesense(0x00000000)    
+ * casesenseは大文字／小文字の区別をするという意味です。    
+ * nocasesenseは大文字／小文字の区別をしません。    
+ * casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 正規表現(regular)の指定があるときは自動的にcasesenseの指定になり、    
+ * 正規表現の指定がないときは自動的にnocasesenseの指定になります。    
+ * 
+ * - regular(0x00000010), noregular(0x00000000)    
+ * regularを付けると正規表現で検索します。    
+ * regularを付けて、casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 自動的にcasesense相当（大文字/小文字の区別をする）になります。    
+ * noregularを付けると正規表現でない通常の検索をします。    
+ * noregularを付けて、casesenseとnocasesenseのいずれも指定しない場合は、    
+ * 自動的にnocasesense相当（大文字/小文字の区別をしない）になります。
+ * regularとnoregularのいずれも指定しない場合は、    
+ * あいまい検索(fuzzy)の指定があるときは自動的にregularの指定になり、    
+ * あいまい検索の指定がないときは自動的にnoregularの指定になります。
+ * 
+ * - fuzzy(0x00000020)    
+ * fuzzyを付けるとあいまい検索をします。    
+ * fuzzyを付けて、regularとnoregularのいずれも指定しない場合は、自動的にregular相当（正規表現あり）になります。    
+ * fuzzyを付けず、regularとnoregularのいずれも指定しない場合は、自動的にnoregular相当（正規表現なし）になります。    
+ * 
+ * - linknext(0x00000080)    
+ * linknextを付けると次の秀丸エディタも続けて検索します。    
+ * 
+ * - hilight(0x00003800), nohilight(0x00002000)    
+ * hilightを付けると「検索文字列の強調」になります。    
+ * nohilightを付けると「検索文字列の強調」が無効になります。    
+ * 
+ * - masknormal(0x00010000), maskcomment(0x00020000), maskifdef(0x00040000), maskscript(0x00080000), maskstring(0x00100000), masktag(0x00200000), maskonly(0x00400000)    
+ * masknormalは、追加の条件の「普通の文字」です。    
+ * maskcommentは、追加の条件の「コメント」です。    
+ * maskifdefは、追加の条件の「#ifdef等の無効部分」です。    
+ * maskscriptは、追加の条件の「スクリプト部分」です。    
+ * maskstringは、追加の条件の「文字定数」です。    
+ * masktagは、追加の条件の「HTML/XMLタグ」です。    
+ * maskonlyを付けない場合は、追加の条件は「を除く」です。maskonlyを付けると「のみ」になります。    
+ * 
+ * - loop(0x01000000)    
+ * loopを付けると「一周する」になります。    
+ * 
+ * - noclose(0x02000000)    
+ * nocloseを付けると「検索したら閉じる」をOFFにします。（searchdialogのみ）    
+ * 
+ * - incolormarker(0x00000002)    
+ * incolormarkerは、追加の条件の「指定の範囲/カラーマーカー内」を有効にします。    
+ * 対象となる範囲は、settargetcolormarkerで指定します。    
+ * 
+ * - ask(0x00000008)
+ * askを指定すると置換の前に確認が入ります。    
+ * askによって確認にダイアログが出るとき、どのようにして確認ダイアログが閉じられたかをgetresultexで知ることができます。    
+ * linknextとaskを同時に指定することはできません。
+ * 
+ * @example
+ * replacedialog("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * @comment
+ * 検索文字列には上限があります。上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。    
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 置換した個数が返ります。    
+ * ダイアログでキャンセルした場合は -2 になります。    
+ */
+declare function replacedialog(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/*
+replaceup, replacedownは、成功した場合はresult1になり、失敗した場合は0になります。
+ダイアログでキャンセルした場合は-2になります。（V6.50以降）
+*/
+
+/**
+ * s
+ * 
+ * replacedown文は、カーソル位置から下方向置換をします。
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replacedialog("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * replacedown("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function replacedown(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * replaceup文は、カーソル位置から上方向置換をします。
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replacedialog("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * replaceup("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 成功した場合は返り値は1になります。    
+ * 失敗した場合は返り値は0になります。    
+ */
+declare function replaceup(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
 replaceall ★ function() { var m = "replaceall"; eval(st); return r; }
 replaceallfast ★ function() { var m = "replaceallfast"; eval(st); return r; }
 replaceallquick ★ function() { var m = "replaceallquick"; eval(st); return r; }
