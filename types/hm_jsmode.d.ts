@@ -9407,7 +9407,8 @@ declare function poppaste2(): number;
  * history_ixが無い場合は、全ての履歴を消去します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 成功した場合、0以外を返します。    
+ * 失敗した場合、0を返します。    
  */
 declare function clearcliphist(history_ix? number): number;
 
@@ -16831,6 +16832,9 @@ declare function closehidemaruforced(hidemaru_handle: number): number;
  * @param tab_group_id
  * id_typeが0の場合、グループIDを指定します。
  * id_typeがが1の場合、0から数えたグループの順番を指定します。自分自身は0になります。
+ * 
+ * @example
+ * var h = getcurrenttab(1,0);
  * 
  * @comment
  * 参照：
