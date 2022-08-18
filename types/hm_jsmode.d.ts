@@ -5757,7 +5757,8 @@ declare function enumcolormarkerlayer(colormarkerlayer_ix: number): string
  * 
  * @returns
  * - target_attrを省略、もしくは0なら    
- * 指定のfullpathのファイルが存在する場合は1、存在しない場合は0です。    
+ * 指定のfullpathのファイルが存在する場合は0以外を返す。    
+ * 存在しない場合は0を返す。    
  * 
  * - target_attrが1の場合、ファイルの属性として以下の値をOR演算した組み合わせを返す。    
  *   - 0x00000001　読み取り専用
@@ -6332,15 +6333,18 @@ declare function deletefilehist(history_ix: number | -1 | -2): number
  * 0から始まるヒストリの番号を指定します。    
  * 0 が最新の履歴、1 が１つ前、2 が２つ前という具合です。
  * 
+ * パラメータが無い場合は、全ての履歴を消去します。    
+ * パラメータに0から数えた数値を指定することで、指定した履歴を消すことができます。    
+ * 
  * @comment
  * 参照：    
  * @see クリップボードと変数とのやりとり
  * 
  * @returns
- * 取り出しに成功すると、1を返す。    
+ * 取り出しに成功すると、0以外を返す。    
  * 存在しない番号を指定したり、常駐秀丸エディタがいないなどの場合は0を返す。
  */
-declare function getcliphist(history_ix: number): number
+declare function getcliphist(history_ix?: number): number
 
 
 /**
@@ -9964,7 +9968,7 @@ declare function deletewordfront(): number;
  * insert文は挿入モードでの入力に相当します。
  * 
  * @param text 
- * 挿入する文字列
+ * 挿入する文字列を指定します。
  * 
  * @example
  * insert("ABC");
@@ -9976,9 +9980,11 @@ declare function deletewordfront(): number;
  * insert "\x0A";
  * 
  * @param mode1
- * 1 を指定すると、"\r"と"\n"と"\r\n"の改行コードの違いを正しく解釈するようになります。    
- * 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
- * 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
+ * 改行コードの解釈の仕方や、インデントを働かせる方法を指定します。    
+ * - 省略した場合、改行は"\n"のみ、インデントは無しです。
+ * - 1 を指定すると、"\r"と"\n"と"\r\n"の改行コードの違いを正しく解釈するようになります。    
+ * - 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
+ * - 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
  * 
  * @param mode2
  * 自動インデントの設定を明示的に指定できます。    
@@ -10001,8 +10007,8 @@ declare function deletewordfront(): number;
  * @see overwrite
  * 
  * @returns
- * 挿入できたら１を返す、    
- * 書き込み禁止などで挿入できなかったら０を返す。
+ * 挿入できたら0以外を返す。
+ * 書き込み禁止などで挿入できなかったら0を返す。
  */
 declare function insert(text: string, mode1?: number, mode2_flag?: number): number;
 
@@ -16917,6 +16923,9 @@ declare function getcurrenttab(id_type: number, tab_group_id): number;
  * 
  * @param tab_order
  * グループ内のタブの順番を指定します。
+ * 
+ * @example
+ * var h = gettabhandle(1,0,0);
  * 
  * @comment
  * 参照：
