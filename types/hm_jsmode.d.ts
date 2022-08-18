@@ -10019,7 +10019,7 @@ declare function insert(text: string, mode1?: number, mode2_flag?: number): numb
  * カーソルは移動しません。
  * 
  * @param text 
- * 挿入する文字列
+ * 挿入する文字列を指定します。
  * 
  * @example
  * insertfix("ABC");
@@ -10031,6 +10031,8 @@ declare function insert(text: string, mode1?: number, mode2_flag?: number): numb
  * insertfix "\x0A";
  * 
  * @param mode1
+ * 改行コードの解釈の仕方や、インデントを働かせる方法を指定します。    
+ * - 省略した場合、改行は"\n"のみ、インデントは無しです。
  * 1 を指定すると、"\r"と"\n"と"\r\n"の改行コードの違いを正しく解釈するようになります。    
  * 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
  * 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
@@ -10117,8 +10119,8 @@ declare function insertline(): number;
  * insert("\n");としてください。
  * 
  * @returns
- * 挿入できたら１を返す、    
- * 書き込み禁止などで挿入できなかったら０を返す。
+ * 成功した場合、0以外を返す。
+ * 書き込み禁止などで失敗した場合、0を返す。
  */
 declare function insertreturn(): number;
 
