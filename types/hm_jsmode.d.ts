@@ -6418,7 +6418,7 @@ declare function getresultex(result_id: number): number
  *     messge(result_str);
  * }
  * 
- * @returns;
+ * @returns
  * 直近の execmacroで呼ばれたマクロで    
  * endmacroにパラメータを指定したときの文字列値を返す。
  */
@@ -11309,7 +11309,7 @@ declare function replaceallquick(search_text: string, replace_text:string, searc
 /**
  * s
  * 
- * finddown文は、「下候補」を実行します。   
+ * finddown文は、「下候補」を実行します。    
  * 
  * finddownは、カーソル位置の次の文字から検索を開始します。    
  * カーソル位置から検索するには、finddown2を使います。    
@@ -11343,14 +11343,14 @@ declare function replaceallquick(search_text: string, replace_text:string, searc
  * @see setsearch
  * @see hilightfound
  * 
- * @returns;
+ * @returns
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
 declare function finddown(): number;
 
 /**
- * finddown文2は、「下候補」を実行します。   
+ * finddown文2は、「下候補」を実行します。    
  * 
  * カーソル位置から検索を開始するバージョンです。    
  * 
@@ -11383,14 +11383,96 @@ declare function finddown(): number;
  * @see setsearch
  * @see hilightfound
  * 
- * @returns;
+ * @returns
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
 declare function finddown2(): number;
 
-findup ★ function() { var m = "findup"; eval(st); return r; }
-findup2 ★ function() { var m = "findup2"; eval(st); return r; }
+/**
+ * s
+ * 
+ * findup文は、「上候補」を実行します。    
+ * 
+ * @example
+ * findup();
+ * 
+ * @comment
+ * searchoptionの0x00000004（置換かどうか）がOFFのときは検索し、ONのときは置換します。    
+ * （searchdown等の検索をした後は0x00000004はOFFになっています。replacedown等の置換をした後は0x00000004がONになっています。）    
+ * 
+ * findup, finddownは、コマンドの上候補,下候補と完全に同じ動作ではありません。    
+ * 
+ * 検索にヒットした後、選択されるか点滅表示になるかは動作環境によって違います。    
+ * 違いを無くすにはsetcompatiblemode文を使います
+ * 
+ * @example
+ * var casesense = 0x00000002;
+ * var hilight = 0x00003800;
+ * searchup("検索文字列", casesense|hilight);
+ * // 上と同じ処理として
+ * 
+ * var casesense = 0x00000002;
+ * var nohilight = 0x00002800;
+ * var option = casesense|nohilight|(searchoption() & 0x0740); // grep用のオプションを維持
+ * setsearch("検索文字列", option);  
+ * findup();
+ * hilightfound(1);
+ * 
+ * @comment
+ * 参照：
+ * @see finddown
+ * @see setsearch
+ * @see hilightfound
+ * 
+ * @returns
+ * 成功した場合は、0以外にを返す。
+ * 失敗した場合は、0を返す。
+ */
+declare function findup(): number;
+
+/**
+ * s
+ * 
+ * findup2文は、「上候補」を実行します。    
+ * カーソル位置から検索を開始するバージョンです。    
+ * 
+ * @example
+ * findup2();
+ * 
+ * @comment
+ * searchoptionの0x00000004（置換かどうか）がOFFのときは検索し、ONのときは置換します。    
+ * （searchdown等の検索をした後は0x00000004はOFFになっています。replacedown等の置換をした後は0x00000004がONになっています。）    
+ * 
+ * findup, finddownは、コマンドの上候補,下候補と完全に同じ動作ではありません。    
+ * 
+ * 検索にヒットした後、選択されるか点滅表示になるかは動作環境によって違います。    
+ * 違いを無くすにはsetcompatiblemode文を使います
+ * 
+ * @example
+ * var casesense = 0x00000002;
+ * var hilight = 0x00003800;
+ * searchup("検索文字列", casesense|hilight);
+ * // 上と同じ処理として
+ * 
+ * var casesense = 0x00000002;
+ * var nohilight = 0x00002800;
+ * var option = casesense|nohilight|(searchoption() & 0x0740); // grep用のオプションを維持
+ * setsearch("検索文字列", option);  
+ * findup2();
+ * hilightfound(1);
+ * 
+ * @comment
+ * 参照：
+ * @see finddown
+ * @see setsearch
+ * @see hilightfound
+ * 
+ * @returns
+ * 成功した場合は、0以外にを返す。
+ * 失敗した場合は、0を返す。
+ */
+declare function findup2(): number;
 
 /**
  * s
