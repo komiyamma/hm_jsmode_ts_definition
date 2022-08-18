@@ -10957,7 +10957,30 @@ declare function searchup(search_text: string, searchoption_flag?: number, searc
  */
 declare function searchup2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
 
-replace1 ★ function() { var m = "replace"; eval(st); return r; }
+/**
+ * s
+ * 
+ * replace1文は、置換ダイアログを出します。
+ * これは秀丸マクロのreplace文に相当します。
+ * 
+ * キー割り当ての「置換...」コマンドを実行するのと同じように、    
+ * カーソル位置や範囲選択の文字列を検索文字列として拾うか、    
+ * 動作環境の動作に従って、置換ダイアログを出します。    
+ * searchbufferを検索文字列にするには、replace1ではなく、replacedialog文を使います。    
+ *
+ * @example
+ * replace1();
+ * 
+ * @comment
+ * 参照：
+ * @see replacedialog
+ * 
+ * @returns
+ * 成功した場合は、resultは置換した個数を返す。
+ * ダイアログでキャンセルした場合は -2 を返す。
+ */
+declare function replace1(): number;
+
 replacedialog ★ function() { var m = "replacedialog"; eval(st1s2s); return r; }
 replacedown ★ function() { var m = "replacedown"; eval(st1s2s); return r; }
 replaceup ★ function() { var m = "replaceup"; eval(st1s2s); return r; }
@@ -10991,7 +11014,6 @@ findup2 ★ function() { var m = "findup2"; eval(st); return r; }
  * 失敗した場合は、resultは0になります。    
  */
 declare function getsearch(): number;
-
 
 /**
  * s
