@@ -2725,6 +2725,50 @@ declare function readonly(): number;
  * var is_lf = encode() & 0x40;
  * var is_cr = encode() & 0x80;
  * var is_lf_cr = (is_lf == is_cr); // 両方1か両方0
+ * 
+ * @comment
+ * - openfile等のencode相当    
+ * sjis = 0x01;    
+ * utf16 = 0x02;    //unicode    
+ * euc = 0x03;    
+ * jis = 0x04;    
+ * utf7 = 0x05;    
+ * utf8 = 0x06;    
+ * utf16_be = 0x07; //unicode_be    
+ * euro = 0x08;    
+ * gb2312 = 0x09;    
+ * big5 = 0x0A;    
+ * euckr = 0x0B;    
+ * johab = 0x0C;    
+ * easteuro = 0x0D;    
+ * baltic = 0x0E;    
+ * greek = 0x0F;    
+ * russian = 0x10;    
+ * symbol = 0x11;    
+ * turkish = 0x12;    
+ * hebrew = 0x13;    
+ * arabic = 0x14;    
+ * thai = 0x15;    
+ * vietnamese = 0x16;    
+ * mac = 0x17;    
+ * oem = 0x18;    
+ * default = 0x19;    
+ * utf32 = 0x1B;    
+ * utf32_be = 0x1C;    
+ * binary = 0x1A;    
+ * lf = 0x40;    
+ * cr = 0x80;    
+ *     
+ * - saveasの他のオプションの数値指定    
+ * bom = 0x0600;    
+ * nobom = 0x0400;    
+ * selection = 0x2000;    
+ *     
+ * - openfileの他のオプションの数値指定    
+ * noaddhist = 0x0100;    
+ * ws = 0x0800;    
+ * wb = 0x1000;    
+ * 
  * @returns
  * 現在のエンコードの種類と改行タイプを含んだ値を返す。
  */
