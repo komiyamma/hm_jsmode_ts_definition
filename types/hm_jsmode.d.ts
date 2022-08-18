@@ -14381,8 +14381,8 @@ declare function runex(command: string, is_wait_sync?: number, stdin_prop?: numb
  * 参照：
  * @see enabledraw    
  * @see disabledraw2    
- * @see execmacroで別のマクロを実行する場合    
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * @see 影響の及ぶ範囲(execmacro)    
+ * @see 影響の及ぶ範囲(アクティブ切り替え)    
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
@@ -14453,8 +14453,8 @@ declare function disabledraw(): number;
  * 参照：
  * @see enabledraw    
  * @see disabledraw2    
- * @see execmacroで別のマクロを実行する場合    
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * @see 影響の及ぶ範囲(execmacro)    
+ * @see 影響の及ぶ範囲(アクティブ切り替え)    
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
@@ -14495,8 +14495,8 @@ declare function disabledraw2(): number;
  * @comment
  * 参照：    
  * @see enablebreak
- * @see execmacroで別のマクロを実行する場合
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * @see 影響の及ぶ範囲(execmacro)
+ * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
@@ -14527,8 +14527,8 @@ declare function enablebreak(): number;
  * @comment
  * 参照：    
  * @see enableinvert
- * @see execmacroで別のマクロを実行する場合
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * @see 影響の及ぶ範囲(execmacro)
+ * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
@@ -14614,8 +14614,8 @@ declare function enableerrormsg(): number;
  * 
  * @comment
  * 参照：    
- * @see execmacroで別のマクロを実行する場合
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * @see 影響の及ぶ範囲(execmacro)
+ * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
  * 通常は１が返ってくるが、返ってくる値に意味はない。
@@ -14746,8 +14746,8 @@ declare function setfloatmode(to_floatmode_on: number): number;
  * @see seterrormode
  * @see disableerrormsg
  * @see enableerrormsg
- * @see execmacroで別のマクロを実行する場合    
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合    
+ * @see 影響の及ぶ範囲(execmacro)    
+ * @see 影響の及ぶ範囲(アクティブ切り替え)    
  * 
  * @comment
  * この関数の実行で変更されるのはパラメータ１の値に対応する状態のみで、    
@@ -14848,8 +14848,8 @@ declare function seterrormode(n_type: number, n_value: number): number;
  * 
  * @comment 
  * 参考：    
- * @see execmacroで別のマクロを実行する場合
- * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * @see 影響の及ぶ範囲(execmacro)
+ * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @param to_background 
  * 
