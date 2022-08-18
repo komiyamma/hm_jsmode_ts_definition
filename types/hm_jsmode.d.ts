@@ -11096,7 +11096,7 @@ replaceup, replacedownは、成功した場合はresult1になり、失敗した
  * 置換文字列を指定します。
  * 
  * @example
- * var ret = replacedialog("検索文字", "置換文字");
+ * var ret = replacedown("検索文字", "置換文字");
  * if( !ret ) { message("見つかりませんでした。"); }
  * 
  * @param searchoption_flag
@@ -11133,7 +11133,7 @@ declare function replacedown(search_text: string, replace_text:string, searchopt
  * 置換文字列を指定します。
  * 
  * @example
- * var ret = replacedialog("検索文字", "置換文字");
+ * var ret = replaceup("検索文字", "置換文字");
  * if( !ret ) { message("見つかりませんでした。"); }
  * 
  * @param searchoption_flag
@@ -11158,8 +11158,94 @@ declare function replacedown(search_text: string, replace_text:string, searchopt
  */
 declare function replaceup(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
 
-replaceall ★ function() { var m = "replaceall"; eval(st); return r; }
-replaceallfast ★ function() { var m = "replaceallfast"; eval(st); return r; }
+/**
+ * s
+ * 
+ * replaceall文はは普通に全置換を実行します。    
+ * 普通ではなく高速に実行したい場合は、replaceallfastを利用してください。    
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replaceall("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * replaceall("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see replaceallfast
+ * @see getresultex(14)
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 置換した個数が返ります。    
+ * 途中で中断された場合はresultは-1になります。    
+ * 
+ * 置換が終了しても、「何個置換しました」のメッセージは表示されず、代わりに返り値に置換した個数が入ります。    
+ * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
+ * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
+ */
+declare function replaceall(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+/**
+ * s
+ * 
+ * replaceallfast文はは高速に全置換を実行します。    
+ * 高速ではなく普通の速度で実行したい場合は、replaceallを利用してください。    
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replaceallfast("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * replaceallfast("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see getresultex(14)
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 置換した個数が返ります。    
+ * 途中で中断された場合はresultは-1になります。    
+ * 
+ * 置換が終了しても、「何個置換しました」のメッセージは表示されず、代わりに返り値に置換した個数が入ります。    
+ * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
+ * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
+ */
+declare function replaceallfast(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+
+
 replaceallquick ★ function() { var m = "replaceallquick"; eval(st); return r; }
 
 finddown ★ function() { var m = "finddown"; eval(st); return r; }
