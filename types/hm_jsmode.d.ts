@@ -11245,11 +11245,150 @@ declare function replaceall(search_text: string, replace_text:string, searchopti
  */
 declare function replaceallfast(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
 
+/**
+ * s
+ * 
+ * replaceallquick文は、クイック全置換を行います。    
+ * 利用方法は、replaceall, replaceallfastや、replaceup, replacedown, replacedown文とほぼ同じです。    
+ * 
+ * @param search_text
+ * 検索文字列を指定します
+ * 
+ * @param replace_text
+ * 置換文字列を指定します。
+ * 
+ * @example
+ * var ret = replaceallquick("検索文字", "置換文字");
+ * if( !ret ) { message("見つかりませんでした。"); }
+ * 
+ * @param searchoption_flag
+ * searchoption相当の検索オプションを指定します。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * replaceallquick("test", "host", 0x00000001 | 0x00000002);
+ * 
+ * @comment
+ * クイック全置換でサポートしていないオプションなどは、replaceallquickでも同様にサポートしていません。    
+ * replaceall等と違いは以下のものがあります。    
+ * 
+ * - 置換後のカーソル位置が通常の全置換とは違います。     
+ * - マーク、編集マーク、折りたたみ、カラーマーカーは保持されません。（編集マークは全行に付きます）     
+ * - 「追加の条件」、\(タグ番号,関数名)による変換モジュール指定、「次の秀丸エディタも続けて置換」、複数選択はできません。     
+ * - 正規表現に以下の処理の違いがあります。    
+ * 置換後のテキストが再び検索対象にはならず、元のテキストのみが検索対象になります。    
+ * 例えば「^a」を「a\n」に置換で、対象テキストが「aaaaa」の場合、行頭の１つだけになります。    
+ * 「\n」や「[^...]」で改行がヒットする可能性がある場合は全行が対象になります。(?#maxlines:)や(?#fulllinematch)の指定は無視されます。    
+ * - 「選択した範囲」は行単位ではなく文字単位になり、置換後は「選択した範囲」で動作中の範囲にはならず、通常のままになります。    
+ * - 改行コードが混在する場合、全ての行で統一された改行コードになります。    
+ *     
+ * 注意：多くの場合は高速になりますが、検索文字列に改行を含んで長さが変わるような正規表現の場合、    
+ * 全行がとても長い一行と同じようなことになり、逆に遅くなる場合があります。    
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see searchoption2
+ * @see getresultex(14)
+ * @see getresultex(15)
+ * @see 検索／置換文字列の上限について
+ * 
+ * @returns
+ * 置換した個数が返ります。    
+ * 途中で中断された場合はresultは-1になります。    
+ * 
+ * 置換が終了しても、「何個置換しました」のメッセージは表示されず、代わりに返り値に置換した個数が入ります。    
+ * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
+ * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
+ */
+declare function replaceallquick(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
 
-replaceallquick ★ function() { var m = "replaceallquick"; eval(st); return r; }
+/**
+ * s
+ * 
+ * finddown文は、「下候補」を実行します。   
+ * 
+ * finddownは、カーソル位置の次の文字から検索を開始します。    
+ * カーソル位置から検索するには、finddown2を使います。    
+ * 
+ * @example
+ * finddown();
+ * 
+ * @comment
+ * searchoptionの置換フラグがOFFのとき（replacedownをした直後）は検索し、ONのときは置換します。    
+ * findup, finddownは、コマンドの上候補,下候補と完全に同じ動作ではありません。    
+ * 
+ * 検索にヒットした後、選択されるか点滅表示になるかは動作環境によって違います。    
+ * 違いを無くすにはsetcompatiblemode文を使います
+ * 
+ * @example
+ * var casesense = 0x00000002;
+ * var hilight = 0x00003800;
+ * searchdown("検索文字列", casesense|hilight);
+ * // 上と同じ処理として
+ * 
+ * var casesense = 0x00000002;
+ * var nohilight = 0x00002800;
+ * var option = casesense|nohilight|(searchoption() & 0x0740); // grep用のオプションを維持
+ * setsearch("検索文字列", option);  
+ * finddown();
+ * hilightfound(1);
+ * 
+ * @comment
+ * 参照：
+ * @see findup
+ * @see setsearch
+ * @see hilightfound
+ * 
+ * @returns;
+ * 成功した場合は、0以外にを返す。
+ * 失敗した場合は、0を返す。
+ */
+declare function finddown(): number;
 
-finddown ★ function() { var m = "finddown"; eval(st); return r; }
-finddown2 ★ function() { var m = "finddown2"; eval(st); return r; }
+/**
+ * finddown文2は、「下候補」を実行します。   
+ * 
+ * カーソル位置から検索を開始するバージョンです。    
+ * 
+ * @example
+ * finddown2();
+ * 
+ * @comment
+ * searchoptionの置換フラグがOFFのとき（replacedownをした直後）は検索し、ONのときは置換します。    
+ * findup, finddownは、コマンドの上候補,下候補と完全に同じ動作ではありません。    
+ * 
+ * 検索にヒットした後、選択されるか点滅表示になるかは動作環境によって違います。    
+ * 違いを無くすにはsetcompatiblemode文を使います
+ * 
+ * @example
+ * var casesense = 0x00000002;
+ * var hilight = 0x00003800;
+ * searchdown("検索文字列", casesense|hilight);
+ * // 上と同じ処理として
+ * 
+ * var casesense = 0x00000002;
+ * var nohilight = 0x00002800;
+ * var option = casesense|nohilight|(searchoption() & 0x0740); // grep用のオプションを維持
+ * setsearch("検索文字列", option);  
+ * finddown2();
+ * hilightfound(1);
+ * 
+ * @comment
+ * 参照：
+ * @see findup
+ * @see setsearch
+ * @see hilightfound
+ * 
+ * @returns;
+ * 成功した場合は、0以外にを返す。
+ * 失敗した場合は、0を返す。
+ */
+declare function finddown2(): number;
+
 findup ★ function() { var m = "findup"; eval(st); return r; }
 findup2 ★ function() { var m = "findup2"; eval(st); return r; }
 
