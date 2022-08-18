@@ -1843,7 +1843,7 @@ declare function scrolllinkhandle(): number;
  * 現在編集中のファイル名をドライブ文字も含めたフルパスで返す。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function filename(hidemaru_handle?: number): number;
+declare function filename(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1857,7 +1857,7 @@ declare function filename(hidemaru_handle?: number): number;
  * @returns
  * 現在編集中のファイル名をドライブ文字も含めたフルパスで返す。    
  */
-declare function filename2(hidemaru_handle?: number): number;
+declare function filename2(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1873,7 +1873,7 @@ declare function filename2(hidemaru_handle?: number): number;
  * @returns
  * 現在編集中のファイル名をドライブ文字も含めた短縮ファイル名で返す。    
  */
-declare function filename3(hidemaru_handle?: number): number;
+declare function filename3(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1898,7 +1898,7 @@ declare function filename3(hidemaru_handle?: number): number;
  * ファイル名の、パスを含まない、ベース名だけを返す。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function basename(hidemaru_handle?: number): number;
+declare function basename(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1912,7 +1912,7 @@ declare function basename(hidemaru_handle?: number): number;
  * @returns
  * ファイル名の、パスを含まない、ベース名だけを返す。    
  */
-declare function basename2(hidemaru_handle?: number): number;
+declare function basename2(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1928,7 +1928,7 @@ declare function basename2(hidemaru_handle?: number): number;
  * @returns
  * ファイル名の、パスを含まない、ベース名だけを短縮ファイル名で返す。    
  */
-declare function basename3(hidemaru_handle?: number): number;
+declare function basename3(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1955,7 +1955,7 @@ declare function basename3(hidemaru_handle?: number): number;
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function directory(hidemaru_handle?: number): number;
+declare function directory(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1970,7 +1970,7 @@ declare function directory(hidemaru_handle?: number): number;
  * カレントフォルダをドライブ名も含めたパス名で返す。    
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  */
-declare function directory2(hidemaru_handle?: number): number;
+declare function directory2(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -1987,7 +1987,7 @@ declare function directory2(hidemaru_handle?: number): number;
  * カレントフォルダをドライブ名も含めた短縮パス名で返す。    
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  */
-declare function directory3(hidemaru_handle?: number): number;
+declare function directory3(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -2030,7 +2030,7 @@ declare function directory3(hidemaru_handle?: number): number;
  * - webbrowse    
  * Webブラウズモード（Hidemarnet Explorerがインストールされているときのみ）
  */
-declare function filetype(hidemaru_handle?: number): number;
+declare function filetype(hidemaru_handle?: number): string;
 
 /**
  * k    
@@ -2040,7 +2040,7 @@ declare function filetype(hidemaru_handle?: number): number;
  * @returns
  * 現在実行中のマクロのファイル名をフルパスで返す。すべて小文字。    
  */
-declare function currentmacrofilename(): number;
+declare function currentmacrofilename(): string;
 
 /**
  * k    
@@ -2050,7 +2050,7 @@ declare function currentmacrofilename(): number;
  * @returns
  * 現在実行中のマクロのファイル名の、パスを含まない、ベース名を返す。すべて小文字。    
  */
-declare function currentmacrobasename(): number;
+declare function currentmacrobasename(): string;
 
 /**
  * k    
@@ -2060,7 +2060,7 @@ declare function currentmacrobasename(): number;
  * @returns
  * 現在実行中のマクロのフォルダを返す。すべて小文字。    
  */
-declare function currentmacrodirectory(): number;
+declare function currentmacrodirectory(): string;
 
 /**
  * k    
