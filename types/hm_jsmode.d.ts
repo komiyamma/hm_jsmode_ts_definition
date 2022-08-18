@@ -6732,6 +6732,11 @@ declare function newfile(): number
  * @example
  * openfile("c:\\folder\\file.txt", 28|0x0600); // Unicode(UTF-32, Big-Endian) で、BOM付き
  * 
+ * @example
+ * var utf8 = 0x06;
+ * var noaddhist = 0x0100;
+ * openfile( "c:\\folder\\test.txt", utf8|noaddhist );
+ * 
  * @see getresultex
  * @see browsefile    
  * browsefile関数を使うと、ファイルを開いたり保存したりはせず、ファイルの参照ダイアログだけを出すことができます。
@@ -11564,6 +11569,12 @@ declare function getsearch(): number;
  * マクロの中でsearchdown等を使うと、検索文字列と検索オプションの内容が書き換えられてしまいます。    
  * そうすると、次に上候補/下候補コマンドを使った時に予期しない動作をしてしまうことがあります。    
  * そのため、マクロ実行開始時に値を記憶し、マクロが終わるときにsetsearchを使って復元させることができます。    
+ * 
+ * @example
+ * var word = 0x00000001;
+ * var casesense = 0x00000002;
+ * setsearch( "test", (word|casesense) );
+ * finddown();
  * 
  * @example
  * var s = searchbuffer();
