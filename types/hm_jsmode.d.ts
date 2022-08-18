@@ -12451,16 +12451,16 @@ declare function settargetcolormarker(layer_name: string): number;
  * 引数で範囲を指定できます。    
  * 
  * @param lineno_bgn 
- * 開始位置の行番号を指定します。
+ * 開始位置の行番号を指定します。1から数えます。
  * 
  * @param column_bgn 
- * 開始位置の桁を指定します。
+ * 開始位置の桁を指定します。0から数えます。
  * 
  * @param lineno_end 
- * 終了位置の行番号を指定します。
+ * 終了位置の行番号を指定します。1から数えます。
  *
  * @param column_end 
- * 終了位置の桁を指定します。
+ * 終了位置の桁を指定します。0から数えます。
  * 
  * @param layer_name 
  * レイヤー名を指定します。
@@ -13118,7 +13118,8 @@ declare function hidemaruhelp(): number;
  * macrohelp文は、「秀丸マクロヘルプ」を実行します。
  * 
  * @param keyword
- * keywordを指定した場合、指定したキーワードで呼び出します
+ * keywordを指定した場合、指定したキーワードで呼び出します。    
+ * keywordを省略した場合、カーソル位置にある単語を自動的に検索キーワードにして呼び出します。    
  * 
  * @returns
  * 成功すると0以外、失敗すると0を返します。
