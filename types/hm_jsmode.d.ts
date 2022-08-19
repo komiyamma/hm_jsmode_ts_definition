@@ -164,7 +164,7 @@ declare namespace hidemaru {
      * @see dllfuncexist
      * 
      * @returns
-     * 通常は１が返ってくるが、返ってくる値に意味はない。
+     * 返り値は意味を持ちません。
      */
     setDllDetachFunc(funcname: string): number
   };
@@ -3083,7 +3083,8 @@ declare function fontsize(): number;
  * refreshdatetime(); // ここで時刻関連キーワードの値が、この文を実行した時刻に基づいて更新される
  * message(second()); // second()は、refreshdatetime()文を実行した時刻に基づいた値となっている。
  * @returns
- * 更新に成功したら１。失敗したら０。    
+ * 更新に成功したら0以外を返す。    
+ * 失敗したら0を返す。    
  */
 declare function refreshdatetime(): number;
 
@@ -8230,7 +8231,7 @@ declare function goscreentop(): number;
  * 指定行に移動のダイアログを出す
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function jump(): number;
 
@@ -8269,7 +8270,7 @@ declare function jump(): number;
  * 文字の単位ごとに各種のバリエーションがあります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto(pos_x: number, pos_y: number): number;
 
@@ -8303,7 +8304,7 @@ declare function moveto(pos_x: number, pos_y: number): number;
  * またはshiftrightなどで選択しながらカーソル移動ができます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function movetolineno(pos_column_plus: number, pos_lineno: number): number;
 
@@ -8346,7 +8347,7 @@ declare function movetolineno(pos_column_plus: number, pos_lineno: number): numb
  * またはshiftrightなどで選択しながらカーソル移動ができます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto(pos_x: number, pos_y: number): number;
 
@@ -8378,7 +8379,7 @@ declare function moveto(pos_x: number, pos_y: number): number;
  * 文字の単位ごとに各種のバリエーションがあります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto2(pos_column: number, pos_lineno: number): number;
 
@@ -8394,7 +8395,7 @@ declare function moveto2(pos_column: number, pos_lineno: number): number;
  * 1から数えた行番号を指定します。
  *
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto_wcs(pos_column_wcs: number, pos_lineno: number): number;
 
@@ -8410,7 +8411,7 @@ declare function moveto_wcs(pos_column_wcs: number, pos_lineno: number): number;
  * 1から数えた行番号を指定します。
  *
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto_ucs4(pos_column_ucs4: number, pos_lineno: number): number;
 
@@ -8426,7 +8427,7 @@ declare function moveto_ucs4(pos_column_ucs4: number, pos_lineno: number): numbe
  * 1から数えた行番号を指定します。
  *
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto_cmu(pos_column_cmu: number, pos_lineno: number): number;
 
@@ -8442,7 +8443,7 @@ declare function moveto_cmu(pos_column_cmu: number, pos_lineno: number): number;
  * 1から数えた行番号を指定します。
  *
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function moveto_gcu(pos_column_gcu: number, pos_lineno: number): number;
 
@@ -8702,7 +8703,7 @@ declare function wordrightsalnen2(): number;
  * gowordtop2を利用してください。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function gowordtop(): number;
 
@@ -8712,7 +8713,7 @@ declare function gowordtop(): number;
  * 単語の先頭に移動に移動する。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function gowordtop2(): number;
 
@@ -8726,7 +8727,7 @@ declare function gowordtop2(): number;
  * gowordend2を利用してください。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function gowordend(): number;
 
@@ -8736,7 +8737,7 @@ declare function gowordend(): number;
  * 単語の最後に移動に移動する。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function gowordend2(): number;
 
@@ -8768,7 +8769,7 @@ declare function gowordend2(): number;
  * - アウトライン解析のツリー表示で、フォーカスが移る前の位置 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevpos(): number;
 
@@ -8783,7 +8784,7 @@ declare function prevpos(): number;
  * @see prevposhistforward
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevposhistback(): number;
 
@@ -8798,7 +8799,7 @@ declare function prevposhistback(): number;
  * @see prevposhistforward
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevposhistback(): number;
 
@@ -8812,7 +8813,7 @@ declare function prevposhistback(): number;
  * @see prevposhistback
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevposhistforward(): number;
 
@@ -8828,7 +8829,7 @@ declare function prevposhistforward(): number;
  * @see marked
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setmark(): number;
 
@@ -8895,7 +8896,7 @@ declare function prevmark(): number;
  * Ｃ言語の関数とおぼしきものを上方向に検索します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevfunc(): number;
 
@@ -8906,7 +8907,7 @@ declare function prevfunc(): number;
  * Ｃ言語の関数とおぼしきものを下方向に検索します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function nextfunc(): number;
 
@@ -9036,7 +9037,7 @@ declare function appendcut(): number;
  * copy();
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function beginrect(): number;
 
@@ -9052,7 +9053,7 @@ declare function beginrect(): number;
  * copy();
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function beginrectmulti(): number;
 
@@ -9068,7 +9069,7 @@ declare function beginrectmulti(): number;
  * copy();
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function beginsel(): number;
 
@@ -9092,7 +9093,7 @@ declare function beginsel(): number;
  * @see copyline
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function beginlinesel(is_multiline?: number): number;
 
@@ -9103,7 +9104,7 @@ declare function beginlinesel(is_multiline?: number): number;
  * 範囲選択モードになっている状態（範囲選択はそのまま）    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function endsel(): number;
 
@@ -9121,7 +9122,7 @@ declare function endsel(): number;
  * @see copy2 範囲選択を解除しないバージョン
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copy(): number;
 
@@ -9139,7 +9140,7 @@ declare function copy(): number;
  * @see copy 範囲選択を解除するバージョン
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copy2(): number;
 
@@ -9174,7 +9175,7 @@ declare function cut(): number;
  * @see beginlinesel
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copyline(is_multiline?: number): number;
 
@@ -9214,7 +9215,7 @@ declare function cutafter(): number;
  * // 「This is a」という５単語分(空白も単語)の文字列がクリップボードにコピーされる。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copyword(copy_word_count?: number): number;
 
@@ -9315,7 +9316,7 @@ declare function refpaste(): number;
  * @see refpaste
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refcopy(): number;
 
@@ -9332,7 +9333,7 @@ declare function refcopy(): number;
  * @see refpaste
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refcopy2(): number;
 
@@ -9342,7 +9343,7 @@ declare function refcopy2(): number;
  * selectall文は、すべてを選択 を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectall(): number;
 
@@ -9353,7 +9354,7 @@ declare function selectall(): number;
  * を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectline(): number;
 
@@ -9370,7 +9371,7 @@ declare function selectline(): number;
  * selectword2を利用してください。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectword(): number;
 
@@ -9383,7 +9384,7 @@ declare function selectword(): number;
  * カーソルは単語の先頭に移動します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectword2(): number;
 
@@ -9393,7 +9394,7 @@ declare function selectword2(): number;
  * showcliphist文は、クリップボード履歴の表示 を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showcliphist(): number;
 
@@ -9478,7 +9479,7 @@ declare function clearcliphist(history_ix? number): number;
  * 1000行を超える関数は正しく選択されないことがあります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectcfunc(): number;
 
@@ -9494,7 +9495,7 @@ declare function selectcfunc(): number;
  * メールアドレスや、ファイル名と思わしき場所にあるときでも有効です。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copyurl(): number;
 
@@ -9508,7 +9509,7 @@ declare function copyurl(): number;
  * 「折り返し」相当の位置に改行コードを挿入してコピーします。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function copyformed(): number;
 
@@ -9596,7 +9597,7 @@ declare function selectcolumn(select_tabcolumn_bgn?: number, select_tabcolumn_en
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function tomultiselect(): number;
 
@@ -9617,7 +9618,7 @@ declare function tomultiselect(): number;
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function invertselection(): number;
 
@@ -9642,7 +9643,7 @@ declare function invertselection(): number;
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function reservemultisel(): number;
 
@@ -9665,7 +9666,7 @@ declare function reservemultisel(): number;
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectreservedmultisel(): number;
 
@@ -9688,7 +9689,7 @@ declare function selectreservedmultisel(): number;
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function clearreservedmultisel(): number;
 
@@ -9710,7 +9711,7 @@ declare function clearreservedmultisel(): number;
  * @see setcompatiblemode
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function clearreservedmultiselall(): number;
 
@@ -9725,7 +9726,7 @@ declare function clearreservedmultiselall(): number;
  * @see getclipboard
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function beginclipboardread(): number;
 
@@ -10498,7 +10499,7 @@ declare function tozenkakukata(): number;
  * さらにCapsLockのON/OFFも切り替えます。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function capslockforgot(): number;
 
@@ -10517,7 +10518,7 @@ declare function capslockforgot(): number;
  * @see 再変換の使用例 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function imeconvforgot(): number;
 
@@ -10547,7 +10548,7 @@ declare function reopen(): number;
  * filtermenu文は、秀丸の「変換メニュー」を表示します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function filtermenu(): number;
 
@@ -10650,7 +10651,7 @@ declare function autocomplete(complete_mode?: number, complete_resource?: number
  * 範囲選択されている場合は、範囲を含む行が対象になります。範囲は必ず行単位で処理されます。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  * 整形しなかったとしても１が返ってくる。    
  * 上書き禁止などの時は０が返ってくる。
  */
@@ -10668,7 +10669,7 @@ declare function form(): number;
  * 範囲選択されている場合は、範囲を含む行が対象になります。範囲は必ず行単位で処理されます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  * 整形しなかったとしても１が返ってくる。    
  * 上書き禁止などの時は０が返ってくる。
  */
@@ -10685,7 +10686,7 @@ declare function unform(): number;
  * ルーラーを表示している場合は、ルーラー上のつまみをドラッグして整形ラインを移動できます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showformline(): number;
 
@@ -10699,7 +10700,7 @@ declare function showformline(): number;
  * やり直しバッファをクリアして、その時点からのやり直しをできない状態にします。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function clearundobuffer(): number;
 
@@ -10716,7 +10717,7 @@ declare function clearundobuffer(): number;
  * autocomplete(0);と同様に実行後マクロは中断します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function template(filepath?: string): number;
 
@@ -11865,7 +11866,7 @@ declare function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
  * @see grepfilebuffer
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setgrepfile(file_glob: string): number;
 
@@ -11897,14 +11898,18 @@ declare function goupdateup(): number;
  * forceinselect文は、検索を明示的に「選択した範囲」として動作させます。    
  * 
  * @param select_mode
- * 1 を指定すると、検索ダイアログを出すときに明示的に「選択した範囲」にチェックしたり、下候補、上候補するときに明示的に「選択した範囲」で動作させます。    
- * 2 を指定すると、文字単位になります。    
- * 0 を指定すると、通常の動作になります。    
+ * 「選択した範囲」として動作させるかどうかを指定します。    
+ * - 1 を指定すると、検索ダイアログを出すときに明示的に「選択した範囲」にチェックしたり、下候補、上候補するときに明示的に「選択した範囲」で動作させます。    
+ * - 2 を指定すると、文字単位になります。    
+ * - 0 を指定すると、通常の動作になります。    
  * 
  * searchdown等の引数でinselectが指定できるものには有効ではありません。    
  * find文では有効ではありません。find2文では有効です。    
  * 
  * この文は、検索実行後には値を保持していません。検索のたびにこの文を呼んでいただく必要があります。    
+ * 
+ * @example
+ * forceinselect(1);
  * 
  * @example
  * gofiletop();
@@ -11925,7 +11930,7 @@ declare function goupdateup(): number;
  * @see find2
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function forceinselect(select_mode: number): number;
 
@@ -11935,7 +11940,7 @@ declare function forceinselect(select_mode: number): number;
  * clearupdates文は、「編集マークのクリア」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function clearupdates(): number;
 
@@ -11981,7 +11986,7 @@ grepreplacedialog2 ★ function() { var m = "grepreplacedialog2"; eval(st); retu
  * @see forceinselect 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function escapeinselect(): number;
 
@@ -12000,7 +12005,7 @@ declare function escapeinselect(): number;
  * @see foundhilighting
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function hilightfound(is_on?: number): number;
 
@@ -12292,7 +12297,7 @@ declare function clearcolormarkerallfound(): number;
  * foundlist文は、「すべて検索 - 一覧表示」のダイアログを表示します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function foundlist(): number;
 
@@ -12302,7 +12307,7 @@ declare function foundlist(): number;
  * foundlistoutline文は、「すべて検索 - アウトラインに表示」のダイアログを表示します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function foundlistoutline(): number;
 
@@ -12313,7 +12318,7 @@ declare function foundlistoutline(): number;
  * findmarkerlist();
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function findmarkerlist(): number;
 
@@ -12374,7 +12379,7 @@ declare function findmarkerlist(marker_ix: number, n_action: number): number;
  * findmarkerlist(-1,0);	//「すべて再度色付け」をします。
  *
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): number;
 
@@ -12389,7 +12394,7 @@ declare function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): numb
  * このコマンドを実行してからもう一度検索ダイアログを出すことによって、範囲内検索していた範囲をもう一度指定することができます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function selectinselect(): number;
 
@@ -12404,7 +12409,7 @@ declare function selectinselect(): number;
  * 行単位や文字単位やBOX選択や複数選択など、どのような選択状態であっても、文字単位の範囲内検索として指定されます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setinselect2(): number;
 
@@ -12438,7 +12443,7 @@ declare function setinselect2(): number;
  * @see reservedmultisel
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function settargetcolormarker(layer_name: string): number;
 
@@ -12689,7 +12694,7 @@ declare function setsplitinfo(setting_prop: 0, setting_value: number): number;
  * splitswitch文は、「分割ウィンドウ切り替え」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function splitswitch(): number;
 
@@ -12699,7 +12704,7 @@ declare function splitswitch(): number;
  * windowcascade文は、「秀丸エディタを重ねて表示」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function windowcascade(): number;
 
@@ -12709,7 +12714,7 @@ declare function windowcascade(): number;
  * windowhorz文は、「秀丸エディタを横に並べる」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function windowhorz(): number;
 
@@ -12719,7 +12724,7 @@ declare function windowhorz(): number;
  * windowtiling文は、「秀丸エディタを並べて表示」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function windowtiling(): number;
 
@@ -12729,7 +12734,7 @@ declare function windowtiling(): number;
  * windowvert文は、「秀丸エディタを縦に並べる」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function windowvert(): number;
 
@@ -12739,7 +12744,7 @@ declare function windowvert(): number;
  * windowlist文は、「ウィンドウ一覧表示」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function windowlist(): number;
 
@@ -12787,7 +12792,7 @@ declare function compfile(hidemaru_handle: number, is_after_cursor: number): num
  * 2 を指定すると、比較結果のカラーマーカーがあれば次の比較結果へ、無ければ従来通りの次の比較を自動的に判断します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function nextcompfile(compare_mode?: number): number;
 
@@ -12807,7 +12812,7 @@ declare function nextcompfile(compare_mode?: number): number;
  * 2 を指定すると、比較結果のカラーマーカーがあれば前の比較結果へ、無ければ従来通りの前の比較を自動的に判断します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function prevcompfile(compare_mode?: number): number;
 
@@ -12817,7 +12822,7 @@ declare function prevcompfile(compare_mode?: number): number;
  * alwaystopswitch文は、「常に手前に表示切り替え」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function alwaystopswitch(): number;
 
@@ -12840,7 +12845,7 @@ declare function alwaystopswitch(): number;
  * @see 秀丸エディタ管理(タブ編)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function settabmode(to_tabmode: number): number;
 
@@ -12891,7 +12896,7 @@ declare function settabmode(to_tabmode: number): number;
  * @see 秀丸エディタ管理(タブ編)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function settabgroup(hidemaru_handle?: number, groupid?: number): number;
 
@@ -12925,7 +12930,7 @@ declare function settabgroup(hidemaru_handle?: number, groupid?: number): number
  * @see 秀丸エディタ管理(タブ編)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function settaborder(hidemaru_handle?: number, taborder?: number): number;
 
@@ -12940,7 +12945,7 @@ declare function settaborder(hidemaru_handle?: number, taborder?: number): numbe
  * 最小化されている秀丸エディタをアクティブにすると、再びタブの中に戻ります。 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function iconthistab(): number;
 
@@ -12950,7 +12955,7 @@ declare function iconthistab(): number;
  * fullscreen文は、「全画面表示」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function fullscreen(): number;
 
@@ -13002,7 +13007,7 @@ declare function directtagjump(): number;
  * OFFにすると改行文字より後ろにはカーソルが移動しません。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function freecursorswitch(): number;
 
@@ -13012,7 +13017,7 @@ declare function freecursorswitch(): number;
  * imeswitch文は、「かな漢字変換の切り替え」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function imeswitch(): number;
 
@@ -13132,7 +13137,7 @@ declare function macrohelp(keyword?: string): number;
  * overwriteswitch文は、「上書き／挿入モード切り替え」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function overwriteswitch(): number;
 
@@ -13154,7 +13159,7 @@ declare function readonlyswitch(): number;
  * 主要なエンコードでの文字コードが、ダイアログにて表示されます。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showcode(): number;
 
@@ -13178,7 +13183,7 @@ declare function showcode(): number;
  * 「Hide-maru」や「U.S.A.」は1つとして数えられます。「Hidemaru Editor」は2つとして数えられます。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showcharcount(): number;
 
@@ -13188,7 +13193,7 @@ declare function showcharcount(): number;
  * showlineno文は、「行番号の表示／非表示」を実行します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showlineno(): number;
 
@@ -13227,7 +13232,7 @@ declare function tagjump(): number;
  * redraw文は、「秀丸エディタのウィンドウの再描画」を実行します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function redraw(): number;
 
@@ -13259,7 +13264,7 @@ declare function clist(): number;
  * clearupdated文は、編集マークを全て消去して「(更新)」状態を解除します。
  *  
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function clearupdated(): number;
 
@@ -13273,7 +13278,7 @@ declare function clearupdated(): number;
  * タブの文字数が自由配置,TSVモード,CSVモードのとき、テキスト全体の内容を元に、タブストップを計算して設定します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refreshtabstop(): number;
 
@@ -13287,7 +13292,7 @@ declare function refreshtabstop(): number;
  * TSVモード,CSVモードのとき、編集作業によって列の幅が自動的に調整されますが、このコマンドを実行して一時停止しておくと、調整されないようになります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refreshtabstop_pause(): number;
 
@@ -13301,7 +13306,7 @@ declare function refreshtabstop_pause(): number;
  * TSVモード,CSVモードのとき、列の幅を全て狭めます。横スクロールする量が多いとき、このコマンドを実行すると見やすくなります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refreshtabstop_shrink(): number;
 
@@ -13316,7 +13321,7 @@ declare function refreshtabstop_shrink(): number;
  * ルーラー部分のクリックで列の選択、またはドラッグで複数の列の選択をしているときは、選択した列が対象になります。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function refreshtabstop_current(): number;
 
@@ -13326,7 +13331,7 @@ declare function refreshtabstop_current(): number;
  * autospellcheckswitch文は、「自動スペルチェックのON/OFF切り替え」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function autospellcheckswitch(): number;
 
@@ -13340,7 +13345,7 @@ declare function autospellcheckswitch(): number;
  * @see getresultex(16)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  * 
  * getresultexでスペルミスの修正ダイアログの捜査結果を取得できます。    
  * getresultex(16)の値：
@@ -13369,7 +13374,7 @@ declare function spellcheckdialog(): number;
  * @see backtagjump
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function savebacktagjump(): number;
 
@@ -13396,7 +13401,7 @@ declare function savebacktagjump(): number;
  * @see foldall
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function fold(fold_condition_flag?: number): number;
 
@@ -13410,7 +13415,7 @@ declare function fold(fold_condition_flag?: number): number;
  * @see unfoldall
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function unfold(): number;
 
@@ -13449,7 +13454,7 @@ declare function unfold(): number;
  * @see fold
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function foldall(fold_condition_flag?: number, is_show_dialog?: number): number;
 
@@ -13463,7 +13468,7 @@ declare function foldall(fold_condition_flag?: number, is_show_dialog?: number):
  * @see unfold
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function unfoldall(): number;
 
@@ -13543,7 +13548,7 @@ declare function prevfoldable(fold_condition_flag?: number): number;
  * selectfoldable(0x0040); //空行区切りの折りたたみ可能行に移動
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function selectfoldable(fold_condition_flag?: number): number;
 
@@ -13564,7 +13569,7 @@ declare function rangeeditin(): number;
  * rangeeditout文は、「部分編集解除」を実行します。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function rangeeditout(): number;
 
@@ -13583,7 +13588,7 @@ declare function rangeeditout(): number;
  * nextoutlineitem(1);
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function nextoutlineitem(outer_target?: number): number;
 
@@ -13602,7 +13607,7 @@ declare function nextoutlineitem(outer_target?: number): number;
  * prevoutlineitem(1);
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。    
  */
 declare function prevoutlineitem(outer_target?: number): number;
 
@@ -13823,7 +13828,7 @@ declare function question(message: string): number;
  * beep();
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。    
+ * 返り値は意味を持ちません。
  */
 declare function beep(): number;
 
@@ -13847,7 +13852,7 @@ declare function beep(): number;
  * @see playsync
  * 
  * @returns
- * 
+ * 返り値は意味を持ちません。
  */
 declare function play(wav_filepath: string): number;
 
@@ -13871,7 +13876,7 @@ declare function play(wav_filepath: string): number;
  * @see play
  * 
  * @returns
- * 
+ * 返り値は意味を持ちません。
  */
 declare function playsync(wav_filepath: string): number;
 
@@ -14385,9 +14390,9 @@ declare function runex(command: string, is_wait_sync?: number, stdin_prop?: numb
  * @see 影響の及ぶ範囲(アクティブ切り替え)    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  * 
-*/
+ */
 declare function disabledraw(): number;
 
 /**
@@ -14457,9 +14462,9 @@ declare function disabledraw(): number;
  * @see 影響の及ぶ範囲(アクティブ切り替え)    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  * 
-*/
+ */
 declare function enabledraw(pos_y?: number, pos_x?: number): number;
 
 /**
@@ -14476,7 +14481,7 @@ declare function enabledraw(pos_y?: number, pos_x?: number): number;
  * @see redraw    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  * 
  */
 declare function disabledraw2(): number;
@@ -14499,7 +14504,7 @@ declare function disabledraw2(): number;
  * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function disablebreak(): number;
 
@@ -14511,7 +14516,7 @@ declare function disablebreak(): number;
  * @see disablebreak
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function enablebreak(): number;
 
@@ -14531,7 +14536,7 @@ declare function enablebreak(): number;
  * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function disableinvert(): number;
 
@@ -14545,7 +14550,7 @@ declare function disableinvert(): number;
  * @seedisableinvert
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function enableinvert(): number;
 
@@ -14571,7 +14576,7 @@ declare function enableinvert(): number;
  * @see enableerrormsg
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function disableerrormsg(): number;
 
@@ -14586,7 +14591,7 @@ declare function disableerrormsg(): number;
  * @see disableerrormsg
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function enableerrormsg(): number;
 
@@ -14618,7 +14623,7 @@ declare function enableerrormsg(): number;
  * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function disablehistory(history_flag: number): number;
 
@@ -14634,7 +14639,7 @@ declare function disablehistory(history_flag: number): number;
  * sleep(1000);
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function sleep(millisecond: number): number;
 
@@ -14854,7 +14859,7 @@ declare function seterrormode(n_type: number, n_value: number): number;
  * @param to_background 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setbackgroundmode(to_background: 1): number;
 
@@ -15656,7 +15661,7 @@ declare function createreg(root_key: string, sub_key: string, own_hidemaru_reg?:
  * @see openreg
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function closereg(): number;
 
@@ -15950,8 +15955,19 @@ declare function enumregkey(subkey_ix: number): string;
 declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
 
 configset ★ function() { var m = "configset"; eval(st); return r; }
+
+/**
+ * 
+ * 返り値は意味を持ちません。
+ */
 config ★ function() { var m = "config"; eval(st); return r; }
+
+
 getconfig ★ function() { var m = "getconfig"; eval(fsn); return r; }
+
+/**
+ * 返り値は意味を持ちません。
+ */
 configcolor ★ function() { var m = "configcolor"; eval(st); return r; }
 getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
 
@@ -15972,7 +15988,7 @@ getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
  * @see setconfigstate
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function saveconfig(filepath?: string): number;
 
@@ -15997,7 +16013,7 @@ declare function saveconfig(filepath?: string): number;
  * @see configstate
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setconfigstate(config_flag: number): number;
 
@@ -16027,7 +16043,7 @@ declare function setconfigstate(config_flag: number): number;
  * @see configset
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setfiletype(extension: string, is_read_setting_file): number;
 
@@ -16088,7 +16104,7 @@ declare function envchanged(): number;
  * @see savekeyassign
  * 
  * @returns
- * 読み込みに成功した場合、１を返す。    
+ * 返り値は意味を持ちません。    
  * 読み込みに失敗した場合は、マクロが中断してしまうため注意。
  */
 declare function loadkeyassign(filepath: string, is_settingdir?: number): number;
@@ -16192,7 +16208,7 @@ declare function loadhilight(filepath: string, is_temp: number, read_flag?: numb
  * @see getresultex(13)
  * 
  * @returns
- * 読み込まれた内容のフラグが格納されます。    
+ * 読み込まれた内容のフラグが値として返る。    
  * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
  */
 declare function savehilight(filepath: string, read_flag?: number): number;
@@ -16248,7 +16264,7 @@ declare function savebookmark(filepath: string): number;
  * setfontchangemode(1);
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setfontchangemode(n_mode: number): number;
 
@@ -16356,7 +16372,7 @@ declare function convert_return_in_cell(convert_mode: number): number;
  * - 3 最大化（SW_SHOWMAXIMIZED） 
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function showwindow(show_mode: number): number;
 
@@ -16376,7 +16392,7 @@ declare function showwindow(show_mode: number): number;
  * }
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setmonitor(monitor_ix: number): number;
 
@@ -16394,7 +16410,7 @@ declare function setmonitor(monitor_ix: number): number;
  * ウィンドウの左上のyピクセル位置、
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
 
@@ -16418,7 +16434,7 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
  * ウィンドウの右下のyピクセル位置、
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number;
 
@@ -16437,7 +16453,7 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right
  * setwindowsize(80, 20); // この場合は横80桁×縦20行となります。
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setwindowsize(width_column: number, height_lineno): number;
 
@@ -16488,7 +16504,7 @@ declare function setfocus(window_target: number): number;
  * @see undo
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function begingroupundo(): number;
 
@@ -16711,7 +16727,7 @@ declare function setstaticvariable(key: string, value: string, scope_type: numbe
  * - 数値に2を指定すると、マクロ内で使われた正規表現の検索をキャッシュし、同じ正規表現が使われたときはキャッシュを使います。マクロを終了してもキャッシュを保持します。    
  * 
  * @returns
- * 通常は１が返ってくるが、返ってくる値に意味はない。
+ * 返り値は意味を持ちません。
  */
 declare function setregularcache(cache_mode: number): number;
 
@@ -17356,4 +17372,5 @@ declare function FIND(): 0;
  * @deprecated
  */
 declare function ENV(): 0;
+
 
