@@ -11858,6 +11858,9 @@ declare function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
 /**
  * setgrepfile文は、grepの「検索するファイル」の内容を設定します。
  * 
+ * @param file_glob
+ * grepの「検索するファイル」の内容を指定します。
+ * 
  * @example
  * setgrepfile("*.txt");
  * 
@@ -12416,13 +12419,15 @@ declare function setinselect2(): number;
 /**
  * s
  * 
- * settargetcolormarker文は、検索や置換で追加の条件の「指定の範囲/カラーマーカー内」が有効な場合、対象となる範囲を指定します。    
+ * settargetcolormarker文は、検索や置換の「追加の条件」の「指定の範囲/カラーマーカー内」の対象を指定します。    
  * 
  * @example
  * settargetcolormarker("mylayer");
  * 
  * @param layer_name
- * 文字列は、以下の予約されたものを指定します。    
+ * 対象となるレイヤー名を指定します。    
+ * 検索や置換で、「追加の条件」の「指定の範囲/カラーマーカー内」が有効な場合、この文で指定されるレイヤー名を対象となるようにします。    
+ * 文字列は、以下の予約されたレイヤー名を指定できます。    
  * 先頭に"\x01#"がある文字列は予約されたカラーマーカーになります。    
  * 
  * - "" 「一時的なカラーマーカー」の範囲 
@@ -12911,6 +12916,7 @@ declare function settabgroup(hidemaru_handle?: number, groupid?: number): number
  * 秀丸エディタの番号は、hidemaruorder で示されるウィンドウの番号またはウィンドウハンドルを指定します。
  * 
  * @param taborder
+ * タブの位置を指定します。    
  * 数値は、同じグループ内のタブを 0 から数えた順番です。
  * 
  * @example
@@ -12930,7 +12936,8 @@ declare function settabgroup(hidemaru_handle?: number, groupid?: number): number
  * @see 秀丸エディタ管理(タブ編)
  * 
  * @returns
- * 返り値は意味を持ちません。
+ * 成功した場合、0以外を返す。    
+ * 失敗した場合、0を返す。    
  */
 declare function settaborder(hidemaru_handle?: number, taborder?: number): number;
 
@@ -16542,6 +16549,10 @@ declare function endgroupundo(): number;
  * 
  * findspecial文は、通常の検索では検索できないものを検索します。
  * 
+ * @example
+ * var sjis = 0x01;
+ * findspecial(0, sjis, 0);
+ * 
  * @param search_type 
  * どのようなものを検索するかという種類を数値で指定します。
  * - 0 の場合、    
@@ -16599,7 +16610,7 @@ declare function endgroupundo(): number;
  *   - 3:境界    
  * 
  * - 2の場合、
- * この引数は意味を持ちません。     
+ * search_typeが2の場合は、この引数codeは意味を持ちません。     
  * 0や-1など意味を適当な値を指定してください。
  * 
  * @param search_direction 
@@ -16610,8 +16621,8 @@ declare function endgroupundo(): number;
  * @see encode
  * 
  * @returns
- * 検索がヒットしたら１を返す。    
- * 検索がヒットしなければ０を返す。
+ * 見つかった場合（カーソル移動した場合）、0以外を返す。    
+ * 見つからなかった場合、0を返す。    
  */
 declare function findspecial(search_type: number, code: number, search_direction: number): number;
 
@@ -16874,6 +16885,15 @@ declare function hidemaruhandle(window_z_order: number): number;
  * @example
  * closehidemaru(1);
  * 
+ * @example
+ * var a = findhidemaru( "abc.txt" );
+ * if( a == -1 ) {
+ *    message("abc.txtはいません");
+ * } else {
+ *    var ret = closehidemaru(a);
+ *    if( !ret ) { message("abc.txtの終了失敗です。");
+ * }
+ * 
  * @returns
  * 成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
@@ -16885,10 +16905,11 @@ declare function closehidemaru(hidemaru_handle: number): number;
  * 
  * closehidemaruforced文は、番号（ハンドルも可）で指定した秀丸エディタを終了させます。    
  * 
+ * 
  * @param hidemaru_handle 
  * 秀丸のウィンドウハンドル、もしくはウィンドウ番号を指定します。    
  * 自分自身を指定することはできません。    
- * 指定した秀丸エディタがまだファイルを保存してない場合はclosehidemaruforcedは失敗します。    
+ * closehidemaruとは違い、「(更新)」のついたファイルの場合でもエラーにならずに強制的に（保存せずに）終了させます。
  * 
  * @example
  * closehidemaruforced(1);
