@@ -17018,6 +17018,29 @@ declare function getclipboardinfo(info_type: number): number;
 declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
 
 /**
+ * f
+ * 
+ * loadDll関数は、hidemaru.loadDll関数の別名となります。
+ * 
+ * @param dllpath
+ * DLLのファイル名を指定します。
+ * 
+ * @example
+ * var dll = loaddll("c:\\folder\\mydll.dll");
+ * 
+ * @comment
+ * 参照：
+ * @see hidemaru.loadDll
+ * @see hidemaru.ILoadDllResult
+ * 
+ * @returns
+   * 読み込みに成功した場合、hidemaru.ILoadDllResultを満たすオブジェクトを返します。    
+   * 失敗した場合、undefinedを返します。
+ */
+ declare function loadDll(dllpath: string): hidemaru.ILoadDllResult | undefined;
+
+
+/**
  * s
  * 
  * createobject関数は、hidemaru.createObject関数の別名となります。
