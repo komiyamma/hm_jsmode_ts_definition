@@ -279,7 +279,10 @@ declare namespace hidemaru {
 /**
  * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
  * 
- * @param varname ユーザー定義の変数名
+ * @param varname
+ * 取得する変数名を指定します。    
+ * "#"から始まる場合、数値型変数を取得します。    
+ * "$"から始まる場合、文字列型変数を取得します。
  * 
  * @example
  * $a = "Hello";
@@ -300,7 +303,13 @@ declare function getVar(varname: string): number | string;
 /**
  * JavaScriptの変数の値を、秀丸マクロの「ユーザー定義の変数」へ設定します。
  * 
- * @param varname ユーザー定義の変数名
+ * @param varname
+ * 設定する変数名を指定します。
+ * "#"から始まる場合、数値型変数を設定します。    
+ * "$"から始まる場合、文字列型変数を設定します。
+ * 
+ * @param newvalue
+ * 設定する変数の内容を指定します。
  * 
  * @example
  * $a = "Hello";
@@ -314,7 +323,7 @@ declare function getVar(varname: string): number | string;
  * @returns
  * 値の設定が成功したら１，失敗したら０を返す
  */
-declare function setVar(varname: string, new_value: string | number | boolean): number;
+declare function setVar(varname: string, newvalue: string | number | boolean): number;
 
 /**
  * k    
