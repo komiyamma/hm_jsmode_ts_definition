@@ -3,7 +3,7 @@
  * @author Akitsugu Komiyama
  * @copyright 「各関数の説明内容」については、「サイトー企画 (https://hide.maruo.co.jp/)」に著作権が帰属します。    
  *            「TypeScript定義ファイル化」については、Akitsugu Komiyama に著作権が帰属します。
- * @license MIT
+ * @license 秀丸エディタ ヘルプファイル public License
  * @version v1.0.0
  */
 

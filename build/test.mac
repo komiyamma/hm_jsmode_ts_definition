@@ -1,7 +1,0 @@
-jsmode "WebView2";
-
-execjs currentmacrodirectory + "\\test.js";
-
-js {
-    
-}
