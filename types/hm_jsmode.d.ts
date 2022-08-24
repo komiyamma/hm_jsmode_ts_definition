@@ -17425,5 +17425,4 @@ declare function FIND(): 0;
  * @deprecated
  */
 declare function ENV(): 0;
-
-
+}
