@@ -12616,6 +12616,9 @@ declare function savedesktop(filepath: string, virtual_desktop_mode?: number): n
  * パラメータに0を指定すると、同時スクロール状態を解除します。    
  * パラメータに-1を指定すると、常に相手を指定するダイアログが出るようになります。
  * 
+ * @example
+ * scrolllink hidemaruhandle(1);
+ * 
  * @see scrolllinkhandle
  * 
  * @returns
