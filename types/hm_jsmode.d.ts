@@ -10551,6 +10551,8 @@ declare function reopen(): number;
 
 ★★★ filter ★ function() { var m = "filter"; if (arguments.length >= 4) { eval(fs); } else { eval(st); } return r; }
 
+★★★ currentjsfilename
+
 /**
  * s
  * 
@@ -12505,23 +12507,10 @@ declare function colormarkersnapshot(lineno_bgn?: number, column_bgn?: number, l
  * s
  * 
  * restoredesktop文は、デスクトップ復元をします。
- * 
- * 全ての仮想デスクトップが同じデスクトップ上にあるものとして復元する。
- * 
- * @see savedesktop
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-declare function restoredesktop(): number;
-
-/**
- * s
- * 
- * restoredesktop文は、デスクトップ復元をします。
+ * レジストリからデスクトップ復元します。
  * 
  * @param virtual_desktop_mode
- * 0の場合全ての仮想デスクトップが同じデスクトップ上にあるものとして解釈されます。    
+ * 0を指定するか、もしくは省略した場合、仮想デスクトップが同じデスクトップ上にあるものとして復元されます。    
  * 1の場合は現在の仮想デスクトップに対してのみ、復元されます。    
  * 2の場合は全ての仮想デスクトップに全てのウィンドウが復元されます。保存された情報も2として保存されている必要があります。    
  * 
@@ -12533,7 +12522,7 @@ declare function restoredesktop(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function restoredesktop(virtual_desktop_mode: number): number;
+declare function restoredesktop(virtual_desktop_mode?: number): number;
 
 /**
  * s
@@ -12548,7 +12537,7 @@ declare function restoredesktop(virtual_desktop_mode: number): number;
  * restoredesktop("c:\\folder\\test.hmdesk");
  * 
  * @param virtual_desktop_mode
- * 0を指定するか、もしくは省略した場合、全ての仮想デスクトップが同じデスクトップ上にあるものとして解釈されます。    
+ * 0を指定するか、もしくは省略した場合、全ての仮想デスクトップが同じデスクトップ上にあるものとして復元されます。    
  * 1の場合は現在の仮想デスクトップに対してのみ、復元されます。    
  * 2の場合は全ての仮想デスクトップに全てのウィンドウが復元されます。保存された情報も2として保存されている必要があります。    
  * 
@@ -12567,22 +12556,8 @@ declare function restoredesktop(filepath: string, virtual_desktop_mode?: number)
  * 
  * savedesktop文は、デスクトップ保存をします。
  * 
- * 全ての仮想デスクトップが同じデスクトップ上にあるものとして保存する。
- * 
- * @see restoredesktop
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-declare function savedesktop(): number;
-
-/**
- * s
- * 
- * savedesktop文は、デスクトップ保存をします。
- * 
  * @param virtual_desktop_mode
- * 0の場合全ての仮想デスクトップが同じデスクトップ上にあるものとして解釈されます。    
+ * 省略するか、0の場合全ての仮想デスクトップが同じデスクトップ上にあるものとして解釈されます。    
  * 1の場合は現在の仮想デスクトップに対してのみ、保存されます。    
  * 2の場合は全ての仮想デスクトップの全てのウィンドウが保存されます。どこの仮想デスクトップに属していたかも一緒に保存されます。    
  * 
@@ -12594,7 +12569,7 @@ declare function savedesktop(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function savedesktop(virtual_desktop_mode: number): number;
+declare function savedesktop(virtual_desktop_mode?: number): number;
 
 /**
  * s
@@ -14660,7 +14635,9 @@ declare function disablehistory(history_flag: number): number;
 declare function sleep(millisecond: number): number;
 
 ★★★ setcompatiblemode ★ function() { var m = "setcompatiblemode"; eval(fn); return r; }
-
+★★★ isMacroExecuting
+★★★ postExecMacroFile
+★★★ postExecMacroMemory
 /**
  * s
  * 
