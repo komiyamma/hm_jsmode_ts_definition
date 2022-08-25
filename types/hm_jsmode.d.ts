@@ -12032,7 +12032,7 @@ declare function hilightfound(is_on?: number): number;
 
 
 
-colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
+★★★ colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
 
 /**
  * s
@@ -12632,7 +12632,7 @@ declare function scrolllink(hidemaru_handle?: number | 0 | -1): number;
  * 省略するか、もしくは 0 を指定すると、旧方式の上下のウィンドウ分割になります。    
  * 1 を指定すると、新方式の上下のウィンドウ分割になります。（V8.00以降）     
  * 2 を指定すると、新方式の左右のウィンドウ分割になります。（V8.00以降）    
- * 第１パラメータに -1 を指定すると、キー割り当てした「ウィンドウ分割上下」と同じように、[その他]→[動作環境]→[トラブル対策]→[その他のトラブル対策]の「ウィンドウ分割をV7.xx以下の方式にする」によって動作が変わるようになります。    
+ * -1 を指定すると、キー割り当てした「ウィンドウ分割上下」と同じように、[その他]→[動作環境]→[トラブル対策]→[その他のトラブル対策]の「ウィンドウ分割をV7.xx以下の方式にする」によって動作が変わるようになります。    
  * 
  * @example
  * split();
@@ -15656,6 +15656,9 @@ declare function createreg(root_key: string, sub_key: string, own_hidemaru_reg?:
  * 
  * closereg文は、オープンしたレジストリをクローズします。
  * 
+ * @example
+ * closereg();
+ * 
  * @comment
  * 参照：
  * @see openreg
@@ -15804,7 +15807,7 @@ declare function getregstr(name: string): string;
  * 省略した場合は0と同じになります。
  * 
  * @example
- * // TabEditMouseの最初から６バイトぶんを上書き、７バイト目以降はそのまま残す
+ * // TabEditMouseの最初から6バイトを上書き、7バイト目以降はそのまま残す
  * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
  * writeregbinary("TabEditMouse", "0100FFFF0000", 0, 1);
  * closereg();
