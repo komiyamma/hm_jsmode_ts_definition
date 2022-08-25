@@ -596,6 +596,13 @@ declare function print(showdialog?: number): number;
  * 
  * 文字列で指定するマクロを実行します。
  * @param expression : 実行する秀丸マクロ文字列
+ * 
+ * @comment
+ * 参考：
+ * @see Hidemaru_EvalMacro    
+ * @see WM_REMOTE_EVALMACRO    
+ * @see hidemaru.evalMacro
+ * 
  * @returns 成功したらresultは0以外になります。    
  *        　失敗したらresultは0になります。
  */
