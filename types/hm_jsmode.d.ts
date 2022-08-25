@@ -17101,24 +17101,12 @@ declare function createobject(progid: string): any | undefined;
 declare function createobject(dllpath: string, typeid: string): any | undefined;
 
 /**
- * s    
+ * z    
  * 
- * execjs文で、外部のjsファイルを実行できます。    
- * ファイルはフルパスで書く必要があります。    
- * @param js_file_fullpath 実行対象のJavaScriptファイルのフルパス。   
- * 相対パスではなくフルパスが要求される。
- * 
- * @throws
- * 例外が投げられることがあるため、try-catchで囲んで利用すること。
- * 
- * @example
- * try {
- *     execjs(currentmacrodirectory() + "/test.js"); // フルパスで指定すること
- * } catch(e) {
- *     ...
- * } 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
  */
-declare function execjs(js_file_fullpath: string): void;
+ declare function execjs(): 0;
 
 /**
  * z    
