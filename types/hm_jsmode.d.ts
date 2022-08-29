@@ -9258,7 +9258,7 @@ declare function cutword(): number;
  * 次の範囲選択を開始するまで保持されます。
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。
+ * 返ってくる値に意味はない。
  */
 declare function escapeselect(): number;
 
@@ -12665,7 +12665,7 @@ declare function scrolllink(hidemaru_handle?: number | 0 | -1): number;
  * @see splitmode
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。
+ * 返ってくる値に意味はない。
  */
 declare function split(split_type?: number, split_switch?: number, split_pos?: number): number;
 
@@ -12673,9 +12673,13 @@ declare function split(split_type?: number, split_switch?: number, split_pos?: n
  * s
  * 
  * @param setting_prop
- * 設定する種類です。現在は 0 固定です。0 を指定してください。     
+ * 設定する情報の種類です。    
+ * 現在は 0 固定です。    
+ * 0 を指定してください。     
  * 
  * @param setting_value
+ * 設定する値です。    
+ * - setting_propが0の時    
  * フォーカスが無いほうの分割のスクロールする量を指定して、スクロールさせます。    
  * 
  * @comment
@@ -12685,6 +12689,9 @@ declare function split(split_type?: number, split_switch?: number, split_pos?: n
  * @see setsplitinfo
  * @see splitstate
  * @see splitmode
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
  */
 declare function setsplitinfo(setting_prop: 0, setting_value: number): number;
 
@@ -13256,7 +13263,7 @@ declare function browsemodeswitch(): number;
  * （旧バージョンでの強調表示の一覧，関数一覧）    
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。
+ * 返ってくる値に意味はない。
  */
 declare function clist(): number;
 
@@ -13657,7 +13664,7 @@ declare function showoutlinebar(): number;
  * showfoldingbar文は、「折りたたみ用の余白表示/非表示」の切り替えを実行します。
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。    
+ * 返ってくる値に意味はない。    
  */
 declare function showfoldingbar(): number;
 
@@ -13667,7 +13674,7 @@ declare function showfoldingbar(): number;
  * syncoutline文は、「アウトライン解析の枠同期」を実行します。
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。    
+ * 返ってくる値に意味はない。    
  */
 declare function syncoutline(): number;
 
@@ -13677,7 +13684,7 @@ declare function syncoutline(): number;
  * refreshoutline文は、「アウトライン解析を明示的に即更新」を実行します。
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。    
+ * 返ってくる値に意味はない。    
  */
 declare function refreshoutline(): number;
 
@@ -13693,7 +13700,7 @@ declare function refreshoutline(): number;
  * setoutlinesize(outlinesize()+300);
  * 
  * @returns
- * 通常は０が返ってくるが、返ってくる値に意味はない。    
+ * 返ってくる値に意味はない。    
  */
 declare function setoutlinesize(n_size: number): number;
 
