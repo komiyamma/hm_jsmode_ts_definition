@@ -7611,147 +7611,6 @@ declare function propertydialog(): number;
 /**
  * s
  * 
- * exit文は、現在アクティブな秀丸エディタを終了します。    
- * 「終了」コマンドに相当します。    
- * exit文を実行すると、マクロもいっしょに終了します。
- * 
- * 秀丸エディタを終了させてもマクロは続行したい場合はexitではなく、closehidemaruを使う必要があります。    
- * exitは、[動作環境]→[ファイル]→[保存]→[保存するかどうかの確認]の    
- * 「無題で更新されていて、内容が空のとき」のチェック状態に関わらず、    
- * 無題でファイルが空の場合は、確認のメッセージボックスは出ません。
- * 
- * 自動起動マクロの「ファイルを閉じる直前」が設定されている場合、    
- * マクロ終了後に実行されます。    
- * 
- * @example
- * exit();
- *
- * @see closehidemaru
- * 
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function exit(): number;
-
-/**
- * s    
- * 
- * exitall文は、秀丸エディタを全て終了します。「全終了」に相当します。    
- * 
- * exitall文を実行すると、マクロもいっしょに終了します。    
- * exitallは、[動作環境]→[ファイル]→[保存]→[保存するかどうかの確認]の「無題で更新されていて、    
- * 内容が空のとき」のチェック状態に関わらず、無題でファイルが空の場合は、確認のメッセージボックスは出ません。    
- * 
- * 自動起動マクロの「ファイルを閉じる直前」が設定されている場合、マクロ終了後に実行されます。    
- *
- * @example
- * exitall();
- * 
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function exitall(): number;
-
-/**
- * s
- * 
- * saveexit文は、「保存して終了」をします。    
- * saveall文を実行すると、マクロもいっしょに終了します。
- * 
- * 秀丸エディタを終了させてもマクロは続行したい場合はexitではなく、closehidemaruを使う必要があります。    
- * 
- * 自動起動マクロの「保存直前と直後」または「ファイルを閉じる直前」が設定されている場合、    
- * マクロ終了後に実行されます。
- * @comment
- * 「保存直前と直後」を実行させないようにするには、    
- * @example
- * save();
- * exit();
- * @comment
- * と２つに分けて実行します。 
- *
- * @example
- * exit();
- *
- * @see closehidemaru
- * 
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function saveexit(): number;
-
-/**
- * s    
- * 
- * saveexitall文は、「全保存終了」をします。    
- * 
- * saveexitall文を実行すると、マクロもいっしょに終了します。    
- * 自動起動マクロの「保存直前と直後」または「ファイルを閉じる直前」が設定されている場合、マクロ終了後に実行されます。    
- * 
- * @comment    
- * 「保存直前と直後」を実行させないようにするには、
- * 
- * @example
- * saveall();
- * exitall();
- * 
- * @comment
- * と２つに分けて実行します。
- *
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function saveexitall(): number;
-
-/**
- * s
- * 
- * quit文は、「破棄して終了」をします。
- * 
- * quit文は、設定に関わらず、常に確認メッセージは出ません。    
- * quit文を実行すると、マクロもいっしょに終了します。    
- * 秀丸エディタを終了させてもマクロは続行したい場合はquitではなく、closehidemaruを使う必要があります。    
- * 
- * 自動起動マクロの「ファイルを閉じる直前」が設定されている場合、    
- * マクロ終了後に実行されます。    
- * 
- * @example
- * quit();
- *
- * @see closehidemaru
- * 
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function quit(): number;
-
-/**
- * s    
- * 
- * quitall文は、「全て破棄して終了」をします。    
- * 
- * quitall文は、設定に関わらず、常に確認メッセージは出ません。    
- * quitall文を実行すると、マクロもいっしょに終了します。    
- * 
- * 自動起動マクロの「ファイルを閉じる直前」が設定されている場合、マクロ終了後に実行されます。    
- * 
- * @example
- * quitall();
- * 
- * @returns
- * 成功しても失敗してもマクロが終了します。
- * 結果値は特に意味をもちません。
- */
-declare function quitall(): number;
-
-/**
- * s
- * 
  * up文は、カーソル上コマンドと同等のカーソル移動を行います。
  * 
  * @example
@@ -17411,4 +17270,53 @@ declare function FIND(): 0;
  * @deprecated
  */
 declare function ENV(): 0;
-}
+
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+ declare function exit(): 0;
+
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+ declare function exitall(): 0;
+ 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function saveexit(): 0;
+ 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function saveexitall(): 0;
+ 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+ declare function quit(): 0;
+ 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+ declare function quitall(): 0;
+ 
+ 
