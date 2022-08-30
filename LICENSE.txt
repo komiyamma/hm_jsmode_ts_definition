@@ -1,14 +1,13 @@
 - hm_jsmode.d.ts
 
+- The Custom License
+   秀丸マクロヘルプ文面に関する Custom License
+
+  「ヘルプファイルの大量の文章を使って、強調ファイルや定義ファイルを作り、それを配布するのは自由に出来る」という「サイトー企画」社の許諾に基づく
+    https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
+
 - TypeScript Definition (TypeScript定義ファイル化)
     Copyright (c) 2022 Akitsugu Komiyama
 
-
-
 - Descriptive text for each function (各関数の説明文章)
     Copyright (c) SAITO-KIKAKU CORPORATION
-
-秀丸マクロヘルプ文面に関する Custom License
-
-「ヘルプファイルの大量の文章を使って、強調ファイルや定義ファイルを作り、それを配布するのは自由に出来る」という「サイトー企画」社の許諾に基づく
-https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
