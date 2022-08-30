@@ -210,7 +210,7 @@ declare namespace hidemaru {
    * 読み込みに成功した場合、COMオブジェクトを返します。    
    * 失敗した場合、undefinedを返します。    
    */
-  declare function createoOject(progid: string): any | undefined;
+  function createObject(progid: string): any | undefined;
 
   /**
    * s
