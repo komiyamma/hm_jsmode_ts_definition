@@ -277,6 +277,112 @@ declare namespace hidemaru {
    * 失敗した場合、undefinedを返します。
    */
   function loadTextFile(filepath: string): string | undefined;
+
+  /**
+   * f
+   * 
+   * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
+   * 
+   * @example
+   * js{
+   *     var a = hidemaru.isMacroExecuting();
+   * }
+   * 
+   * @example
+   * jsmode "WebView2";
+   * js{
+   *   function asyncFunc() {
+   *     //ここはマクロ実行中ではない
+   *     var b = hidemaru.isMacroExecuting();
+   *     console.log(b);
+   *   }
+   *   
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   *   var a = hidemaru.isMacroExecuting();
+   *   console.log(a);
+   * }
+   * endmacro;
+   * 
+   * @comment
+   * 参照：
+   * @see WM_ISMACROEXECUTING
+   * 
+   * @returns
+   * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
+   */
+  function isMacroExecuting(): number;
+
+  /**
+   * f
+   * 
+   * postExecMacroFileメソッドは、ファイル名を指定して、マクロ実行をスケジュールします。    
+   * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
+   * 
+   * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
+   * 
+   * @example
+   * // マクロ実行中の中で実行する例
+   * js{
+   *     hidemaru.postExecMacroFile("test2.mac");
+   * }
+   * 
+   * @example
+   * // マクロ実行中ではない時に実行する例
+   * jsmode "WebView2";
+   * js{
+   *   function asyncFunc() {
+   *     //ここはマクロ実行中ではない
+   *     var b = hidemaru.isMacroExecuting();
+   *     console.log(b);
+   *   }
+   *
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   *   var a = hidemaru.isMacroExecuting();
+   *   console.log(a);
+   * }
+   * endmacro;
+   * 
+   * @returns
+   * 返り値はありません。
+   */
+  function postExecMacroFile(filepath: string): void;
+
+  /**
+   * f
+   * 
+   * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
+   * 
+   * @example
+   * js{
+   *     hidemaru.postExecMacroMemory('message "a";');
+   * }
+   * 
+   * @example
+   * jsmode "WebView2";
+   * js{
+   *    function asyncFunc(text){
+   *      //ここはマクロ実行中ではない
+   *      globaltext=text;
+   *      hidemaru.postExecMacroMemory(`
+   *        jsmode "WebView2";
+   *        js{
+   *          message(globaltext);
+   *          globaltext=null;
+   *        }
+   *      `)
+   *    }
+   *
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   * }
+   * endmacro;
+   * 
+   * @returns
+   * 返り値はありません。
+   */
+  function postExecMacroMemory(expression: string): void;
 }
 
 /**
@@ -10421,6 +10527,33 @@ declare function reopen(): number;
 ★★★ filter ★ function() { var m = "filter"; if (arguments.length >= 4) { eval(fs); } else { eval(st); } return r; }
 
 ★★★ currentjsfilename
+/**
+ * k
+ * 
+ * 現在実行中のexecjs文によって呼ばれたjsファイルのファイル名をフルパスで表します。
+ * execjs文による実行中でない場合はcurrentmacrofilenameと同じです。
+ * すべて小文字です。
+ * 
+ * @example
+ * // execjsにより実行されている最中ならば、{filename, directory}のそれぞれのプロパティに有効な値が入る
+ * function get_including_by_execjs() {
+ *     var cjf = hidemaruGlobal.currentjsfilename();
+ *     var cmf = hidemaruGlobal.currentmacrofilename();
+ *     if (cjf != cmf) {
+ *         var dir = cjf.replace(/[\/\\][^\/\\]+?$/, "");
+ *         return {
+ *             "filename": cjf,
+ *             "directory": dir
+ *         };
+ *     }
+ *     return {};
+ * }
+ * 
+ * @returns
+ * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
+ * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
+ */
+declare function currentjsfilename(): string;
 
 /**
  * s
@@ -14515,9 +14648,6 @@ declare function disablehistory(history_flag: number): number;
 declare function sleep(millisecond: number): number;
 
 ★★★ setcompatiblemode ★ function() { var m = "setcompatiblemode"; eval(fn); return r; }
-★★★ isMacroExecuting
-★★★ postExecMacroFile
-★★★ postExecMacroMemory
 /**
  * s
  * 
