@@ -170,7 +170,7 @@ declare namespace hidemaru {
   };
 
   /**
-   * adDllメソッドは、秀丸用のdllfunc対応のDLLを読み込みます。
+   * loadDllメソッドは、秀丸用のdllfunc対応のDLLを読み込みます。
    * @param dllpath 
    * DLLのファイル名を指定します。
    *
