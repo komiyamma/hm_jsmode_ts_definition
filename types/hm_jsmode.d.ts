@@ -4,8 +4,9 @@
  * @copyright 「各関数の説明内容」については、「サイトー企画 (https://hide.maruo.co.jp/)」に著作権が帰属します。    
  *            「TypeScript定義ファイル化」については、Akitsugu Komiyama に著作権が帰属します。
  * @license    The Custom License (秀丸マクロヘルプ文面に関する Custom License)    
- *            「ヘルプファイルの大量の文章を使って、強調ファイルや定義ファイルを作り、それを配布するのは自由に出来る」という「サイトー企画」社の許諾に基づく    
- *              https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
+ *            「ヘルプファイルの大量の文章を使って、強調ファイルや定義ファイルを作り、それを配布するのは自由に出来る」    
+ *             という「サイトー企画」社の許諾に基づく    
+ *             https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * @version v0.7.0
  */
 
