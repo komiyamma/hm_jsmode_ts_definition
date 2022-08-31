@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v0.7.0
+ * @version v0.8.0
  */
 
 /**
