@@ -302,6 +302,34 @@ declare namespace hidemaru {
   /**
    * f
    * 
+   * getTotalTextは、現在の編集ペインのテキスト内容を取得します。
+   * 
+   * @example
+   * var text = hidemaru.getTotalText();
+   * 
+   * returns
+   * 現在の編集ペインのテキスト内容を返す。
+   */
+  function getTotalText(): string;
+
+  /**
+   * f
+   * 
+   * getLineTextは、現在の編集ペインで、指定のlinenoのテキスト内容を取得します。
+   * 
+   * @example
+   * var text1 = hidemaru.getLineText(3); // 3行目のテキスト内容を返す
+   * 
+   * var text2 = hidemaru.getLineText(lineno()); // カーソルがある行のテキスト内容を返す
+   * 
+   * returns
+   * 現在の編集ペインで、指定のlinenoのテキスト内容を返す。
+   */
+  function getLineText(line_num: number): string;
+
+  /**
+   * f
+   * 
    * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
    * 
    * @example
