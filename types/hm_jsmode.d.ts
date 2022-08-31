@@ -10526,7 +10526,6 @@ declare function reopen(): number;
 
 ★★★ filter ★ function() { var m = "filter"; if (arguments.length >= 4) { eval(fs); } else { eval(st); } return r; }
 
-★★★ currentjsfilename
 /**
  * k
  * 
@@ -15964,12 +15963,387 @@ configset ★ function() { var m = "configset"; eval(st); return r; }
 
 /**
  * 
+ * 
+ * @param param
+ * 設定する箇所と内容を指定します。    
+ * 複数の設定を連結して指定できます。
+ * 
+ * @returns
  * 返り値は意味を持ちません。
  */
-config ★ function() { var m = "config"; eval(st); return r; }
+★★★ declare function config (string: param): number
 
+type typeConfigSettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCharSet"|"BoldFace"|"Orikaeshi"|"AutoAdjustOrikaeshi"|"Kinsoku"|"CorrectLineNo"|"LF"|"CharSpace"|"Tategaki"|"Dangumi"|"FreeCursor"|"SaveLastPos"|"Tab"|"TabMode"|"Indent"|"Blockquote"|"BquoteItemized"|"BquoteInclude"|"BlockquoteFix"|"UnderLine"|"ImeColorCurLine"|"HideCR"|"ShowCR"|"HideEOF"|"ShowEOF"|"ShowTab"|"ShowBox"|"Ruler"|"TabRuler"|"ShowLineNo"|"ShowPageNo"|"FormLine"|"ActiveKakko"|"ActiveTagPair"|"VertLine"|"GuideLine"|"GuideLineInterval"|"OrikaeshiLine"|"LastColor"|"Stripe"|"ColorNum"|"ColorUrl"|"ColorEmail"|"ColorFN"|"CurLineColor"|"CurLineColorEx"|"RulerColor"|"RulerBack"|"ColorComment"|"AspDefaultScript"|"Asp"|"JspComment"|"Php"|"Xml"|"ColorIfdef"|"Hilight"|"HilightTitle"|"HilightDirectWord"|"HilightDirectMulti"|"HilightDirectIfdef"|"Outline"|"ClistFont"|"ClistFontSize"|"HilightList"|"OutlineBar"|"RangeEdit"|"Folding"|"FoldingTwigBar"|"Ime"|"AutocompFlag1"|"AutocompFlag2"|"AutocompDic"|"AutocompAuto"|"FiletypeCharcode"|"SaveConv"|"StripTrail"|"SaveWithEOF"|"IgnoreEOF"|"Backup"|"BackupFast";
+/**
+ * f
+ * 
+ * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。
+ * 
+ * config("x...")で指定できる名前と同じものを指定します。
+ *（getconfigのときは 頭についている x は不要です ）
+ * 
+ * @example
+ * message(getconfig( "Font" ));
+ * message(getconfig( "Tab" ));
+ * message(getconfig( "FreeCursor" ));
+ * message(getconfig( "xFont" ));	//失敗します。xは書かなくていいです。
+ * 
+ * @param setting_name
+ * ファイルタイプ別の設定の値を、設定の名前で取得します。
+ * - Font(文字列)    
+ *     フォントの名前    
+ *     参照：fontmode
+ * - FontSize(数値)    
+ *     フォントサイズ（ドット数） 
+ * - FontPoint(数値)    
+ *     フォントサイズ（ポイント） 
+ * - FontDecimal(数値)    
+ *     フォントサイズ（ポイント，小数点以下） 
+ * - FontCharSet(数値)    
+ *     フォントの文字セット 
+ * - BoldFace(フラグ)    
+ *     太字 
+ * --------------------------------------------------------------------------------
+ * - Orikaeshi(数値)    
+ *     折り返し桁数 
+ * - AutoAdjustOrikaeshi(数値)    
+ *     - 0:折り返し桁数を固定
+ *     - 1:折り返し桁数をウィンドウ幅に合わせる
+ *     - 2:折り返し桁数を最大
+ * - Kinsoku(フラグ)    
+ *     禁則処理 
+ * --------------------------------------------------------------------------------
+ * - CorrectLineNo(フラグ)    
+ *     行番号の計算方法がエディタ的かどうか 
+ * - LF(数値)    
+ *     行間（0～11） 
+ * - CharSpace(数値)    
+ *     文字間（0～11）
+ *  
+ * - Tategaki(数値)    
+ *     - 縦書きのフラグ
+ *     以下のフラグの論理和
+ * 
+ *     - 0x0001　縦書き
+ *     - 0x0002　行番号も縦書き
+ *     - 0x0004　半角も縦書き
+ *     - 0x0008　半角漢数字
+ *     - 0x0010　半角数字２文字をセットにして縦書きにする
+ *     - 0x0020　カーソル行の下線モードは右側
+ *     - 0x0040　全角の記号類を９０度回転
+ * 
+ * - Dangumi(数値)    
+ *     段組数    
+ *     マイナスのときは無効。マイナス値で数を記憶。  
+ * - FreeCursor(フラグ)    
+ *     フリーカーソルモード    
+ *     閲覧モードでは2になります。
+ *  
+ * - SaveLastPos(フラグ)    
+ *     カーソル位置の自動復元 
+ * --------------------------------------------------------------------------------
+ * - Tab(数値)    
+ *     タブの文字数
+ *     マイナス値にするとタブキーで空白入力。
+ * - TabMode(数値)    
+ *     TSVモード/CSVモード/自由配置モード    
+ *     - 0x000fで論理積(&)されたビット
+ *         - 0x0000　通常モード
+ *         - 0x0001　TSVまたはCSVモード（TSVかCSVかは0x0100で判断）
+ *         - 0x0002　自由配置モード
+ * 
+ *     - 0x0f00で論理積(&)されたビット
+ *         - 0x0100　CSVモード（0x0001もあるとき）    
+ * 
+ *     - 参照：fontmode
+ *  
+ * - Indent(数値)    
+ *     自動インデント 
+ * - Blockquote(フラグ)    
+ *     行頭のタブ文字で段落全体をインデントする 
+ * - BquoteItemized(フラグ)    
+ *     箇条書きへのインテリジェントな対応 
+ * - BquoteInclude(文字列)    
+ *     インデント対象に追加する文字 
+ * - BlockquoteFix(数値)    
+ *     指定桁数をインデントする     
+ * --------------------------------------------------------------------------------
+ * - UnderLine(数値)    
+ *     カーソル行の下線モード    
+ *     - 0で文字色モード、
+ *     - 1で下線モード、
+ *     - 2で背景色モード  
+ * - ImeColorCurLine(数値)    
+ *     カーソル関係のフラグ    
+ *     - 以下のフラグの論理和
+ *         - 0x0001　「カーソル行(IME ON時)」が有効かどうか
+ *         - 0x0002　「IME変換中の色」が有効かどうか
+ * - HideCR(フラグ)    
+ *     改行の非表示(ShowCRと逆の意味) 
+ * - ShowCR(フラグ)    
+ *     改行の表示 
+ * - HideEOF(フラグ)    
+ *     EOFの非表示(ShowEOFと逆の意味) 
+ * - ShowEOF(フラグ)    
+ *     EOFの表示 
+ * - ShowTab(フラグ)    
+ *     タブ文字表示 
+ * - ShowBox(数値)    
+ *     全角空白・半角空白表示（第0ビットが全角空白を記号で表示、第1ビットが半角空白を記号で表示） 
+ * - Ruler(フラグ)    
+ *     ルーラー表示 
+ * - TabRuler(フラグ)    
+ *     ルーラー8単位かどうか 
+ * - ShowLineNo(フラグ)    
+ *     行番号表示 
+ * - ShowPageNo(数値)    
+ *     ページ番号表示
+ * １ページの行数を指定/取得します。 
+ * - FormLine(数値)    
+ *     - 整形ラインの桁数    
+ *     桁数　0x00007fffを論理積(&)した値    
+ *     参照：formwidth showformline
+ *  
+ * - ActiveKakko(フラグ)    
+ *     対応する括弧の強調表示 
+ * - ActiveTagPair(フラグ)    
+ *     対応するタグの強調表示
+ * - VertLine(数値)    
+ *     カーソル位置の縦線　0:なし　1:点線　2:実線 
+ * - GuideLine(数値)    
+ *     - ガイドライン縦と横の情報
+ *         - ガイドライン縦：0x03を論理積(&)した値　0x00:なし　0x01:点線　0x02:実線
+ *         - ガイドライン横：0x0Cを論理積(&)した値　0x00:なし　0x04:点線　0x08:実線
+ *         - ガイドライン横の上下位置　0xC0を論理積(&)した値　0x00:下　0x40:中　0x80:上
+ *  
+ * - GuideLineInterval(数値)    
+ *     - ガイドライン縦と横の間隔
+ *         - ガイドライン縦の間隔：0x00007fffを論理積(&)した値
+ *         - ガイドライン横の間隔：0x7fff0000を論理積(&)して、0x00010000で割った値（16ビット右シフト）
+ *  
+ * - OrikaeshiLine(数値)    
+ *     折り返し桁数の縦線　0:なし　1:点線　2:実線 
+ * - LastColor(フラグ)    
+ *     最後に編集した所 
+ * - Stripe(フラグ)    
+ *     背景ストライプ表示
+ * - ColorNum(フラグ)    
+ *     数値のカラー表示
+ * - ColorUrl(フラグ)    
+ *     URLのカラー表示 
+ * - ColorEmail(フラグ)    
+ *     Emailのカラー表示 
+ * - ColorFN(フラグ)    
+ *     ファイル名と思わしき場所のカラー表示 
+ * --------------------------------------------------------------------------------
+ * - CurLineColor(文字列)    
+ *     - カーソル行の色をRGBで10進数空白区切り    
+ *     例：config("xCurLineColor:(255 0 0)");で赤色    
+ *     configcolorの[65][0]でも指定できます。
+ *  
+ * - CurLineColorEx(数値)    
+ *     - カーソル行の色の24ビット数値    
+ *     例：config("xCurLineColorEx:0xff0000");で青色    
+ *     configcolorの[65][0]でも指定できます。
+ *  
+ * - RulerColor(文字列)    
+ *     ルーラーの文字色をRGBで10進数空白区切り    
+ *     例：config("xRulerColor:(255 0 0)");で赤色    
+ *     空の文字列で普通の文字の文字色と同じ　例：config("xRulerColor:()");    
+ *     configcolorの[66][0]でも指定できます。
+ *  
+ * - RulerBack(文字列)    
+ *     ルーラーの背景色をRGBで10進数空白区切り    
+ *     例：config("xRulerBack:(0 0 255)");で青色    
+ *     空の文字列で普通の文字の背景色と同じ　例：config("xRulerBack:()");    
+ *     configcolorの[66][1]でも指定できます。
+ * --------------------------------------------------------------------------------
+ * - ColorComment(数値)    
+ *     - 複数行コメント（旧、カラー表示にするモード）    
+ *     getconfigで取得する場合、自動判定では判定されたモードが返ります。    
+ *     - 以下の値が取得/設定できます。
+ *         - 0　なし
+ *         - 1　HTML
+ *         - 5　C言語/Java
+ *         - 6　Visual Basic
+ *         - 7　Pascal/Delphi
+ *         - 8　アセンブリ語
+ *         - 9　Perl
+ *         - 10　VHDL
+ *         - 11　Verilog
+ *         - 12　AutoLISP
+ *         - 13　TeX
+ *         - 14　PL/SQL
+ *         - 15　秀丸マクロ
+ *         - 16　秀Termスクリプト
+ *         - 17　FORTRAN77
+ *         - 19　FORTRAN90
+ *         - 21　C言語/Java(#ifdef等のカラー表示)
+ *         - 22　UNIXシェルスクリプト
+ *         - 23　Hidemarnet Explorer
+ *         - 25　CSS
+ *         - 26　Ruby
+ *         - 27　ユーザー定義
+ *         - 28　Python
+ *         - 29　自動（設定のみ,取得は判定後のモード）
+ * 
+ * - AspDefaultScript(数値)    
+ *     サーバーサイドスクリプトのASPの言語 
+ * - Asp(フラグ)    
+ *     サーバーサイドスクリプトのASP 
+ * - JspComment(フラグ)    
+ *     サーバーサイドスクリプトのJSP
+ *  
+ * - Php(フラグ)    
+ *     サーバーサイドスクリプトのPHP 
+ * - Xml(フラグ)    
+ *     HTML/XMLのときXMLかどうか 
+ * - ColorIfdef(フラグ)    
+ *     #ifdef等のカラー表示 
+ * --------------------------------------------------------------------------------
+ * - Hilight(数値)    
+ *     - 強調表示
+ *         - 0:なし
+ *         - 1:ユーザー定義
+ *         - 2:自動判定
+ *         - 3:言語指定  
+ * - HilightTitle(文字列)    
+ *     hilightファイルを読み込んだときのファイル名    
+ *     またはhilightファイル直接指定モード時のファイル名（xHilightDirectWordが必要）
+ *  
+ * - HilightDirectWord(数値)    
+ *     hilightファイル直接指定モードかどうか
+ * - HilightDirectMulti(数値)    
+ *     hilightファイル直接指定モード（複数行の強調）かどうか（xHilightDirectWordが必要）
+ * - HilightDirectIfdef(数値)    
+ *     hilightファイル直接指定モード（#ifdef等の詳細）かどうか（xHilightDirectWordが必要）
+ * --------------------------------------------------------------------------------
+ * - Outline(フラグ)    
+ *     アウトライン解析の枠
+ * - ClistFont(文字列)    
+ *     アウトライン解析の枠のフォント
+ * - ClistFontSize(数値)    
+ *     - アウトライン解析の枠のフォントサイズ    
+ *       ポイント数を10倍した値です。    
+ *       10.5ポイントの場合、105。  
+ * - HilightList(数値)    
+ *     - アウトライン解析のダイアログのフラグ    
+ *       以下のフラグの論理和です。
+ *         - 0x00000001　行の強調１（強調一覧時）
+ *         - 0x00000002　未使用
+ *         - 0x00000004　特に強調１（強調一覧時）
+ *         - 0x00000008　URL（強調一覧時）
+ *         - 0x00000010　ファイル名（強調一覧時）
+ *         - 0x00000020　関数一覧
+ *         - 0x00000040　ソート（関数一覧,強調一覧時）
+ *         - 0x00000080　行の強調２（強調一覧時）
+ *         - 0x00000100　特に強調２（強調一覧時）
+ *         - 0x00000200　行番号を表示しない（関数一覧,強調一覧時）
+ *         - 0x00000400　パラメータを表示しない（関数一覧時）
+ *         - 0x00000800　行の強調３（強調一覧時）
+ *         - 0x00001000　行の強調４（強調一覧時）
+ *         - 0x00002000　特に強調３（強調一覧時）
+ *         - 0x00004000　特に強調４（強調一覧時）
+ *         - 0x00010000　ツリー表示
+ *         - 0x00100000　分類モード（ツリー表示時）
+ *         - 0x00800000　「検索文字列を強調」されている箇所（強調一覧時）
+ *     - 0x000F0020を論理積( & )したビットは、「アウトライン解析の方法」が何であるかを意味します。    
+ *       例：
+ *       var f = val(getconfig("HilightList"));
+ *       if( (f & 0x000F0020) == 0x00000020 ) { 関数一覧 }
+ *       if( (f & 0x000F0020) == 0x00000000 ) { 強調一覧 }
+ *       if( (f & 0x000F0020) == 0x00010000 ) { ツリー表示 }
+ *  
+ * - OutlineBar(数値)    
+ *     - 見出しバー関係    
+ *     以下のフラグの論理和
+ *          - 0x00000001　見出しバー
+ *          - 0x00000002　見出しバーを部分編集中に自動表示しない
+ * 
+ * - RangeEdit(数値)    
+ *     - 部分編集関係    
+ *     以下の値
+ *          - 0x00000000　制限モード
+ *          - 0x00010000　制限モード（半透明）
+ *          - 0x00060000　ローカル編集モード
+ * 
+ * - Folding(数値)    
+ *     - 折りたたみ可能な条件    
+ *     以下のフラグの論理和
+ *          - 0x00000001　範囲選択を無効
+ *          - 0x00000002　インデントの深さを無効
+ *          - 0x00000004　連続したコメントを無効
+ *          - 0x00000008　カーソル上の対応する括弧を無効
+ *          - 0x00000010　#ifdef等の対応を無効
+ *          - 0x00000020　アウトライン解析との対応を無効
+ *          - 0x00000040　空行区切りを無効
+ *          - 0x00000080　行の強調表示区切りを無効
+ * 
+ * - FoldingTwigBar(数値)    
+ *     - 折りたたみ用の余白関係    
+ *     以下のフラグの論理和    
+ *         - 0x00000001　折りたたみ用の余白
+ * --------------------------------------------------------------------------------
+ * - Ime(数値)    
+ *     開く時のかな漢字変換の制御 
+ * --------------------------------------------------------------------------------
+ * - AutocompFlag1(数値)    
+ *     単語補完の設定（autocomplete文の第２パラメータと同じ）
+ * - AutocompFlag2(数値)    
+ *     単語補完の設定（autocomplete文の第３パラメータと同じ）
+ * - AutocompDic(文字列)    
+ *     単語補完の辞書ファイル（autocomplete文の第４パラメータと同じ）
+ * - AutocompAuto(数値)    
+ *     - 単語補完の自動表示    
+ *       以下のフラグの論理和
+ *         - 0x00000001　自動表示ON/OFF
+ *         - 0x00000000　表示方法 標準
+ *         - 0x00000020　表示方法 リスト
+ *         - 0x00000030　表示方法 ステータスバー
+ *         - 0x00000040　表示方法 ツールチップ
+ * --------------------------------------------------------------------------------
+ * - FiletypeCharcode(数値)    
+ *     標準のエンコードの種類 
+ * - SaveConv(数値)    
+ *     - 保存するときの変換
+ *         - 0:変換なし
+ *         - 1:タブを空白に変換する
+ *         - 2:空白をタブに変換する
+ * 
+ * - StripTrail(フラグ)    
+ *     保存するときに行末の空白を除去する 
+ * - SaveWithEOF(フラグ)    
+ *     保存するときにEOF制御文字を付ける 
+ * - IgnoreEOF(フラグ)    
+ *     読み込むときにEOF制御文字を無視 
+ * - Backup(フラグ)    
+ *     バックアップファイルの作成 
+ * - BackupFast(フラグ)    
+ *     高速バックアップ 
+ * 
+ * @returns
+ * 取得する情報によって文字列型と数値型のどちらかが返ります。
+ */
+declare function getconfig(key: typeConfigSettingName): string | number
 
-getconfig ★ function() { var m = "getconfig"; eval(fsn); return r; }
+/**
+ * f
+ * 
+ * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。
+ * 
+ * config("x...")で指定できる名前と同じものを指定します。
+ *（getconfigのときは 頭についている x は不要です ）
+ * 
+ * @example
+ * message(getconfig( "Font" ));
+ * message(getconfig( "Tab" ));
+ * message(getconfig( "FreeCursor" ));
+ * message(getconfig( "xFont" ));	//失敗します。xは書かなくていいです。
+ * 
+ * @param setting_name
+ * 取得する情報によって文字列型と数値型のどちらかが返ります。
+ */
+declare function getconfig(key: string): string | number
 
 /**
  * 返り値は意味を持ちません。
