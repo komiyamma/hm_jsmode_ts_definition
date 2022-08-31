@@ -15980,19 +15980,34 @@ declare function enumregkey(subkey_ix: number): string;
  */
 declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
 
-configset ★ function() { var m = "configset"; eval(st); return r; }
-
 /**
+ * st
  * 
+ * configset文は、ファイルタイプ別の設定を、「設定のリスト」の名前を指定して変更します。
  * 
- * @param param
- * 設定する箇所と内容を指定します。    
- * 複数の設定を連結して指定できます。
+ * @param setting_name
+ * 設定の名前を指定します。    
+ * 設定のリストの中にある名前を指定します。   
+ * ""を指定すると、「共通」の設定になります。
+ * 
+ * @param config_state
+ * 設定を記憶するかどうかを指定します。    
+ * - 0 を指定すると、ファイルタイプ別の設定は一時的な設定になります。    
+ * ファイルタイプに関連付けられている設定のリストは維持されます。    
+ * この状態で、saveconfig文を使うと、もともと指定されていた設定のリストに上書きされて保存されるので、注意してください。
+ * - 1を指定すると、一時的な設定にはならず保存されます。    
+ * ファイルタイプに関連付けされている設定のリストは切り替わります。    
+ * 新規作成時の秀丸エディタに 1 を指定しても適用されません。    
+ * 現在の設定のリストの名前はcurrentconfigsetキーワードで表されます。（ファイルタイプ別の設定関連)
+ * 
+ * @example
+ * configset("C言語ｿｰｽﾌｧｲﾙ", 1);
  * 
  * @returns
- * 返り値は意味を持ちません。
+ * 成功したら0以外を返します。    
+ * 失敗したら0を返します。
  */
-★★★ declare function config (string: param): number
+declare function config(string: setting_name, number: config_state): number
 
 type typeConfigSettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCharSet"|"BoldFace"|"Orikaeshi"|"AutoAdjustOrikaeshi"|"Kinsoku"|"CorrectLineNo"|"LF"|"CharSpace"|"Tategaki"|"Dangumi"|"FreeCursor"|"SaveLastPos"|"Tab"|"TabMode"|"Indent"|"Blockquote"|"BquoteItemized"|"BquoteInclude"|"BlockquoteFix"|"UnderLine"|"ImeColorCurLine"|"HideCR"|"ShowCR"|"HideEOF"|"ShowEOF"|"ShowTab"|"ShowBox"|"Ruler"|"TabRuler"|"ShowLineNo"|"ShowPageNo"|"FormLine"|"ActiveKakko"|"ActiveTagPair"|"VertLine"|"GuideLine"|"GuideLineInterval"|"OrikaeshiLine"|"LastColor"|"Stripe"|"ColorNum"|"ColorUrl"|"ColorEmail"|"ColorFN"|"CurLineColor"|"CurLineColorEx"|"RulerColor"|"RulerBack"|"ColorComment"|"AspDefaultScript"|"Asp"|"JspComment"|"Php"|"Xml"|"ColorIfdef"|"Hilight"|"HilightTitle"|"HilightDirectWord"|"HilightDirectMulti"|"HilightDirectIfdef"|"Outline"|"ClistFont"|"ClistFontSize"|"HilightList"|"OutlineBar"|"RangeEdit"|"Folding"|"FoldingTwigBar"|"Ime"|"AutocompFlag1"|"AutocompFlag2"|"AutocompDic"|"AutocompAuto"|"FiletypeCharcode"|"SaveConv"|"StripTrail"|"SaveWithEOF"|"IgnoreEOF"|"Backup"|"BackupFast";
 /**
