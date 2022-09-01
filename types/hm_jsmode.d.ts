@@ -12078,6 +12078,77 @@ declare function hilightfound(is_on?: number): number;
 ★★★ colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
 
 /**
+ * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。
+ * 
+ * @param json_string 
+ * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
+ * JSONの項目名と意味：    
+ * - "noredraw"(数値)    
+ * 0以外を指定したら再描画しない。
+ * - "unit"(文字列)    
+ * 位置の単位 "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで既定は"char"
+ * - "text"(文字列)    
+ * 文字色 例："#FFFF00"
+ * - "back"(文字列)    
+ * 背景色 例："#000088"
+ * - "wave"(文字列)    
+ * 波線色 例："#FF0000"
+ * - "style"(数値)    
+ * スタイル
+ * - "kind"(数値)    
+ * 種類
+ * - "userdata"(数値)    
+ * ユーザーデータ
+ * - "layer"(文字列)    
+ * レイヤー名
+ * - "line1"(数値)    
+ * 開始行
+ * - "col1"(数値)    
+ * 開始桁
+ * - "line2"(数値)    
+ * 終了行
+ * - "col2"(数値)    
+ * 終了桁
+ * - "items"(配列)    
+ * 現在のオブジェクトを継承して、上書きできる入れ子構造
+ * 
+ * @example
+ * js{
+ *   var obj = {};
+ *   obj.layer="yellowline";
+ *   obj.kind=2;
+ *   obj.text="#000000";
+ *   obj.back="#FFFF00";
+ *   obj.line1=lineno();
+ *   obj.col1=0;
+ *   obj.line2=lineno();
+ *   obj.col2=linelen2();
+ *   colormarker(JSON.stringify(obj));
+ * }
+ * 
+ * @comment
+ * noredrawはどこかに1つでもあったら有効です。    
+ * unitは文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。    
+ * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
+ * text, back, wave, style, kind, userdataは、全部色は透明("")、スタイルは透過(-1)、種類とユーザーデータは0にしたとき、消去の意味になります。    
+ * 
+ * @returns
+ * 成功した場合は0以外を返す。
+ * 失敗した場合は0を返す。
+ */
+declare function colormarker(json_string: string): number;
+
+/**
+ *  * @returns
+ * 成功した場合は0以外を返す。
+ * 失敗した場合は0を返す。
+ * number版必要
+ */
+★★★declare function colormarker(i: number): number;
+
+
+/**
  * s
  * 
  * prevcolormarker文は、カラーマーカーで色付けされている前の場所に移動します。
