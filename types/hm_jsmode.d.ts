@@ -9497,7 +9497,7 @@ declare function poppaste2(): number;
  * 成功した場合、0以外を返します。    
  * 失敗した場合、0を返します。    
  */
-declare function clearcliphist(history_ix? number): number;
+declare function clearcliphist(history_ix?: number): number;
 
 /**
  * s
