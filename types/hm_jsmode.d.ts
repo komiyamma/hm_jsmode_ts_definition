@@ -12035,7 +12035,52 @@ declare function grepdialog(): number;
 ★★★ grep ★ function() { var m = "grep"; eval(st); return r; }
 
 grepdialog2 ★ function() { var m = "grepdialog2"; eval(st); return r; }
-localgrep ★ function() { var m = "localgrep"; eval(st); return r; }
+
+
+/**
+ * s
+ * 
+ * localgrep文は、現在の内容を対象にしてgrepを実行します。
+ * 
+ * @comment
+ * オプションの意味はsearchdialogやgrepと同じです。    
+ * 検索文字列には上限があります。    
+ * 上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。
+ * 
+ * @param grep_text
+ * 検索文字列を指定します。
+ * 
+ * @param searchoption_flag
+ * 検索のオプションを、以下の値から論理和で指定します。
+ * searchoption相当の検索オプションを論理和で指定します。
+ * - word(0x00000001)    
+ * - casesense(0x00000002), nocasesense(0x00000000)    
+ * - regular(0x00000010), noregular(0x00000000)    
+ * - fuzzy(0x00000020)    
+ * - hilight(0x00003800), nohilight(0x00002000)    
+ * - masknormal(0x00010000), maskcomment(0x00020000), maskifdef(0x00040000), maskscript(0x00080000), maskstring(0x00100000), masktag(0x00200000), maskonly(0x00400000)    
+ * - icon(0x00000200)    
+ * - outputsingle(0x10000000), outputsametab(0x20000000)    
+ * - unmatch(0x00000001)
+ * 
+ * @example
+ * var word = 0x00000001;
+ * var casesense = 0x00000002;
+ * localgrep("#include", word|casesense);
+ * 
+ * @comment
+ * 参照：
+ * @see searchoption
+ * @see grep
+ * @see searchdialog
+ * 
+ * @returns
+ * resultには見つかった個数が入ります。    
+ * 途中で中断された場合は返り値は-1になります。
+ */
+declare function localgrep(grep_text:string, searchoption_flag): number;
+
+
 grepreplace ★ function() { var m = "grepreplace"; eval(st); return r; }
 grepreplacedialog2 ★ function() { var m = "grepreplacedialog2"; eval(st); return r; }
 
