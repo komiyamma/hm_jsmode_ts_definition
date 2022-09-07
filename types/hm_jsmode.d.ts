@@ -1075,6 +1075,7 @@ declare function unicode(text: string): number;
  * - 0x00001000 ... Email部分    
  * - 0x00010000 ... 検索文字列の強調    
  * - 0x00080000 ... カラーマーカー    
+ * - 0x00100000 ... 幅ゼロのカラーマーカー
  *     
  * 「普通の文字」～「特に強調表示4」の色コードは、(colorcode & 0x401F)して取得できます。    
  * （以前のヘルプでは色コードを0x001fで取得できるとしていましたが、強調5～8,行の強調3～4,特に強調3～4は取得できないので、0x401fが適切です）    
@@ -11752,6 +11753,7 @@ declare function setreplace(replace_text: string): number
  * @param history_ix    
  * 0から始まるヒストリの番号を指定します。   
  * 検索ヒストリの最大は100個（0～99まで）です。    
+ * -1を指定すると最初に挿入します。    
  * 
  * @param search_text
  * ヒストリとして設定したい文字列を指定します。    
@@ -11837,7 +11839,8 @@ declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
  * 
  * @param history_ix    
  * 0から始まるヒストリの番号を指定します。   
- * 置換ヒストリの最大は20個（0～19まで）です。
+ * 置換ヒストリの最大は20個（0～19まで）です。    
+ * -1を指定すると最初に挿入します。    
  * 
  * @param replace_text
  * ヒストリとして設定したい文字列を指定します。    
@@ -15960,7 +15963,6 @@ declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?:
  * @param read_size 
  * 何バイト分取得するかのサイズを指定します。    
  * 省略した場合は全てのサイズになります。    
- * サイズは2000バイト分が上限です。
  * 
  * @example
  * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
@@ -17209,9 +17211,11 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right
  * setwindowsize文は、現在のウィンドウサイズを文字数単位で指定します。    
  * 
  * @param width_column 
+ * 幅を文字数単位で指定します。    
  * 何文字の横幅(桁幅)にするかを指定する。
  * 
  * @param height_lineno 
+ * 高さを文字数単位で指定します。    
  * 何文字の縦幅(行幅)にするかを指定する。
  * 
  * @example
