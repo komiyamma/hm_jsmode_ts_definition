@@ -582,7 +582,7 @@ declare namespace hidemaru {
    * 内容が変わったときにカウントが増える値。    
    * 初期値は1以上。32bitの値を超えると一周。
    */
-  declare var updateCount: number
+  declare const updateCount: number;
 
   /**
    * fileFullPathプロパティは、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
@@ -597,7 +597,24 @@ declare namespace hidemaru {
    * @returns
    * 現在のファイル名。
    */
-  declare var fileFullPath: string
+  declare const fileFullPath: string
+
+  /**
+   * jsmodeプロパティは、現在のJavaScriptの動作モードを表します。    
+   * [非同期]
+   * 
+   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
+   * 
+   * @example
+   * js {
+   *     var a = hidemaru.jsmode;
+   * }
+   * 
+   * @returns
+   * 現在のJavaScriptの動作モード。    
+   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
+   */
+   declare const jsmode: string
 
 
   /**
