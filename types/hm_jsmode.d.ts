@@ -544,56 +544,77 @@ declare namespace hidemaru {
    * 返り値はありません。
    */
   function postExecMacroMemory(expression: string): void;
+
+  /**
+   * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
+   * 
+   * @param varname
+   * 取得する変数名を指定します。    
+   * "#"から始まる場合、数値型変数を取得します。    
+   * "$"から始まる場合、文字列型変数を取得します。
+   * 
+   * @example
+   * $a = "Hello";
+   * #b = 3333;
+   * js {
+   *     var s = getVar( "$a" );
+   *     s += " JavaScript";
+   *     setVar( "$a", s );
+   *     var num = getVar( "#b" );
+   * }
+   *
+   * @returns
+   * 指定した秀丸マクロ変数の値を返す
+   */
+  function getVar(varname: string): number | string;
+
+  /**
+   * JavaScriptの変数の値を、秀丸マクロの「ユーザー定義の変数」へ設定します。
+   * 
+   * @param varname
+   * 設定する変数名を指定します。
+   * "#"から始まる場合、数値型変数を設定します。    
+   * "$"から始まる場合、文字列型変数を設定します。
+   * 
+   * @param newvalue
+   * 設定する変数の内容を指定します。
+   * 
+   * @example
+   * $a = "Hello";
+   * js {
+   *     var s = getVar( "$a" );
+   *     s += " JavaScript";
+   *     setVar( "$a", s );
+   *     setVar( "#b", 333 );
+   * }
+   *
+   * @returns
+   * 値の設定が成功したら１，失敗したら０を返す
+   */
+  function setVar(varname: string, newvalue: string | number | boolean): number;
+
+  /**
+   * s
+   * 
+   * 文字列で指定するマクロを実行します。
+   * @param expression : 実行する秀丸マクロ文字列
+   * 
+   * @comment
+   * 参考：
+   * @see Hidemaru_EvalMacro    
+   * @see WM_REMOTE_EVALMACRO    
+   * @see hidemaru.evalMacro
+   * 
+   * @returns 成功したらresultは0以外になります。    
+   *        　失敗したらresultは0になります。
+   */
+  function evalMacro(expression: string): number;
 }
 
-/**
- * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
- * 
- * @param varname
- * 取得する変数名を指定します。    
- * "#"から始まる場合、数値型変数を取得します。    
- * "$"から始まる場合、文字列型変数を取得します。
- * 
- * @example
- * $a = "Hello";
- * #b = 3333;
- * js {
- *     var s = getVar( "$a" );
- *     s += " JavaScript";
- *     setVar( "$a", s );
- *     var num = getVar( "#b" );
- * }
- *
- * @returns
- * 指定した秀丸マクロ変数の値を返す
- */
-declare function getVar(varname: string): number | string;
 
 
-/**
- * JavaScriptの変数の値を、秀丸マクロの「ユーザー定義の変数」へ設定します。
- * 
- * @param varname
- * 設定する変数名を指定します。
- * "#"から始まる場合、数値型変数を設定します。    
- * "$"から始まる場合、文字列型変数を設定します。
- * 
- * @param newvalue
- * 設定する変数の内容を指定します。
- * 
- * @example
- * $a = "Hello";
- * js {
- *     var s = getVar( "$a" );
- *     s += " JavaScript";
- *     setVar( "$a", s );
- *     setVar( "#b", 333 );
- * }
- *
- * @returns
- * 値の設定が成功したら１，失敗したら０を返す
- */
-declare function setVar(varname: string, newvalue: string | number | boolean): number;
+
+
 
 /**
  * k    
@@ -860,23 +881,6 @@ declare function geteventnotify(notify_target: 0): number;
  *        　失敗したらresultは0になります。
  */
 declare function print(showdialog?: number): number;
-
-/**
- * s
- * 
- * 文字列で指定するマクロを実行します。
- * @param expression : 実行する秀丸マクロ文字列
- * 
- * @comment
- * 参考：
- * @see Hidemaru_EvalMacro    
- * @see WM_REMOTE_EVALMACRO    
- * @see hidemaru.evalMacro
- * 
- * @returns 成功したらresultは0以外になります。    
- *        　失敗したらresultは0になります。
- */
-declare function evalMacro(expression: string): number;
 
 /**
  * f
