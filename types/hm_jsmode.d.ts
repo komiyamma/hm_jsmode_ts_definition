@@ -510,6 +510,22 @@ declare namespace hidemaru {
   function postExecMacroFile(filepath: string): void;
 
   /**
+   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。 [非同期]
+   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
+   * JScriptではこの関数が簡易版として代用できます。
+   * 
+   * @param func 
+   * 関数を指定します。
+   * 
+   * @param millisecond 
+   * 時間をミリ秒単位で指定します。
+   * 
+   * @returns
+   * 固有のIDが返ります。
+   */
+  function setTimeout(func: Function, millisecond: number): number;
+
+  /**
    * f
    * 
    * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
@@ -544,6 +560,45 @@ declare namespace hidemaru {
    * 返り値はありません。
    */
   function postExecMacroMemory(expression: string): void;
+
+  /**
+   * updateCountプロパティは、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
+   *  [非同期]
+   * 
+   * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
+   * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
+   * 一回の操作でも数カウント上がったりします。    
+   * 
+   * 32bitの値を超えると一周します。    
+   * 初期値は1以上です。
+   * 
+   * @example
+   * js{
+   *     var a = hidemaru.updateCount;
+   * }
+   * 
+   * @returns
+   * 秀丸マクロでいうupdatecountに相当する値。    
+   * 内容が変わったときにカウントが増える値。    
+   * 初期値は1以上。32bitの値を超えると一周。
+   */
+  declare var updateCount: number
+
+  /**
+   * fileFullPathプロパティは、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
+   * filename2()とほぼ同じですが、非同期で使えるところに価値があります。    
+   *  [非同期]
+   * 
+   * @example
+   * js {
+   *     var a = hidemaru.fileFullPath;
+   * }
+   * 
+   * @returns
+   * 現在のファイル名。
+   */
+  declare var fileFullPath: string
+
 
   /**
    * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
