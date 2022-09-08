@@ -216,7 +216,8 @@ declare namespace hidemaru {
   /**
    * s
    * 
-   * createobject関数は、COMオブジェクトを作成します。
+   * createobject関数は、COMオブジェクトを作成します。    
+   * [非同期]
    * 
    * @param progid 
    * 登録されたCOMオブジェクトのProgIdを指定します。
@@ -227,9 +228,14 @@ declare namespace hidemaru {
    * var line = file.ReadLine();
    * file.Close();
    * 
+   * @comment
+   * 参照：
+   * @see getresultex(11)
+   * 
    * @returns
    * 読み込みに成功した場合、COMオブジェクトを返します。    
    * 失敗した場合、undefinedを返します。    
+   * 失敗した場合、getresultex(11)でエラーコードを取得できます。
    */
   function createObject(progid: string): any | undefined;
 
@@ -302,20 +308,26 @@ declare namespace hidemaru {
   /**
    * f
    * 
-   * getTotalTextは、現在の編集ペインのテキスト内容を取得します。
+   * getTotalTextは、現在の編集ペインのテキスト全体を文字列にして返します。    
+   *  [非同期]
    * 
    * @example
    * var text = hidemaru.getTotalText();
    * 
    * returns
-   * 現在の編集ペインのテキスト内容を返す。
+   * テキスト全体を返します。    
+   * 失敗した場合はundefinedになります
    */
   function getTotalText(): string;
 
   /**
    * f
    * 
-   * getLineTextは、現在の編集ペインで、指定のlinenoのテキスト内容を取得します。
+   * getLineTextメソッドは、指定行のテキストを文字列にして取得します。    
+   *  [非同期]
+   * 
+   * @param line_num
+   * 行番号を指定します。先頭が1です。
    * 
    * @example
    * var text1 = hidemaru.getLineText(3); // 3行目のテキスト内容を返す
@@ -323,14 +335,112 @@ declare namespace hidemaru {
    * var text2 = hidemaru.getLineText(lineno()); // カーソルがある行のテキスト内容を返す
    * 
    * returns
-   * 現在の編集ペインで、指定のlinenoのテキスト内容を返す。
+   * 指定した行の内容を返します。    
+   * 失敗した場合はundefinedになります。
    */
   function getLineText(line_num: number): string;
 
   /**
    * f
    * 
+   * getCurrentWindowHandleメソッドは、現在の秀丸エディタのウィンドウハンドルを取得します。    
+   *  [非同期]
+   * 
+   * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
+   * 
+   * @example
+   * var a = hidemaru.getCurrentWindowHandle();
+   * 
+   * @returns
+   * 現在の秀丸エディタのウィンドウハンドルに相当する値を返します。    
+   * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
+   */
+  function getCurrentWindowHandle(): number;
+
+  /**
+   * f
+   * 
+   * getCurrentWindowHandleメソッドは、現在のウィンドウハンドルを取得します。    
+   *  [非同期]
+   * 
+   * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
+   * 
+   * @example
+   * var a = hidemaru.setStaticVariable("hoge","fuga",0);
+   * 
+   * @returns
+   * ウィンドウハンドルに相当する値を返します。    
+   * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
+   */
+   function getCurrentWindowHandle(): number;
+
+  /**
+   * getstaticvariableと同様の関数です。    
+   * 静的な変数を取得します。    
+   *  [非同期]
+   *
+   * @param key
+   * 変数名を指定します。大文字と小文字の区別はされません。    
+   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
+   * （scope_typeに0以上を指定した場合に限る）
+   * 
+   * @param scope_type
+   * 共有されている静的な変数かどうかを指定します。    
+   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+   * - 1 を指定すると、全ての秀丸エディタで有効です。    
+   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+   * 他のマクロとの競合はありません。
+   * 
+   * @returns
+   * keyとscope_typeで指定された静的変数の内容を返す。    
+   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
+   * （scope_typeに0以上を指定した場合に限る）
+   */
+  function getStaticVariable(key: string, scope_type: number): string
+
+  /**
+   * setstaticvariableと同様の関数です。    
+   * 静的な変数を書き込みます。    
+   *  [非同期]
+   * 
+   * @param key 
+   * 変数名を指定します。大文字と小文字の区別はされません。    
+   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
+   * 
+   * @param value
+   * 書き込む変数の内容を、文字列で指定します。数値は指定できません。""を指定すると消去します。    
+   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
+   * 
+   * @param scope_type
+   * 共有されている静的な変数かどうかを指定します。    
+   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+   * - 1 を指定すると、全ての秀丸エディタで有効です。    
+   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+   * 他のマクロとの競合はありません。
+   *
+   * @returns
+   * 失敗した場合、0を返す。    
+   * 成功した場合、0以外を返す。    
+   */
+  function setStaticVariable(key: string, value: string, scope_type: number): number;
+
+  /**
+   * f
+   * 
    * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
+   *  [非同期]
    * 
    * @example
    * js{
@@ -367,6 +477,7 @@ declare namespace hidemaru {
    * 
    * postExecMacroFileメソッドは、ファイル名を指定して、マクロ実行をスケジュールします。    
    * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
+   *  [非同期]    
    * 
    * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
    * 
@@ -402,6 +513,7 @@ declare namespace hidemaru {
    * f
    * 
    * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
+   *  [非同期]
    * 
    * @example
    * js{
@@ -17760,7 +17872,8 @@ declare function getclipboardinfo(info_type: number): number;
 /**
  * f
  * 
- * loaddll関数は、hidemaru.loadDll関数の別名となります。
+ * loaddll関数は、hidemaru.loadDll関数の別名となります。    
+ *  [非同期]
  * 
  * @param dllpath
  * DLLのファイル名を指定します。
