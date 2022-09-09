@@ -358,23 +358,6 @@ declare namespace hidemaru {
   function getCurrentWindowHandle(): number;
 
   /**
-   * f
-   * 
-   * getCurrentWindowHandleメソッドは、現在のウィンドウハンドルを取得します。    
-   *  [非同期]
-   * 
-   * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
-   * 
-   * @example
-   * var a = hidemaru.setStaticVariable("hoge","fuga",0);
-   * 
-   * @returns
-   * ウィンドウハンドルに相当する値を返します。    
-   * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
-   */
-   function getCurrentWindowHandle(): number;
-
-  /**
    * getstaticvariableと同様の関数です。    
    * 静的な変数を取得します。    
    *  [非同期]
@@ -562,7 +545,7 @@ declare namespace hidemaru {
   function postExecMacroMemory(expression: string): void;
 
   /**
-   * updateCountプロパティは、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
+   * getUpdateCount関数は、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
    *  [非同期]
    * 
    * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
@@ -574,7 +557,7 @@ declare namespace hidemaru {
    * 
    * @example
    * js{
-   *     var a = hidemaru.updateCount;
+   *     var a = hidemaru.getUpdateCount();
    * }
    * 
    * @returns
@@ -582,39 +565,39 @@ declare namespace hidemaru {
    * 内容が変わったときにカウントが増える値。    
    * 初期値は1以上。32bitの値を超えると一周。
    */
-  declare const updateCount: number;
+  function getUpdateCount(): number;
 
   /**
-   * fileFullPathプロパティは、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
+   * getFileFullPath関数は、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
    * filename2()とほぼ同じですが、非同期で使えるところに価値があります。    
    *  [非同期]
    * 
    * @example
    * js {
-   *     var a = hidemaru.fileFullPath;
+   *     var a = hidemaru.getFileFullPath();
    * }
    * 
    * @returns
    * 現在のファイル名。
    */
-  declare const fileFullPath: string
+  function getFileFullPath(): string
 
   /**
-   * jsmodeプロパティは、現在のJavaScriptの動作モードを表します。    
+   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
    * [非同期]
    * 
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    * 
    * @example
    * js {
-   *     var a = hidemaru.jsmode;
+   *     var a = hidemaru.getJsMode();
    * }
    * 
    * @returns
    * 現在のJavaScriptの動作モード。    
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    */
-   declare const jsmode: string
+   function getJsMode(): string
 
 
   /**
