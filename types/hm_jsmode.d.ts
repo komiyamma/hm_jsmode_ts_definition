@@ -314,11 +314,31 @@ declare namespace hidemaru {
    * @example
    * var text = hidemaru.getTotalText();
    * 
-   * returns
+   * @returns
    * テキスト全体を返します。    
    * 失敗した場合はundefinedになります
    */
   function getTotalText(): string;
+
+  /**
+   * f
+   * 
+   * getSelectedTextメソッドは、範囲選択の内容を取得します。     
+   *  [非同期]
+   * 
+   * @param line_num
+   * 行番号を指定します。先頭が1です。
+   * 
+   * @example
+   * js {
+   *    var a = hidemaru.getSelectedText();
+   * }
+   * 
+   * @returns
+   * 範囲選択の内容を文字列で返します。    
+   * (選択していないなどの理由で)失敗した場合はundefinedになります。
+   */
+   function getSelectedText(): string;
 
   /**
    * f
@@ -334,7 +354,7 @@ declare namespace hidemaru {
    * 
    * var text2 = hidemaru.getLineText(lineno()); // カーソルがある行のテキスト内容を返す
    * 
-   * returns
+   * @returns
    * 指定した行の内容を返します。    
    * 失敗した場合はundefinedになります。
    */
