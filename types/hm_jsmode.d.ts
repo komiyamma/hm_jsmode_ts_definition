@@ -17023,7 +17023,43 @@ declare function getconfig(key: string): string | number
  */
 declare function configcolor(color_settings: string, ): number
 
-getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
+/**
+ * f    
+ * 
+ * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。
+ * 
+ * @param n1 
+ * 設定の種類を指定します。    
+ * configcolorのn1に相当します。
+ * 
+ * @param n2 
+ * 文字色/背景色/スタイルのどれを取得するかを指定します。    
+ * configcolorのn2に相当します。    
+ * 
+ * @example
+ * var h =  hex(getconfigcolor(0,0))+"\n"
+ *        + hex(getconfigcolor(0,1))+"\n"
+ *        + str(getconfigcolor(0,2));
+ * 
+ * @comment
+ * 文字色/背景色で透明が指定できる種類の場合は特殊になっていて、設定と取得で値が異なります。    
+ * configcolorでは 0x02000000 を指定します。（0xFFFFFFFFや-1も可）    
+ * getconfigcolorでは0xFFFFFFFFが返ります。    
+ * 
+ * 透明を含む場合に実際に表示されている色は、getcolormarkerで取得することができます。    
+ * - カーソル行の色は、getconfigcolor(53,0)でも取得できます。
+ * - ルーラーの文字色は、getconfigcolor(54,0)でも取得できます。
+ * - ルーラーの背景色はgetconfigcolor(54,1)でも取得できます。
+ * 
+ * @comment
+ * 参照：
+ * @see configcolor
+ * 
+ * @returns
+ * configcolorのn3と同じ意味の数値を返します。（透明を除く）    
+ *  
+ */
+declare function getconfigcolor(n1: number, n2:number): number
 
 /**
  * s
