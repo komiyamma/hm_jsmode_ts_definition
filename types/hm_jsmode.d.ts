@@ -12225,11 +12225,107 @@ declare function clearupdates(): number;
  */
 declare function grepdialog(): number;
 
+/**
+ * st
+ * 
+ * grep文は、パラメータを指定してgrepを実行します。
+ * 
+ * @param search_text
+ * 検索文字列を指定します。    
+ * 
+ * 正規表現文字列やファイル名の中で「\」を""で囲った文字列の中で指定する場合は、「\\」と指定しなくてはいけません。    
+ * 例えば正規表現で「\n」（改行文字）を検索させたい場合は、マクロの中の文字列定数としては"\\n"と指定する必要があります。    
+ * 
+ * @param search_file
+ * 検索するファイルを指定します。    
+ * ワイルドカードの指定が可能です。    
+ *  
+ * @param search_dir
+ * 検索するフォルダ（ディレクトリ）を指定します。    
+ * 現在のフォルダを指定する場合は、"."または""を指定します。
+ * 
+ * フォルダが存在しない場合は、これ以上マクロを続行できないエラーとして扱われます。この場合disableerrormsgも効きません。    
+ * 事前にフォルダが存在するかどうかをチェックするには、if( existfile( @"c:\folder\*.*" ) ){…} という感じで判定することができます。
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。    
+ * encode相当の値や、searchoption2相当の値も指定可能です。
+ * 
+ * searchoptionの以下に対応する「値」の論理和を指定します。
+ * - word
+ * - casesense または nocasesense
+ * - regular または noregular
+ * - fuzzy
+ * - hilight または nohilight
+ * - masknormal maskcomment maskifdef maskscript maskstring masktag maskonly
+ * - sjis unicode 等のエンコードの種類
+ * - subdir
+ *   subdirはサブフォルダも検索をします。
+ * - icon
+ *   iconは最小化状態で実行します。
+ * - filelist
+ *   filelistはファイル名一覧だけ作成します。
+ * - fullpath
+ *   fullpathはファイル名をフルパスで出力します。
+ * - outputsingle または outputsametab
+ *   outputsingleを指定すると出力先を「単一」にできます。    
+ *   outputsametabを指定すると出力先を「タブグループごと」にできます。    
+ *   マクロでは「アウトプット枠」を指定することはできません。    
+ * - unmatch
+ *   unmatchを指定すると「ヒットしない行」にできます。
+ * 
+ * searchoption, encode, searchoption2相当の数値の指定も可能です。
+ * 
+ * @example
+ * var word = 0x00000001;
+ * var casesense = 0x00000002;
+ * grep("Abc", "*.txt", "C:\\abc", word|casesense);
+ *
+ * @comment
+ * 参照：    
+ * @see searchoption
+ * @see searchoption2
+ * @see encode
+ * @see getresultex(12)
+ * 
+ * 
+ * @returns
+ * grepして見つかった個数が入ります。    
+ * 途中で中断された場合はresultは-1になります。    
+ * ダイアログでキャンセルした場合はresultは-2になります。    
+ * 検索したファイルの数をgetresultex(12)で取得可能です。
+ */
+declare function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
 
-★★★ grep ★ function() { var m = "grep"; eval(st); return r; }
-
-grepdialog2 ★ function() { var m = "grepdialog2"; eval(st); return r; }
-
+/**
+ * grepdialog2文は、grep文と同様のパラメータ指定をして、    
+ * ダイアログボックスを出します。
+ * 
+ * @param search_text 
+ * 検索文字列を指定します。    
+ *
+ * 検索するファイルを指定します。    
+ * ワイルドカードの指定が可能です。    
+ *  
+ * @param search_dir
+ * 検索するフォルダ（ディレクトリ）を指定します。    
+ * 現在のフォルダを指定する場合は、"."または""を指定します。
+ * 
+ * @param searchoption_flag 
+ * searchoption相当の検索オプションを指定します。    
+ * encode相当の値や、searchoption2相当の値も指定可能です。
+ * 
+ * @comment
+ * 参照：    
+ * @see grep
+ * 
+ * @returns
+ * grepして見つかった個数が入ります。    
+ * 途中で中断された場合はresultは-1になります。    
+ * ダイアログでキャンセルした場合はresultは-2になります。    
+ * 検索したファイルの数をgetresultex(12)で取得可能です。
+ */
+declare function grepdialog2(search_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
 
 /**
  * s
