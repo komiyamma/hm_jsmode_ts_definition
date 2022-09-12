@@ -12571,7 +12571,8 @@ declare function hilightfound(is_on?: number): number;
  *   obj.col1=0;
  *   obj.line2=lineno();
  *   obj.col2=linelen2();
- *   colormarker(JSON.stringify(obj));
+ *   colormarker(obj);
+ *   colormarker(JSON.stringify(obj)) // でもOK
  * }
  * 
  * @comment
@@ -12606,6 +12607,9 @@ declare function colormarker(): number;
  * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
  * 任意の位置に、幾つでもカラーマーカーを付けることができます。
  * BOX選択でも適用されます。
+ * 
+ * @example
+ * colormarker(0x0000ff,0xff0000,-1,0);
  * 
  * @param text_color 
  * 文字色を指定します。24bitのRGB値です。    
@@ -12995,8 +12999,162 @@ declare function selectcolormarker(layer_name?: string, user_data?: number): num
  */
 declare function selectallfound(): number;
 
-
-colormarkerallfound ★ function() { var m = "colormarkerallfound"; eval(st); return r; }
+/**
+ * s
+ * 
+ * colormarkerallfound文は、「すべての候補を色付け」コマンド相当の、テキスト中のすべての検索でヒットする候補の色付けをします。    
+ * BOX選択でも適用されます。
+ * 
+ * @example
+ * setcompatiblemode(0x20000);
+ * setsearch("test",0);
+ * colormarkerallfound(0xffffff,0xff0000,-1,0,0);
+ * 
+ * @param text_color 
+ * 文字色を指定します。24bitのRGB値です。    
+ * -1を指定すると透明色になります。    
+ * 文字色、背景色、スタイルを全て-1にした場合は、自動的な色が決まります。    
+ * 
+ * 色は24bitの数値で、第0～7bitが赤、8～15bitが緑、16～23bitが青です。    
+ * 例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ * 
+ * @param back_color 
+ * 背景色を指定します。24bitのRGB値です。    
+ * 省略すると、透明色になります。    
+ * -1を指定すると透明色になります。    
+ * 文字色、背景色、スタイルを全て-1にした場合は、自動的な色が決まります。    
+ *     
+ * 色は24bitの数値で、第0～7bitが赤、8～15bitが緑、16～23bitが青です。    
+ * 例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ *
+ * @param style_prop 
+ * スタイルを指定します。以下の値を指定できます。    
+ * 省略すると透過になります    
+ * 文字色、背景色、スタイルを全て-1にした場合は、自動的な色が決まります。    
+ * 
+ * - スタイルの場合は、以下の値を入れます。
+ *    - -1    透過
+ *    - 0    普通 
+ *    - 1    ボールド 
+ *    - 2    下線付き 
+ *    - 3    下線付きボールド 
+ *    - 4    イタリック 
+ *    - 5    イタリックボールド 
+ *    - 6    下線付きイタリック 
+ *    - 7    下線付きイタリックボールド 
+ *    - 8    白抜き 
+ *    - 9    極太 
+ *    - 10    影付き 
+ *    - 11    透過
+ * 
+ * @param marker_type_flags 
+ * 種類を指定します。以下の値のいずれかを指定できます。    
+ * 省略すると、「編集しても維持」になります。    
+ * - 0x00　編集しても維持
+ * - 0x01　編集したら分裂
+ * - 0x02　編集したら消える
+ * 
+ * 以下の値をOR演算して指定できます。
+ * - 0x10　改行に色付けするとき、改行以降の余白などにも背景色を適用。
+ * 
+ * - 32ビット値の上位16ビットで強調表示としての指定ができます。
+ *   種類の32ビット値の上位16ビットで指定できる強調表示の値：（colorcodeと似ています）
+ *     - 0x00190000 ... スクリプト部分
+ *     - 0x00040000 ... 強調表示1
+ *     - 0x00070000 ... 強調表示2
+ *     - 0x00160000 ... 強調表示3
+ *     - 0x00170000 ... 強調表示4
+ *     - 0x40040000 ... 強調表示5
+ *     - 0x40070000 ... 強調表示6
+ *     - 0x40160000 ... 強調表示7
+ *     - 0x40170000 ... 強調表示8
+ *     - 0x001b0000 ... 数値
+ *     - 0x00060000 ... 行の強調表示1
+ *     - 0x00090000 ... 行の強調表示2
+ *     - 0x40060000 ... 行の強調表示3
+ *     - 0x40090000 ... 行の強調表示4
+ *     - 0x00030000 ... コメント
+ *     - 0x00140000 ... 文字定数
+ *     - 0x001A0000 ... #ifdef等での無効部分
+ *     - 0x00050000 ... 特に強調表示1
+ *     - 0x00080000 ... 特に強調表示2
+ *     - 0x40050000 ... 特に強調表示3
+ *     - 0x40080000 ... 特に強調表示4
+ *  
+ * - 強調表示の値を指定している場合は、文字色=-1、背景色=-1、スタイル=-1で指定しない場合は、    
+ *   本来の強調表示の色やスタイルが適用されます。    
+ * 
+ * - 強調表示として指定したものは、対応する括弧からの除外、検索での追加の条件や、    
+ *   アウトライン解析の強調表示の指定など、強調表示としての意味を持つようになります。    
+ * 
+ * - 行の強調表示の変化がある場合、範囲外の描画をするためにredrawをする必要がある場合があります。    
+ *   行の強調表示で行全体を任意の色にする場合は、行頭から改行を含めた次の行の行頭までを対象にしたうえで、    
+ *   この marker_type_flags のフラグの0x10も一緒に指定する必要があります。
+ *
+ * - アウトライン解析の変化がある場合、更新するためにrefreshoutlineをする必要がある場合があります。
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 任意の値を入れることができます。    
+ * ユーザーデータを省略するか0にすると、色を付けるごとに加算される自動的なユーザーデータが入ります。    
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 
+ * 省略した場合は、「すべての候補を色付け」コマンド（検索ダイアログで「すべて検索 - 色付け」）と同じように    
+ * 自動的な色とレイヤーが決まり、自動的に見出しバーが表示されます。（設定によります）    
+ * 「一時的なカラーマーカー」の無名のレイヤーとは別の、内部的に予約されたレイヤーになります。    
+ * このレイヤーはfindmarkerというキーワードで扱うことができます。    
+ * findmarkerはgetcolormarkerやnextcolormarkerなどのパラメータで使うことができます。    
+ * 
+ * レイヤー名までを書くと、自動的な動作ではなくなり、自動的に見出しバーが表示されることもありません。    
+ * 
+ * @param bgn_lineno 
+ * 開始位置の行番号を指定します。1から数えます。    
+ * この bgn_lineno 以降を省略している場合、範囲選択が対象になります。    
+ * 位置を指定する場合は、開始行/桁と終了行/桁の４つを全部指定する必要があります。    
+ * 
+ * 省略すると、全てのテキスト（または現在の部分編集の範囲内）を対象にします。    
+ * 範囲の指定は、検索オプション(searchoption, searchoption2)で    
+ * 『追加の条件で「指定の範囲/カラーマーカー内」が有効かどうか』がOFFになっている必要があります。    
+ * ONの場合は失敗して返り値が0になります。     
+ * 
+ * @param bgn_column 
+ * 開始位置の桁を指定します。0から数えます。
+ * 
+ * @param end_lineno 
+ * 終了位置の行番号を指定します。1から数えます。
+ * 
+ * @param end_column 
+ * 終了位置の桁を指定します。0から数えます。
+ * 
+ * @example
+ * colormarkerallfound(); //自動的な配色、見出しバーが出る
+ * colormarkerallfound(-1,-1,-1); //自動的な配色、見出しバーが出る
+ * colormarkerallfound(0x0000ff,0xff0000,-1,0); //見出しバーが出る
+ * 
+ * var user_data = ...;
+ * var layer_name = "...";
+ * colormarkerallfound(0x0000ff,0xff0000,-1,0,user_data, layer_name); // 
+ * colormarkerallfound(0x0000ff,0xff0000,-1,0,0,layer_name); //ユーザーデータ自動加算
+ * var line1 = ...;
+ * var col1 = ...;
+ * var line2 = ...;
+ * var col2 = ...;
+ * colormarkerallfound 0x0000ff,0xff0000,-1,0,user_data,layer_name,line1,col1,line2,col2); //指定した範囲の中で検索
+ * 
+ * @comment
+ * 参照：
+ * @see getcolormarker
+ * @see nextcolormarker
+ * @see prevcolormarker
+ * @see enumcolormarkerlayer
+ * 
+ * @returns
+ * 成功した場合は0以外を返す。
+ * 失敗した場合は0を返す。
+ */
+declare function colormarkerallfound(text_color?: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
 
 /**
  * s
