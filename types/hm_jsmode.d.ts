@@ -12373,7 +12373,7 @@ declare function localgrep(grep_text:string, searchoption_flag): number;
 
 
 /**
- * st
+ * s
  * 
  * grepreplace文は、パラメータを指定して「grepして置換」を実行します
  * 
@@ -12450,7 +12450,7 @@ declare function localgrep(grep_text:string, searchoption_flag): number;
 declare function grepreplace(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
 
 /**
- * st
+ * s
  * 
  * grepreplacedialog2文は、「grepして置換...」のダイアログボックスを出します。
  * 
@@ -12521,13 +12521,14 @@ declare function escapeinselect(): number;
 declare function hilightfound(is_on?: number): number;
 
 
-
-★★★ colormarker ★ function() { var m = "colormarker"; eval(st); return r; }
-
 /**
- * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。
+ * s
  * 
- * @param json_string 
+ * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。
+ * 任意の位置に、幾つでもカラーマーカーを付けることができます。
+ * BOX選択でも適用されます。
+ * 
+ * @param json 
  * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
  * JSONの項目名と意味：    
  * - "noredraw"(数値)    
@@ -12584,16 +12585,152 @@ declare function hilightfound(is_on?: number): number;
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-declare function colormarker(json_string: string): number;
+declare function colormarker(json: string|object): number;
 
 /**
- *  * @returns
+ * s
+ * 
+ * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
+ * 
+ * 選択範囲のカラーマーカーを削除します。
+ * 
+ * @returns
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
- * number版必要
  */
-★★★declare function colormarker(i: number): number;
+declare function colormarker(): number;
 
+/**
+ * s
+ * 
+ * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
+ * 任意の位置に、幾つでもカラーマーカーを付けることができます。
+ * BOX選択でも適用されます。
+ * 
+ * @param text_color 
+ * 文字色を指定します。24bitのRGB値です。    
+ * -1を指定すると透明色になります。    
+ *     
+ * 色は24bitの数値で、第0～7bitが赤、8～15bitが緑、16～23bitが青です。    
+ * 例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ * 
+ * @param back_color 
+ * 背景色を指定します。24bitのRGB値です。    
+ * 省略すると、透明色になります。    
+ * -1を指定すると透明色になります。    
+ *     
+ * 色は24bitの数値で、第0～7bitが赤、8～15bitが緑、16～23bitが青です。    
+ * 例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ *
+ * @param style_prop 
+ * スタイルを指定します。以下の値を指定できます。    
+ * 省略すると透過になります    
+ * - スタイルの場合は、以下の値を入れます。
+ *    - -1    透過
+ *    - 0    普通 
+ *    - 1    ボールド 
+ *    - 2    下線付き 
+ *    - 3    下線付きボールド 
+ *    - 4    イタリック 
+ *    - 5    イタリックボールド 
+ *    - 6    下線付きイタリック 
+ *    - 7    下線付きイタリックボールド 
+ *    - 8    白抜き 
+ *    - 9    極太 
+ *    - 10    影付き 
+ *    - 11    透過
+ * 
+ * @param marker_type_flags 
+ * 種類を指定します。以下の値のいずれかを指定できます。    
+ * 省略すると、「編集しても維持」になります。    
+ * - 0x00　編集しても維持
+ * - 0x01　編集したら分裂
+ * - 0x02　編集したら消える
+ * 
+ * 以下の値をOR演算して指定できます。
+ * - 0x10　改行に色付けするとき、改行以降の余白などにも背景色を適用。
+ * 
+ * - 32ビット値の上位16ビットで強調表示としての指定ができます。
+ *   種類の32ビット値の上位16ビットで指定できる強調表示の値：（colorcodeと似ています）
+ *     - 0x00190000 ... スクリプト部分
+ *     - 0x00040000 ... 強調表示1
+ *     - 0x00070000 ... 強調表示2
+ *     - 0x00160000 ... 強調表示3
+ *     - 0x00170000 ... 強調表示4
+ *     - 0x40040000 ... 強調表示5
+ *     - 0x40070000 ... 強調表示6
+ *     - 0x40160000 ... 強調表示7
+ *     - 0x40170000 ... 強調表示8
+ *     - 0x001b0000 ... 数値
+ *     - 0x00060000 ... 行の強調表示1
+ *     - 0x00090000 ... 行の強調表示2
+ *     - 0x40060000 ... 行の強調表示3
+ *     - 0x40090000 ... 行の強調表示4
+ *     - 0x00030000 ... コメント
+ *     - 0x00140000 ... 文字定数
+ *     - 0x001A0000 ... #ifdef等での無効部分
+ *     - 0x00050000 ... 特に強調表示1
+ *     - 0x00080000 ... 特に強調表示2
+ *     - 0x40050000 ... 特に強調表示3
+ *     - 0x40080000 ... 特に強調表示4
+ *  
+ * - 強調表示の値を指定している場合は、文字色=-1、背景色=-1、スタイル=-1で指定しない場合は、    
+ *   本来の強調表示の色やスタイルが適用されます。    
+ * 
+ * - 強調表示として指定したものは、対応する括弧からの除外、検索での追加の条件や、    
+ *   アウトライン解析の強調表示の指定など、強調表示としての意味を持つようになります。    
+ * 
+ * - 行の強調表示の変化がある場合、範囲外の描画をするためにredrawをする必要がある場合があります。    
+ *   行の強調表示で行全体を任意の色にする場合は、行頭から改行を含めた次の行の行頭までを対象にしたうえで、    
+ *   この marker_type_flags のフラグの0x10も一緒に指定する必要があります。
+ *
+ * - アウトライン解析の変化がある場合、更新するためにrefreshoutlineをする必要がある場合があります。
+ * 
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 任意の値を入れることができます。    
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 省略した場合は、名前なしのレイヤー（一時的なカラーマーカー相当）になります。    
+ *     
+ * レイヤー名を指定すると、上書きしたり削除したりしても他のレイヤーにあるカラーマーカーには影響を与えないようにできます。    
+ * 指定しない場合は名前なしのレイヤーになります。    
+ * 「一時的なカラーマーカー」系のコマンドは名前なしのレイヤーです。    
+ * レイヤーの数には上限があります。    
+ * 際限なく幾つもレイヤーを作るような使い方は避けてください。    
+ * 上限は、32個までです。    
+ * レイヤー名の先頭に"\x01#"が付く文字列は内部的に予約された文字列になるので使用できません。    
+ * 
+ * @param bgn_lineno 
+ * 開始位置の行番号を指定します。1から数えます。    
+ * この bgn_lineno 以降を省略している場合、範囲選択が対象になります。    
+ * 位置を指定する場合は、開始行/桁と終了行/桁の４つを全部指定する必要があります。    
+ * 
+ * @param bgn_column 
+ * 開始位置の桁を指定します。0から数えます。
+ * 
+ * @param end_lineno 
+ * 終了位置の行番号を指定します。1から数えます。
+ * 
+ * @param end_column 
+ * 終了位置の桁を指定します。0から数えます。
+ * 
+ * @comment
+ * 同じレイヤーで既にカラーマーカーがある位置にカラーマーカーを付けた場合は上書きされます。    
+ * ファイルに保存されることはありません。    
+ * 
+ * 参照：
+ * @see getcolormarker
+ * @see nextcolormarker
+ * @see prevcolormarker
+ * @see enumcolormarkerlayer
+ * 
+ * @returns
+ * 成功した場合は0以外を返す。
+ * 失敗した場合は0を返す。
+ */
+declare function colormarker(text_color: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
 
 /**
  * s
@@ -17133,7 +17270,7 @@ declare function getconfig(key: string): string | number
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function configcolor(color_settings: string, ): number
+declare function configcolor(color_settings: string): number
 
 /**
  * f    
