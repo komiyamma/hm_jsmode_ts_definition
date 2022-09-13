@@ -12226,7 +12226,7 @@ declare function clearupdates(): number;
 declare function grepdialog(): number;
 
 /**
- * st
+ * s
  * 
  * grep文は、パラメータを指定してgrepを実行します。
  * 
@@ -16899,7 +16899,7 @@ declare function enumregkey(subkey_ix: number): string;
 declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
 
 /**
- * st
+ * s
  * 
  * configset文は、ファイルタイプ別の設定を、「設定のリスト」の名前を指定して変更します。
  * 
@@ -17306,7 +17306,7 @@ declare function getconfig(key: typeConfigSettingName): string | number
 declare function getconfig(key: string): string | number
 
 /**
- * st
+ * s
  * 
  * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。
 
