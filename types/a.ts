@@ -1,3 +1,3 @@
 ///<reference path="hm_jsmode.d.ts"/>
 
- var b = hidemaru.updateCount;
+ var b = config("xActiveKakko:abc");
