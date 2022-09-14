@@ -583,7 +583,8 @@ declare namespace hidemaru {
    * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
    * 
    * @param timeout_id
-   * 解除したいタイムアウトの識別子です。この ID は対応する setTimeout() から返されたものです。
+   * 解除したいタイムアウトの識別子です。    
+   * この ID は対応する setTimeout() から返されたものです。
    */
   function clearTimeout(timeout_id: number): void;
 
