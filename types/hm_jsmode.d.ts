@@ -347,7 +347,8 @@ declare namespace hidemaru {
    *  [非同期]
    * 
    * @param line_num
-   * 行番号を指定します。先頭が1です。
+   * 行番号を指定します。先頭が1です。    
+   * 省略した場合には、現在カーソルがある行が対象となります。
    * 
    * @example
    * var text1 = hidemaru.getLineText(3); // 3行目のテキスト内容を返す
@@ -358,7 +359,7 @@ declare namespace hidemaru {
    * 指定した行の内容を返します。    
    * 失敗した場合はundefinedになります。
    */
-  function getLineText(line_num: number): string;
+  function getLineText(line_num?: number): string;
 
   /**
    * f
