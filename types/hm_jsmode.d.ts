@@ -773,7 +773,6 @@ declare namespace hidemaru {
       /**
        * 標準出力から全て読み取って文字列を返します。    
        * 応答が無い場合は固まります。    
-       * タイムアウトを指定します。    
        * 
        * @param timeout_millisecond
        * タイムアウトをミリ秒で指定します。
@@ -787,7 +786,6 @@ declare namespace hidemaru {
       /**
        * 標準出力から行を読み取って文字列を返します。    
        * 応答が無い場合は固まります。    
-       * タイムアウトを指定します。    
        * 
        * @param timeout_millisecond
        * タイムアウトをミリ秒で指定します。
@@ -801,14 +799,13 @@ declare namespace hidemaru {
       /**
        * 標準出力から指定バイト数までを読み取って文字列を返します。    
        * 応答が無い場合は固まります。    
-       * タイムアウトを指定します。    
-       * 指定バイト数は第2パラメータで指定し、0の場合は空行までになります。    
        * 
        * @param timeout_millisecond
        * タイムアウトをミリ秒で指定します。
        * 
        * @parm read_byte
-       * 読み込むバイト数を指定します。
+       * 読み込むバイト数を指定します。    
+       * 0の場合は空行までになります。    
        * 
        * @example
        * var nTimeout = 2000;
@@ -855,7 +852,8 @@ declare namespace hidemaru {
        * function(out: string) { ... } の形の関数を指定します。
        * 
        * @parm read_byte
-       * 読み込むバイト数を指定します。
+       * 読み込むバイト数を指定します。    
+       * 0の場合は空行までになります。    
        * 
        * @example
        * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
