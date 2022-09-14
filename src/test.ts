@@ -3,5 +3,6 @@
  　getconfig("CharSpace")
 
 var p = hidemaru.runProcess("a", "b", "c", "d");
-var b = p.stdOut.readSeparated(2000, 100);
+var b = p.stdOut.onReadSeparated(function(out){}, 0);
+
 
