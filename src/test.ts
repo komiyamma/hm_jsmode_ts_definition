@@ -2,3 +2,4 @@
 
  　getconfig("CharSpace")
 
+hidemaru.clearTimeout()
