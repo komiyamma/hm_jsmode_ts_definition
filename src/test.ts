@@ -2,4 +2,5 @@
 
  　getconfig("CharSpace")
 
-hidemaru.clearTimeout()
+var p = hidemaru.runProcess();
+p.stdIn.writeLine();

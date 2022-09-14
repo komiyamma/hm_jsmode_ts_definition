@@ -555,7 +555,9 @@ declare namespace hidemaru {
   function postExecMacroMemory(expression: string): void;
 
   /**
-   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。 [非同期]
+   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
+   *  [非同期]
+   * 
    * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
    * JScriptではこの関数が簡易版として代用できます。    
    * clearTimeoutメソッドで、解除します。    
@@ -581,6 +583,7 @@ declare namespace hidemaru {
    * f
    * 
    * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
+   *  [非同期]    
    * 
    * @param timeout_id
    * 解除したいタイムアウトの識別子です。    
@@ -647,6 +650,7 @@ declare namespace hidemaru {
    * k    
    * 
    * getInputStates関数は、各種の入力ができるかどうかを判断するための状態を取得します。    
+   *  [非同期]    
    * 
    * 各種の入力ができるかどうかを判断するための状態を表します。    
    * 以下の値の論理和です。    
@@ -732,9 +736,112 @@ declare namespace hidemaru {
    *        　失敗したらresultは0になります。
    */
   function evalMacro(expression: string): number;
+
+
+  interface IProcessInfoStdIn {
+      /**
+       * 標準入力に文字列を書き込みます。
+       * 
+       * @param input  
+       * 書き込む文字列
+       * 
+       * @example
+       * var input_message = "あいうえお";
+       * stdIn.write(input_message);
+       */
+      write(input: string): void;
+
+      /**
+       * 標準入力に文字列に改行を入れて書き込みます。
+       * 
+       * @param input  
+       * 書き込む文字列
+       * stdIn.writeLine(in);
+       * 
+       * @example
+       * var input_message = "あいうえお";
+       * stdIn.writeLine(input_message);
+       */
+      writeLine(input: string): void;
+
+      /**
+       * 標準入力を閉じます。
+       */
+      close(): void
+  }
+
+  interface IProcessinfo {
+      /**
+       *  標準入力を扱うStdInオブジェクト。
+       */
+      stdIn: IProcessInfoStdIn;
+
+      /**
+       * 標準出力を扱うStdOutオブジェクト。
+       */
+      stdOut: IProcessInfoStdOut;
+
+      /**
+       * 標準エラー出力を扱うStdOutオブジェクト。
+       */
+      stdErr: IProcessInfoStdOut;
+
+      /**
+       * プロセスID (pid)
+       */
+      readonly processID: number;
+
+      /**
+       * 終了しているかどうか。
+       */
+      readonly status: number;
+
+      /**
+       * 終了コード。
+       */
+      readonly exitCode: number;
+
+      /**
+       * プロセスを強制終了します。
+       */
+      terminate(): void;
+
+      /**
+       * プロセスを強制終了します。
+       */
+       kill(): void
+  }
+  /**
+   * runProcessメソッドは、プロセスを起動します。 [非同期]
+   * @param command 
+   * コマンドラインの文字列を指定します。
+   * 
+   * @param current_dir 
+   * カレントディレクトリとなる文字列を指定します。
+   * 
+   * @param mode_name 
+   * 以下の文字列の動作モードを指定します。    
+   * - "gui"    
+   * ウィンドウ表示あり、stdIn/stdOutなし。(既定)
+   * - "stdio"    
+   * ウィンドウ表示なし、stdIn/stdOutあり。
+   * - "guiStdio"    
+   * ウィンドウ表示あり、stdIn/stdOutあり。
+   * 
+   * @param encode_name 
+   * 以下の文字列のエンコードの種類を指定します。    
+   * - "utf8"    
+   * UTF-8(既定)
+   * - "utf16"    
+   * UTF-16
+   * - "sjis"    
+   * Shift-JIS
+   * 
+   * @returns
+   * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
+   */
+  function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessinfo;
 }
-
-
 
 ★ runProcess()
 
