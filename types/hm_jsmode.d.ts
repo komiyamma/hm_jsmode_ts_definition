@@ -326,9 +326,6 @@ declare namespace hidemaru {
    * getSelectedTextメソッドは、範囲選択の内容を取得します。     
    *  [非同期]
    * 
-   * @param line_num
-   * 行番号を指定します。先頭が1です。
-   * 
    * @example
    * js {
    *    var a = hidemaru.getSelectedText();
@@ -620,6 +617,30 @@ declare namespace hidemaru {
    */
    function getJsMode(): string
 
+  /**
+   * k    
+   * 
+   * getInputStates関数は、各種の入力ができるかどうかを判断するための状態を取得します。    
+   * 
+   * 各種の入力ができるかどうかを判断するための状態を表します。    
+   * 以下の値の論理和です。    
+   * - 0x0002 ウィンドウ移動/サイズ変更中
+   * - 0x0004 メニュー操作中
+   * - 0x0008 システムメニュー操作中
+   * - 0x0010 ポップアップメニュー操作中
+   * - 0x0100 IME入力中
+   * - 0x0200 何らかのダイアログ表示中
+   * - 0x0400 ウィンドウがDisable状態
+   * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
+   * - 0x1000 検索ダイアログの疑似モードレス状態
+   * - 0x2000 なめらかスクロール中
+   * 
+   * @returns
+   * 各種の入力ができるかどうかを判断するための状態値を返す
+   */
+  function getInputStates(): number
+
+
 
   /**
    * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
@@ -689,8 +710,81 @@ declare namespace hidemaru {
 
 
 
+★ runProcess()
+★ hidemaru.clearTimeout
 
+/**
+ * f
+ * 
+ * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+ * 
+ * @example
+ * var text = gettotaltext();
+ * 
+ * @returns
+ * テキスト全体を返します。    
+ * 失敗した場合は空文字列になります
+ */
+declare function gettotaltext(): string;
 
+/**
+ * f
+ * 
+ * getlinetext関数は、指定行のテキストを文字列にして取得します。    
+ * 
+ * @param line_num
+ * 行番号を指定します。先頭が1です。    
+ * 省略した場合には、現在カーソルがある行が対象となります。
+ * 
+ * @example
+ * var text1 = getlinetext(3); // 3行目のテキスト内容を返す
+ * 
+ * var text2 = getlinetext(); // カーソルがある行のテキスト内容を返す
+ * 
+ * @returns
+ * 指定した行の内容を返します。    
+ * 失敗した場合は空文字になります。
+ */
+declare function getlinetext(line_num?: number): string;
+
+/**
+ * f
+ * 
+ * getselectedtext関数は、範囲選択の内容を取得します。     
+ * 
+ * @example
+ * js {
+ *    var a = getselectedtext();
+ * }
+ * 
+ * @returns
+ * 範囲選択の内容を文字列で返します。    
+ * (選択していないなどの理由で)失敗した場合は空文字になります。
+ */
+declare function getselectedtext(): string;
+
+/**
+ * k    
+ * 
+ * inputstatesは、各種の入力ができるかどうかを判断するための状態を取得します。    
+ * 
+ * 各種の入力ができるかどうかを判断するための状態を表します。    
+ * 以下の値の論理和です。    
+ * - 0x0002 ウィンドウ移動/サイズ変更中
+ * - 0x0004 メニュー操作中
+ * - 0x0008 システムメニュー操作中
+ * - 0x0010 ポップアップメニュー操作中
+ * - 0x0100 IME入力中
+ * - 0x0200 何らかのダイアログ表示中
+ * - 0x0400 ウィンドウがDisable状態
+ * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
+ * - 0x1000 検索ダイアログの疑似モードレス状態
+ * - 0x2000 なめらかスクロール中
+ * 
+ * @returns
+ * 各種の入力ができるかどうかを判断するための状態値を返す
+ */
+declare function inputstates(): number
 
 /**
  * k    
@@ -2521,8 +2615,8 @@ declare function filehistcount(): number;
  * 上書きモードか挿入モードかを表します。
  * 
  * @returns
- * 上書きモードの場合は１、    
- * 挿入モードの場合は０です。
+ * 上書きモードの場合は0以外、    
+ * 挿入モードの場合は0です。
  */
 declare function overwrite(): number;
 
@@ -2542,8 +2636,8 @@ declare function overwrite(): number;
  * 右半分が空白になる動作が無効になります
  * 
  * @returns
- * 実行に成功した場合は１、    
- * 失敗した場合は０。
+ * 実行に成功した場合は0以外、    
+ * 失敗した場合は0。
  */
 declare function overwrite(newtext: string, mode?: number): number;
 
