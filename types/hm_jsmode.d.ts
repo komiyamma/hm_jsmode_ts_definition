@@ -505,26 +505,13 @@ declare namespace hidemaru {
    * }
    * endmacro;
    * 
+   * @comment
+   * postExecMacroMemoryとは違い、jsmodeの引き継ぎなどは無く、マクロファイルで改めて指定する必要があります。
+   * 
    * @returns
    * 返り値はありません。
    */
   function postExecMacroFile(filepath: string): void;
-
-  /**
-   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。 [非同期]
-   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
-   * JScriptではこの関数が簡易版として代用できます。
-   * 
-   * @param func 
-   * 関数を指定します。
-   * 
-   * @param millisecond 
-   * 時間をミリ秒単位で指定します。
-   * 
-   * @returns
-   * 固有のIDが返ります。
-   */
-  function setTimeout(func: Function, millisecond: number): number;
 
   /**
    * f
@@ -557,10 +544,48 @@ declare namespace hidemaru {
    * }
    * endmacro;
    * 
+   * @comment
+   * jsmodeをそのまま引き継ぐ。    
+   * 自動的にsetcompatiblemode 0x08000000;相当となり、他の秀丸エディタへの切り替え不可モード。    
+   * 自動的にsetbackgroundmode 1;相当。    
+   * 
    * @returns
    * 返り値はありません。
    */
   function postExecMacroMemory(expression: string): void;
+
+  /**
+   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。 [非同期]
+   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
+   * JScriptではこの関数が簡易版として代用できます。    
+   * clearTimeoutメソッドで、解除します。    
+   * 既に実行された後では効果はありません。
+   * 
+   * @param func 
+   * 関数を指定します。
+   * 
+   * @param millisecond 
+   * 時間をミリ秒単位で指定します。
+   * 
+   * @comment
+   * 参照：
+   * @see clearTimeout
+   * 
+   * @returns
+   * 固有のIDが返ります。    
+   * 主にclearTimeoutをするためのIDとなります。
+   */
+  function setTimeout(func: Function, millisecond: number): number;
+
+  /**
+   * f
+   * 
+   * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
+   * 
+   * @param timeout_id
+   * 解除したいタイムアウトの識別子です。この ID は対応する setTimeout() から返されたものです。
+   */
+  function clearTimeout(timeout_id: number): void;
 
   /**
    * getUpdateCount関数は、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
@@ -711,7 +736,6 @@ declare namespace hidemaru {
 
 
 ★ runProcess()
-★ hidemaru.clearTimeout
 
 /**
  * f

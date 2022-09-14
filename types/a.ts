@@ -2,3 +2,4 @@
 
  var b = config("xActiveKakko:abc");
  config("xAutoAdjustOrikaeshi:bbb");
+ clearTimeout
