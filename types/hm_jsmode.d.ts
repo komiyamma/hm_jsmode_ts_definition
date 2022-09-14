@@ -756,7 +756,6 @@ declare namespace hidemaru {
        * 
        * @param input  
        * 書き込む文字列
-       * stdIn.writeLine(in);
        * 
        * @example
        * var input_message = "あいうえお";
@@ -769,7 +768,52 @@ declare namespace hidemaru {
        */
       close(): void
   }
+  interface IProcessInfoStdOut {
+    /**
+     * 標準出力から全て読み取って文字列を返します。    
+     * 応答が無い場合は固まります。    
+     * タイムアウトを指定します。    
+     * 
+     * @example
+     * var nTimeout = 2000;
+     * var outmsg = stdOut.readAll(nTimeout);
+     */
+    readAll(timeout_millisecond: number): string
+    
+    /**
+     * 標準出力から行を読み取って文字列を返します。    
+     * 応答が無い場合は固まります。    
+     * タイムアウトを指定します。    
+     * 
+     * @example
+     * var nTimeout = 2000;
+     * var outmsg = stdOut.readLine(nTimeout);
+     */
+     readLine(timeout_millisecond: number): string
 
+    /**
+     * 標準出力から指定バイト数までを読み取って文字列を返します。    
+     * 応答が無い場合は固まります。    
+     * タイムアウトを指定します。    
+     * 指定バイト数は第2パラメータで指定し、0の場合は空行までになります。    
+     * 
+     * @example
+     * var nTimeout = 2000;
+     * out = stdOut.readSeparated(nTimeout, 0);   // 空行まで読み込む
+     * out = stdOut.readSeparated(nTimeout, 123); // 123バイト読み込む
+     */
+     readSeparated(timeout_millisecond: number, read_byte: number): string
+     
+     /**
+      * 標準出力し終わっているどうか。
+      */
+     readonly atEndOfStream: number
+
+     /**
+      * 標準出力を閉じます
+      */
+     close(): void
+  }
   interface IProcessinfo {
       /**
        *  標準入力を扱うStdInオブジェクト。
@@ -809,7 +853,7 @@ declare namespace hidemaru {
       /**
        * プロセスを強制終了します。
        */
-       kill(): void
+      kill(): void
   }
   /**
    * runProcessメソッドは、プロセスを起動します。 [非同期]

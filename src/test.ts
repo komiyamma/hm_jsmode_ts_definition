@@ -2,5 +2,6 @@
 
  　getconfig("CharSpace")
 
-var p = hidemaru.runProcess();
-p.stdIn.writeLine();
+var p = hidemaru.runProcess("a", "b", "c", "d");
+var b = p.stdOut.readSeparated(2000, 100);
+
