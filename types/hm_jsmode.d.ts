@@ -737,6 +737,7 @@ declare namespace hidemaru {
    */
   function evalMacro(expression: string): number;
 
+  type CallBack = (o:any) => any
 
   interface IProcessInfoStdIn {
       /**
@@ -769,50 +770,108 @@ declare namespace hidemaru {
       close(): void
   }
   interface IProcessInfoStdOut {
-    /**
-     * 標準出力から全て読み取って文字列を返します。    
-     * 応答が無い場合は固まります。    
-     * タイムアウトを指定します。    
-     * 
-     * @example
-     * var nTimeout = 2000;
-     * var outmsg = stdOut.readAll(nTimeout);
-     */
-    readAll(timeout_millisecond: number): string
-    
-    /**
-     * 標準出力から行を読み取って文字列を返します。    
-     * 応答が無い場合は固まります。    
-     * タイムアウトを指定します。    
-     * 
-     * @example
-     * var nTimeout = 2000;
-     * var outmsg = stdOut.readLine(nTimeout);
-     */
-     readLine(timeout_millisecond: number): string
+      /**
+       * 標準出力から全て読み取って文字列を返します。    
+       * 応答が無い場合は固まります。    
+       * タイムアウトを指定します。    
+       * 
+       * @param timeout_millisecond
+       * タイムアウトをミリ秒で指定します。
+       * 
+       * @example
+       * var nTimeout = 2000;
+       * var outmsg = stdOut.readAll(nTimeout);
+       */
+      readAll(timeout_millisecond: number): string
 
-    /**
-     * 標準出力から指定バイト数までを読み取って文字列を返します。    
-     * 応答が無い場合は固まります。    
-     * タイムアウトを指定します。    
-     * 指定バイト数は第2パラメータで指定し、0の場合は空行までになります。    
-     * 
-     * @example
-     * var nTimeout = 2000;
-     * out = stdOut.readSeparated(nTimeout, 0);   // 空行まで読み込む
-     * out = stdOut.readSeparated(nTimeout, 123); // 123バイト読み込む
-     */
-     readSeparated(timeout_millisecond: number, read_byte: number): string
-     
-     /**
-      * 標準出力し終わっているどうか。
-      */
-     readonly atEndOfStream: number
+      /**
+       * 標準出力から行を読み取って文字列を返します。    
+       * 応答が無い場合は固まります。    
+       * タイムアウトを指定します。    
+       * 
+       * @param timeout_millisecond
+       * タイムアウトをミリ秒で指定します。
+       * 
+       * @example
+       * var nTimeout = 2000;
+       * var outmsg = stdOut.readLine(nTimeout);
+       */
+      readLine(timeout_millisecond: number): string
 
-     /**
-      * 標準出力を閉じます
-      */
-     close(): void
+      /**
+       * 標準出力から指定バイト数までを読み取って文字列を返します。    
+       * 応答が無い場合は固まります。    
+       * タイムアウトを指定します。    
+       * 指定バイト数は第2パラメータで指定し、0の場合は空行までになります。    
+       * 
+       * @param timeout_millisecond
+       * タイムアウトをミリ秒で指定します。
+       * 
+       * @parm read_byte
+       * 読み込むバイト数を指定します。
+       * 
+       * @example
+       * var nTimeout = 2000;
+       * out = stdOut.readSeparated(nTimeout, 0);   // 空行まで読み込む
+       * out = stdOut.readSeparated(nTimeout, 123); // 123バイト読み込む
+       */
+      readSeparated(timeout_millisecond: number, read_byte: number): string
+
+      /**
+       * 標準出力から全て読み取って文字列を返す readAllの非同期のバージョンとなります。    
+       * 標準出力に全て出力されているときに呼ばれる関数を指定します。    
+       * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
+       * 
+       * @param CallBack 
+       * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+       * function(out: string) { ... } の形の関数を指定します。
+       * 
+       * @example
+       * stdOut.onReadAll(function(out){});
+       */
+      onReadAll(CallBack:(out?: string)=>any): void
+
+      /**
+       * 標準出力から全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
+       * 標準出力に行までが出力されているときに呼ばれる関数を指定します。    
+       * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
+       * 
+       * @param CallBack 
+       * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+       * function(out: string) { ... } の形の関数を指定します。
+       * 
+       * @example
+       * stdOut.onReadLine(function(out){});
+       */
+      onReadLine(CallBack:(out?: string)=>any): void
+
+      /**
+       * 標準出力から全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
+       * 標準出力に指定バイト数までが出力されているときに呼ばれる関数を指定します。    
+       * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
+       * 
+       * @param CallBack 
+       * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+       * function(out: string) { ... } の形の関数を指定します。
+       * 
+       * @parm read_byte
+       * 読み込むバイト数を指定します。
+       * 
+       * @example
+       * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
+       * stdOut.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
+       */
+       onReadSeparated(CallBack:(out?: string)=>any, read_byte: number): void
+
+      /**
+       * 標準出力し終わっているどうか。
+       */
+      readonly atEndOfStream: number
+
+      /**
+       * 標準出力を閉じます
+       */
+      close(): void
   }
   interface IProcessinfo {
       /**
