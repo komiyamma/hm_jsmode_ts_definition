@@ -12602,13 +12602,28 @@ declare function grepdialog(): number;
  * - unmatch    
  *   unmatchを指定すると「ヒットしない行」にできます。
  * 
- * searchoption, encode, searchoption2相当の数値の指定も可能です。
- * 
  * @example
  * var word = 0x00000001;
  * var casesense = 0x00000002;
  * grep("Abc", "*.txt", "C:\\abc", word|casesense);
  *
+ * @param n_encode
+ * encodeキーワードで示される値と同じ、    
+ * エンコードの種類を表す値を指定します。    
+ * 0を指定すると、「自動判定で読み込みしなおし」と同じになります。    
+ * 省略すると0と同じです。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
+ * @example
+ * var word = 0x00000001;
+ * var casesense = 0x00000002;
+ * var n_encode = 6; // UTF-8
+ * var so2 = searchoption2();
+ * grep("Abc", "*.txt" , $dir, word|casesense, n_encode, so2);
+ * 
  * @comment
  * 参照：    
  * @see searchoption
@@ -12616,14 +12631,13 @@ declare function grepdialog(): number;
  * @see encode
  * @see getresultex(12)
  * 
- * 
  * @returns
  * grepして見つかった個数が入ります。    
  * 途中で中断された場合はresultは-1になります。    
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
+declare function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
  * grepdialog2文は、grep文と同様のパラメータ指定をして、    
@@ -12644,6 +12658,16 @@ declare function grep(search_text: string, search_file: string, search_dir: stri
  * searchoption相当の検索オプションを指定します。    
  * encode相当の値や、searchoption2相当の値も指定可能です。
  * 
+ * @param n_encode
+ * encodeキーワードで示される値と同じ、    
+ * エンコードの種類を表す値を指定します。    
+ * 0を指定すると、「自動判定で読み込みしなおし」と同じになります。    
+ * 省略すると0と同じです。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
  * @comment
  * 参照：    
  * @see grep
@@ -12654,7 +12678,7 @@ declare function grep(search_text: string, search_file: string, search_dir: stri
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grepdialog2(search_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
+declare function grepdialog2(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
  * s
@@ -12761,6 +12785,16 @@ declare function localgrep(grep_text:string, searchoption_flag): number;
  * var casesense = 0x00000002;
  * grepreplace("abc", "xyz", "*.txt", "C:\\abc", word|casesense);
  *
+ * @param n_encode
+ * encodeキーワードで示される値と同じ、    
+ * エンコードの種類を表す値を指定します。    
+ * 0を指定すると、「自動判定で読み込みしなおし」と同じになります。    
+ * 省略すると0と同じです。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
  * @comment
  * 参照：    
  * @see searchoption
@@ -12775,7 +12809,7 @@ declare function localgrep(grep_text:string, searchoption_flag): number;
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grepreplace(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
+declare function grepreplace(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
  * s
@@ -12803,6 +12837,16 @@ declare function grepreplace(search_text: string, replace_text: string, search_f
  * searchoption相当の検索オプションを指定します。    
  * encode相当の値や、searchoption2相当の値も指定可能です。
  *
+ * @param n_encode
+ * encodeキーワードで示される値と同じ、    
+ * エンコードの種類を表す値を指定します。    
+ * 0を指定すると、「自動判定で読み込みしなおし」と同じになります。    
+ * 省略すると0と同じです。
+ * 
+ * @param searchoption2_flag
+ * searchoption2相当の検索オプションを指定します。    
+ * searchoption2相当の値を設定するには、searchoptionで0x80000000のビットを立てる必要があります。    
+ * 
  * @comment
  * 参照：    
  * @see grepreplace
@@ -12813,7 +12857,7 @@ declare function grepreplace(search_text: string, replace_text: string, search_f
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
- declare function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag: number): number;
+ declare function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
  * s
