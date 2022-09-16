@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v0.8.0
+ * @version v0.9.0
  */
 
 /**
@@ -61,8 +61,6 @@ declare namespace console {
    */
   function log(message: any, ...optional_params: any[]): void;
 }
-
-
 
 declare namespace hidemaru {
 
@@ -5783,6 +5781,7 @@ declare function sendmessage(hwnd: number, wndmsg_id: number, wparam: number, lp
  * 引数で指定したヒストリのgrepファイルヒストリの文字列を返す。
  */
 declare function getgrepfilehist(history_ix: number): string
+
 /**
  * f
  * 
@@ -6373,6 +6372,7 @@ declare function getcolormarker(target_prop: number, layer_name?: string ): stri
  * 指定に対応する文字列を返す。
  */
 declare function getfilehist(history_ix: number): string
+
 /**
  * f
  * 
@@ -6455,6 +6455,7 @@ declare function getpathhist(history_ix: number): string
  * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
  */
 declare function getreplacehist(history_ix: number | -1): string
+
 /**
  * f
  * 
@@ -6590,6 +6591,7 @@ declare function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "
  * 指定の対象に対応する数値を返す
  */
 declare function getresultex(result_id: number): number
+
 /**
  * f    
  * 
@@ -6643,6 +6645,7 @@ declare function getresultex(result_id: -1): string
  * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
  */
 declare function getsearchhist(history_ix: number | -1): string
+
 /**
  * f
  * 
@@ -7678,6 +7681,7 @@ declare function openbyhidemaru(): number;
  * 失敗した場合は、０
  */
 declare function setfilehist(history_ix: number, fullpath: string): number
+
 /**
  * s
  * 
@@ -7716,6 +7720,7 @@ declare function setfilehist(history_ix: number, fullpath: string): number
  * 失敗した場合は、０
  */
 declare function setfilehist(history_ix: number, fullpath: string, is_pin: 0, pos_lineno: number, pos_column: number): number
+
 /**
  * s
  * 
@@ -10809,6 +10814,7 @@ declare function reopen(): number;
  * target_textで指定した文字列がそのまま返ります。    
  */
 declare function filter(module_name: string, module_func_name: string, parameters: string, target_text: string) : string
+
 /**
  * f
  * 
@@ -12002,6 +12008,7 @@ declare function setsearch(search_text: string, searchoption_flag: number, searc
  * 失敗した場合は、０
  */
 declare function setsearchhist(history_ix: number, search_text: string, is_pin?: 0): number
+
 /**
  * s
  * 
@@ -12030,6 +12037,7 @@ declare function setsearchhist(history_ix: number, search_text: string, is_pin?:
  * 失敗した場合は、０
  */
 declare function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
+
 /**
  * s
  * 
@@ -12128,6 +12136,7 @@ declare function setreplace(replace_text: string): number
  * 失敗した場合は、０
  */
 declare function setreplacehist(history_ix: number, replace_text: string, is_pin?: 0): number
+
 /**
  * s
  * 
@@ -12156,6 +12165,7 @@ declare function setreplacehist(history_ix: number, replace_text: string, is_pin
  * 失敗した場合は、０
  */
 declare function setreplacehist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
+
 /**
  * s
  * 
@@ -17569,6 +17579,7 @@ type typeConfigSettingName = "xFont:"|"xFontSize:"|"xFontPoint:"|"xFontDecimal:"
  * 返り値は意味を持ちません。
  */
 declare function config(setting_expression: typeConfigSettingName): number
+
 /**
  * s
  * 
@@ -17940,6 +17951,7 @@ type typeConfigGettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCh
  * 取得する情報によって文字列型と数値型のどちらかが返ります。
  */
 declare function getconfig(key: typeConfigGettingName): string | number
+
 /**
  * f
  * 
