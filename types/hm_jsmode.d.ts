@@ -737,8 +737,6 @@ declare namespace hidemaru {
    */
   function evalMacro(expression: string): number;
 
-  type CallBack = (o:any) => any
-
   interface IProcessInfoStdIn {
       /**
        * 標準入力に文字列を書き込みます。
@@ -819,35 +817,35 @@ declare namespace hidemaru {
        * 標準出力に全て出力されているときに呼ばれる関数を指定します。    
        * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
        * 
-       * @param CallBack 
+       * @param callback 
        * 標準出力に全て出力されているときに呼ばれる関数を指定します。
        * function(out: string) { ... } の形の関数を指定します。
        * 
        * @example
        * stdOut.onReadAll(function(out){});
        */
-      onReadAll(CallBack:(out?: string)=>any): void
+      onReadAll(callback:(out?: string)=>any): void
 
       /**
        * 標準出力から全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
        * 標準出力に行までが出力されているときに呼ばれる関数を指定します。    
        * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
        * 
-       * @param CallBack 
+       * @param callback 
        * 標準出力に全て出力されているときに呼ばれる関数を指定します。
        * function(out: string) { ... } の形の関数を指定します。
        * 
        * @example
        * stdOut.onReadLine(function(out){});
        */
-      onReadLine(CallBack:(out?: string)=>any): void
+      onReadLine(callback:(out?: string)=>any): void
 
       /**
        * 標準出力から全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
        * 標準出力に指定バイト数までが出力されているときに呼ばれる関数を指定します。    
        * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
        * 
-       * @param CallBack 
+       * @param callback 
        * 標準出力に全て出力されているときに呼ばれる関数を指定します。
        * function(out: string) { ... } の形の関数を指定します。
        * 
@@ -859,7 +857,7 @@ declare namespace hidemaru {
        * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
        * stdOut.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
        */
-       onReadSeparated(CallBack:(out?: string)=>any, read_byte: number): void
+       onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
 
       /**
        * 標準出力し終わっているどうか。
