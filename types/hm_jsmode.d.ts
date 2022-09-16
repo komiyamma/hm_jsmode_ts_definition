@@ -62,7 +62,74 @@ declare namespace console {
   function log(message: any, ...optional_params: any[]): void;
 }
 
+
+
 declare namespace hidemaru {
+
+  /**
+   * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
+   * 
+   * @param varname
+   * 取得する変数名を指定します。    
+   * "#"から始まる場合、数値型変数を取得します。    
+   * "$"から始まる場合、文字列型変数を取得します。
+   * 
+   * @example
+   * $a = "Hello";
+   * #b = 3333;
+   * js {
+   *     var s = getVar( "$a" );
+   *     s += " JavaScript";
+   *     setVar( "$a", s );
+   *     var num = getVar( "#b" );
+   * }
+   *
+   * @returns
+   * 指定した秀丸マクロ変数の値を返す
+   */
+  function getVar(varname: string): number | string;
+
+  /**
+   * JavaScriptの変数の値を、秀丸マクロの「ユーザー定義の変数」へ設定します。
+   * 
+   * @param varname
+   * 設定する変数名を指定します。
+   * "#"から始まる場合、数値型変数を設定します。    
+   * "$"から始まる場合、文字列型変数を設定します。
+   * 
+   * @param newvalue
+   * 設定する変数の内容を指定します。
+   * 
+   * @example
+   * $a = "Hello";
+   * js {
+   *     var s = getVar( "$a" );
+   *     s += " JavaScript";
+   *     setVar( "$a", s );
+   *     setVar( "#b", 333 );
+   * }
+   *
+   * @returns
+   * 値の設定が成功したら１，失敗したら０を返す
+   */
+  function setVar(varname: string, newvalue: string | number | boolean): number;
+
+  /**
+   * s
+   * 
+   * 文字列で指定するマクロを実行します。
+   * @param expression : 実行する秀丸マクロ文字列
+   * 
+   * @comment
+   * 参考：
+   * @see Hidemaru_EvalMacro    
+   * @see WM_REMOTE_EVALMACRO    
+   * @see hidemaru.evalMacro
+   * 
+   * @returns 成功したらresultは0以外になります。    
+   *        　失敗したらresultは0になります。
+   */
+  function evalMacro(expression: string): number;
 
   type DllFuncManager = any
   /**
@@ -283,460 +350,6 @@ declare namespace hidemaru {
    */
   function createObject(dllpath: string, typeid: string): any | undefined;
 
-  /**
-   * loadTextFileメソッドは、テキストファイルを読み込んで文字列で取得します。
-   * 
-   * @param filepath 
-   * ファイル名をフルパスで指定します。
-   * 
-   * @example
-   * js{
-   *     var text = hidemaru.loadTextFile("c:\\folder\\a.txt");
-   * }
-   * 
-   * @comment
-   * ファイルは、Shift-JIS,UTF-8,UTF-16を自動認識します。    
-   * ファイルの内容をテキストに変換し、文字列として返します。    
-   * 10MBの上限があります。
-   * 
-   * @returns
-   * 読み込みに成功した場合、ファイルの内容を文字列で返します。    
-   * 失敗した場合、undefinedを返します。
-   */
-  function loadTextFile(filepath: string): string | undefined;
-
-  /**
-   * f
-   * 
-   * getTotalTextは、現在の編集ペインのテキスト全体を文字列にして返します。    
-   *  [非同期]
-   * 
-   * @example
-   * var text = hidemaru.getTotalText();
-   * 
-   * @returns
-   * テキスト全体を返します。    
-   * 失敗した場合はundefinedになります
-   */
-  function getTotalText(): string;
-
-  /**
-   * f
-   * 
-   * getSelectedTextメソッドは、範囲選択の内容を取得します。     
-   *  [非同期]
-   * 
-   * @example
-   * js {
-   *    var a = hidemaru.getSelectedText();
-   * }
-   * 
-   * @returns
-   * 範囲選択の内容を文字列で返します。    
-   * (選択していないなどの理由で)失敗した場合はundefinedになります。
-   */
-   function getSelectedText(): string;
-
-  /**
-   * f
-   * 
-   * getLineTextメソッドは、指定行のテキストを文字列にして取得します。    
-   *  [非同期]
-   * 
-   * @param line_num
-   * 行番号を指定します。先頭が1です。    
-   * 省略した場合には、現在カーソルがある行が対象となります。
-   * 
-   * @example
-   * var text1 = hidemaru.getLineText(3); // 3行目のテキスト内容を返す
-   * 
-   * var text2 = hidemaru.getLineText(lineno()); // カーソルがある行のテキスト内容を返す
-   * 
-   * @returns
-   * 指定した行の内容を返します。    
-   * 失敗した場合はundefinedになります。
-   */
-  function getLineText(line_num?: number): string;
-
-  /**
-   * f
-   * 
-   * getCurrentWindowHandleメソッドは、現在の秀丸エディタのウィンドウハンドルを取得します。    
-   *  [非同期]
-   * 
-   * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
-   * 
-   * @example
-   * var a = hidemaru.getCurrentWindowHandle();
-   * 
-   * @returns
-   * 現在の秀丸エディタのウィンドウハンドルに相当する値を返します。    
-   * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
-   */
-  function getCurrentWindowHandle(): number;
-
-  /**
-   * getstaticvariableと同様の関数です。    
-   * 静的な変数を取得します。    
-   *  [非同期]
-   *
-   * @param key
-   * 変数名を指定します。大文字と小文字の区別はされません。    
-   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
-   * （scope_typeに0以上を指定した場合に限る）
-   * 
-   * @param scope_type
-   * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
-   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
-   * - 1 を指定すると、全ての秀丸エディタで有効です。    
-   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
-   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
-   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
-   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
-   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
-   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
-   * 他のマクロとの競合はありません。
-   * 
-   * @returns
-   * keyとscope_typeで指定された静的変数の内容を返す。    
-   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
-   * （scope_typeに0以上を指定した場合に限る）
-   */
-  function getStaticVariable(key: string, scope_type: number): string
-
-  /**
-   * setstaticvariableと同様の関数です。    
-   * 静的な変数を書き込みます。    
-   *  [非同期]
-   * 
-   * @param key 
-   * 変数名を指定します。大文字と小文字の区別はされません。    
-   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
-   * 
-   * @param value
-   * 書き込む変数の内容を、文字列で指定します。数値は指定できません。""を指定すると消去します。    
-   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
-   * 
-   * @param scope_type
-   * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
-   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
-   * - 1 を指定すると、全ての秀丸エディタで有効です。    
-   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
-   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
-   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
-   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
-   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
-   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
-   * 他のマクロとの競合はありません。
-   *
-   * @returns
-   * 失敗した場合、0を返す。    
-   * 成功した場合、0以外を返す。    
-   */
-  function setStaticVariable(key: string, value: string, scope_type: number): number;
-
-  /**
-   * f
-   * 
-   * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
-   *  [非同期]
-   * 
-   * @example
-   * js{
-   *     var a = hidemaru.isMacroExecuting();
-   * }
-   * 
-   * @example
-   * jsmode "WebView2";
-   * js{
-   *   function asyncFunc() {
-   *     //ここはマクロ実行中ではない
-   *     var b = hidemaru.isMacroExecuting();
-   *     console.log(b);
-   *   }
-   *   
-   *   debuginfo(2);
-   *   setTimeout(asyncFunc, 2000);
-   *   var a = hidemaru.isMacroExecuting();
-   *   console.log(a);
-   * }
-   * endmacro;
-   * 
-   * @comment
-   * 参照：
-   * @see WM_ISMACROEXECUTING
-   * 
-   * @returns
-   * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
-   */
-  function isMacroExecuting(): number;
-
-  /**
-   * f
-   * 
-   * postExecMacroFileメソッドは、ファイル名を指定して、マクロ実行をスケジュールします。    
-   * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
-   *  [非同期]    
-   * 
-   * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
-   * 
-   * @example
-   * // マクロ実行中の中で実行する例
-   * js{
-   *     hidemaru.postExecMacroFile("test2.mac");
-   * }
-   * 
-   * @example
-   * // マクロ実行中ではない時に実行する例
-   * jsmode "WebView2";
-   * js{
-   *   function asyncFunc() {
-   *     //ここはマクロ実行中ではない
-   *     var b = hidemaru.isMacroExecuting();
-   *     console.log(b);
-   *   }
-   *
-   *   debuginfo(2);
-   *   setTimeout(asyncFunc, 2000);
-   *   var a = hidemaru.isMacroExecuting();
-   *   console.log(a);
-   * }
-   * endmacro;
-   * 
-   * @comment
-   * postExecMacroMemoryとは違い、jsmodeの引き継ぎなどは無く、マクロファイルで改めて指定する必要があります。
-   * 
-   * @returns
-   * 返り値はありません。
-   */
-  function postExecMacroFile(filepath: string): void;
-
-  /**
-   * f
-   * 
-   * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
-   *  [非同期]
-   * 
-   * @example
-   * js{
-   *     hidemaru.postExecMacroMemory('message "a";');
-   * }
-   * 
-   * @example
-   * jsmode "WebView2";
-   * js{
-   *    function asyncFunc(text){
-   *      //ここはマクロ実行中ではない
-   *      globaltext=text;
-   *      hidemaru.postExecMacroMemory(`
-   *        jsmode "WebView2";
-   *        js{
-   *          message(globaltext);
-   *          globaltext=null;
-   *        }
-   *      `)
-   *    }
-   *
-   *   debuginfo(2);
-   *   setTimeout(asyncFunc, 2000);
-   * }
-   * endmacro;
-   * 
-   * @comment
-   * jsmodeをそのまま引き継ぐ。    
-   * 自動的にsetcompatiblemode 0x08000000;相当となり、他の秀丸エディタへの切り替え不可モード。    
-   * 自動的にsetbackgroundmode 1;相当。    
-   * 
-   * @returns
-   * 返り値はありません。
-   */
-  function postExecMacroMemory(expression: string): void;
-
-  /**
-   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
-   *  [非同期]
-   * 
-   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
-   * JScriptではこの関数が簡易版として代用できます。    
-   * clearTimeoutメソッドで、解除します。    
-   * 既に実行された後では効果はありません。
-   * 
-   * @param func 
-   * 関数を指定します。
-   * 
-   * @param millisecond 
-   * 時間をミリ秒単位で指定します。
-   * 
-   * @comment
-   * 参照：
-   * @see clearTimeout
-   * 
-   * @returns
-   * 固有のIDが返ります。    
-   * 主にclearTimeoutをするためのIDとなります。
-   */
-  function setTimeout(func: Function, millisecond: number): number;
-
-  /**
-   * f
-   * 
-   * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
-   *  [非同期]    
-   * 
-   * @param timeout_id
-   * 解除したいタイムアウトの識別子です。    
-   * この ID は対応する setTimeout() から返されたものです。
-   */
-  function clearTimeout(timeout_id: number): void;
-
-  /**
-   * getUpdateCount関数は、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
-   *  [非同期]
-   * 
-   * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
-   * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
-   * 一回の操作でも数カウント上がったりします。    
-   * 
-   * 32bitの値を超えると一周します。    
-   * 初期値は1以上です。
-   * 
-   * @example
-   * js{
-   *     var a = hidemaru.getUpdateCount();
-   * }
-   * 
-   * @returns
-   * 秀丸マクロでいうupdatecountに相当する値。    
-   * 内容が変わったときにカウントが増える値。    
-   * 初期値は1以上。32bitの値を超えると一周。
-   */
-  function getUpdateCount(): number;
-
-  /**
-   * getFileFullPath関数は、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
-   * filename2()とほぼ同じですが、非同期で使えるところに価値があります。    
-   *  [非同期]
-   * 
-   * @example
-   * js {
-   *     var a = hidemaru.getFileFullPath();
-   * }
-   * 
-   * @returns
-   * 現在のファイル名。
-   */
-  function getFileFullPath(): string
-
-  /**
-   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
-   * [非同期]
-   * 
-   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
-   * 
-   * @example
-   * js {
-   *     var a = hidemaru.getJsMode();
-   * }
-   * 
-   * @returns
-   * 現在のJavaScriptの動作モード。    
-   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
-   */
-   function getJsMode(): string
-
-  /**
-   * k    
-   * 
-   * getInputStates関数は、各種の入力ができるかどうかを判断するための状態を取得します。    
-   *  [非同期]    
-   * 
-   * 各種の入力ができるかどうかを判断するための状態を表します。    
-   * 以下の値の論理和です。    
-   * - 0x0002 ウィンドウ移動/サイズ変更中
-   * - 0x0004 メニュー操作中
-   * - 0x0008 システムメニュー操作中
-   * - 0x0010 ポップアップメニュー操作中
-   * - 0x0100 IME入力中
-   * - 0x0200 何らかのダイアログ表示中
-   * - 0x0400 ウィンドウがDisable状態
-   * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
-   * - 0x1000 検索ダイアログの疑似モードレス状態
-   * - 0x2000 なめらかスクロール中
-   * 
-   * @returns
-   * 各種の入力ができるかどうかを判断するための状態値を返す
-   */
-  function getInputStates(): number
-
-
-
-  /**
-   * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
-   * 
-   * @param varname
-   * 取得する変数名を指定します。    
-   * "#"から始まる場合、数値型変数を取得します。    
-   * "$"から始まる場合、文字列型変数を取得します。
-   * 
-   * @example
-   * $a = "Hello";
-   * #b = 3333;
-   * js {
-   *     var s = getVar( "$a" );
-   *     s += " JavaScript";
-   *     setVar( "$a", s );
-   *     var num = getVar( "#b" );
-   * }
-   *
-   * @returns
-   * 指定した秀丸マクロ変数の値を返す
-   */
-  function getVar(varname: string): number | string;
-
-  /**
-   * JavaScriptの変数の値を、秀丸マクロの「ユーザー定義の変数」へ設定します。
-   * 
-   * @param varname
-   * 設定する変数名を指定します。
-   * "#"から始まる場合、数値型変数を設定します。    
-   * "$"から始まる場合、文字列型変数を設定します。
-   * 
-   * @param newvalue
-   * 設定する変数の内容を指定します。
-   * 
-   * @example
-   * $a = "Hello";
-   * js {
-   *     var s = getVar( "$a" );
-   *     s += " JavaScript";
-   *     setVar( "$a", s );
-   *     setVar( "#b", 333 );
-   * }
-   *
-   * @returns
-   * 値の設定が成功したら１，失敗したら０を返す
-   */
-  function setVar(varname: string, newvalue: string | number | boolean): number;
-
-  /**
-   * s
-   * 
-   * 文字列で指定するマクロを実行します。
-   * @param expression : 実行する秀丸マクロ文字列
-   * 
-   * @comment
-   * 参考：
-   * @see Hidemaru_EvalMacro    
-   * @see WM_REMOTE_EVALMACRO    
-   * @see hidemaru.evalMacro
-   * 
-   * @returns 成功したらresultは0以外になります。    
-   *        　失敗したらresultは0になります。
-   */
-  function evalMacro(expression: string): number;
-
   interface IProcessInfoStdIn {
       /**
        * 標準入力に文字列を書き込みます。
@@ -869,6 +482,7 @@ declare namespace hidemaru {
        */
       close(): void
   }
+
   interface IProcessinfo {
       /**
        *  標準入力を扱うStdInオブジェクト。
@@ -910,6 +524,7 @@ declare namespace hidemaru {
        */
       kill(): void
   }
+
   /**
    * runProcessメソッドは、プロセスを起動します。 [非同期]
    * @param command 
@@ -940,347 +555,395 @@ declare namespace hidemaru {
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
   function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessinfo;
+
+  /**
+   * f
+   * 
+   * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
+   *  [非同期]
+   * 
+   * @example
+   * js{
+   *     var a = hidemaru.isMacroExecuting();
+   * }
+   * 
+   * @example
+   * jsmode "WebView2";
+   * js{
+   *   function asyncFunc() {
+   *     //ここはマクロ実行中ではない
+   *     var b = hidemaru.isMacroExecuting();
+   *     console.log(b);
+   *   }
+   *   
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   *   var a = hidemaru.isMacroExecuting();
+   *   console.log(a);
+   * }
+   * endmacro;
+   * 
+   * @comment
+   * 参照：
+   * @see WM_ISMACROEXECUTING
+   * 
+   * @returns
+   * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
+   */
+  function isMacroExecuting(): number;
+
+  /**
+   * f
+   * 
+   * postExecMacroFileメソッドは、ファイル名を指定して、マクロ実行をスケジュールします。    
+   * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
+   *  [非同期]    
+   * 
+   * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
+   * 
+   * @example
+   * // マクロ実行中の中で実行する例
+   * js{
+   *     hidemaru.postExecMacroFile("test2.mac");
+   * }
+   * 
+   * @example
+   * // マクロ実行中ではない時に実行する例
+   * jsmode "WebView2";
+   * js{
+   *   function asyncFunc() {
+   *     //ここはマクロ実行中ではない
+   *     var b = hidemaru.isMacroExecuting();
+   *     console.log(b);
+   *   }
+   *
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   *   var a = hidemaru.isMacroExecuting();
+   *   console.log(a);
+   * }
+   * endmacro;
+   * 
+   * @comment
+   * postExecMacroMemoryとは違い、jsmodeの引き継ぎなどは無く、マクロファイルで改めて指定する必要があります。
+   * 
+   * @returns
+   * 返り値はありません。
+   */
+  function postExecMacroFile(filepath: string): void;
+
+  /**
+   * f
+   * 
+   * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
+   *  [非同期]
+   * 
+   * @example
+   * js{
+   *     hidemaru.postExecMacroMemory('message "a";');
+   * }
+   * 
+   * @example
+   * jsmode "WebView2";
+   * js{
+   *    function asyncFunc(text){
+   *      //ここはマクロ実行中ではない
+   *      globaltext=text;
+   *      hidemaru.postExecMacroMemory(`
+   *        jsmode "WebView2";
+   *        js{
+   *          message(globaltext);
+   *          globaltext=null;
+   *        }
+   *      `)
+   *    }
+   *
+   *   debuginfo(2);
+   *   setTimeout(asyncFunc, 2000);
+   * }
+   * endmacro;
+   * 
+   * @comment
+   * jsmodeをそのまま引き継ぐ。    
+   * 自動的にsetcompatiblemode 0x08000000;相当となり、他の秀丸エディタへの切り替え不可モード。    
+   * 自動的にsetbackgroundmode 1;相当。    
+   * 
+   * @returns
+   * 返り値はありません。
+   */
+  function postExecMacroMemory(expression: string): void;
+
+  /**
+   * f
+   * 
+   * getTotalTextは、現在の編集ペインのテキスト全体を文字列にして返します。    
+   *  [非同期]
+   * 
+   * @example
+   * var text = hidemaru.getTotalText();
+   * 
+   * @returns
+   * テキスト全体を返します。    
+   * 失敗した場合はundefinedになります
+   */
+  function getTotalText(): string;
+
+  /**
+   * f
+   * 
+   * getLineTextメソッドは、指定行のテキストを文字列にして取得します。    
+   *  [非同期]
+   * 
+   * @param line_num
+   * 行番号を指定します。先頭が1です。    
+   * 省略した場合には、現在カーソルがある行が対象となります。
+   * 
+   * @example
+   * var text1 = hidemaru.getLineText(3); // 3行目のテキスト内容を返す
+   * 
+   * var text2 = hidemaru.getLineText(lineno()); // カーソルがある行のテキスト内容を返す
+   * 
+   * @returns
+   * 指定した行の内容を返します。    
+   * 失敗した場合はundefinedになります。
+   */
+  function getLineText(line_num?: number): string;
+
+  /**
+   * f
+   * 
+   * getSelectedTextメソッドは、範囲選択の内容を取得します。     
+   *  [非同期]
+   * 
+   * @example
+   * js {
+   *    var a = hidemaru.getSelectedText();
+   * }
+   * 
+   * @returns
+   * 範囲選択の内容を文字列で返します。    
+   * (選択していないなどの理由で)失敗した場合はundefinedになります。
+   */
+   function getSelectedText(): string;
+
+  /**
+   * f
+   * 
+   * getCurrentWindowHandleメソッドは、現在の秀丸エディタのウィンドウハンドルを取得します。    
+   *  [非同期]
+   * 
+   * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
+   * 
+   * @example
+   * var a = hidemaru.getCurrentWindowHandle();
+   * 
+   * @returns
+   * 現在の秀丸エディタのウィンドウハンドルに相当する値を返します。    
+   * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
+   */
+  function getCurrentWindowHandle(): number;
+
+
+  /**
+   * setstaticvariableと同様の関数です。    
+   * 静的な変数を書き込みます。    
+   *  [非同期]
+   * 
+   * @param key 
+   * 変数名を指定します。大文字と小文字の区別はされません。    
+   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
+   * 
+   * @param value
+   * 書き込む変数の内容を、文字列で指定します。数値は指定できません。""を指定すると消去します。    
+   * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
+   * 
+   * @param scope_type
+   * 共有されている静的な変数かどうかを指定します。    
+   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+   * - 1 を指定すると、全ての秀丸エディタで有効です。    
+   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+   * 他のマクロとの競合はありません。
+   *
+   * @returns
+   * 失敗した場合、0を返す。    
+   * 成功した場合、0以外を返す。    
+   */
+  function setStaticVariable(key: string, value: string, scope_type: number): number;
+
+  /**
+   * getstaticvariableと同様の関数です。    
+   * 静的な変数を取得します。    
+   *  [非同期]
+   *
+   * @param key
+   * 変数名を指定します。大文字と小文字の区別はされません。    
+   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
+   * （scope_typeに0以上を指定した場合に限る）
+   * 
+   * @param scope_type
+   * 共有されている静的な変数かどうかを指定します。    
+   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+   * - 1 を指定すると、全ての秀丸エディタで有効です。    
+   * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+   * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+   * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+   * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+   * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+   * 他のマクロとの競合はありません。
+   * 
+   * @returns
+   * keyとscope_typeで指定された静的変数の内容を返す。    
+   * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
+   * （scope_typeに0以上を指定した場合に限る）
+   */
+  function getStaticVariable(key: string, scope_type: number): string
+
+  /**
+   * getFileFullPath関数は、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
+   * filename2()とほぼ同じですが、非同期で使えるところに価値があります。    
+   *  [非同期]
+   * 
+   * @example
+   * js {
+   *     var a = hidemaru.getFileFullPath();
+   * }
+   * 
+   * @returns
+   * 現在のファイル名。
+   */
+  function getFileFullPath(): string
+
+  /**
+   * getUpdateCount関数は、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
+   *  [非同期]
+   * 
+   * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
+   * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
+   * 一回の操作でも数カウント上がったりします。    
+   * 
+   * 32bitの値を超えると一周します。    
+   * 初期値は1以上です。
+   * 
+   * @example
+   * js{
+   *     var a = hidemaru.getUpdateCount();
+   * }
+   * 
+   * @returns
+   * 秀丸マクロでいうupdatecountに相当する値。    
+   * 内容が変わったときにカウントが増える値。    
+   * 初期値は1以上。32bitの値を超えると一周。
+   */
+  function getUpdateCount(): number;
+
+  /**
+   * loadTextFileメソッドは、テキストファイルを読み込んで文字列で取得します。
+   * 
+   * @param filepath 
+   * ファイル名をフルパスで指定します。
+   * 
+   * @example
+   * js{
+   *     var text = hidemaru.loadTextFile("c:\\folder\\a.txt");
+   * }
+   * 
+   * @comment
+   * ファイルは、Shift-JIS,UTF-8,UTF-16を自動認識します。    
+   * ファイルの内容をテキストに変換し、文字列として返します。    
+   * 10MBの上限があります。
+   * 
+   * @returns
+   * 読み込みに成功した場合、ファイルの内容を文字列で返します。    
+   * 失敗した場合、undefinedを返します。
+   */
+  function loadTextFile(filepath: string): string | undefined;
+
+  /**
+   * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
+   *  [非同期]
+   * 
+   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
+   * JScriptではこの関数が簡易版として代用できます。    
+   * clearTimeoutメソッドで、解除します。    
+   * 既に実行された後では効果はありません。
+   * 
+   * @param func 
+   * 関数を指定します。
+   * 
+   * @param millisecond 
+   * 時間をミリ秒単位で指定します。
+   * 
+   * @comment
+   * 参照：
+   * @see clearTimeout
+   * 
+   * @returns
+   * 固有のIDが返ります。    
+   * 主にclearTimeoutをするためのIDとなります。
+   */
+  function setTimeout(func: Function, millisecond: number): number;
+
+  /**
+   * f
+   * 
+   * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
+   *  [非同期]    
+   * 
+   * @param timeout_id
+   * 解除したいタイムアウトの識別子です。    
+   * この ID は対応する setTimeout() から返されたものです。
+   */
+  function clearTimeout(timeout_id: number): void;
+
+  /**
+   * k    
+   * 
+   * getInputStates関数は、各種の入力ができるかどうかを判断するための状態を取得します。    
+   *  [非同期]    
+   * 
+   * 各種の入力ができるかどうかを判断するための状態を表します。    
+   * 以下の値の論理和です。    
+   * - 0x0002 ウィンドウ移動/サイズ変更中
+   * - 0x0004 メニュー操作中
+   * - 0x0008 システムメニュー操作中
+   * - 0x0010 ポップアップメニュー操作中
+   * - 0x0100 IME入力中
+   * - 0x0200 何らかのダイアログ表示中
+   * - 0x0400 ウィンドウがDisable状態
+   * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
+   * - 0x1000 検索ダイアログの疑似モードレス状態
+   * - 0x2000 なめらかスクロール中
+   * 
+   * @returns
+   * 各種の入力ができるかどうかを判断するための状態値を返す
+   */
+  function getInputStates(): number
+
+  /**
+   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
+   * [非同期]
+   * 
+   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
+   * 
+   * @example
+   * js {
+   *     var a = hidemaru.getJsMode();
+   * }
+   * 
+   * @returns
+   * 現在のJavaScriptの動作モード。    
+   * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
+   */
+   function getJsMode(): string
 }
-
-
-/**
- * f
- * 
- * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
- * 
- * @example
- * var text = gettotaltext();
- * 
- * @returns
- * テキスト全体を返します。    
- * 失敗した場合は空文字列になります
- */
-declare function gettotaltext(): string;
-
-/**
- * f
- * 
- * getlinetext関数は、指定行のテキストを文字列にして取得します。    
- * 
- * @param line_num
- * 行番号を指定します。先頭が1です。    
- * 省略した場合には、現在カーソルがある行が対象となります。
- * 
- * @example
- * var text1 = getlinetext(3); // 3行目のテキスト内容を返す
- * 
- * var text2 = getlinetext(); // カーソルがある行のテキスト内容を返す
- * 
- * @returns
- * 指定した行の内容を返します。    
- * 失敗した場合は空文字になります。
- */
-declare function getlinetext(line_num?: number): string;
-
-/**
- * f
- * 
- * getselectedtext関数は、範囲選択の内容を取得します。     
- * 
- * @example
- * js {
- *    var a = getselectedtext();
- * }
- * 
- * @returns
- * 範囲選択の内容を文字列で返します。    
- * (選択していないなどの理由で)失敗した場合は空文字になります。
- */
-declare function getselectedtext(): string;
-
-/**
- * k    
- * 
- * inputstatesは、各種の入力ができるかどうかを判断するための状態を取得します。    
- * 
- * 各種の入力ができるかどうかを判断するための状態を表します。    
- * 以下の値の論理和です。    
- * - 0x0002 ウィンドウ移動/サイズ変更中
- * - 0x0004 メニュー操作中
- * - 0x0008 システムメニュー操作中
- * - 0x0010 ポップアップメニュー操作中
- * - 0x0100 IME入力中
- * - 0x0200 何らかのダイアログ表示中
- * - 0x0400 ウィンドウがDisable状態
- * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
- * - 0x1000 検索ダイアログの疑似モードレス状態
- * - 0x2000 なめらかスクロール中
- * 
- * @returns
- * 各種の入力ができるかどうかを判断するための状態値を返す
- */
-declare function inputstates(): number
-
-/**
- * k    
- * 
- * 自動起動マクロとしてマクロが実行されたとき、どのような種類かを表します。
- *
- * @returns
- * 0 自動起動マクロとして実行されていない    
- * 1 ファイルを開いた直後    
- * 2 新規作成直後    
- * 3 保存直前と直後    
- * 4 印刷直前と直後    
- * 5 編集後タイマー    
- * 6 カーソル移動後タイマー    
- * 7 ファイルを閉じる直前    
- * 8 アクティブ切り替え後(V8.00以降)    
- * 9 テンプレート(スニペット)による実行(V9.16以降)    
- */
-declare function event(): number;
-
-/**
- * f
- * 
- * geteventparam関数は、自動起動マクロとしてマクロが呼び出されたとき、    
- * さらにどのような条件で呼び出されたかなどの詳細な情報を取得します。    
- * 
- * @param event_infomation_ix
- * どのような情報を取得するかを指定します。    
- * eventによって意味が違います。    
- * 
- * @comment
- * eventの値によって以下の情報を返します。    
- * - ファイルを開いた直後(event==1)    
- * geteventparam(0)の返り値：    
- *   - 0 外部から開いた    
- *   - 1 秀丸エディタから開いた    
- *   - 2 常駐秀丸エディタから開いた    
- *   - 3 タグジャンプによって開いた(V8.30以降)    
- *
- * @example
- * if( event() == 1 ) {
- *     var a = geteventparam( 0 );
- * }
- * 
- * @comment
- * - 新規作成直後(event==2)    
- * geteventparam(0)の返り値：    
- *    - 0 外部から開いた    
- *    - 1 秀丸エディタから開いた    
- *    - 2 常駐秀丸エディタから開いた    
- * 
- * @example
- * if( event() == 2 ) {
- *     var a = geteventparam( 0 );
- * }
- *
- * @comment
- * - 保存直前と直後(event==3)    
- * geteventparam(0)の返り値：    
- *    - 0 保存直前    
- *    - 1 保存直後    
- * 
- * @example
- * if( event() == 3 ) {
- *     var a = geteventparam( 0 );
- *     if( a == 0 ) {
- *         message("保存直前");
- *     } else if( a == 1 ) {
- *         message("保存直後");
- *     }
- * }
- * 
- * @comment
- * - 印刷直前と直後(event==4)    
- * geteventparam(0)の返り値：    
- *    - 0 印刷直前    
- *    - 1 印刷直後    
- * 
- * @example
- * if( event() == 4 ) {
- *     var a = geteventparam( 0 );
- * }
- * 
- * @comment
- * - 編集後タイマー(event==5)    
- *   - geteventparam(0)の返り値：    
- *     - 0 通常の編集    
- *     - 1 やり直しによる編集    
- *   - geteventparam(1)の返り値：    
- *     - 0 改行以外の編集    
- *     - 1 改行による編集（遅延時間0msのときのみ）    
- *   - geteventparam(2)の返り値：    
- *     - 0 単語補完の決定直後以外 
- *     - 1 単語補完の決定直後    
- *   - geteventparam(3)の返り値：    
- *      - 遅延時間(ms)    
- *   - geteventparam(4)の返り値：    
- *      - 遅延時間0msのとき、入力された一文字の文字コード。    
- *   - geteventparam(5)の返り値：    
- *      - 0 削除ではない編集
- *      - 1 通常の削除
- *      - 2 BackSpace
- *      - 3 範囲選択
- *      - 4 行削除
- *      - 5 単語削除
- *      - 6 カーソルより後ろを削除
- *      - 7 カーソルより前を削除
- *      - 8 置換
- *      - 9 全置換
- *      - 10 複数選択の入力
- *      - 11 複数選択の削除
- *      - 12 BOX選択の入力
- *      - 13 BOX削除
- *      - 14 CSV/TSVモードで列の移動
- * 
- * @example
- * if( event() == 5 ) {
- *     var undo = geteventparam( 0 );
- *     var enter = geteventparam( 1 );
- *     var autocomp = geteventparam( 2 );
- *     var time = geteventparam( 3 );
- *     var char = geteventparam( 4 );
- *     var type = geteventparam( 5 );
- * }
- * 
- * @comment
- * - カーソル移動後タイマー(event==6)    
- *   - geteventparam(3)の返り値：    
- *     - 遅延時間(ms)    
- *   - geteventparam(4)の返り値：    
- *     - どういうコマンドによってカーソル移動したかを表すコマンド値。    
- *       通常の矢印キーによりカーソル移動は0になります。    
- *       コマンド値を調べるするマクロの例：（ステータスバーに表示）     
- *   - geteventparam(5)の返り値：    
- *      - 最後に実行した上検索/下検索が成功したかどうかを返します。    
- *        title(str(geteventparam(4)),1);    
- *        title(-1,1);    
- * 
- * @example
- * if ( event() == 6 ) {
- *     var time = geteventparam( 3 );
- *     var cmd = geteventparam( 4 );
- *     var found = geteventparam( 5 );
- * }
- * 
- * @comment
- * - ファイルを閉じる直前(event==7)    
- *    - geteventparam(1)の返り値：    
- *      - 0 破棄して終了以外    
- *      - 1 破棄して終了    
- * 
- * @example
- * if ( event() == 7 ) {
- *     var a = geteventparam( 1 );
- * }
- * 
- * @example
- * - アクティブ切り替え後(event==8)    
- *   - geteventparam(0)の返り値：    
- *     - 0 タグジャンプによって開いた以外    
- *     - 3 タグジャンプによって開いた    
- *   - geteventparam(3)の返り値：    
- *     - 遅延時間(ms)    
- * 
- * @example
- * if ( event() == 8 ) {
- *     var tagjump = geteventparam( 0 );
- *     var time = geteventparam( 3 );
- * }
- * 
- * @comment
- * - テンプレート(スニペット)による実行(event==9)    
- *   - geteventparam(0)の返り値：    
- *     - 0 直前の選択内容    
- * 
- * @example
- * if ( event() == 9 ) {
- *     var seltext = geteventparam( 0 );
- * }
- * 
- * @returns
- * 指定された情報を返します。    
- * eventとパラメータの値によって意味が違います。    
- * 指定によって数値が返るか文字列が返るかも違います。
- */
-declare function geteventparam(event_infomation_ix: number): number | string
-
-/**
- * s    
- * 
- * seteventnotify文は、自動起動マクロとしてマクロが呼び出されたとき、    
- * マクロ実行後の処理を秀丸エディタに指示します。
- * 
- * eventの値によって意味が違います。
- * geteventnotifyを使うことで、seteventnotifyで設定された値を取得できます。
- * 
- * @param notify_target    
- * @comment
- * - 自動起動マクロとして実行されていない(event==0)    
- * フォーカスが各種の枠にあるとき、キー割り当てによって   
- * マクロが実行された場合に本来のキー操作を行うかどうかを決めます。    
- * 枠のキー操作を続行する場合、マクロは本体に関する操作等は行わず、    
- * すぐにseteventnotify(1);してマクロを終了する必要があります。    
- * @example
- *   seteventnotify(0); // 枠のキー操作を中断
- *   seteventnotify(1); // 枠のキー操作を続行
- * 
- * @comment
- * - ファイルを開いた直後(event==1)    
- * なし
- * 
- * - 新規作成直後(event==2)    
- * なし
- * 
- * - 保存直前と直後(event==3) かつ、geteventparam(0)==0で保存直前の場合。    
- * @example
- *   seteventnotify(0); // 保存処理を続行
- *   seteventnotify(1); // 保存処理を中断
- * 
- * - 印刷直前と直後(event==4) かつ、geteventparam(0)==0で印刷直前の場合。    
- * @example
- *   seteventnotify(0); // 印刷処理を続行
- *   seteventnotify(1); // 印刷処理を中断
- * 
- * - 編集後タイマー(event==5)    
- * なし
- * 
- * - カーソル移動後タイマー(event==6)    
- * なし
- * 
- * - ファイルを閉じる直前(event==7)    
- * @example
- *   seteventnotify(0); // 閉じる処理を続行
- *   seteventnotify(1); // 閉じる処理を中断
- *   seteventnotify(2); // 保存するかどうかの問い合わせは出さずに続行
- *
- * - アクティブ切り替え後(event==8)
- * なし
- * 
- * @returns
- * result相当。成功すれば1、失敗すれば0;
- */
-declare function seteventnotify(notify_target: number): number;
-
-/**
- * f    
- * 
- * geteventnotify関数は、seteventnotifyで設定された値を取得します。
- * 
- * @param notify_target 0を指定してください。    
- * パラメータは将来のために予約されています。
- * 
- * @returns seteventnotifyで設定された値を返します。
- * 
- */
-declare function geteventnotify(notify_target: 0): number;
-
-/**
- * s    
- * 
- * print文は、印刷をします。
- * @param showdialog 印刷ダイアログを出すかどうかを指定します。
- * @returns 成功したらresultは0以外になります。    
- *        　失敗したらresultは0になります。
- */
-declare function print(showdialog?: number): number;
 
 /**
  * f
@@ -1290,6 +953,8 @@ declare function print(showdialog?: number): number;
  * @returns JavaScriptとしてeval評価された最終的なオブジェクト
  */
 declare function evalJs(expression: string): any;
+
+
 
 /**
  * k    
@@ -1368,7 +1033,6 @@ declare function diff(): string;
  */
 declare function reservedmultisel(): string;
 
-
 /**
  * k    
  * 
@@ -1417,7 +1081,6 @@ declare function y(): number;
  * @returns カーソルのカラム位置(秀丸独自単位)
  */
 declare function column(): number;
-
 
 /**
  * k    
@@ -1531,7 +1194,6 @@ declare function code(): number;
  * @returns カーソル位置のUnicodeの文字コード（数値）
  */
 declare function unicode(): number;
-
 /**
  * f    
  * 
@@ -1544,7 +1206,6 @@ declare function unicode(): number;
  * @returns 文字列の先頭の文字のUnicodeの文字コード（数値）
  */
 declare function unicode(text: string): number;
-
 
 /**
  * k
@@ -1614,7 +1275,6 @@ declare function colorcode(line_flag?: number): number;
  */
 declare function marked(): number;
 
-
 /**
  * k    
  * 
@@ -1622,7 +1282,6 @@ declare function marked(): number;
  * @returns 編集マーク（編集した行）があれば1、そうでなければ0
  */
 declare function lineupdated(): number;
-
 
 /**
  * k    
@@ -1979,6 +1638,35 @@ declare function seltopcolumn(): number;
 /**
  * k    
  * 
+ * 範囲選択開始位置のエディタ的に計算した行番号を表します。
+ * @returns 範囲選択開始位置のエディタ的に計算した行番号
+ * 選択範囲がなければ最後の範囲選択開始位置のエディタ的に計算した行番号
+ */
+declare function seltoplineno(): number;
+
+/**
+ * k    
+ * 
+ * 範囲選択終了位置のカラム位置(column相当の値)を表します。    
+ * 文字の単位ごとに各種のバリエーションがあります。
+ *（selend_wcs, selend_ucs4, selend_cmu, selend_gcu）   
+ * @returns 範囲選択終了位置のカラム位置(column相当の値)。    
+ * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
+ */
+declare function selendcolumn(): number;
+
+/**
+ * k    
+ * 
+ * 範囲選択終了位置のエディタ的に計算した行番号を表します。
+ * @returns 範囲選択終了位置のエディタ的に計算した行番号
+ * 選択範囲がなければ最後の範囲選択終了位置のエディタ的に計算した行番号
+ */
+declare function selendlineno(): number;
+
+/**
+ * k    
+ * 
  * seltopcolumnのUCS-2単位版
  * @returns 範囲選択開始位置のカラム位置(column_wcs相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
@@ -1993,7 +1681,6 @@ declare function seltop_wcs(): number;
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
 declare function seltop_ucs4(): number;
-
 
 /**
  * k    
@@ -2016,26 +1703,6 @@ declare function seltop_gcu(): number;
 /**
  * k    
  * 
- * 範囲選択開始位置のエディタ的に計算した行番号を表します。
- * @returns 範囲選択開始位置のエディタ的に計算した行番号
- * 選択範囲がなければ最後の範囲選択開始位置のエディタ的に計算した行番号
- */
-declare function seltoplineno(): number;
-
-/**
- * k    
- * 
- * 範囲選択終了位置のカラム位置(column相当の値)を表します。    
- * 文字の単位ごとに各種のバリエーションがあります。
- *（selend_wcs, selend_ucs4, selend_cmu, selend_gcu）   
- * @returns 範囲選択終了位置のカラム位置(column相当の値)。    
- * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
- */
-declare function selendcolumn(): number;
-
-/**
- * k    
- * 
  * selendcolumnのUCS-2単位版
  * @returns 範囲選択終了位置のカラム位置(column_wcs相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
@@ -2050,7 +1717,6 @@ declare function selend_wcs(): number;
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
 declare function selend_ucs4(): number;
-
 
 /**
  * k    
@@ -2069,15 +1735,6 @@ declare function selend_cmu(): number;
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
 declare function selend_gcu(): number;
-
-/**
- * k    
- * 
- * 範囲選択終了位置のエディタ的に計算した行番号を表します。
- * @returns 範囲選択終了位置のエディタ的に計算した行番号
- * 選択範囲がなければ最後の範囲選択終了位置のエディタ的に計算した行番号
- */
-declare function selendlineno(): number;
 
 /**
  * k    
@@ -2284,7 +1941,6 @@ declare function cxworkarea(): number;
  * @returns 画面の作業領域の縦サイズをピクセル単位で返す
  */
 declare function cyworkarea(): number;
-
 /**
  * k    
  * 
@@ -2754,6 +2410,34 @@ declare function currentmacrobasename(): string;
 declare function currentmacrodirectory(): string;
 
 /**
+ * k
+ * 
+ * 現在実行中のexecjs文によって呼ばれたjsファイルのファイル名をフルパスで表します。
+ * execjs文による実行中でない場合はcurrentmacrofilenameと同じです。
+ * すべて小文字です。
+ * 
+ * @example
+ * // execjsにより実行されている最中ならば、{filename, directory}のそれぞれのプロパティに有効な値が入る
+ * function get_including_by_execjs() {
+ *     var cjf = hidemaruGlobal.currentjsfilename();
+ *     var cmf = hidemaruGlobal.currentmacrofilename();
+ *     if (cjf != cmf) {
+ *         var dir = cjf.replace(/[\/\\][^\/\\]+?$/, "");
+ *         return {
+ *             "filename": cjf,
+ *             "directory": dir
+ *         };
+ *     }
+ *     return {};
+ * }
+ * 
+ * @returns
+ * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
+ * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
+ */
+declare function currentjsfilename(): string;
+
+/**
  * k    
  * 
  * hidemaru.exeのフォルダを表します。すべて小文字です。
@@ -2849,7 +2533,6 @@ declare function filehistcount(): number;
  * 挿入モードの場合は0です。
  */
 declare function overwrite(): number;
-
 /**
  * s    
  * 
@@ -2926,6 +2609,29 @@ declare function anyclipboard(): number;
 /**
  * k    
  * 
+ * inputstatesは、各種の入力ができるかどうかを判断するための状態を取得します。    
+ * 
+ * 各種の入力ができるかどうかを判断するための状態を表します。    
+ * 以下の値の論理和です。    
+ * - 0x0002 ウィンドウ移動/サイズ変更中
+ * - 0x0004 メニュー操作中
+ * - 0x0008 システムメニュー操作中
+ * - 0x0010 ポップアップメニュー操作中
+ * - 0x0100 IME入力中
+ * - 0x0200 何らかのダイアログ表示中
+ * - 0x0400 ウィンドウがDisable状態
+ * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
+ * - 0x1000 検索ダイアログの疑似モードレス状態
+ * - 0x2000 なめらかスクロール中
+ * 
+ * @returns
+ * 各種の入力ができるかどうかを判断するための状態値を返す
+ */
+declare function inputstates(): number
+
+/**
+ * k    
+ * 
  * かな漢字変換の状態を表します。    
  * 
  * @returns
@@ -2972,71 +2678,6 @@ declare function browsemode(): number;
  * disablebreakされた状態でのみ利用可能。
  */
 declare function keypressed(): number;
-
-/**
- * f    
- * 
- * keypressedex関数は、    
- * キーが押されたかどうかを返すkeypressedキーワードの拡張版です。
- * disablebreakされた状態でのみ利用可能です。
- *
- * @param return_keytype    
- * 取得する方法を指定します。    
- * - 0を指定する場合は、keypressedキーワードと同じ仮想キーコードを取得します。    
- * - 1を指定する場合は、仮想キーコードではなく、char関数に相当する文字コードを取得します。    
- * 例外的に、矢印キーについては、inputcharと同様の秀丸エディタ独自のコードを取得します。    
- * 例外的に、矢印キー以外の0x20未満の値についてはkeypressedキーワードと同じ仮想キーコードを取得します。(Escキーなどを取得するため）
- * 
- * - パラメータ１に0を指定する場合、押されたキーの仮想キーコードを返します。
- * @example 
- *  disablebreak();
- *  insert("Escキーで終わります\n");
- *  while( 1 ) {
- *    var c = keypressedex(0);
- *    if(c==0x1B) { // Esc
- *      break;
- *    }
- *    if(c==0x31) { // 1キー
- *      insert("1キー\n");
- *    }
- *    if(c==0x10) { // Shiftキー VK_SHIFT
- *      insert("Shiftキー\n");
- *    }
- *  }
- * 
- * @comment
- * - パラメータ１に1を指定する場合、
- * 例えばShift+1キーでキーボードによっては"!"になりますが、"!"に相当する0x21が取得できます。
- *
- * @example 
- *  disablebreak();
- *  insert("Escキーで終わります\n");
- *  while( 1 ) {
- *    var c = keypressedex(1);
- *    if(c==0x1B) { // Esc
- *      break;
- *    }
- *    if(c==0x31) { // 1キー
- *      insert("1という文字\n");
- *    }
- *    if(c==0x21) { // '!'
- *      insert("!という文字\n");
- *    }
- *  }
- * 
- * @comment
- * 参照：    
- * @see iskeydown
- * @see inputchar
- * @see keypressed
- * 
- * @returns
- * - 引数のreturn_keytypeが0の場合は、仮想キーコードを返す。
- * - 引数のreturn_keytypeが1の場合は、文字コードを返す。
- * 
- * disablebreakされた状態でのみ利用可能。
- */
-declare function keypressedex(return_keytype: number): number;
 
 /**
  * k    
@@ -3632,11 +3273,11 @@ declare function carettabmode(): number;
  * -TSV/CSVモードの「セル内改行の変換」（convert_return_in_cell）が行われている状態値を返す。
  * 
  * 以下の値の論理和。    
- * - 0x0001 LFが半角矢印(￬)(U+FFEC)に変換されています。    
+ * - 0x0001 LFが半角矢印(?)(U+FFEC)に変換されています。    
  * 保存時にU+FFECはLFに変換されるモードとして動作しています。
- * - 0x0002 CRが半角矢印(￩)(U+FFE9)に変換されています。    
+ * - 0x0002 CRが半角矢印(?)(U+FFE9)に変換されています。    
  * 保存時にU+FFE9はCRに変換されるモードとして動作しています。
- * - 0x0004 CR+LFが半角矢印(↲)(U+21B2)に変換されています。    
+ * - 0x0004 CR+LFが半角矢印(?)(U+21B2)に変換されています。    
  * 保存時にU+21B2はCR+LFに変換されるモードとして動作しています。    
  * - 0x0100 LFが見た目上改行されない特殊なLFに変換されています。    
  * - 0x0200 CRが見た目上改行されない特殊なCRに変換されています。    
@@ -4490,7 +4131,6 @@ declare function strrstr(text: string, pattern: string, from?: number): number;
  */
 declare function wcsleftstr(text: string, length: number): string;
 
-
 /**
  * f    
  * 
@@ -4701,7 +4341,6 @@ declare function wcsstrrstr(text: string, pattern: string, from?: number): numbe
  */
 declare function ucs4leftstr(text: string, length: number): string;
 
-
 /**
  * f    
  * 
@@ -4910,7 +4549,6 @@ declare function ucs4strrstr(text: string, pattern: string, from?: number): numb
  */
 declare function cmuleftstr(text: string, length: number): string;
 
-
 /**
  * f    
  * 
@@ -5112,7 +4750,6 @@ declare function cmustrrstr(text: string, pattern: string, from?: number): numbe
  * 元の文字列がそのまま返る。
  */
 declare function gculeftstr(text: string, length: number): string;
-
 
 /**
  * f    
@@ -5625,7 +5262,7 @@ declare function char_to_gcu(text_line: string | number, from_column: number): n
  * 以下の例で、最初の文字がUnicodeの全角文字だとしたら、2を返します。    
  * 
  * @example
- * // var a = byteindex_to_charindex( "☀abcde", 4 );
+ * // var a = byteindex_to_charindex( "?abcde", 4 );
  * var a = byteindex_to_charindex( "\u2600abcde", 4 );
  * message(str(a));
  * 
@@ -5633,7 +5270,7 @@ declare function char_to_gcu(text_line: string | number, from_column: number): n
  * 最初の文字がUnicodeの半角文字だとしたら、1を返します。    
  * 
  * @example
- * // var a = byteindex_to_charindex( "Àabcde", 4 );
+ * // var a = byteindex_to_charindex( "Aabcde", 4 );
  * var a = byteindex_to_charindex( "\u00c0abcde", 4 );
  * message(str(a));
  *
@@ -5643,7 +5280,7 @@ declare function char_to_gcu(text_line: string | number, from_column: number): n
  * 
  * @example
  * var hmjre = loaddll("HmJre.dll");
- * var target = "\u2600abcde"; // "☀abcde"
+ * var target = "\u2600abcde"; // "?abcde"
  * var a = hmjre.dllFunc.FindRegular( "FindRegular", "abc", target, 0 );
  * var b = byteindex_to_charindex( target, a );
  * var c = strstr( target, "abc" );
@@ -5690,7 +5327,7 @@ declare function byteindex_to_charindex(text: string, byteindex: number): number
  * 以下の例で、最初の文字がUnicodeの全角文字だとしたら、2を返します。    
  * 
  * @example
- * // var a = charindex_to_byteindex( "☀abcde", 2 );
+ * // var a = charindex_to_byteindex( "?abcde", 2 );
  * var a = charindex_to_byteindex( "\u2600abcde", 2 );
  * message(str(a));
  * 
@@ -5698,7 +5335,7 @@ declare function byteindex_to_charindex(text: string, byteindex: number): number
  * 最初の文字がUnicodeの半角文字だとしたら、5を返します。    
  * 
  * @example
- * // var a = charindex_to_byteindex( "Àabcde", 2 );
+ * // var a = charindex_to_byteindex( "Aabcde", 2 );
  * var a = charindex_to_byteindex( "\u00c0abcde", 2 );
  * message(str(a));
  *
@@ -6146,7 +5783,6 @@ declare function sendmessage(hwnd: number, wndmsg_id: number, wparam: number, lp
  * 引数で指定したヒストリのgrepファイルヒストリの文字列を返す。
  */
 declare function getgrepfilehist(history_ix: number): string
-
 /**
  * f
  * 
@@ -6660,6 +6296,64 @@ declare function getarg(arg_ix: number): string
 declare function getautocompitem(item_ix: number): string
 
 /**
+ * f    
+ * 
+ * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。
+ * 
+ * @param target_prop
+ * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
+ * - 0x0001　文字色を取得    
+ * - 0x0002　背景色を取得    
+ * - 0x0004　スタイルを取得    
+ * - 0x0008　ユーザーデータを取得    
+ * - 0x0010　カラーマーカーではない場合でも表示されている実際の色とスタイルを取得    
+ * - 0x0020　行末の情報も取得可能にする    
+ * - 0x0040　カラーマーカー末尾または幅ゼロのカラーマーカーの情報も取得可能にする（代わりにカラーマーカー先頭は取得できなくなります）    
+ * - 0x0080　先頭を1として上から数えて何番目のカラーマーカーであるかを取得    
+ * - 0x0100　一時的なカラーマーカーと名前付きレイヤーのカラーマーカーを調べて一番上にある使われているものを取得し、レイヤー名の文字列を""でくくって取得。    
+ *           このフラグがある場合は第２パラメータは無視されます。    
+ *           予約されたレイヤー（reservedmultiselやfindmarker等）は含まれません。
+ * - 0x0200　種類を取得
+ * 
+ * @param layer_name
+ * 指定しない場合、全てのレイヤーが対象です。    
+ * 指定すると、指定した文字列のレイヤーに属するものだけを取得します。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ * 
+ * @example
+ * selectline();
+ * colormarker(0x0000ff, 0xff0000);
+ * var a = getcolormarker(0x0001|0x0002);
+ * message(a);
+ * 
+ * @comment
+ * カーソル位置の文字がcolormarker文によってカラーマーカーが付けられている場合、その情報を取得します。    
+ * 32ビットの値を16進数で表した文字列（"0x"は除く）を連結して返します。    
+ * 例えば、文字色が数値で0x00808080、背景色が0x00FFFFFFという場合、getcolormarker( 0x0001 | 0x0002 ) の返す文字列は、"0080808000FFFFFF"になります。    
+ * 色は24bitの数値で、例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ * 
+ * 0x0100のフラグがある場合は、レイヤー名が""でくくられて取得されます。    
+ * getcolormarker( 0x0001 | 0x0002 | 0x0100 ) の返す文字列は、"0080808000FFFFFF\"mylayer\""のような感じになります。    
+ * 連結する順番は、文字色→背景色→スタイル→種類→ユーザーデータ→レイヤー名の順番になります。    
+ * 
+ * 範囲選択されていても範囲は関係なく、カーソル位置の情報を返します。    
+ * 
+ * 0x0010 を指定している場合は、カラーマーカーで色付けされていなくても、強調表示された結果の色を取得できます。    
+ * カーソル行の文字色モード/下線モード/背景色モードは取得できません。    
+ * 「検索文字列の強調」で強調された状態も取得できません。    
+ * 
+ * @comment
+ * 参照：
+ * @see colormarker
+ * @see colorcode
+ * 
+ * @returns
+ * 指定した種類の情報を文字列で返します。
+ */
+declare function getcolormarker(target_prop: number, layer_name?: string ): string;
+
+/**
  * f
  * 
  * getfilehist関数は、ファイルヒストリの文字列を取得します。
@@ -6679,7 +6373,6 @@ declare function getautocompitem(item_ix: number): string
  * 指定に対応する文字列を返す。
  */
 declare function getfilehist(history_ix: number): string
-
 /**
  * f
  * 
@@ -6762,7 +6455,6 @@ declare function getpathhist(history_ix: number): string
  * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
  */
 declare function getreplacehist(history_ix: number | -1): string
-
 /**
  * f
  * 
@@ -6797,247 +6489,6 @@ declare function getreplacehist(history_ix: number | -1): string
  * 文字列なので注意してください。
  */
 declare function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "1"
-
-/**
- * f
- * 
- * getsearchhist関数は、検索ヒストリの文字列を取得します。
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。    
- * 検索ヒストリの最大は100個（0～99まで）です。
- * 
- * -1 を指定すると、ヒストリを使用している数を文字列にして返します。
- * 
- * @example
- * var c = +( getsearchhist(-1) ); // + を付けて、文字列を数値に
- * var i = 0;
- * while(i <= c ) {
- *     var a = getsearchhist(i);
- *     insert(a+"\n");
- *     i++;
- * }
- * 
- * @comment
- * 参照：    
- * @see setsearchhist
- * 
- * @returns
- * 指定に対応する文字列を返す。    
- * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
- */
-declare function getsearchhist(history_ix: number | -1): string
-
-/**
- * f
- * 
- * getsearchhist関数は、検索ヒストリに    
- * 常駐（ピン留め）しているかどうかを取得できます。
- * 
- * @param history_ix 
- * 0から始まるヒストリの番号を指定します。    
- * 
- * @param is_pin 
- * 1を指定すると、ヒストリに常駐（ピン留め）しているかどうかを取得できます。    
- * 文字列で "0"か"1"が返ります。    
- * 文字列なので注意してください。
- * 
- * @example
- * var c = +( getsearchhist(-1) );
- * var i = 0;
- * while(i < c ) {
- *     var a = getsearchhist(i);
- *     var b = getsearchhist(i, 1);
- *     insert(a+"\n");
- *     insert(b+"\n\n");
- *     i++;
- * }
- * 
- * @comment
- * 参照：    
- * @see setsearchhist
- * 
- * @returns
- * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
- * 文字列なので注意してください。
- */
-declare function getsearchhist(history_ix: number, is_pin: 1 | number): "0" | "1"
-
-/**
- * s
- * 
- * setfilehist文は、ファイルヒストリを設定します。
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * -1を指定すると最初に挿入します。    
- * -2を指定すると最後に追加します。    
- * 
- * @param fullpath
- * ヒストリの内容（フルパスのファイル名）を指定します。    
- * 
- * @example
- * setfilehist(0, "c:\\folder\\file.txt");
- * 
- * @comment
- * 参照：
- * @see deletefilehist
- * @see getfilehist
- * @see filehistcount
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setfilehist(history_ix: number, fullpath: string): number
-
-/**
- * s
- * 
- * setfilehist文は、ファイルヒストリを設定します。    
- * その際に、行番号(pos_lineno)と桁位置(pos_column)は、    
- * ファイルタイプ別の設定の「カーソル位置の自動復元」で使われます。
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * -1を指定すると最初に挿入します。    
- * -2を指定すると最後に追加します。    
- * 
- * @param fullpath
- * ヒストリの内容（フルパスのファイル名）を指定します。    
- * 
- * @param is_pin
- * 0を指定します。    
- * 
- * @param pos_lineno
- * 行番号を指定します。    
- * 
- * @param pos_column
- * 桁位置を指定します。    
- * 
- * @example
- * setfilehist(0, "c:\\folder\\file.txt", 0, lineno, column);
- * 
- * @comment
- * 参照：    
- * @see deletefilehist
- * @see getfilehist
- * @see filehistcount
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setfilehist(history_ix: number, fullpath: string, is_pin: 0, pos_lineno: number, pos_column: number): number
-
-/**
- * s
- * 
- * setfilehist文は、ファイルヒストリを設定します。    
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * -1を指定すると最初に挿入します。    
- * -2を指定すると最後に追加します。    
- * 
- * @param pin_status
- * 第３パラメータis_pinによって常駐の指定となっている場合、    
- * "0" を指定するとヒストリに常駐OFF、"1" を指定するとヒストリに常駐ONになります。
- * 
- * @param is_pin
- * 1を指定します。    
- * 
- * @example
- * setfilehist(3, "1", 1);
- * 
- * @comment
- * 参照：    
- * @see deletefilehist
- * @see getfilehist
- * @see filehistcount
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setfilehist(history_ix: number | -1 | -2, pin_status: "0" | "1", is_pin: 1): number
-
-/**
- * s
- * 
- * setpathhist文は、フォルダのヒストリを設定します。
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * フォルダヒストリの数は9個で固定です。    
- * 番号の指定は0～8までになります。
- * 
- * @param fullpath
- * ヒストリの内容（フォルダのパス）を指定します。    
- * 文字列を""にすると、ヒストリを削除します。
- * 
- * @comment
- * 参照：    
- * @see getpathhist
- * 
- * @returns
- * 設定に成功した場合は、０以外
- * 失敗した場合は、０
- */
-declare function setpathhist(history_ix: number, fullpath: string): number
-
-/**
- * s
- * 
- * deletefilehist文は、ファイルヒストリを削除します。    
- * 0以上の値を指定する場合は、0から数えたヒストリの番号で、    
- * １つの項目を削除します。
- * 
- * 削除された項目以降は１つ番号が上がります。
- * 
- * 
- * @param history_ix    
- *  0以上の場合、0から数えたヒストリの番号を指定します。    
- *  -1を指定すると、ヒストリに常駐している項目以外をすべて削除します。    
- *  -2を指定すると、ヒストリに常駐している項目も含めてすべて削除します。    
- * 
- * @example
- * deletefilehist(0);
- * 
- * @comment
- * 参照：    
- * @see setfilehist
- * @see getfilehist
- * @see filehistcount
- * 
- * @returns
- * 設定に成功した場合は、０以外
- * 失敗した場合は、０
- */
-declare function deletefilehist(history_ix: number | -1 | -2): number
-
-/**
- * s
- * 
- * getcliphistは、クリップボード履歴からの取り出しを行います。
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。    
- * 0 が最新の履歴、1 が１つ前、2 が２つ前という具合です。
- * 
- * パラメータが無い場合は、全ての履歴を消去します。    
- * パラメータに0から数えた数値を指定することで、指定した履歴を消すことができます。    
- * 
- * @comment
- * 参照：    
- * @see クリップボードと変数とのやりとり
- * 
- * @returns
- * 取り出しに成功すると、0以外を返す。    
- * 存在しない番号を指定したり、常駐秀丸エディタがいないなどの場合は0を返す。
- */
-declare function getcliphist(history_ix?: number): number
-
 
 /**
  * 
@@ -7139,7 +6590,6 @@ declare function getcliphist(history_ix?: number): number
  * 指定の対象に対応する数値を返す
  */
 declare function getresultex(result_id: number): number
-
 /**
  * f    
  * 
@@ -7163,6 +6613,70 @@ declare function getresultex(result_id: number): number
  * endmacroにパラメータを指定したときの文字列値を返す。
  */
 declare function getresultex(result_id: -1): string
+
+/**
+ * f
+ * 
+ * getsearchhist関数は、検索ヒストリの文字列を取得します。
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。    
+ * 検索ヒストリの最大は100個（0～99まで）です。
+ * 
+ * -1 を指定すると、ヒストリを使用している数を文字列にして返します。
+ * 
+ * @example
+ * var c = +( getsearchhist(-1) ); // + を付けて、文字列を数値に
+ * var i = 0;
+ * while(i <= c ) {
+ *     var a = getsearchhist(i);
+ *     insert(a+"\n");
+ *     i++;
+ * }
+ * 
+ * @comment
+ * 参照：    
+ * @see setsearchhist
+ * 
+ * @returns
+ * 指定に対応する文字列を返す。    
+ * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
+ */
+declare function getsearchhist(history_ix: number | -1): string
+/**
+ * f
+ * 
+ * getsearchhist関数は、検索ヒストリに    
+ * 常駐（ピン留め）しているかどうかを取得できます。
+ * 
+ * @param history_ix 
+ * 0から始まるヒストリの番号を指定します。    
+ * 
+ * @param is_pin 
+ * 1を指定すると、ヒストリに常駐（ピン留め）しているかどうかを取得できます。    
+ * 文字列で "0"か"1"が返ります。    
+ * 文字列なので注意してください。
+ * 
+ * @example
+ * var c = +( getsearchhist(-1) );
+ * var i = 0;
+ * while(i < c ) {
+ *     var a = getsearchhist(i);
+ *     var b = getsearchhist(i, 1);
+ *     insert(a+"\n");
+ *     insert(b+"\n\n");
+ *     i++;
+ * }
+ * 
+ * @comment
+ * 参照：    
+ * @see setsearchhist
+ * 
+ * @returns
+ * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
+ * 文字列なので注意してください。
+ */
+declare function getsearchhist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
 /**
  * f    
@@ -7238,6 +6752,71 @@ declare function gettitle(target_id: number, hidemaru_handle?: number): string
  * キャンセルされた場合は""が返ります。
  */
 declare function browsefile(target_directory: string, filename_wildcard?: string): string
+
+/**
+ * f    
+ * 
+ * keypressedex関数は、    
+ * キーが押されたかどうかを返すkeypressedキーワードの拡張版です。
+ * disablebreakされた状態でのみ利用可能です。
+ *
+ * @param return_keytype    
+ * 取得する方法を指定します。    
+ * - 0を指定する場合は、keypressedキーワードと同じ仮想キーコードを取得します。    
+ * - 1を指定する場合は、仮想キーコードではなく、char関数に相当する文字コードを取得します。    
+ * 例外的に、矢印キーについては、inputcharと同様の秀丸エディタ独自のコードを取得します。    
+ * 例外的に、矢印キー以外の0x20未満の値についてはkeypressedキーワードと同じ仮想キーコードを取得します。(Escキーなどを取得するため）
+ * 
+ * - パラメータ１に0を指定する場合、押されたキーの仮想キーコードを返します。
+ * @example 
+ *  disablebreak();
+ *  insert("Escキーで終わります\n");
+ *  while( 1 ) {
+ *    var c = keypressedex(0);
+ *    if(c==0x1B) { // Esc
+ *      break;
+ *    }
+ *    if(c==0x31) { // 1キー
+ *      insert("1キー\n");
+ *    }
+ *    if(c==0x10) { // Shiftキー VK_SHIFT
+ *      insert("Shiftキー\n");
+ *    }
+ *  }
+ * 
+ * @comment
+ * - パラメータ１に1を指定する場合、
+ * 例えばShift+1キーでキーボードによっては"!"になりますが、"!"に相当する0x21が取得できます。
+ *
+ * @example 
+ *  disablebreak();
+ *  insert("Escキーで終わります\n");
+ *  while( 1 ) {
+ *    var c = keypressedex(1);
+ *    if(c==0x1B) { // Esc
+ *      break;
+ *    }
+ *    if(c==0x31) { // 1キー
+ *      insert("1という文字\n");
+ *    }
+ *    if(c==0x21) { // '!'
+ *      insert("!という文字\n");
+ *    }
+ *  }
+ * 
+ * @comment
+ * 参照：    
+ * @see iskeydown
+ * @see inputchar
+ * @see keypressed
+ * 
+ * @returns
+ * - 引数のreturn_keytypeが0の場合は、仮想キーコードを返す。
+ * - 引数のreturn_keytypeが1の場合は、文字コードを返す。
+ * 
+ * disablebreakされた状態でのみ利用可能。
+ */
+declare function keypressedex(return_keytype: number): number;
 
 /**
  * f
@@ -7823,7 +7402,6 @@ declare function changename(filename: "" | "nul" | string): number
  */
 declare function insertfile(filepath: string, fileoption_flag?: number): number
 
-
 /**
  * s    
  * 
@@ -7983,6 +7561,16 @@ declare function savelf(): number;
 /**
  * s    
  * 
+ * print文は、印刷をします。
+ * @param showdialog 印刷ダイアログを出すかどうかを指定します。
+ * @returns 成功したらresultは0以外になります。    
+ *        　失敗したらresultは0になります。
+ */
+declare function print(showdialog?: number): number;
+
+/**
+ * s    
+ * 
  * saveall文は、「全保存」を実行します。    
  * 保存対象は現在秀丸エディタで開いている全てのファイルのうち    
  * 「更新されたファイル」のみとなります。
@@ -8064,6 +7652,127 @@ declare function openbyshell(text?: string): number;
 declare function openbyhidemaru(): number;
 
 /**
+ * s
+ * 
+ * setfilehist文は、ファイルヒストリを設定します。
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * -1を指定すると最初に挿入します。    
+ * -2を指定すると最後に追加します。    
+ * 
+ * @param fullpath
+ * ヒストリの内容（フルパスのファイル名）を指定します。    
+ * 
+ * @example
+ * setfilehist(0, "c:\\folder\\file.txt");
+ * 
+ * @comment
+ * 参照：
+ * @see deletefilehist
+ * @see getfilehist
+ * @see filehistcount
+ * 
+ * @returns
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
+ */
+declare function setfilehist(history_ix: number, fullpath: string): number
+/**
+ * s
+ * 
+ * setfilehist文は、ファイルヒストリを設定します。    
+ * その際に、行番号(pos_lineno)と桁位置(pos_column)は、    
+ * ファイルタイプ別の設定の「カーソル位置の自動復元」で使われます。
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * -1を指定すると最初に挿入します。    
+ * -2を指定すると最後に追加します。    
+ * 
+ * @param fullpath
+ * ヒストリの内容（フルパスのファイル名）を指定します。    
+ * 
+ * @param is_pin
+ * 0を指定します。    
+ * 
+ * @param pos_lineno
+ * 行番号を指定します。    
+ * 
+ * @param pos_column
+ * 桁位置を指定します。    
+ * 
+ * @example
+ * setfilehist(0, "c:\\folder\\file.txt", 0, lineno, column);
+ * 
+ * @comment
+ * 参照：    
+ * @see deletefilehist
+ * @see getfilehist
+ * @see filehistcount
+ * 
+ * @returns
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
+ */
+declare function setfilehist(history_ix: number, fullpath: string, is_pin: 0, pos_lineno: number, pos_column: number): number
+/**
+ * s
+ * 
+ * setfilehist文は、ファイルヒストリを設定します。    
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * -1を指定すると最初に挿入します。    
+ * -2を指定すると最後に追加します。    
+ * 
+ * @param pin_status
+ * 第３パラメータis_pinによって常駐の指定となっている場合、    
+ * "0" を指定するとヒストリに常駐OFF、"1" を指定するとヒストリに常駐ONになります。
+ * 
+ * @param is_pin
+ * 1を指定します。    
+ * 
+ * @example
+ * setfilehist(3, "1", 1);
+ * 
+ * @comment
+ * 参照：    
+ * @see deletefilehist
+ * @see getfilehist
+ * @see filehistcount
+ * 
+ * @returns
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
+ */
+declare function setfilehist(history_ix: number | -1 | -2, pin_status: "0" | "1", is_pin: 1): number
+
+/**
+ * s
+ * 
+ * setpathhist文は、フォルダのヒストリを設定します。
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * フォルダヒストリの数は9個で固定です。    
+ * 番号の指定は0～8までになります。
+ * 
+ * @param fullpath
+ * ヒストリの内容（フォルダのパス）を指定します。    
+ * 文字列を""にすると、ヒストリを削除します。
+ * 
+ * @comment
+ * 参照：    
+ * @see getpathhist
+ * 
+ * @returns
+ * 設定に成功した場合は、０以外
+ * 失敗した場合は、０
+ */
+declare function setpathhist(history_ix: number, fullpath: string): number
+
+/**
  * s    
  * 
  * setencode文は、エンコードの種類の変更または改行コードの変更をします。    
@@ -8128,6 +7837,36 @@ declare function setencode(n_encode?: number, text_keep?: number, bom_type?: num
  * 失敗したら０を返す。
  */
 declare function stophistoryswitch(): number;
+
+/**
+ * s
+ * 
+ * deletefilehist文は、ファイルヒストリを削除します。    
+ * 0以上の値を指定する場合は、0から数えたヒストリの番号で、    
+ * １つの項目を削除します。
+ * 
+ * 削除された項目以降は１つ番号が上がります。
+ * 
+ * 
+ * @param history_ix    
+ *  0以上の場合、0から数えたヒストリの番号を指定します。    
+ *  -1を指定すると、ヒストリに常駐している項目以外をすべて削除します。    
+ *  -2を指定すると、ヒストリに常駐している項目も含めてすべて削除します。    
+ * 
+ * @example
+ * deletefilehist(0);
+ * 
+ * @comment
+ * 参照：    
+ * @see setfilehist
+ * @see getfilehist
+ * @see filehistcount
+ * 
+ * @returns
+ * 設定に成功した場合は、０以外
+ * 失敗した場合は、０
+ */
+declare function deletefilehist(history_ix: number | -1 | -2): number
 
 /**
  * openfileのダイアログボックス版。
@@ -8224,24 +7963,6 @@ declare function INSERTFILE(): number;
  * 失敗したら0を返す。    
  */
 declare function OPENFILEPART(): number;
-
-/**
- * compfileのダイアログボックス版。
- * 
- * COMPFILE文は、キー割り当てされた「他の秀丸エディタと内容比較...」と同じことをします。    
- * - 開いている秀丸エディタが１つの場合は何も起きません。    
- * - 開いている秀丸エディタが２つの場合は動作環境によって、すぐ比較されるか、比較先ダイアログが出るかが変わります。    
- * - 開いている秀丸エディタが３つ以上の場合は比較先ダイアログが出ます。    
- * 
- * @comment
- * 参照：    
- * @see compfile 文
- * 
- * @returns
- * 成功したら0以外を返す。    
- * 失敗したら0を返す。    
- */
-declare function COMPFILE(): number;
 
 /**
  * deletefile文は、ファイルを削除します。    
@@ -8346,49 +8067,6 @@ declare function down(n_step?: number): number;
 /**
  * s
  * 
- * left文は、カーソル左コマンドと同等のカーソル移動を行います。
- * 
- * @example
- * left();
- *
- * @param n_step
- * 移動する量を指定します。
- * 省略すると1と同じです。
- * 
- * @example
- * left(100);
- * right(90);
- * 
- * @example
- * var ret = left(100);
- * if (ret != 0) {
- *     message("移動した");
- * } else {
- *     message("移動しなかった");
- * }
- *
- * @comment
- * 範囲選択された状態でのleft;やright;は、複数行の選択かどうかなどによって動作が違います。   
- * 通常は、[その他]→[動作環境]→[編集]→[高度な編集2]の「左右キーは必ず範囲選択の先頭/末尾」がOFF相当の動作です。    
- * この動作の違いを無くすには、setcompatiblemodeで0x10000000を指定します。
- *
- * @example
- * setcompatiblemode(0x10000000);
- * beginsel();
- * down();
- * endsel();
- * right();
- * left();
- *  
- * @returns
- * 移動した場合は0以外を返す。    
- * 移動しなかった場合は0を返す。
- */
-declare function left(n_step?: number): number;
-
-/**
- * s
- * 
  * right文は、カーソル右コマンドと同等のカーソル移動を行います。
  * 
  * @example
@@ -8428,6 +8106,49 @@ declare function left(n_step?: number): number;
  * 移動しなかった場合は0を返す。
  */
 declare function right(n_step?: number): number;
+
+/**
+ * s
+ * 
+ * left文は、カーソル左コマンドと同等のカーソル移動を行います。
+ * 
+ * @example
+ * left();
+ *
+ * @param n_step
+ * 移動する量を指定します。
+ * 省略すると1と同じです。
+ * 
+ * @example
+ * left(100);
+ * right(90);
+ * 
+ * @example
+ * var ret = left(100);
+ * if (ret != 0) {
+ *     message("移動した");
+ * } else {
+ *     message("移動しなかった");
+ * }
+ *
+ * @comment
+ * 範囲選択された状態でのleft;やright;は、複数行の選択かどうかなどによって動作が違います。   
+ * 通常は、[その他]→[動作環境]→[編集]→[高度な編集2]の「左右キーは必ず範囲選択の先頭/末尾」がOFF相当の動作です。    
+ * この動作の違いを無くすには、setcompatiblemodeで0x10000000を指定します。
+ *
+ * @example
+ * setcompatiblemode(0x10000000);
+ * beginsel();
+ * down();
+ * endsel();
+ * right();
+ * left();
+ *  
+ * @returns
+ * 移動した場合は0以外を返す。    
+ * 移動しなかった場合は0を返す。
+ */
+declare function left(n_step?: number): number;
 
 /**
  * s
@@ -8542,51 +8263,6 @@ declare function shiftdown(n_step?: number): number;
 /**
  * s
  * 
- * shiftleft文は、Shiftキーを押しながら矢印左キーを押すことに相当する文です。    
- * カーソルの動きやパラメータなどはleftと同じで、    
- * Shiftキーを押しながら操作することに相当するため、範囲選択が広がるなどの動作になります。
- * 
- * @example
- * shiftleft();
- * 
- * @param n_step
- * 移動する量を指定します。
- * 省略すると1と同じです。
- * 
- * @example
- * shiftleft(100);
- * shiftright(90);
- * 
- * @example
- * var ret = shiftleft(100);
- * if (ret != 0) {
- *     message("移動した");
- * } else {
- *     message("移動しなかった");
- * }
- *
- * @comment
- * 範囲選択された状態でのshiftleft;やshiftright;は、複数行の選択かどうかなどによって動作が違います。   
- * 通常は、[その他]→[動作環境]→[編集]→[高度な編集2]の「左右キーは必ず範囲選択の先頭/末尾」がOFF相当の動作です。    
- * この動作の違いを無くすには、setcompatiblemodeで0x10000000を指定します。
- *
- * @example
- * setcompatiblemode(0x10000000);
- * beginsel();
- * shiftdown();
- * endsel();
- * shiftright();
- * shiftleft();
- *  
- * @returns
- * 移動した場合は0以外を返す。    
- * 移動しなかった場合は0を返す。
- */
-declare function shiftleft(n_step?: number): number;
-
-/**
- * s
- * 
  * shiftright文は、Shiftキーを押しながら矢印右キーを押すことに相当する文です。    
  * カーソルの動きやパラメータなどはrightと同じで、    
  * Shiftキーを押しながら操作することに相当するため、範囲選択が広がるなどの動作になります。
@@ -8628,6 +8304,51 @@ declare function shiftleft(n_step?: number): number;
  * 移動しなかった場合は0を返す。
  */
 declare function shiftright(n_step?: number): number;
+
+/**
+ * s
+ * 
+ * shiftleft文は、Shiftキーを押しながら矢印左キーを押すことに相当する文です。    
+ * カーソルの動きやパラメータなどはleftと同じで、    
+ * Shiftキーを押しながら操作することに相当するため、範囲選択が広がるなどの動作になります。
+ * 
+ * @example
+ * shiftleft();
+ * 
+ * @param n_step
+ * 移動する量を指定します。
+ * 省略すると1と同じです。
+ * 
+ * @example
+ * shiftleft(100);
+ * shiftright(90);
+ * 
+ * @example
+ * var ret = shiftleft(100);
+ * if (ret != 0) {
+ *     message("移動した");
+ * } else {
+ *     message("移動しなかった");
+ * }
+ *
+ * @comment
+ * 範囲選択された状態でのshiftleft;やshiftright;は、複数行の選択かどうかなどによって動作が違います。   
+ * 通常は、[その他]→[動作環境]→[編集]→[高度な編集2]の「左右キーは必ず範囲選択の先頭/末尾」がOFF相当の動作です。    
+ * この動作の違いを無くすには、setcompatiblemodeで0x10000000を指定します。
+ *
+ * @example
+ * setcompatiblemode(0x10000000);
+ * beginsel();
+ * shiftdown();
+ * endsel();
+ * shiftright();
+ * shiftleft();
+ *  
+ * @returns
+ * 移動した場合は0以外を返す。    
+ * 移動しなかった場合は0を返す。
+ */
+declare function shiftleft(n_step?: number): number;
 
 /**
  * s
@@ -9260,16 +8981,6 @@ declare function gowordtop(): number;
 /**
  * s
  * 
- * 単語の先頭に移動に移動する。
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-declare function gowordtop2(): number;
-
-/**
- * s
- * 
  * 単語の最後に移動に移動する。
  * 
  * @deprecated
@@ -9280,6 +8991,16 @@ declare function gowordtop2(): number;
  * 返り値は意味を持ちません。
  */
 declare function gowordend(): number;
+
+/**
+ * s
+ * 
+ * 単語の先頭に移動に移動する。
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function gowordtop2(): number;
 
 /**
  * s
@@ -9337,7 +9058,6 @@ declare function prevpos(): number;
  * 返り値は意味を持ちません。
  */
 declare function prevposhistback(): number;
-
 /**
  * s
  * 
@@ -9496,7 +9216,6 @@ declare function nextresult(target_flag?: number): number;
  * 有効な値は返ってこない。
  */
 declare function prevresult(target_flag?: number): number;
-
 
 /**
  * s
@@ -9732,17 +9451,6 @@ declare function copyline(is_multiline?: number): number;
 /**
  * s
  * 
- * cutafter文は、カーソルより後ろを切り抜き
- * 
- * @returns
- * 切り抜きに成功したら１を返す、    
- * 書き込み禁止などで切り抜きに失敗したら０を返す
- */
-declare function cutafter(): number;
-
-/**
- * s
- * 
  * cutline文は、行の切り抜きを行います。
  * 
  * 範囲選択されていない場合は、カーソル位置の行を切り抜きします。    
@@ -9767,6 +9475,17 @@ declare function cutafter(): number;
  * 返り値は意味を持ちません。
  */
 declare function cutline(cutmode?: number): number;
+
+/**
+ * s
+ * 
+ * cutafter文は、カーソルより後ろを切り抜き
+ * 
+ * @returns
+ * 切り抜きに成功したら１を返す、    
+ * 書き込み禁止などで切り抜きに失敗したら０を返す
+ */
+declare function cutafter(): number;
 
 /**
  * s
@@ -10026,6 +9745,28 @@ declare function poppaste(): number;
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
 declare function poppaste2(): number;
+
+/**
+ * s
+ * 
+ * getcliphistは、クリップボード履歴からの取り出しを行います。
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。    
+ * 0 が最新の履歴、1 が１つ前、2 が２つ前という具合です。
+ * 
+ * パラメータが無い場合は、全ての履歴を消去します。    
+ * パラメータに0から数えた数値を指定することで、指定した履歴を消すことができます。    
+ * 
+ * @comment
+ * 参照：    
+ * @see クリップボードと変数とのやりとり
+ * 
+ * @returns
+ * 取り出しに成功すると、0以外を返す。    
+ * 存在しない番号を指定したり、常駐秀丸エディタがいないなどの場合は0を返す。
+ */
+declare function getcliphist(history_ix?: number): number
 
 /**
  * s
@@ -10296,110 +10037,6 @@ declare function clearreservedmultiselall(): number;
 /**
  * s
  * 
- * beginclipboardread文は、    
- * クリップボードからのデータの取り込みを開始することを宣言します。    
- * 
- * getclipboard関数といっしょに使います。
- * 
- * @see getclipboard
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-declare function beginclipboardread(): number;
-
-/**
- * f
- * 
- * getclipboard関数は、クリップボードから１行分のデータを取り出し、それを返します。    
- * 
- * @comment
- * '\x0D'は除去されますが、'\x0A'は行末についてきます。    
- * ただし、クリップボードデータの最後の部分が改行で終わっていない場合は、'\x0A'無しでデータが返ってきます。    
- * 
- * getclipboard()を使うには、まずbeginclipboardreadを実行しないといけません。    
- * beginclipboardreadを実行した直後のgetclipboard()の値はクリップボード内データの１行目で、    
- * ２回目の値は２行目で、以下、３行目、４行目とデータを受けとることができます。
- * 
- * クリップボードの最後までデータを取り出し終わるとgetclipboard()の返す値は""となります。    
- * getclipboard()を続けて呼ぶことができるのは、同じ秀丸エディタ内のみです。    
- * newfileやsetactivehidemaruで別の秀丸エディタに切り替わった場合は、getclipboard()は続けて呼ぶことはできません。    
- * 
- * @comment
- * 参照：    
- * @see beginclipboardread
- * 
- * @example
- * // クリップボードの内容を a[0～] の配列に取り込む例
- * beginclipboardread();
- * var i = 0;
- * var a = [];
- * a[i] = getclipboard();
- * while( a[i] != "" ) {
- *     i = i + 1;
- *     a[i] = getclipboard();
- * }
- * 
- * @returns
- * 取得した文字列を返します。
- */
-declare function getclipboard(): number;
-
-/**
- * s
- * 
- * setclipboard文は、式の値をクリップボードに設定します。
- * 
- * @param text 
- * クリップボードに設定する文字列を指定します。
- * 
- * @example
- * var aaaaa = "あいうえお";
- * setclipboard(aaaaa);
- * 
- * @comment
- * 改行も含めてクリップボードに入れたい場合は以下のように使う必要があります。
- * 
- * @example
- * var aaaaa = "あいうえお" + "\r\n";
- * setclipboard(aaaaa);
- * 
- * @comment
- * 空の文字列（""）を設定すると、クリップボードの内容は全て消去されます。
- * 
- * @example
- * setclipboard("");
- * 
- * @returns
- * 失敗した場合、0を返す。    
- * 成功した場合、0以外を返す。
- */
-declare function setclipboard(text: string): number;
-
-/**
- * s
- * 
- * addclipboard文は、現在のクリップボードのデータに式の値を追加します。    
- * BOX選択してコピーしていた場合、BOX選択であることの情報は失われます。
- * 
- * @param text 
- * クリップボードに追加する文字列を指定します。
- * 
- * @example
- * setclipboard("あいうえお");
- * addclipboard("かきくけこ"); // 最新のクリップボードは"あいうえおかきくけこ" になる。
- * 
- * @see setclipboard
- * 
- * @returns
- * 失敗した場合、0を返す。    
- * 成功した場合、0以外を返す。
- */
-declare function addclipboard(text: string): number;
-
-/**
- * s
- * 
  * backspace文は、    
  * 「Backspace」を実行します。
  * 
@@ -10538,7 +10175,6 @@ declare function deletewordall(): number;
  */
 declare function deletewordfront(): number;
 
-
 /**
  * s
  * 
@@ -10671,7 +10307,6 @@ declare function dupline(duplicate_mode?: number): number;
  */
 declare function insertline(): number;
 
-
 /**
  * s
  * 
@@ -10780,7 +10415,6 @@ declare function undo(undo_type?: number): number;
  * 書き込み禁止などで「やり直しのやり直し」をできなかったら０を返す。
  */
 declare function redo(): number;
-
 
 /**
  * s
@@ -10891,7 +10525,6 @@ declare function shifttab(): number;
  * 常に0を返しますが、返り値は意味を持ちません。
  */
 declare function toupper(target_char_group_flag?: number): 0;
-
 /**
  * f
  * 
@@ -10962,7 +10595,6 @@ declare function toupper(text: string, target_char_group_flag?: number): string;
  * 常に0を返しますが、返り値は意味を持ちません。
  */
 declare function tolower(target_char_group_flag?: number): 0;
-
 /**
  * f
  * 
@@ -11100,7 +10732,6 @@ declare function capslockforgot(): number;
  */
 declare function imeconvforgot(): number;
 
-
 /**
  * s
  * 
@@ -11178,7 +10809,6 @@ declare function reopen(): number;
  * target_textで指定した文字列がそのまま返ります。    
  */
 declare function filter(module_name: string, module_func_name: string, parameters: string, target_text: string) : string
-
 /**
  * f
  * 
@@ -11248,34 +10878,6 @@ declare function filter(module_name: string, module_func_name: string, parameter
  * 詳細なエラーは、getresultex(18)やgetresultex(19)でエラー情報を取得できます。 
  */ 
 declare function filter(module_name: string, module_func_name: string, parameters: string) : number
-
-/**
- * k
- * 
- * 現在実行中のexecjs文によって呼ばれたjsファイルのファイル名をフルパスで表します。
- * execjs文による実行中でない場合はcurrentmacrofilenameと同じです。
- * すべて小文字です。
- * 
- * @example
- * // execjsにより実行されている最中ならば、{filename, directory}のそれぞれのプロパティに有効な値が入る
- * function get_including_by_execjs() {
- *     var cjf = hidemaruGlobal.currentjsfilename();
- *     var cmf = hidemaruGlobal.currentmacrofilename();
- *     if (cjf != cmf) {
- *         var dir = cjf.replace(/[\/\\][^\/\\]+?$/, "");
- *         return {
- *             "filename": cjf,
- *             "directory": dir
- *         };
- *     }
- *     return {};
- * }
- * 
- * @returns
- * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
- * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
- */
-declare function currentjsfilename(): string;
 
 /**
  * s
@@ -11873,11 +11475,6 @@ declare function replace1(): number;
  */
 declare function replacedialog(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
 
-/*
-replaceup, replacedownは、成功した場合はresult1になり、失敗した場合は0になります。
-ダイアログでキャンセルした場合は-2になります。（V6.50以降）
-*/
-
 /**
  * s
  * 
@@ -12293,6 +11890,17 @@ declare function getsearch(): number;
 /**
  * s
  * 
+ * gosearchstarted文は、「検索開始位置へ戻る」を実行します。
+ * 
+ * @returns
+ * 成功した場合は、resultは0以外になります。    
+ * 失敗した場合は、resultは0になります。    
+ */
+declare function gosearchstarted(): number;
+
+/**
+ * s
+ * 
  * setsearch文は、秀丸エディタが内部で保持している検索文字列と検索オプションの内容を設定します。    
  * 
  * @param search_text
@@ -12369,13 +11977,87 @@ declare function setsearch(search_text: string, searchoption_flag: number, searc
 /**
  * s
  * 
- * gosearchstarted文は、「検索開始位置へ戻る」を実行します。
+ * setsearchhist文は、検索ダイアログの検索文字列のヒストリを設定します。    
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * 検索ヒストリの最大は100個（0～99まで）です。    
+ * -1を指定すると最初に挿入します。    
+ * 
+ * @param search_text
+ * ヒストリとして設定したい文字列を指定します。    
+ * 
+ * @param is_pin
+ * 何も指定しないか 0 を指定します。
+ * 
+ * @example
+ * setsearchhist(0, "あいうえお");
+ * 
+ * @comment
+ * 参照：    
+ * @see getsearchhist
  * 
  * @returns
- * 成功した場合は、resultは0以外になります。    
- * 失敗した場合は、resultは0になります。    
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
  */
-declare function gosearchstarted(): number;
+declare function setsearchhist(history_ix: number, search_text: string, is_pin?: 0): number
+/**
+ * s
+ * 
+ * setsearchhist文は、検索ダイアログの検索文字列のヒストリを設定します。    
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * 検索ヒストリの最大は100個（0～99まで）です。    
+ * 
+ * @param pin_status
+ * ヒストリに常駐させるかどうかの指定になります。    
+ * "0" を指定するとヒストリに常駐OFF、"1" を指定するとヒストリに常駐ONになります。
+ * 
+ * @param is_pin
+ * 1 を指定します。
+ * 
+ * @example
+ * setsearchhist(0, "1", 1);
+ * 
+ * @comment
+ * 参照：    
+ * @see getsearchhist
+ * 
+ * @returns
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
+ */
+declare function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
+/**
+ * s
+ * 
+ * setsearchhist文は、検索ダイアログの検索文字列のヒストリを一斉削除します。    
+ * 
+ * @param history_ix    
+ * 0から始まるヒストリの番号を指定します。   
+ * 検索ヒストリの最大は100個（0～99まで）です。    
+ * この指定の番号より1つ大きい番号以降のヒストリが削除されます。
+ * 
+ * @param noop
+ * ""を指定します。
+ * 
+ * @param is_pin
+ * 2 を指定します。
+ * 
+ * @example
+ * setsearchhist(0, "", 2); // 検索ダイアログの検索文字列のヒストリを一斉削除
+ * 
+ * @comment
+ * 参照：    
+ * @see getsearchhist
+ * 
+ * @returns
+ * 設定に成功した場合は、1
+ * 失敗した場合は、０
+ */
+declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
 
 /**
  * s
@@ -12421,93 +12103,6 @@ declare function setreplace(replace_text: string): number
 /**
  * s
  * 
- * setsearchhist文は、検索ダイアログの検索文字列のヒストリを設定します。    
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * 検索ヒストリの最大は100個（0～99まで）です。    
- * -1を指定すると最初に挿入します。    
- * 
- * @param search_text
- * ヒストリとして設定したい文字列を指定します。    
- * 
- * @param is_pin
- * 何も指定しないか 0 を指定します。
- * 
- * @example
- * setsearchhist(0, "あいうえお");
- * 
- * @comment
- * 参照：    
- * @see getsearchhist
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setsearchhist(history_ix: number, search_text: string, is_pin?: 0): number
-
-/**
- * s
- * 
- * setsearchhist文は、検索ダイアログの検索文字列のヒストリを設定します。    
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * 検索ヒストリの最大は100個（0～99まで）です。    
- * 
- * @param pin_status
- * ヒストリに常駐させるかどうかの指定になります。    
- * "0" を指定するとヒストリに常駐OFF、"1" を指定するとヒストリに常駐ONになります。
- * 
- * @param is_pin
- * 1 を指定します。
- * 
- * @example
- * setsearchhist(0, "1", 1);
- * 
- * @comment
- * 参照：    
- * @see getsearchhist
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
-
-/**
- * s
- * 
- * setsearchhist文は、検索ダイアログの検索文字列のヒストリを一斉削除します。    
- * 
- * @param history_ix    
- * 0から始まるヒストリの番号を指定します。   
- * 検索ヒストリの最大は100個（0～99まで）です。    
- * この指定の番号より1つ大きい番号以降のヒストリが削除されます。
- * 
- * @param noop
- * ""を指定します。
- * 
- * @param is_pin
- * 2 を指定します。
- * 
- * @example
- * setsearchhist(0, "", 2); // 検索ダイアログの検索文字列のヒストリを一斉削除
- * 
- * @comment
- * 参照：    
- * @see getsearchhist
- * 
- * @returns
- * 設定に成功した場合は、1
- * 失敗した場合は、０
- */
-declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
-
-/**
- * s
- * 
  * setreplacehist文は、置換ダイアログの置換文字列のヒストリを設定します。    
  * 
  * @param history_ix    
@@ -12533,7 +12128,6 @@ declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
  * 失敗した場合は、０
  */
 declare function setreplacehist(history_ix: number, replace_text: string, is_pin?: 0): number
-
 /**
  * s
  * 
@@ -12562,7 +12156,6 @@ declare function setreplacehist(history_ix: number, replace_text: string, is_pin
  * 失敗した場合は、０
  */
 declare function setreplacehist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
-
 /**
  * s
  * 
@@ -12613,28 +12206,6 @@ declare function setgrepfile(file_glob: string): number;
 /**
  * s
  * 
- * goupdatedown文は、「編集マークの下検索」を実行します。    
- * 
- * @returns
- * 次の編集箇所へと移動した場合には１を返す、    
- * そうでなければ０を返す。
- */
-declare function goupdatedown(): number;
-
-/**
- * s
- * 
- * goupdateup文は、「編集マークの前検索」を実行します。    
- * 
- * @returns
- * 前の編集箇所へと移動した場合には１を返す、    
- * そうでなければ０を返す。
- */
-declare function goupdateup(): number;
-
-/**
- * s
- * 
  * forceinselect文は、検索を明示的に「選択した範囲」として動作させます。    
  * 
  * @param select_mode
@@ -12677,35 +12248,34 @@ declare function forceinselect(select_mode: number): number;
 /**
  * s
  * 
+ * goupdatedown文は、「編集マークの下検索」を実行します。    
+ * 
+ * @returns
+ * 次の編集箇所へと移動した場合には１を返す、    
+ * そうでなければ０を返す。
+ */
+declare function goupdatedown(): number;
+
+/**
+ * s
+ * 
+ * goupdateup文は、「編集マークの前検索」を実行します。    
+ * 
+ * @returns
+ * 前の編集箇所へと移動した場合には１を返す、    
+ * そうでなければ０を返す。
+ */
+declare function goupdateup(): number;
+
+/**
+ * s
+ * 
  * clearupdates文は、「編集マークのクリア」を実行します。
  * 
  * @returns
  * 返り値は意味を持ちません。
  */
 declare function clearupdates(): number;
-
-/**
- * s
- * 
- * grepdialog文は、「grepの実行...」のダイアログボックスを出します。    
- * 
- * 通常の「grepの実行...」コマンドを実行した動作とは違います。    
- * 現在の秀丸エディタが新規作成状態でない場合は新規に秀丸エディタが立ち上がります。    
- * 
- * @example
- * grepdialog();
- * 
- * @comment
- * 参照：
- * @see grep
- * @see grepdialog
- * @see grepdialog2
- * 
- * @returns
- * 通常は、０を返します。    
- * ダイアログでキャンセルした場合は -2 になります。
- */
-declare function grepdialog(): number;
 
 /**
  * s
@@ -12794,6 +12364,29 @@ declare function grepdialog(): number;
 declare function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
+ * s
+ * 
+ * grepdialog文は、「grepの実行...」のダイアログボックスを出します。    
+ * 
+ * 通常の「grepの実行...」コマンドを実行した動作とは違います。    
+ * 現在の秀丸エディタが新規作成状態でない場合は新規に秀丸エディタが立ち上がります。    
+ * 
+ * @example
+ * grepdialog();
+ * 
+ * @comment
+ * 参照：
+ * @see grep
+ * @see grepdialog
+ * @see grepdialog2
+ * 
+ * @returns
+ * 通常は、０を返します。    
+ * ダイアログでキャンセルした場合は -2 になります。
+ */
+declare function grepdialog(): number;
+
+/**
  * grepdialog2文は、grep文と同様のパラメータ指定をして、    
  * ダイアログボックスを出します。
  * 
@@ -12876,7 +12469,6 @@ declare function grepdialog2(search_text: string, search_file: string, search_di
  * 途中で中断された場合は返り値は-1になります。
  */
 declare function localgrep(grep_text:string, searchoption_flag): number;
-
 
 /**
  * s
@@ -13011,7 +12603,7 @@ declare function grepreplace(search_text: string, replace_text: string, search_f
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
- declare function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
+declare function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
 
 /**
  * s
@@ -13045,7 +12637,6 @@ declare function escapeinselect(): number;
  * 返り値は意味を持ちません。
  */
 declare function hilightfound(is_on?: number): number;
-
 
 /**
  * s
@@ -13113,7 +12704,6 @@ declare function hilightfound(is_on?: number): number;
  * 失敗した場合は0を返す。
  */
 declare function colormarker(json: string|object): number;
-
 /**
  * s
  * 
@@ -13126,7 +12716,6 @@ declare function colormarker(json: string|object): number;
  * 失敗した場合は0を返す。
  */
 declare function colormarker(): number;
-
 /**
  * s
  * 
@@ -13263,62 +12852,48 @@ declare function colormarker(): number;
 declare function colormarker(text_color: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
 
 /**
- * f    
+ * s
  * 
- * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。
+ * nextcolormarker文は、カラーマーカーで色付けされている次の場所に移動します。
+ * 前のカラーマーカーに移動するにはprevcolormarker文を使います。    
+ * 全ての引数を省略すると、カラーマーカーで色付けされている次の開始位置に移動します。    
  * 
- * @param target_prop
- * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
- * - 0x0001　文字色を取得    
- * - 0x0002　背景色を取得    
- * - 0x0004　スタイルを取得    
- * - 0x0008　ユーザーデータを取得    
- * - 0x0010　カラーマーカーではない場合でも表示されている実際の色とスタイルを取得    
- * - 0x0020　行末の情報も取得可能にする    
- * - 0x0040　カラーマーカー末尾または幅ゼロのカラーマーカーの情報も取得可能にする（代わりにカラーマーカー先頭は取得できなくなります）    
- * - 0x0080　先頭を1として上から数えて何番目のカラーマーカーであるかを取得    
- * - 0x0100　一時的なカラーマーカーと名前付きレイヤーのカラーマーカーを調べて一番上にある使われているものを取得し、レイヤー名の文字列を""でくくって取得。    
- *           このフラグがある場合は第２パラメータは無視されます。    
- *           予約されたレイヤー（reservedmultiselやfindmarker等）は含まれません。
- * - 0x0200　種類を取得
+ * @param target_flag 
+ * 対象を指定します。以下の値をOR演算した値を指定します。    
+ * - 0x01 カラーマーカーの開始位置
+ * - 0x02 カラーマーカーの終了位置
+ * - 0x04 ユーザーデータと一致するものを探す
+ * - 0x08 カーソル位置を含めて検索する    
+ * 省略すると0x01と同じです。
  * 
- * @param layer_name
- * 指定しない場合、全てのレイヤーが対象です。    
- * 指定すると、指定した文字列のレイヤーに属するものだけを取得します。    
- * 検索の色付けは、findmarkerというキーワードを指定します。    
- * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ * @param user_data 
+ * ユーザーデータを指定します。    
+ * 引数にtarget_flagに0x04が含まれる場合に使われます。    
+ * 
+ * @param layer_name 
+ * レイヤー名を指定します。    
+ * 指定したレイヤーに属するものだけに移動します。    
+ * 省略すると、""の一時的なカラーマーカーと同じです。    
  * 
  * @example
- * selectline();
- * colormarker(0x0000ff, 0xff0000);
- * var a = getcolormarker(0x0001|0x0002);
- * message(a);
+ * nextcolormarker(0x01, 0, "");
  * 
  * @comment
- * カーソル位置の文字がcolormarker文によってカラーマーカーが付けられている場合、その情報を取得します。    
- * 32ビットの値を16進数で表した文字列（"0x"は除く）を連結して返します。    
- * 例えば、文字色が数値で0x00808080、背景色が0x00FFFFFFという場合、getcolormarker( 0x0001 | 0x0002 ) の返す文字列は、"0080808000FFFFFF"になります。    
- * 色は24bitの数値で、例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
- * 
- * 0x0100のフラグがある場合は、レイヤー名が""でくくられて取得されます。    
- * getcolormarker( 0x0001 | 0x0002 | 0x0100 ) の返す文字列は、"0080808000FFFFFF\"mylayer\""のような感じになります。    
- * 連結する順番は、文字色→背景色→スタイル→種類→ユーザーデータ→レイヤー名の順番になります。    
- * 
- * 範囲選択されていても範囲は関係なく、カーソル位置の情報を返します。    
- * 
- * 0x0010 を指定している場合は、カラーマーカーで色付けされていなくても、強調表示された結果の色を取得できます。    
- * カーソル行の文字色モード/下線モード/背景色モードは取得できません。    
- * 「検索文字列の強調」で強調された状態も取得できません。    
- * 
+ * 「一時的なカラーマーカー」のレイヤー名は""です。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ *
  * @comment
  * 参照：
- * @see colormarker
- * @see colorcode
+ * @see prevcolormarker
+ * @see findmarker
+ * @see diff
  * 
  * @returns
- * 指定した種類の情報を文字列で返します。
+ * 移動した場合は、0以外を返す。    
+ * 移動しなかった場合は、0を返す。
  */
-declare function getcolormarker(target_prop: number, layer_name?: string ): string;
+declare function nextcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
 
 /**
  * s
@@ -13363,50 +12938,6 @@ declare function getcolormarker(target_prop: number, layer_name?: string ): stri
  * 移動しなかった場合は、0を返す。
  */
 declare function prevcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
-
-/**
- * s
- * 
- * nextcolormarker文は、カラーマーカーで色付けされている次の場所に移動します。
- * 前のカラーマーカーに移動するにはprevcolormarker文を使います。    
- * 全ての引数を省略すると、カラーマーカーで色付けされている次の開始位置に移動します。    
- * 
- * @param target_flag 
- * 対象を指定します。以下の値をOR演算した値を指定します。    
- * - 0x01 カラーマーカーの開始位置
- * - 0x02 カラーマーカーの終了位置
- * - 0x04 ユーザーデータと一致するものを探す
- * - 0x08 カーソル位置を含めて検索する    
- * 省略すると0x01と同じです。
- * 
- * @param user_data 
- * ユーザーデータを指定します。    
- * 引数にtarget_flagに0x04が含まれる場合に使われます。    
- * 
- * @param layer_name 
- * レイヤー名を指定します。    
- * 指定したレイヤーに属するものだけに移動します。    
- * 省略すると、""の一時的なカラーマーカーと同じです。    
- * 
- * @example
- * nextcolormarker(0x01, 0, "");
- * 
- * @comment
- * 「一時的なカラーマーカー」のレイヤー名は""です。    
- * 検索の色付けは、findmarkerというキーワードを指定します。    
- * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
- *
- * @comment
- * 参照：
- * @see prevcolormarker
- * @see findmarker
- * @see diff
- * 
- * @returns
- * 移動した場合は、0以外を返す。    
- * 移動しなかった場合は、0を返す。
- */
-declare function nextcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
 
 /**
  * s
@@ -13782,7 +13313,6 @@ declare function foundlistoutline(): number;
  * 返り値は意味を持ちません。
  */
 declare function findmarkerlist(): number;
-
 /**
  * s
  * 
@@ -13822,7 +13352,6 @@ declare function findmarkerlist(): number;
  * n_actionによって、それぞれの結果に対応する値を返します。
  */
 declare function findmarkerlist(marker_ix: number, n_action: number): number;
-
 /**
  * s
  * 
@@ -13970,7 +13499,6 @@ declare function colormarkersnapshot(lineno_bgn?: number, column_bgn?: number, l
  * 返り値は意味を持ちません。
  */
 declare function restoredesktop(virtual_desktop_mode?: number): number;
-
 /**
  * s
  * 
@@ -14017,7 +13545,6 @@ declare function restoredesktop(filepath: string, virtual_desktop_mode?: number)
  * 返り値は意味を持ちません。
  */
 declare function savedesktop(virtual_desktop_mode?: number): number;
-
 /**
  * s
  * 
@@ -14222,6 +13749,24 @@ declare function windowlist(): number;
  * 違いが見つかってその位置にカーソル移動した場合は1となります。    
  */
 declare function compfile(hidemaru_handle: number, is_after_cursor: number): number;
+
+/**
+ * compfileのダイアログボックス版。
+ * 
+ * COMPFILE文は、キー割り当てされた「他の秀丸エディタと内容比較...」と同じことをします。    
+ * - 開いている秀丸エディタが１つの場合は何も起きません。    
+ * - 開いている秀丸エディタが２つの場合は動作環境によって、すぐ比較されるか、比較先ダイアログが出るかが変わります。    
+ * - 開いている秀丸エディタが３つ以上の場合は比較先ダイアログが出ます。    
+ * 
+ * @comment
+ * 参照：    
+ * @see compfile 文
+ * 
+ * @returns
+ * 成功したら0以外を返す。    
+ * 失敗したら0を返す。    
+ */
+declare function COMPFILE(): number;
 
 /**
  * s
@@ -14535,7 +14080,6 @@ declare function help4(): number;
  * 成功すると0以外、失敗すると0を返します。
  */
 declare function help5(): number;
-
 /**
  * s
  * 
@@ -14871,59 +14415,6 @@ declare function unfold(): number;
 /**
  * s
  * 
- * foldall文は「折りたたみ」を実行します。
- * 
- * @param fold_condition_flag
- * パラメータを指定して、折りたたみ可能な条件を指定することができます。    
- * パラメータが無い場合はファイルタイプ別の設定に従います。    
- * 以下の値のOR演算した値を指定できます。    
- * - 0x0001    範囲選択 
- * - 0x0002    インデントの深さ 
- * - 0x0004    連続したコメント 
- * - 0x0008    カーソル上の対応する括弧 
- * - 0x0010    #ifdef等の対応 
- * - 0x0020    アウトライン解析との対応 
- * - 0x0040    空行区切り 
- * - 0x0080    行の強調表示区切り 
- * 
- * @param is_show_dialog
- * ダイアログを出すかどうかを指定できます。
- * - 0を指定すると、ダイアログを出しません。
- * - 1を指定すると、ダイアログを出します。
- * - 2または省略すると、ダイアログが出るかどうかは自動で決まります。    
- * 自動で出るかどうかは、第１パラメータのフラグが全てONの状態    
- * （標準設定のままでfoldall;とだけ書いた場合）、ダイアログが出ます。    
- * 何かフラグを明示的に指定している場合は、ダイアログは出ません。
- * 
- * @example
- * foldall(0x0002); //インデントの深さで折りたたみ
- * 
- * @comment
- * 参照：
- * @see fold
- * 
- * @returns
- * 返り値は意味を持ちません。    
- */
-declare function foldall(fold_condition_flag?: number, is_show_dialog?: number): number;
-
-/**
- * s
- * 
- * unfold文は「全て展開」を実行します。
- * 
- * @comment
- * 参照：
- * @see unfold
- * 
- * @returns
- * 返り値は意味を持ちません。    
- */
-declare function unfoldall(): number;
-
-/**
- * s
- * 
  * nextfoldableは「次の折りたたみ可能行」コマンド、と同じ働きをします。
  * 
  * @param fold_condition_flag
@@ -15000,6 +14491,59 @@ declare function prevfoldable(fold_condition_flag?: number): number;
  * 返り値は意味を持ちません。    
  */
 declare function selectfoldable(fold_condition_flag?: number): number;
+
+/**
+ * s
+ * 
+ * foldall文は「折りたたみ」を実行します。
+ * 
+ * @param fold_condition_flag
+ * パラメータを指定して、折りたたみ可能な条件を指定することができます。    
+ * パラメータが無い場合はファイルタイプ別の設定に従います。    
+ * 以下の値のOR演算した値を指定できます。    
+ * - 0x0001    範囲選択 
+ * - 0x0002    インデントの深さ 
+ * - 0x0004    連続したコメント 
+ * - 0x0008    カーソル上の対応する括弧 
+ * - 0x0010    #ifdef等の対応 
+ * - 0x0020    アウトライン解析との対応 
+ * - 0x0040    空行区切り 
+ * - 0x0080    行の強調表示区切り 
+ * 
+ * @param is_show_dialog
+ * ダイアログを出すかどうかを指定できます。
+ * - 0を指定すると、ダイアログを出しません。
+ * - 1を指定すると、ダイアログを出します。
+ * - 2または省略すると、ダイアログが出るかどうかは自動で決まります。    
+ * 自動で出るかどうかは、第１パラメータのフラグが全てONの状態    
+ * （標準設定のままでfoldall;とだけ書いた場合）、ダイアログが出ます。    
+ * 何かフラグを明示的に指定している場合は、ダイアログは出ません。
+ * 
+ * @example
+ * foldall(0x0002); //インデントの深さで折りたたみ
+ * 
+ * @comment
+ * 参照：
+ * @see fold
+ * 
+ * @returns
+ * 返り値は意味を持ちません。    
+ */
+declare function foldall(fold_condition_flag?: number, is_show_dialog?: number): number;
+
+/**
+ * s
+ * 
+ * unfold文は「全て展開」を実行します。
+ * 
+ * @comment
+ * 参照：
+ * @see unfold
+ * 
+ * @returns
+ * 返り値は意味を持ちません。    
+ */
+declare function unfoldall(): number;
 
 /**
  * s
@@ -15341,7 +14885,6 @@ declare function playsync(wav_filepath: string): number;
  * 返り値は意味を持ちません。
  */
 declare function debuginfo(output_mode: number): number;
-
 /**
  * s
  * 
@@ -15368,7 +14911,6 @@ declare function debuginfo(output_mode: number): number;
  * 返り値は意味を持ちません。
  */
 declare function debuginfo(output_mode: number): number;
-
 /**
  * s
  * 
@@ -15459,7 +15001,6 @@ declare function showvars(): number;
  * 返り値は意味を持ちません。
  */
 declare function title(title_text: string, target_location: number): number;
-
 /**
  * s
  * 
@@ -15774,6 +15315,26 @@ declare function runsync2(command: string): number;
 declare function runex(command: string, is_wait_sync?: number, stdin_prop?: number, in_filepath?: string, stdout_prop?: number, out_filepath?: string, stderr_prop?: number, err_filepath?: string, work_folder_prop?: number, work_folderpath?: string, show_window_prop?: number, is_hide_redirect?: number, n_encode?: number, extension_flags?: number): number;
 
 /**
+ * z    
+ * 
+ * @throws "endmacro"
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function endmacro(): 0;
+
+/**
+ * z    
+ * 
+ * @throws "endmacroall"
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function endmacroall(): 0;
+
+/**
  * s
  * 
  * disabledraw文は、画面の書き換えを禁止します。    
@@ -15938,6 +15499,18 @@ declare function disabledraw2(): number;
 /**
  * s
  * 
+ * enablebreak文はdisablebreakされた状態を解除します。    
+ * 
+ * @see disablebreak
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function enablebreak(): number;
+
+/**
+ * s
+ * 
  * disablebreak文は、マクロの中断を禁止します。    
  * 
  * @comment
@@ -15956,18 +15529,6 @@ declare function disabledraw2(): number;
  * 返り値は意味を持ちません。
  */
 declare function disablebreak(): number;
-
-/**
- * s
- * 
- * enablebreak文はdisablebreakされた状態を解除します。    
- * 
- * @see disablebreak
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-declare function enablebreak(): number;
 
 /**
  * s
@@ -16296,7 +15857,6 @@ declare function setfloatmode(to_floatmode_on: number): number;
  * message("設定前：0x"+hex(old_value)+"\n"+"設定後：0x"+hex(new_value));
  */
 declare function seterrormode(n_type: number, n_value: number): number;
-
 
 /**
  * s
@@ -16711,7 +16271,6 @@ declare function setmenudelay(millisecond: number): number;
  * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
  */
 declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): number;
-
 
 /**
  * f
@@ -17197,121 +16756,6 @@ declare function closereg(): number;
 /**
  * s
  * 
- * deletereg文は、レジストリのキーを削除します。
- * 
- * @example
- * deletereg("CURRENTUSER", "Software\\xxxx\\yyyy");
- *
- * @param root_key
- * ルートとなるキー名を指定します。
- * 
- * @param sub_key
- * サブキー名を指定します。
- * 
- * @param own_hidemaru_reg
- * 指定しないか0を指定する場合、32bit版は32bit版の情報、64bit版は64bit版の情報にそのままアクセスします。    
- * 1を指定すると、32bit版でも64bitの情報にアクセスします。    
- * 2を指定すると、64bit版でも32bitの情報にアクセスします。    
- * 
- * @comment
- * パラメータの指定の仕方はopenreg/createregと同じです。    
- * キーの中にサブキーがある場合でも、それらをまとめて削除します。    
- * 管理者権限の注意、64bit版/32bit版の注意、持ち出しキットの注意などもopenregと同じです。
- * 
- * @returns
- * 成功したら0以外を返す。    
- * 失敗したら0を返す。
- */
-declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
-
-/**
- * f
- * 
- * getregbinary関数は、レジストリからREG_BINARY型のバイナリ値を、文字列に変換して取得します。
- * 
- * @param name 
- * 値の名前を指定します。    
- *
- * 値を書き込むにはwriteregbinaryを使います。
- * 
- * @param seek_cur 
- * 0から数えた何バイト目から取得するかを指定します。    
- * 省略した場合は0になります。
- * 
- * @param read_size 
- * 何バイト分取得するかのサイズを指定します。    
- * 省略した場合は全てのサイズになります。    
- * 
- * @example
- * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
- * var s = getregbinary( "TabEditMouse", 0, 10 );
- * closereg();
- * message(s);
- * 
- * @comment
- * 参照：
- * @see writeregbinary
- * 
- * @returns
- * 16進数の文字列として、１バイトあたり２文字の文字列で返します。
- */
-declare function getregbinary(name: string, seek_cur?: number, read_size?: number): string;
-
-/**
- * f
- * 
- * getregnum関数は、オープンされたレジストリからREG_DWORD型の値を数値を取得します。    
- * 
- * REG_DWORD型の値を書き込むには、writeregnumを使います。    
- * 
- * @param name 
- * 値の名前を指定します。    
- * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
- * 
- * @example
- * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
- * var n = getregnum( "RegVer")
- * closereg();
- * message(hex(n));
- * 
- * @comment
- * 参照：
- * @see writeregnum
- * 
- * @returns
- * 数値の内容を返します。
- */
-declare function getregnum(name: string): number;
-
-/**
- * f
- * 
- * getregstr関数は、オープンされたレジストリからREG_SZ型の文字列値を取得します。    
- * 
- * REG_SZ型の値を書き込むには、writeregstrを使います。
- * 
- * @param name 
- * 値の名前を指定します。    
- * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
- * 
- * @example
- * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
- * var s = getregstr( "Spec");
- * closereg();
- * message(s);
- * 
- * @comment
- * 参照：    
- * @see writeregstr
- * 
- * @returns
- * 文字列値の内容を返します。
- */
-declare function getregstr(name: string): string;
-
-/**
- * s
- * 
  * writeregbinary文は、レジストリにREG_BINARY型のバイナリ値を書き込みます。    
  *
  * 値を読み込むにはgetregbinaryを使います。    
@@ -17406,6 +16850,91 @@ declare function writeregstr(name: string, value: string): number;
 /**
  * f
  * 
+ * getregbinary関数は、レジストリからREG_BINARY型のバイナリ値を、文字列に変換して取得します。
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ *
+ * 値を書き込むにはwriteregbinaryを使います。
+ * 
+ * @param seek_cur 
+ * 0から数えた何バイト目から取得するかを指定します。    
+ * 省略した場合は0になります。
+ * 
+ * @param read_size 
+ * 何バイト分取得するかのサイズを指定します。    
+ * 省略した場合は全てのサイズになります。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru\\Env");
+ * var s = getregbinary( "TabEditMouse", 0, 10 );
+ * closereg();
+ * message(s);
+ * 
+ * @comment
+ * 参照：
+ * @see writeregbinary
+ * 
+ * @returns
+ * 16進数の文字列として、１バイトあたり２文字の文字列で返します。
+ */
+declare function getregbinary(name: string, seek_cur?: number, read_size?: number): string;
+
+/**
+ * f
+ * 
+ * getregnum関数は、オープンされたレジストリからREG_DWORD型の値を数値を取得します。    
+ * 
+ * REG_DWORD型の値を書き込むには、writeregnumを使います。    
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var n = getregnum( "RegVer")
+ * closereg();
+ * message(hex(n));
+ * 
+ * @comment
+ * 参照：
+ * @see writeregnum
+ * 
+ * @returns
+ * 数値の内容を返します。
+ */
+declare function getregnum(name: string): number;
+
+/**
+ * f
+ * 
+ * getregstr関数は、オープンされたレジストリからREG_SZ型の文字列値を取得します。    
+ * 
+ * REG_SZ型の値を書き込むには、writeregstrを使います。
+ * 
+ * @param name 
+ * 値の名前を指定します。    
+ * 既定の値(標準の値)を取得する場合は、空の文字列（""）を指定します。    
+ * 
+ * @example
+ * openreg("CURRENTUSER", "Software\\Hidemaruo\\Hidemaru");
+ * var s = getregstr( "Spec");
+ * closereg();
+ * message(s);
+ * 
+ * @comment
+ * 参照：    
+ * @see writeregstr
+ * 
+ * @returns
+ * 文字列値の内容を返します。
+ */
+declare function getregstr(name: string): string;
+
+/**
+ * f
+ * 
  * enumregkey関数は、オープンされたレジストリのサブキーを列挙します。
  * 
  * @param subkey_ix 
@@ -17481,6 +17010,36 @@ declare function enumregkey(subkey_ix: number): string;
  * ""を返したらこれ以上の値はありません。
  */
 declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
+
+/**
+ * s
+ * 
+ * deletereg文は、レジストリのキーを削除します。
+ * 
+ * @example
+ * deletereg("CURRENTUSER", "Software\\xxxx\\yyyy");
+ *
+ * @param root_key
+ * ルートとなるキー名を指定します。
+ * 
+ * @param sub_key
+ * サブキー名を指定します。
+ * 
+ * @param own_hidemaru_reg
+ * 指定しないか0を指定する場合、32bit版は32bit版の情報、64bit版は64bit版の情報にそのままアクセスします。    
+ * 1を指定すると、32bit版でも64bitの情報にアクセスします。    
+ * 2を指定すると、64bit版でも32bitの情報にアクセスします。    
+ * 
+ * @comment
+ * パラメータの指定の仕方はopenreg/createregと同じです。    
+ * キーの中にサブキーがある場合でも、それらをまとめて削除します。    
+ * 管理者権限の注意、64bit版/32bit版の注意、持ち出しキットの注意などもopenregと同じです。
+ * 
+ * @returns
+ * 成功したら0以外を返す。    
+ * 失敗したら0を返す。
+ */
+declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
 
 /**
  * s
@@ -18010,7 +17569,6 @@ type typeConfigSettingName = "xFont:"|"xFontSize:"|"xFontPoint:"|"xFontDecimal:"
  * 返り値は意味を持ちません。
  */
 declare function config(setting_expression: typeConfigSettingName): number
-
 /**
  * s
  * 
@@ -18382,7 +17940,6 @@ type typeConfigGettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCh
  * 取得する情報によって文字列型と数値型のどちらかが返ります。
  */
 declare function getconfig(key: typeConfigGettingName): string | number
-
 /**
  * f
  * 
@@ -18807,7 +18364,6 @@ declare function loadhilight(filepath: string, is_temp: number, read_flag?: numb
  */
 declare function savehilight(filepath: string, read_flag?: number): number;
 
-
 /**
  * s
  * 
@@ -19007,7 +18563,6 @@ declare function setmonitor(monitor_ix: number): number;
  * 返り値は意味を持ちません。
  */
 declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
-
 /**
  * s
  * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
@@ -19218,52 +18773,6 @@ declare function findspecial(search_type: number, code: number, search_direction
 /**
  * f
  * 
- * getstaticvariable関数は、静的な変数を取得します。
- * 
- * @param key 
- * 変数名を指定します。大文字と小文字の区別はされません。    
- * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。
- * 
- * @param scope_type
- * 共有されている静的な変数かどうかを指定します。    
- * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
- * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
- * - 1 を指定すると、全ての秀丸エディタで有効です。    
- * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
- * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
- * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
- * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
- * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
- * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
- * 他のマクロとの競合はありません。
- *
- * @example
- * setstaticvariable("TestA", "全ての秀丸エディタで有効",1);
- * message(getstaticvariable( "TestA", 1 ));
- * 
- * setstaticvariable("TestB", "現在の秀丸エディタで有効",0);
- * message(getstaticvariable( "TestB", 0 ));
- * 
- * message("共有されている名前一覧:\n"+getstaticvariable( "", 1 ));
- * message("現在の秀丸エディタ内の名前一覧:\n"+getstaticvariable( "", 0 ));
- * 
- * setstaticvariable("TestC", "長大なテキスト文字列", -1); // -1 はメモリ制限を受けない
- * message(getstaticvariable( "TestC", -1 )); // 秀丸マクロ変数で受け取らず、直接返り値を利用すればメモリ制限を受けない
- * 
- * @comment
- * 参照：
- * @see setstaticvariable
- * @see Hidemaru_GetStaticVariable
- * 
- * @returns
- * keyとscope_typeで指定された静的変数の内容を返す。    
- * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
- */
-declare function getstaticvariable(key: string, scope_type: number): string;
-
-/**
- * f
- * 
  * setstaticvariable関数は、静的な変数を書き込みます。
  * 
  * @param key 
@@ -19314,6 +18823,52 @@ declare function getstaticvariable(key: string, scope_type: number): string;
 declare function setstaticvariable(key: string, value: string, scope_type: number): string;
 
 /**
+ * f
+ * 
+ * getstaticvariable関数は、静的な変数を取得します。
+ * 
+ * @param key 
+ * 変数名を指定します。大文字と小文字の区別はされません。    
+ * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。
+ * 
+ * @param scope_type
+ * 共有されている静的な変数かどうかを指定します。    
+ * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+ * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
+ * - 1 を指定すると、全ての秀丸エディタで有効です。    
+ * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+ * 「ファイルを閉じる」「閉じて開く」をしても保持されます。
+ * - -1 を指定すると、別の使い方になります。静的ではなく、一時的な変数として扱います。    
+ * 共有せず、現在の秀丸エディタだけで有効で、実行中のマクロ内だけで有効です。    
+ * マクロが終了したら消えます。メモリ上限の設定の影響を受けないため、    
+ * 大きなテキストなどを格納するのにむいています(マクロ変数だとメモリ制限の影響を受けるため)。    
+ * 他のマクロとの競合はありません。
+ *
+ * @example
+ * setstaticvariable("TestA", "全ての秀丸エディタで有効",1);
+ * message(getstaticvariable( "TestA", 1 ));
+ * 
+ * setstaticvariable("TestB", "現在の秀丸エディタで有効",0);
+ * message(getstaticvariable( "TestB", 0 ));
+ * 
+ * message("共有されている名前一覧:\n"+getstaticvariable( "", 1 ));
+ * message("現在の秀丸エディタ内の名前一覧:\n"+getstaticvariable( "", 0 ));
+ * 
+ * setstaticvariable("TestC", "長大なテキスト文字列", -1); // -1 はメモリ制限を受けない
+ * message(getstaticvariable( "TestC", -1 )); // 秀丸マクロ変数で受け取らず、直接返り値を利用すればメモリ制限を受けない
+ * 
+ * @comment
+ * 参照：
+ * @see setstaticvariable
+ * @see Hidemaru_GetStaticVariable
+ * 
+ * @returns
+ * keyとscope_typeで指定された静的変数の内容を返す。    
+ * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
+ */
+declare function getstaticvariable(key: string, scope_type: number): string;
+
+/**
  * s
  * 
  * setregularcache文は、検索のための正規表現のキャッシュの具合を指定します。    
@@ -19330,7 +18885,6 @@ declare function setstaticvariable(key: string, value: string, scope_type: numbe
  * 返り値は意味を持ちません。
  */
 declare function setregularcache(cache_mode: number): number;
-
 /**
  * s
  * 
@@ -19567,6 +19121,110 @@ declare function getcurrenttab(id_type: number, tab_group_id): number;
 declare function gettabhandle(id_type: number, tab_group_id, tab_order: number): number;
 
 /**
+ * s
+ * 
+ * beginclipboardread文は、    
+ * クリップボードからのデータの取り込みを開始することを宣言します。    
+ * 
+ * getclipboard関数といっしょに使います。
+ * 
+ * @see getclipboard
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function beginclipboardread(): number;
+
+/**
+ * f
+ * 
+ * getclipboard関数は、クリップボードから１行分のデータを取り出し、それを返します。    
+ * 
+ * @comment
+ * '\x0D'は除去されますが、'\x0A'は行末についてきます。    
+ * ただし、クリップボードデータの最後の部分が改行で終わっていない場合は、'\x0A'無しでデータが返ってきます。    
+ * 
+ * getclipboard()を使うには、まずbeginclipboardreadを実行しないといけません。    
+ * beginclipboardreadを実行した直後のgetclipboard()の値はクリップボード内データの１行目で、    
+ * ２回目の値は２行目で、以下、３行目、４行目とデータを受けとることができます。
+ * 
+ * クリップボードの最後までデータを取り出し終わるとgetclipboard()の返す値は""となります。    
+ * getclipboard()を続けて呼ぶことができるのは、同じ秀丸エディタ内のみです。    
+ * newfileやsetactivehidemaruで別の秀丸エディタに切り替わった場合は、getclipboard()は続けて呼ぶことはできません。    
+ * 
+ * @comment
+ * 参照：    
+ * @see beginclipboardread
+ * 
+ * @example
+ * // クリップボードの内容を a[0～] の配列に取り込む例
+ * beginclipboardread();
+ * var i = 0;
+ * var a = [];
+ * a[i] = getclipboard();
+ * while( a[i] != "" ) {
+ *     i = i + 1;
+ *     a[i] = getclipboard();
+ * }
+ * 
+ * @returns
+ * 取得した文字列を返します。
+ */
+declare function getclipboard(): number;
+
+/**
+ * s
+ * 
+ * setclipboard文は、式の値をクリップボードに設定します。
+ * 
+ * @param text 
+ * クリップボードに設定する文字列を指定します。
+ * 
+ * @example
+ * var aaaaa = "あいうえお";
+ * setclipboard(aaaaa);
+ * 
+ * @comment
+ * 改行も含めてクリップボードに入れたい場合は以下のように使う必要があります。
+ * 
+ * @example
+ * var aaaaa = "あいうえお" + "\r\n";
+ * setclipboard(aaaaa);
+ * 
+ * @comment
+ * 空の文字列（""）を設定すると、クリップボードの内容は全て消去されます。
+ * 
+ * @example
+ * setclipboard("");
+ * 
+ * @returns
+ * 失敗した場合、0を返す。    
+ * 成功した場合、0以外を返す。
+ */
+declare function setclipboard(text: string): number;
+
+/**
+ * s
+ * 
+ * addclipboard文は、現在のクリップボードのデータに式の値を追加します。    
+ * BOX選択してコピーしていた場合、BOX選択であることの情報は失われます。
+ * 
+ * @param text 
+ * クリップボードに追加する文字列を指定します。
+ * 
+ * @example
+ * setclipboard("あいうえお");
+ * addclipboard("かきくけこ"); // 最新のクリップボードは"あいうえおかきくけこ" になる。
+ * 
+ * @see setclipboard
+ * 
+ * @returns
+ * 失敗した場合、0を返す。    
+ * 成功した場合、0以外を返す。
+ */
+declare function addclipboard(text: string): number;
+
+/**
  * f
  * 
  * getclipboardinfo関数は、現在のクリップボードの状態を取得します。
@@ -19608,27 +19266,260 @@ declare function getclipboardinfo(info_type: number): number;
 declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
 
 /**
+ * k    
+ * 
+ * 自動起動マクロとしてマクロが実行されたとき、どのような種類かを表します。
+ *
+ * @returns
+ * 0 自動起動マクロとして実行されていない    
+ * 1 ファイルを開いた直後    
+ * 2 新規作成直後    
+ * 3 保存直前と直後    
+ * 4 印刷直前と直後    
+ * 5 編集後タイマー    
+ * 6 カーソル移動後タイマー    
+ * 7 ファイルを閉じる直前    
+ * 8 アクティブ切り替え後(V8.00以降)    
+ * 9 テンプレート(スニペット)による実行(V9.16以降)    
+ */
+declare function event(): number;
+
+/**
  * f
  * 
- * loadDll関数は、hidemaru.loadDll関数の別名となります。
+ * geteventparam関数は、自動起動マクロとしてマクロが呼び出されたとき、    
+ * さらにどのような条件で呼び出されたかなどの詳細な情報を取得します。    
  * 
- * @param dllpath
- * DLLのファイル名を指定します。
- * 
- * @example
- * var dll = loaddll("c:\\folder\\mydll.dll");
+ * @param event_infomation_ix
+ * どのような情報を取得するかを指定します。    
+ * eventによって意味が違います。    
  * 
  * @comment
- * 参照：
- * @see hidemaru.loadDll
- * @see hidemaru.ILoadDllResult
+ * eventの値によって以下の情報を返します。    
+ * - ファイルを開いた直後(event==1)    
+ * geteventparam(0)の返り値：    
+ *   - 0 外部から開いた    
+ *   - 1 秀丸エディタから開いた    
+ *   - 2 常駐秀丸エディタから開いた    
+ *   - 3 タグジャンプによって開いた(V8.30以降)    
+ *
+ * @example
+ * if( event() == 1 ) {
+ *     var a = geteventparam( 0 );
+ * }
+ * 
+ * @comment
+ * - 新規作成直後(event==2)    
+ * geteventparam(0)の返り値：    
+ *    - 0 外部から開いた    
+ *    - 1 秀丸エディタから開いた    
+ *    - 2 常駐秀丸エディタから開いた    
+ * 
+ * @example
+ * if( event() == 2 ) {
+ *     var a = geteventparam( 0 );
+ * }
+ *
+ * @comment
+ * - 保存直前と直後(event==3)    
+ * geteventparam(0)の返り値：    
+ *    - 0 保存直前    
+ *    - 1 保存直後    
+ * 
+ * @example
+ * if( event() == 3 ) {
+ *     var a = geteventparam( 0 );
+ *     if( a == 0 ) {
+ *         message("保存直前");
+ *     } else if( a == 1 ) {
+ *         message("保存直後");
+ *     }
+ * }
+ * 
+ * @comment
+ * - 印刷直前と直後(event==4)    
+ * geteventparam(0)の返り値：    
+ *    - 0 印刷直前    
+ *    - 1 印刷直後    
+ * 
+ * @example
+ * if( event() == 4 ) {
+ *     var a = geteventparam( 0 );
+ * }
+ * 
+ * @comment
+ * - 編集後タイマー(event==5)    
+ *   - geteventparam(0)の返り値：    
+ *     - 0 通常の編集    
+ *     - 1 やり直しによる編集    
+ *   - geteventparam(1)の返り値：    
+ *     - 0 改行以外の編集    
+ *     - 1 改行による編集（遅延時間0msのときのみ）    
+ *   - geteventparam(2)の返り値：    
+ *     - 0 単語補完の決定直後以外 
+ *     - 1 単語補完の決定直後    
+ *   - geteventparam(3)の返り値：    
+ *      - 遅延時間(ms)    
+ *   - geteventparam(4)の返り値：    
+ *      - 遅延時間0msのとき、入力された一文字の文字コード。    
+ *   - geteventparam(5)の返り値：    
+ *      - 0 削除ではない編集
+ *      - 1 通常の削除
+ *      - 2 BackSpace
+ *      - 3 範囲選択
+ *      - 4 行削除
+ *      - 5 単語削除
+ *      - 6 カーソルより後ろを削除
+ *      - 7 カーソルより前を削除
+ *      - 8 置換
+ *      - 9 全置換
+ *      - 10 複数選択の入力
+ *      - 11 複数選択の削除
+ *      - 12 BOX選択の入力
+ *      - 13 BOX削除
+ *      - 14 CSV/TSVモードで列の移動
+ * 
+ * @example
+ * if( event() == 5 ) {
+ *     var undo = geteventparam( 0 );
+ *     var enter = geteventparam( 1 );
+ *     var autocomp = geteventparam( 2 );
+ *     var time = geteventparam( 3 );
+ *     var char = geteventparam( 4 );
+ *     var type = geteventparam( 5 );
+ * }
+ * 
+ * @comment
+ * - カーソル移動後タイマー(event==6)    
+ *   - geteventparam(3)の返り値：    
+ *     - 遅延時間(ms)    
+ *   - geteventparam(4)の返り値：    
+ *     - どういうコマンドによってカーソル移動したかを表すコマンド値。    
+ *       通常の矢印キーによりカーソル移動は0になります。    
+ *       コマンド値を調べるするマクロの例：（ステータスバーに表示）     
+ *   - geteventparam(5)の返り値：    
+ *      - 最後に実行した上検索/下検索が成功したかどうかを返します。    
+ *        title(str(geteventparam(4)),1);    
+ *        title(-1,1);    
+ * 
+ * @example
+ * if ( event() == 6 ) {
+ *     var time = geteventparam( 3 );
+ *     var cmd = geteventparam( 4 );
+ *     var found = geteventparam( 5 );
+ * }
+ * 
+ * @comment
+ * - ファイルを閉じる直前(event==7)    
+ *    - geteventparam(1)の返り値：    
+ *      - 0 破棄して終了以外    
+ *      - 1 破棄して終了    
+ * 
+ * @example
+ * if ( event() == 7 ) {
+ *     var a = geteventparam( 1 );
+ * }
+ * 
+ * @example
+ * - アクティブ切り替え後(event==8)    
+ *   - geteventparam(0)の返り値：    
+ *     - 0 タグジャンプによって開いた以外    
+ *     - 3 タグジャンプによって開いた    
+ *   - geteventparam(3)の返り値：    
+ *     - 遅延時間(ms)    
+ * 
+ * @example
+ * if ( event() == 8 ) {
+ *     var tagjump = geteventparam( 0 );
+ *     var time = geteventparam( 3 );
+ * }
+ * 
+ * @comment
+ * - テンプレート(スニペット)による実行(event==9)    
+ *   - geteventparam(0)の返り値：    
+ *     - 0 直前の選択内容    
+ * 
+ * @example
+ * if ( event() == 9 ) {
+ *     var seltext = geteventparam( 0 );
+ * }
  * 
  * @returns
-   * 読み込みに成功した場合、hidemaru.ILoadDllResultを満たすオブジェクトを返します。    
-   * 失敗した場合、undefinedを返します。
+ * 指定された情報を返します。    
+ * eventとパラメータの値によって意味が違います。    
+ * 指定によって数値が返るか文字列が返るかも違います。
  */
- declare function loadDll(dllpath: string): hidemaru.ILoadDllResult | undefined;
+declare function geteventparam(event_infomation_ix: number): number | string
 
+/**
+ * s    
+ * 
+ * seteventnotify文は、自動起動マクロとしてマクロが呼び出されたとき、    
+ * マクロ実行後の処理を秀丸エディタに指示します。
+ * 
+ * eventの値によって意味が違います。
+ * geteventnotifyを使うことで、seteventnotifyで設定された値を取得できます。
+ * 
+ * @param notify_target    
+ * @comment
+ * - 自動起動マクロとして実行されていない(event==0)    
+ * フォーカスが各種の枠にあるとき、キー割り当てによって   
+ * マクロが実行された場合に本来のキー操作を行うかどうかを決めます。    
+ * 枠のキー操作を続行する場合、マクロは本体に関する操作等は行わず、    
+ * すぐにseteventnotify(1);してマクロを終了する必要があります。    
+ * @example
+ *   seteventnotify(0); // 枠のキー操作を中断
+ *   seteventnotify(1); // 枠のキー操作を続行
+ * 
+ * @comment
+ * - ファイルを開いた直後(event==1)    
+ * なし
+ * 
+ * - 新規作成直後(event==2)    
+ * なし
+ * 
+ * - 保存直前と直後(event==3) かつ、geteventparam(0)==0で保存直前の場合。    
+ * @example
+ *   seteventnotify(0); // 保存処理を続行
+ *   seteventnotify(1); // 保存処理を中断
+ * 
+ * - 印刷直前と直後(event==4) かつ、geteventparam(0)==0で印刷直前の場合。    
+ * @example
+ *   seteventnotify(0); // 印刷処理を続行
+ *   seteventnotify(1); // 印刷処理を中断
+ * 
+ * - 編集後タイマー(event==5)    
+ * なし
+ * 
+ * - カーソル移動後タイマー(event==6)    
+ * なし
+ * 
+ * - ファイルを閉じる直前(event==7)    
+ * @example
+ *   seteventnotify(0); // 閉じる処理を続行
+ *   seteventnotify(1); // 閉じる処理を中断
+ *   seteventnotify(2); // 保存するかどうかの問い合わせは出さずに続行
+ *
+ * - アクティブ切り替え後(event==8)
+ * なし
+ * 
+ * @returns
+ * result相当。成功すれば1、失敗すれば0;
+ */
+declare function seteventnotify(notify_target: number): number;
+
+/**
+ * f    
+ * 
+ * geteventnotify関数は、seteventnotifyで設定された値を取得します。
+ * 
+ * @param notify_target 0を指定してください。    
+ * パラメータは将来のために予約されています。
+ * 
+ * @returns seteventnotifyで設定された値を返します。
+ * 
+ */
+declare function geteventnotify(notify_target: 0): number;
 
 /**
  * s
@@ -19649,7 +19540,6 @@ declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
  * 失敗した場合、undefinedを返します。    
  */
 declare function createobject(progid: string): any | undefined;
-
 /**
  * s
  * 
@@ -19695,32 +19585,54 @@ declare function createobject(progid: string): any | undefined;
 declare function createobject(dllpath: string, typeid: string): any | undefined;
 
 /**
- * z    
+ * f
  * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
+ * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+ * 
+ * @example
+ * var text = gettotaltext();
+ * 
+ * @returns
+ * テキスト全体を返します。    
+ * 失敗した場合は空文字列になります
  */
- declare function execjs(): 0;
+declare function gettotaltext(): string;
 
 /**
- * z    
+ * f
  * 
- * @throws "endmacro"
+ * getlinetext関数は、指定行のテキストを文字列にして取得します。    
  * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
+ * @param line_num
+ * 行番号を指定します。先頭が1です。    
+ * 省略した場合には、現在カーソルがある行が対象となります。
+ * 
+ * @example
+ * var text1 = getlinetext(3); // 3行目のテキスト内容を返す
+ * 
+ * var text2 = getlinetext(); // カーソルがある行のテキスト内容を返す
+ * 
+ * @returns
+ * 指定した行の内容を返します。    
+ * 失敗した場合は空文字になります。
  */
-declare function endmacro(): 0;
+declare function getlinetext(line_num?: number): string;
 
 /**
- * z    
+ * f
  * 
- * @throws "endmacroall"
+ * getselectedtext関数は、範囲選択の内容を取得します。     
  * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
+ * @example
+ * js {
+ *    var a = getselectedtext();
+ * }
+ * 
+ * @returns
+ * 範囲選択の内容を文字列で返します。    
+ * (選択していないなどの理由で)失敗した場合は空文字になります。
  */
-declare function endmacroall(): 0;
+declare function getselectedtext(): string;
 
 /**
  * z    
@@ -19752,8 +19664,39 @@ declare function jsmode(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function call(): 0;
+declare function execjs(): 0;
 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function GREP(): 0;
+
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function FIND(): 0;
+
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function ENV(): 0;
+
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function call(): 0;
 /**
  * z    
  * 
@@ -19970,6 +19913,13 @@ declare function ddewaitadvicew(): 0;
  */
 declare function keepdde(): 0;
 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+declare function exit(): 0;
 
 /**
  * z    
@@ -19977,39 +19927,8 @@ declare function keepdde(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function GREP(): 0;
+declare function exitall(): 0;
 
-/**
- * z    
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
-declare function FIND(): 0;
-
-/**
- * z    
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
-declare function ENV(): 0;
-
-/**
- * z    
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
- declare function exit(): 0;
-
-/**
- * z    
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
- declare function exitall(): 0;
  
 /**
  * z    
@@ -20018,6 +19937,7 @@ declare function ENV(): 0;
  * @deprecated
  */
 declare function saveexit(): 0;
+
  
 /**
  * z    
@@ -20026,6 +19946,7 @@ declare function saveexit(): 0;
  * @deprecated
  */
 declare function saveexitall(): 0;
+
  
 /**
  * z    
@@ -20033,7 +19954,8 @@ declare function saveexitall(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
- declare function quit(): 0;
+declare function quit(): 0;
+
  
 /**
  * z    
@@ -20041,6 +19963,5 @@ declare function saveexitall(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
- declare function quitall(): 0;
- 
- 
+declare function quitall(): 0;
+
