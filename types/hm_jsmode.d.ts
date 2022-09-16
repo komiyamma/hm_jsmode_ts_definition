@@ -277,7 +277,6 @@ declare namespace hidemaru {
    */
   function loadDll(dllpath: string): ILoadDllResult | undefined;
 
-
   /**
    * s
    * 
