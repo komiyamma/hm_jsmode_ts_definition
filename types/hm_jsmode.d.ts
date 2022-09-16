@@ -260,6 +260,8 @@ declare namespace hidemaru {
 
   /**
    * loadDllメソッドは、秀丸用のdllfunc対応のDLLを読み込みます。
+   * [非同期]
+   * 
    * @param dllpath 
    * DLLのファイル名を指定します。
    *
@@ -307,6 +309,7 @@ declare namespace hidemaru {
    * s
    * 
    * createobject関数は、COMオブジェクトを作成します。
+   * [非同期]
    * 
    * @param dllpath 
    * DLLのファイル名をフルパスで指定します。
@@ -523,7 +526,9 @@ declare namespace hidemaru {
   }
 
   /**
-   * runProcessメソッドは、プロセスを起動します。 [非同期]
+   * runProcessメソッドは、プロセスを起動します。    
+   *  [非同期]    
+   * 
    * @param command 
    * コマンドラインの文字列を指定します。
    * 
@@ -557,7 +562,7 @@ declare namespace hidemaru {
    * f
    * 
    * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
-   *  [非同期]
+   *  [非同期]    
    * 
    * @example
    * js{
