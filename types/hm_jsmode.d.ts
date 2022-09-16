@@ -13263,6 +13263,64 @@ declare function colormarker(): number;
 declare function colormarker(text_color: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
 
 /**
+ * f    
+ * 
+ * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。
+ * 
+ * @param target_prop
+ * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
+ * - 0x0001　文字色を取得    
+ * - 0x0002　背景色を取得    
+ * - 0x0004　スタイルを取得    
+ * - 0x0008　ユーザーデータを取得    
+ * - 0x0010　カラーマーカーではない場合でも表示されている実際の色とスタイルを取得    
+ * - 0x0020　行末の情報も取得可能にする    
+ * - 0x0040　カラーマーカー末尾または幅ゼロのカラーマーカーの情報も取得可能にする（代わりにカラーマーカー先頭は取得できなくなります）    
+ * - 0x0080　先頭を1として上から数えて何番目のカラーマーカーであるかを取得    
+ * - 0x0100　一時的なカラーマーカーと名前付きレイヤーのカラーマーカーを調べて一番上にある使われているものを取得し、レイヤー名の文字列を""でくくって取得。    
+ *           このフラグがある場合は第２パラメータは無視されます。    
+ *           予約されたレイヤー（reservedmultiselやfindmarker等）は含まれません。
+ * - 0x0200　種類を取得
+ * 
+ * @param layer_name
+ * 指定しない場合、全てのレイヤーが対象です。    
+ * 指定すると、指定した文字列のレイヤーに属するものだけを取得します。    
+ * 検索の色付けは、findmarkerというキーワードを指定します。    
+ * 比較結果のカラーマーカーは、diffというキーワードを指定します。    
+ * 
+ * @example
+ * selectline();
+ * colormarker(0x0000ff, 0xff0000);
+ * var a = getcolormarker(0x0001|0x0002);
+ * message(a);
+ * 
+ * @comment
+ * カーソル位置の文字がcolormarker文によってカラーマーカーが付けられている場合、その情報を取得します。    
+ * 32ビットの値を16進数で表した文字列（"0x"は除く）を連結して返します。    
+ * 例えば、文字色が数値で0x00808080、背景色が0x00FFFFFFという場合、getcolormarker( 0x0001 | 0x0002 ) の返す文字列は、"0080808000FFFFFF"になります。    
+ * 色は24bitの数値で、例えば赤は0x000000FF、緑は0x0000FF00、青は0x00FF0000、白は0x00FFFFFF、黒は0x0000000になります。    
+ * 
+ * 0x0100のフラグがある場合は、レイヤー名が""でくくられて取得されます。    
+ * getcolormarker( 0x0001 | 0x0002 | 0x0100 ) の返す文字列は、"0080808000FFFFFF\"mylayer\""のような感じになります。    
+ * 連結する順番は、文字色→背景色→スタイル→種類→ユーザーデータ→レイヤー名の順番になります。    
+ * 
+ * 範囲選択されていても範囲は関係なく、カーソル位置の情報を返します。    
+ * 
+ * 0x0010 を指定している場合は、カラーマーカーで色付けされていなくても、強調表示された結果の色を取得できます。    
+ * カーソル行の文字色モード/下線モード/背景色モードは取得できません。    
+ * 「検索文字列の強調」で強調された状態も取得できません。    
+ * 
+ * @comment
+ * 参照：
+ * @see colormarker
+ * @see colorcode
+ * 
+ * @returns
+ * 指定した種類の情報を文字列で返します。
+ */
+declare function getcolormarker(target_prop: number, layer_name?: string ): string;
+
+/**
  * s
  * 
  * prevcolormarker文は、カラーマーカーで色付けされている前の場所に移動します。
