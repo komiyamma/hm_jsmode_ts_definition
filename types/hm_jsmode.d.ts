@@ -944,7 +944,6 @@ declare namespace hidemaru {
   function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessinfo;
 }
 
-★ runProcess()
 
 /**
  * f
@@ -11093,7 +11092,136 @@ declare function imeconvforgot(): number;
  */
 declare function reopen(): number;
 
-★★★ filter ★ function() { var m = "filter"; if (arguments.length >= 4) { eval(fs); } else { eval(st); } return r; }
+/**
+ * f
+ * 
+ * filter関数は、変換モジュールを使って、引数の文字列を変換して返り値として返します。
+ * 
+ * @param module_name 
+ * 変換モジュール名を指定します。    
+ * 変換モジュール名に "" （何も無い文字列）を指定すると、    
+ * 標準の変換モジュール（32bit版の場合はHmFilter.hmf、64bit版の場合はHmFilter.hmf64）を使用します。    
+ * 変換モジュールの名前の「.hmf」または「.hmf64」の拡張子は省略出来ます。    
+ * ただしフルパスでファイル名を書く場合は拡張子の省略はできません。    
+ * 変換モジュールのロードや変換モジュールの関数呼び出しに失敗した場合は、特にエラーにはならず、    
+ * パラメータ４で指定した文字列がそのまま返ります。    
+ * 変換モジュールのDLLが見つからない場合や、関数が見つからない場合は、getresultex(18)でエラー情報を取得できます。
+ * 
+ * @param module_func_name 
+ * 変換モジュール内の関数名を指定します。    
+ * 
+ * @param parameters 
+ * 変換モジュール内の関数に渡すパラメータを指定します。
+ * 
+ * @param target_text 
+ * 変換対象となる文字列を指定します。
+ * 変換モジュールに渡すパラメータの内容は、変換モジュールが自由に決めることができます。    
+ * パラメータは省略可能です。
+ *
+ * @example
+ * var s = filter( "", "ToUpper", "", "abc");
+ * message(s);
+ * 
+ * @comment
+ *  * 標準の変換モジュール(HmFilter.hmf)の関数名一覧
+ * - ToUpper UPPER CASE 
+ * - ToLower lower case 
+ * - ToHankaku ハンカク 
+ * - ToZenkakuHira 全角ひらがな 
+ * - ToZenkakuKata 全角カタカナ 
+ * - ToSpace TAB -> 空白 (※注) 
+ * - ToTab 空白 -> TAB (※注) 
+ * - ToHankakuAlnum 英数字/記号/空白のみ半角に 
+ * - ToZenkakuAlnum 英数字/記号/空白のみ全角に 
+ * - ToHankakuKataOnly カタカナのみ半角に 
+ * - ToZenkakuKataOnly カタカナのみ全角に 
+ * - Indent インデント 
+ * - UnIndent 逆インデント 
+ * - Sort ソート
+ * - ConvertCase 大文字/小文字の変換
+ * - HanZenConv 半角/全角変換
+ * 
+ * @comment
+ * 参照：
+ * @see getresultex(18)
+ * @see getresultex(19)
+ * 
+ * @returns
+ * 変換された内容が返ります。    
+ * 変換モジュールのロードや変換モジュールの関数呼び出しに失敗した場合は、特にエラーにはならず、    
+ * target_textで指定した文字列がそのまま返ります。    
+ */
+declare function filter(module_name: string, module_func_name: string, parameters: string, target_text: string) : string
+
+/**
+ * f
+ * 
+ * filter関数は、変換モジュールを使って、「選択しているテキスト」を変換します。
+ * 
+ * @param module_name 
+ * 変換モジュール名を指定します。    
+ * 変換モジュール名に "" （何も無い文字列）を指定すると、    
+ * 標準の変換モジュール（32bit版の場合はHmFilter.hmf、64bit版の場合はHmFilter.hmf64）を使用します。    
+ * 変換モジュールの名前の「.hmf」または「.hmf64」の拡張子は省略出来ます。    
+ * ただしフルパスでファイル名を書く場合は拡張子の省略はできません。    
+ * 変換モジュールのロードや変換モジュールの関数呼び出しに失敗した場合は、特にエラーにはならず、    
+ * パラメータ４で指定した文字列がそのまま返ります。    
+ * 変換モジュールのDLLが見つからない場合や、関数が見つからない場合は、getresultex(18)でエラー情報を取得できます。
+ * 
+ * @param module_func_name 
+ * 変換モジュール内の関数名を指定します。    
+ * 
+ * @param parameters 
+ * 変換モジュール内の関数に渡すパラメータを指定します。
+ * 
+ * @param target_text 
+ * 変換対象となる文字列を指定します。
+ * 変換モジュールに渡すパラメータの内容は、変換モジュールが自由に決めることができます。    
+ * パラメータは省略可能です。
+ *
+ * @example
+ * var s = filter( "", "ToUpper");
+ * message(s);
+ * 
+ * //昇順、すべてチェックOFF
+ * filter("" , "Sort" , "000000000000"); //+"1"; ダイアログを出す場合
+ * //降順、すべてチェックOFF
+ * filter("" , "Sort" , "100000000000");
+ * //昇順、UnicodeのみON
+ * filter("" , "Sort" , "000010000000");
+ * //昇順、数値の大小関係のみON
+ * filter("" , "Sort" , "000100000000");
+ * 
+ * @comment
+ *  * 標準の変換モジュール(HmFilter.hmf)の関数名一覧
+ * - ToUpper UPPER CASE 
+ * - ToLower lower case 
+ * - ToHankaku ハンカク 
+ * - ToZenkakuHira 全角ひらがな 
+ * - ToZenkakuKata 全角カタカナ 
+ * - ToSpace TAB -> 空白 (※注) 
+ * - ToTab 空白 -> TAB (※注) 
+ * - ToHankakuAlnum 英数字/記号/空白のみ半角に 
+ * - ToZenkakuAlnum 英数字/記号/空白のみ全角に 
+ * - ToHankakuKataOnly カタカナのみ半角に 
+ * - ToZenkakuKataOnly カタカナのみ全角に 
+ * - Indent インデント 
+ * - UnIndent 逆インデント 
+ * - Sort ソート
+ * - ConvertCase 大文字/小文字の変換
+ * - HanZenConv 半角/全角変換
+ * 
+ * @comment
+ * 参照：
+ * @see getresultex(18)
+ * @see getresultex(19)
+ * 
+ * @returns
+ * 範囲選択されていない場合など、変換が実行されない場合はresultは0になります。    
+ * 変換モジュールが見つからない場合などの場合は、成功しても失敗してもresultは1になります。    
+ * 詳細なエラーは、getresultex(18)やgetresultex(19)でエラー情報を取得できます。 
+ */ 
+declare function filter(module_name: string, module_func_name: string, parameters: string) : number
 
 /**
  * k
