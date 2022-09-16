@@ -2197,7 +2197,7 @@ declare function splitpos(): number;
  * @example
  * var handle = hidemaruhandle( findhidemaru( "client.cpp" ) ); // client.cpp
  * var a = windowstate(handle);
-
+ *
  * @returns    
  * - 非表示の場合は０    
  * - 通常の表示状態の場合は１
@@ -2226,7 +2226,7 @@ declare function windowstate(hidemaru_handle?: number): number;
  * @example
  * var handle = hidemaruhandle( findhidemaru( "client.cpp" ) ); // client.cpp
  * var a = windowstate2(handle);
-
+ *
  * @returns    
  * - 非表示の場合は０    
  * - 通常の表示状態の場合は１
@@ -3007,7 +3007,7 @@ declare function keypressed(): number;
  * @comment
  * - パラメータ１に1を指定する場合、
  * 例えばShift+1キーでキーボードによっては"!"になりますが、"!"に相当する0x21が取得できます。
-
+ *
  * @example 
  *  disablebreak();
  *  insert("Escキーで終わります\n");
@@ -4569,7 +4569,7 @@ declare function wcsmidstr(text: string, from: number, length?: number): string;
  * strlenのUnicode版です。全角文字も半角文字も1文字として数えます。    
  * UTF-16の数え方と同じになります。    
  * UTF-16でサロゲートペアとなる文字は2文字として数えます。
-
+ *
  * @param text 対象となる文字列を指定します。
  * 
  * @example
@@ -4779,7 +4779,7 @@ declare function ucs4midstr(text: string, from: number, length?: number): string
  * 
  * strlenのUnicode(UCS-4)版です。全角文字も半角文字も1文字として数えます。    
  * UTF-16でサロゲートペアとなる文字も1文字として数えます。    
-
+ *
  * @param text 対象となる文字列を指定します。
  * 
  * @example
@@ -6164,7 +6164,7 @@ declare function getgrepfilehist(history_ix: number): string
  * 1を指定すると、ヒストリに常駐（ピン留め）しているかどうかを取得できます。    
  * 文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
-
+ *
  * @example
  * var i=0;
  * while(i < 100) {
@@ -6693,7 +6693,7 @@ declare function getfilehist(history_ix: number): string
  * 1を指定すると、ヒストリに常駐（ピン留め）しているかどうかを取得できます。    
  * 文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
-
+ *
  * @example
  * var i=0;
  * while(i < filehistcount() ) {
@@ -6776,7 +6776,7 @@ declare function getreplacehist(history_ix: number | -1): string
  * 1を指定すると、ヒストリに常駐（ピン留め）しているかどうかを取得できます。    
  * 文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
-
+ *
  * @example
  * var c = +( getreplacehist(-1) );
  * var i = 0;
@@ -8151,7 +8151,7 @@ declare function OPEN(): number;
  * @comment
  * 参照：
  * @see getresultex
-
+ *
  * @returns
  * 成功したら0以外を返す。    
  * 失敗したら0を返すか、または、    
@@ -8899,7 +8899,7 @@ declare function movetolineno(pos_column_plus: number, pos_lineno: number): numb
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto(pos_x: number, pos_y: number): number;
+declare function movetoview(pos_x: number, pos_y: number): number;
 
 /**
  * s
@@ -9739,6 +9739,34 @@ declare function copyline(is_multiline?: number): number;
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
 declare function cutafter(): number;
+
+/**
+ * s
+ * 
+ * cutline文は、行の切り抜きを行います。
+ * 
+ * 範囲選択されていない場合は、カーソル位置の行を切り抜きします。    
+ * 範囲選択されている場合は、パラメータによって動作が違います。    
+ * 
+ * @param cutmode
+ * 範囲選択されている場合の動作を指定します。    
+ * - 0を指定するか省略した場合、範囲選択されていないときと同様に、カーソル位置の行を切り抜きします。    
+ * - 1を指定すると、範囲選択が含まれる行すべてを行単位にして切り抜きをします。
+ * 
+ * @example
+ * cutline(0);
+ * 
+ * @comment
+ * 複数選択に対応した動作にするには、setcompatiblemode 0x00100000;が必要です。
+ * 
+ * @comment
+ * 参照：
+ * @see setcompatiblemode
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function cutline(cutmode?: number): number;
 
 /**
  * s
@@ -11460,7 +11488,7 @@ declare function find1(): number;
  * ダイアログで検索をして、失敗(=ヒットせず)した場合は0を返す。    
  * ダイアログでキャンセルした場合は -2 を返す。
  */
-declare function find1(): number;
+declare function find2(): number;
 
 /**
  * s
@@ -13407,7 +13435,7 @@ declare function deletecolormarker(layer_name?: string, user_data?: number, bgn_
  * 「一時的なカラーマーカー」のレイヤー名は""です。    
  * 検索の色付けは、findmarkerというキーワードを指定します。    
  * 比較結果のカラーマーカーは、diff というキーワードを指定します。    
-
+ *
  * @comment
  * 参照：    
  * @see colormarker
@@ -13444,7 +13472,7 @@ declare function deletecolormarkerall(layer_name?: string, user_data?: number): 
  * 省略するか、""とした場合は、「一時的なカラーマーカー」を対象にします。    
  * 検索の色付けは、findmarkerというキーワードを指定します。    
  * 比較結果のカラーマーカーは、diff というキーワードを指定します。    
-
+ *
  * @param user_data 
  * ユーザーデータを指定します。    
  * 0以外の値を指定すると、一致するユーザーデータのみを対象にします。    
@@ -15297,7 +15325,7 @@ declare function debuginfo(output_mode: number): number;
  * debuginfo(1);
  * var a = 100;
  * debuginfo("a = " + a + "\r\n");
-
+ *
  * 
  * @comment
  * デバッグアプリケーションが常駐していない時にこの文を実行すると、文字列はデバッグ端末に送られます。    
@@ -18320,7 +18348,7 @@ declare function getconfig(key: string): string | number
  * s
  * 
  * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。
-
+ *
  * @param color_settings
  * 設定箇所と、文字色と背景食とスタイルを文字列で表した情報を指定します。    
  * 複数の設定を連結して１つの文字列で表すことができます。    
