@@ -13777,8 +13777,7 @@ declare function compfile(hidemaru_handle: number, is_after_cursor: number): num
  * @see compfile 文
  * 
  * @returns
- * 成功したら0以外を返す。    
- * 失敗したら0を返す。    
+ * 返り値は意味を持ちません。
  */
 declare function COMPFILE(): number;
 
