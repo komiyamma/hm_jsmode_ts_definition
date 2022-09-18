@@ -10208,7 +10208,7 @@ declare function deletewordfront(): number;
  * - 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
  * - 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
  * 
- * @param mode2
+ * @param mode2_flag
  * 自動インデントの設定を明示的に指定できます。    
  * 以下の値の論理和です。    
  * - 0x0001：全角空白もインデント=ON
@@ -10259,7 +10259,7 @@ declare function insert(text: string, mode1?: number, mode2_flag?: number): numb
  * 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
  * 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
  * 
- * @param mode2
+ * @param mode2_flag
  * 自動インデントの設定を明示的に指定できます。    
  * 以下の値の論理和です。    
  * - 0x0001：全角空白もインデント=ON
@@ -29286,7 +29286,7 @@ function deletewordfront(): number;
  * - 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
  * - 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
  * 
- * @param mode2
+ * @param mode2_flag
  * 自動インデントの設定を明示的に指定できます。    
  * 以下の値の論理和です。    
  * - 0x0001：全角空白もインデント=ON
@@ -29337,7 +29337,7 @@ function insert(text: string, mode1?: number, mode2_flag?: number): number;
  * 2 を指定して、文字列が"}"の場合、C言語用の自動アンインデントが働きます。    
  * 2 を指定して、文字列が"\n"の場合、自動インデントが働きます。    
  * 
- * @param mode2
+ * @param mode2_flag
  * 自動インデントの設定を明示的に指定できます。    
  * 以下の値の論理和です。    
  * - 0x0001：全角空白もインデント=ON
