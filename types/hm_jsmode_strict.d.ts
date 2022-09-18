@@ -12748,7 +12748,7 @@ function hilightfound(is_on?: number): number
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-function colormarker(json: string|object): number
+function colormarker(json: string | object): number
 /**
  * s
  * 
