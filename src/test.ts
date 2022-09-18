@@ -1,6 +1,8 @@
-/// <reference path="../types/hm_jsmode_strict.d.ts" />
+/// <reference path="../types/hm_jsmode.d.ts" />
 
- 　getconfig("CharSpace")
+ 　let ret = hideamruGlobal.getconfig("BoldFace");
+
+    hideamruGlobal.config("xActiveKakko:abc");
 
 var p = hidemaru.runProcess("a", "b", "c", "d");
 p.stdOut.onReadSeparated(function(out3){
@@ -17,3 +19,10 @@ processID.stdOut.onReadAll((out: string)=>{
 })
 
 hideamruGlobal.insert("あいうえお", 0, 0x0001);
+
+message("OK");
+
+var b = gettotaltext();
+if (b.endsWith());
+
+var c = createobject("a");
