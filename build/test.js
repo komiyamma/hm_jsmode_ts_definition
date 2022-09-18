@@ -1,12 +1,14 @@
-function test(arg) {
-    var a;
-    if (typeof (a) == "string") {
-    }
-    if (typeof (a) == "number") {
-    }
+/// <reference path="../types/hm_jsmode.d.ts" />
+getconfig("CharSpace");
+var p = hidemaru.runProcess("a", "b", "c", "d");
+p.stdOut.onReadSeparated(function (out3) {
+    console.log(out3);
+    console.log("\r\n");
     return 3;
-}
-test(1); //=> 1
-test("文字列"); //=> 文字列
-//※ Genericsでも型推論ができるので、引数から型が明示的にわかる場合は省略が可能
-test("文字列２"); //=> "文字列２"
+}, 0);
+hidemaruGlobal.message("OK");
+var processID = hidemaru.runProcess("abc", "def", "gui", "utf");
+processID.stdOut.onReadAll(function (out) {
+    console.log(out);
+});
+insert("あいうえお", 0, 0x0001);

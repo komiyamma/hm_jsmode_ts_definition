@@ -112,13 +112,14 @@ declare namespace hidemaru {
    * @returns
    * 値の設定が成功したら１，失敗したら０を返す
    */
-  function setVar(varname: string, newvalue: string | number | boolean): number;
+  function setVar(varname: string, newvalue: string | number): number;
 
   /**
    * s
    * 
    * 文字列で指定するマクロを実行します。
-   * @param expression : 実行する秀丸マクロ文字列
+   * @param expression
+   * 実行する秀丸マクロ文字列
    * 
    * @comment
    * 参考：
@@ -418,7 +419,7 @@ declare namespace hidemaru {
      * @param timeout_millisecond
      * タイムアウトをミリ秒で指定します。
      * 
-     * @parm read_byte
+     * @param read_byte
      * 読み込むバイト数を指定します。    
      * 0の場合は空行までになります。    
      * 
@@ -466,7 +467,7 @@ declare namespace hidemaru {
      * 標準出力に全て出力されているときに呼ばれる関数を指定します。
      * function(out: string) { ... } の形の関数を指定します。
      * 
-     * @parm read_byte
+     * @param read_byte
      * 読み込むバイト数を指定します。    
      * 0の場合は空行までになります。    
      * 
@@ -607,6 +608,9 @@ declare namespace hidemaru {
    * 
    * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
    * 
+   * @param filepath
+   * マクロのファイル名を文字列で指定します。
+   * 
    * @example
    * // マクロ実行中の中で実行する例
    * js{
@@ -643,6 +647,9 @@ declare namespace hidemaru {
    * 
    * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
    *  [非同期]
+   * 
+   * @param expression
+   * マクロの内容を文字列で指定します。
    * 
    * @example
    * js{
@@ -955,7 +962,10 @@ declare namespace hidemaru {
  * f
  * 
  * JavaScriptのeval関数と同一です。
- * @param expression : 実行するJavaScript文字列
+ * 
+ * @param expression
+ * 実行するJavaScript文字列
+ * 
  * @returns JavaScriptとしてeval評価された最終的なオブジェクト
  */
 declare function evalJs(expression: string): any;
@@ -1207,8 +1217,11 @@ declare function unicode(): number;
  * 対象となる文字列を指定します。先頭の１文字だけを見ます。    
  * ascii関数のUnicode版です。    
  * s1の先頭の文字のUnicodeの値を返します。    
- * unichar関数と逆の関数です。
+ * unichar関数と逆の関数です。    
+ *     
  * @param text 
+ * 対象となる文字列を指定します。先頭の１文字だけを見ます。
+ * 
  * @returns 文字列の先頭の文字のUnicodeの文字コード（数値）
  */
 declare function unicode(text: string): number;
@@ -1421,6 +1434,7 @@ declare function linelen(line_num?: number): number;
  * 
  * @param line_num2 引数を指定すると、指定した行の値を得ることができます。    
  * 行の数え方はエディタ的(改行だけを数える)で、0から数えます。
+ * 
  * @example
  * var current = linelen2();
  * var current = linelen2(lineno()-1); // 上と同じ
@@ -1433,6 +1447,9 @@ declare function linelen2(line_num2?: number): number;
 
 /**
  * k
+ * 
+ * @param line_num2 引数を指定すると、指定した行の値を得ることができます。    
+ * 行の数え方はエディタ的(改行だけを数える)で、0から数えます。
  * 
  * linelen2と同様の処理だが、UnicodeのUCS-2として文字を数えるバージョン。
  * @example
@@ -1449,6 +1466,10 @@ declare function linelen_wcs(line_num2?: number): number;
  * k
  * 
  * linelen2と同様の処理だが、UnicodeのUCS-4として文字を数えるバージョン。
+ * 
+ * @param line_num2 引数を指定すると、指定した行の値を得ることができます。    
+ * 行の数え方はエディタ的(改行だけを数える)で、0から数えます。
+ * 
  * @example
  * var current = linelen_ucs4();
  * var current = linelen_ucs4(lineno()-1); // 上と同じ
@@ -1462,7 +1483,11 @@ declare function linelen_ucs4(line_num2?: number): number;
 /**
  * k
  * 
- * linelen2と同様の処理だが、カーソル移動単位として数えるバージョン。
+ * linelen2と同様の処理だが、カーソル移動単位として数えるバージョン。    
+ * 
+ * @param line_num2 引数を指定すると、指定した行の値を得ることができます。    
+ * 行の数え方はエディタ的(改行だけを数える)で、0から数えます。
+ * 
  * @example
  * var current = linelen_cmu();
  * var current = linelen_cmu(lineno()-1); // 上と同じ
@@ -1476,7 +1501,11 @@ declare function linelen_cmu(line_num2?: number): number;
 /**
  * k
  * 
- * linelen2と同様の処理だが、書記素クラスター単位として数えるバージョン。
+ * linelen2と同様の処理だが、書記素クラスター単位として数えるバージョン。    
+ * 
+ * @param line_num2 引数を指定すると、指定した行の値を得ることができます。    
+ * 行の数え方はエディタ的(改行だけを数える)で、0から数えます。
+ * 
  * @example
  * var current = linelen_gcu();
  * var current = linelen_gcu(lineno()-1); // 上と同じ
@@ -1852,8 +1881,10 @@ declare function splitpos(): number;
  * ウィンドウの表示の具合を表します。
  * @example
  * var a = windowstate();
+ * 
  * @param hidemaru_handle hidemaruhandleに相当する値を引数に与えることで、    
  * 他の秀丸エディタからも値を得ることができます。
+ * 
  * @example
  * var a = windowstate(1); // ２番めの秀丸エディタのウィンドウ具合を得る
  * 
@@ -1876,6 +1907,7 @@ declare function windowstate(hidemaru_handle?: number): number;
  * 以下の値の論理和です。    
  * - 常に手前に表示　　　0x0001(ビット０)
  * - 全画面表示かどうか　0x0002(ビット１)
+ * 
  * @example
  * var a = windowstate2() & 0x1; // aが1なら常に手前に表示
  * var b = windowstate2() & 0x2; // bが1なら全画面表示
@@ -1883,6 +1915,7 @@ declare function windowstate(hidemaru_handle?: number): number;
  * 
  * @param hidemaru_handle hidemaruhandleに相当する値を引数に与えることで、    
  * 他の秀丸エディタからも値を得ることができます。
+ * 
  * @example
  * var a = windowstate2(1); // ２番めの秀丸エディタのウィンドウ具合を得る
  * 
