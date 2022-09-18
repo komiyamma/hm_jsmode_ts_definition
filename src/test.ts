@@ -1,4 +1,4 @@
-/// <reference path="../types/hm_jsmode.d.ts" />
+/// <reference path="../types/hm_jsmode_strict.d.ts" />
 
  　getconfig("CharSpace")
 
@@ -9,7 +9,7 @@ p.stdOut.onReadSeparated(function(out3){
     return 3;
 }, 0);
 
-hidemaruGlobal.message("OK");
+message("OK");
 
 var processID = hidemaru.runProcess("abc", "def", "gui", "utf");
 processID.stdOut.onReadAll((out: string)=>{

@@ -112,7 +112,7 @@ declare namespace hidemaru {
    * @returns
    * 値の設定が成功したら１，失敗したら０を返す
    */
-  function setVar(varname: string, newvalue: string | number): number;
+  function setVar(varname: string, newvalue: string | number): number
 
   /**
    * s
@@ -130,7 +130,7 @@ declare namespace hidemaru {
    * @returns 成功したらresultは0以外になります。    
    *        　失敗したらresultは0になります。
    */
-  function evalMacro(expression: string): number;
+  function evalMacro(expression: string): number
 
 /// <# HidemaruToGlobal end #>
 
@@ -174,7 +174,7 @@ declare namespace hidemaru {
     /**
      * 読み込まれているDLLファイルのパスを返します
      */
-    readonly loadDllFile: string;
+    readonly loadDllFile: string
 
     /**
      * DllFuncManagerオブジェクト。    
@@ -507,17 +507,17 @@ declare namespace hidemaru {
     /**
      * プロセスID (pid)
      */
-    readonly processID: number;
+    readonly processID: number
 
     /**
      * 終了しているかどうか。
      */
-    readonly status: number;
+    readonly status: number
 
     /**
      * 終了コード。
      */
-    readonly exitCode: number;
+    readonly exitCode: number
 
     /**
      * プロセスを強制終了します。
@@ -597,7 +597,7 @@ declare namespace hidemaru {
    * @returns
    * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
    */
-  function isMacroExecuting(): number;
+  function isMacroExecuting(): number
 
   /**
    * f
@@ -699,7 +699,7 @@ declare namespace hidemaru {
    * テキスト全体を返します。    
    * 失敗した場合はundefinedになります
    */
-  function getTotalText(): string;
+  function getTotalText(): string
 
   /**
    * f
@@ -720,7 +720,7 @@ declare namespace hidemaru {
    * 指定した行の内容を返します。    
    * 失敗した場合はundefinedになります。
    */
-  function getLineText(line_num?: number): string;
+  function getLineText(line_num?: number): string
 
   /**
    * f
@@ -737,7 +737,7 @@ declare namespace hidemaru {
    * 範囲選択の内容を文字列で返します。    
    * (選択していないなどの理由で)失敗した場合はundefinedになります。
    */
-   function getSelectedText(): string;
+   function getSelectedText(): string
 
   /**
    * f
@@ -754,7 +754,7 @@ declare namespace hidemaru {
    * 現在の秀丸エディタのウィンドウハンドルに相当する値を返します。    
    * (これは実際のWin32 APIなどでよく利用するウィンドウハンドルと同じ値です)
    */
-  function getCurrentWindowHandle(): number;
+  function getCurrentWindowHandle(): number
 
 
   /**
@@ -787,7 +787,7 @@ declare namespace hidemaru {
    * 失敗した場合、0を返す。    
    * 成功した場合、0以外を返す。    
    */
-  function setStaticVariable(key: string, value: string, scope_type: number): number;
+  function setStaticVariable(key: string, value: string, scope_type: number): number
 
   /**
    * getstaticvariableと同様の関数です。    
@@ -855,7 +855,7 @@ declare namespace hidemaru {
    * 内容が変わったときにカウントが増える値。    
    * 初期値は1以上。32bitの値を超えると一周。
    */
-  function getUpdateCount(): number;
+  function getUpdateCount(): number
 
   /**
    * loadTextFileメソッドは、テキストファイルを読み込んで文字列で取得します。
@@ -902,7 +902,7 @@ declare namespace hidemaru {
    * 固有のIDが返ります。    
    * 主にclearTimeoutをするためのIDとなります。
    */
-  function setTimeout(func: Function, millisecond: number): number;
+  function setTimeout(func: Function, millisecond: number): number
 
   /**
    * f
@@ -970,7 +970,7 @@ declare namespace hidemaru {
  */
 declare function evalJs(expression: string): any;
 
-/// <# GlobalToHidemaruGlobal bgn #>
+declare namespace hideamruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
 /**
  * k    
@@ -982,7 +982,7 @@ declare function evalJs(expression: string): any;
  * 例えばquestion文を実行した直後には「はい」か「いいえ」のどちらのボタンか押されたかの値がresultには格納されています。    
  * @returns 直前の命令文の結果値
  */
-declare function result(): number;
+function result(): number
 
 /**
  * k    
@@ -993,7 +993,7 @@ declare function result(): number;
  * 秀丸エディタβ版では、下２桁は98以下であり、    
  * 秀丸エディタ正式版では、下２桁は99となります。
  */
-declare function version(): number;
+function version(): number
 
 /**
  * k    
@@ -1013,7 +1013,7 @@ declare function version(): number;
  * - 0x01000000　持ち出しキットで動作中かどうか    
  * - 0x02000000　ストアアプリ版かどうか    
  */
-declare function platform(): number;
+function platform(): number
 
 /**
  * k    
@@ -1023,7 +1023,7 @@ declare function platform(): number;
  * - 0x00000001 Windowsの設定がダークモードで、秀丸エディタもダークモード対応が有効な状態で動作しています。    
  * - 0x00000002 ダークモード対応が有効で、かつ、色設定の自動変換が有効です。    
  */
-declare function darkmode(): number;
+function darkmode(): number
 
 /**
  * k    
@@ -1031,7 +1031,7 @@ declare function darkmode(): number;
  * カラーマーカーの予約されたレイヤーのうち、検索の色付けを表す文字列です。    
  * @returns "\x01#findmarker"という文字列と同じです。
  */
-declare function findmarker(): string;
+function findmarker(): string
 
 /**
  * k    
@@ -1039,7 +1039,7 @@ declare function findmarker(): string;
  * カラーマーカーの予約されたレイヤーのうち、比較結果を表す文字列です。    
  * @returns "\x01#diff"という文字列と同じです。
  */
-declare function diff(): string;
+function diff(): string
 
 /**
  * k    
@@ -1047,14 +1047,14 @@ declare function diff(): string;
  * カラーマーカーの予約されたレイヤーのうち、複数選択予約を表す文字列です。    
  * @returns "\x01#reservedmultisel"という文字列と同じです。
  */
-declare function reservedmultisel(): string;
+function reservedmultisel(): string
 
 /**
  * k    
  * 
  * 正規表現DLLをフルパスで表します。    
  */
-declare function regulardll(): string;
+function regulardll(): string
 
 /**
  * k    
@@ -1072,7 +1072,7 @@ declare function regulardll(): string;
  * 
  * @returns カーソルのx座標
  */
-declare function x(): number;
+function x(): number
 
 /**
  * k    
@@ -1083,7 +1083,7 @@ declare function x(): number;
  * 
  * @returns カーソルのy座標
  */
-declare function y(): number;
+function y(): number
 
 /**
  * k    
@@ -1096,7 +1096,7 @@ declare function y(): number;
  * 結合文字は実際に幅として現れなくても文字数に加算されます。
  * @returns カーソルのカラム位置(秀丸独自単位)
  */
-declare function column(): number;
+function column(): number
 
 /**
  * k    
@@ -1105,7 +1105,7 @@ declare function column(): number;
  * columnの「UCS-2単」位版
  * @returns カーソルのカラム位置(UCS-2単位)
  */
-declare function column_wcs(): number;
+function column_wcs(): number
 
 /**
  * k    
@@ -1114,7 +1114,7 @@ declare function column_wcs(): number;
  * columnの「UCS-4」単位版
  * @returns カーソルのカラム位置(UCS-4単位)
  */
-declare function column_ucs4(): number;
+function column_ucs4(): number
 
 /**
  * k    
@@ -1123,7 +1123,7 @@ declare function column_ucs4(): number;
  * columnの「カーソル移動」単位版
  * @returns カーソルのカラム位置(カーソル移動単位)
  */
-declare function column_cmu(): number;
+function column_cmu(): number
 
 /**
  * k    
@@ -1132,7 +1132,7 @@ declare function column_cmu(): number;
  * columnの「書記素クラスター」単位版
  * @returns カーソルのカラム位置(書記素クラスター単位)
  */
-declare function column_gcu(): number;
+function column_gcu(): number
 
 /**
  * k    
@@ -1141,7 +1141,7 @@ declare function column_gcu(): number;
  * ファイルの先頭が1です。 
  * @returns カーソル位置の行番号
  */
-declare function lineno(): number;
+function lineno(): number
 
 /**
  * k    
@@ -1154,7 +1154,7 @@ declare function lineno(): number;
  * 現在のテキスト内容から得られる最大の値はtabcolumnmaxで取得できます。
  * @returns タブストップごとに数えた位置、または、TSVモード/CSVモードのタブ区切り/カンマ区切りの位置
  */
-declare function tabcolumn(): number;
+function tabcolumn(): number
 
 /**
  * k    
@@ -1175,7 +1175,7 @@ declare function tabcolumn(): number;
  * この値を使った位置に移動するには、movetoview文を使います。
  * @returns カーソルの見た目上のx座標
  */
-declare function xview(): number;
+function xview(): number
 
 /**
  * k    
@@ -1198,7 +1198,7 @@ declare function xview(): number;
  * 
  * @returns カーソル位置の文字コード（数値）
  */
-declare function code(): number;
+function code(): number
 
 /**
  * k    
@@ -1209,7 +1209,7 @@ declare function code(): number;
  * 
  * @returns カーソル位置のUnicodeの文字コード（数値）
  */
-declare function unicode(): number;
+function unicode(): number
 /**
  * f    
  * 
@@ -1224,7 +1224,7 @@ declare function unicode(): number;
  * 
  * @returns 文字列の先頭の文字のUnicodeの文字コード（数値）
  */
-declare function unicode(text: string): number;
+function unicode(text: string): number
 
 /**
  * k
@@ -1284,7 +1284,7 @@ declare function unicode(text: string): number;
  * 1を指定すると、行の強調があるときの改行以降の色、または改行の色を表します。    
  * 2を指定すると、複数行強調/コメントがあるときの、次の行へと続く色を表します。
  */
-declare function colorcode(line_flag?: number): number;
+function colorcode(line_flag?: number): number
 
 /**
  * k    
@@ -1292,7 +1292,7 @@ declare function colorcode(line_flag?: number): number;
  * カーソル位置がマークされているかどうかを返します。    
  * @returns カーソル位置がマークされていたら1、そうでなければ0
  */
-declare function marked(): number;
+function marked(): number
 
 /**
  * k    
@@ -1300,7 +1300,7 @@ declare function marked(): number;
  * カーソル位置に編集マーク（編集した行）があるかどうかを返します。    
  * @returns 編集マーク（編集した行）があれば1、そうでなければ0
  */
-declare function lineupdated(): number;
+function lineupdated(): number
 
 /**
  * k    
@@ -1309,7 +1309,7 @@ declare function lineupdated(): number;
  * 
  * @returns カーソルのX座標のピクセル位置
  */
-declare function xpixel(): number;
+function xpixel(): number
 
 /**
  * k    
@@ -1318,7 +1318,7 @@ declare function xpixel(): number;
  * 
  * @returns カーソルのY座標のピクセル位置
  */
-declare function ypixel(): number;
+function ypixel(): number
 
 /**
  * k    
@@ -1328,7 +1328,7 @@ declare function ypixel(): number;
  * 
  * @returns 前のカーソル位置のX座標
  */
-declare function prevposx(): number;
+function prevposx(): number
 
 /**
  * k    
@@ -1338,7 +1338,7 @@ declare function prevposx(): number;
  * 
  * @returns 前のカーソル位置のY座標
  */
-declare function prevposy(): number;
+function prevposy(): number
 
 /**
  * k    
@@ -1348,7 +1348,7 @@ declare function prevposy(): number;
  * 
  * @returns 最後に編集した所のX座標
  */
-declare function lastupdatedx(): number;
+function lastupdatedx(): number
 
 /**
  * k    
@@ -1358,7 +1358,7 @@ declare function lastupdatedx(): number;
  * 
  * @returns 最後に編集した所のY座標
  */
-declare function lastupdatedy(): number;
+function lastupdatedy(): number
 
 /**
  * k    
@@ -1369,7 +1369,7 @@ declare function lastupdatedy(): number;
  * 
  * @returns マウスカーソルの場所にある文字カーソルのcolumn相当の位置
  */
-declare function mousecolumn(): number;
+function mousecolumn(): number
 
 /**
  * k    
@@ -1380,7 +1380,7 @@ declare function mousecolumn(): number;
  * 
  * @returns マウスカーソルの場所にある文字カーソルのlineno相当の位置
  */
-declare function mouselineno(): number;
+function mouselineno(): number
 
 /**
  * k    
@@ -1394,7 +1394,7 @@ declare function mouselineno(): number;
  * @returns 現在のファイルの、ワープロ的(折り返しも一行とする)に計算した行数。    
  * 
  */
-declare function linecount(): number;
+function linecount(): number
 
 /**
  * k    
@@ -1404,7 +1404,7 @@ declare function linecount(): number;
  * 
  * @returns 現在のファイルの、エディタ的(改行だけを数える)に計算した行数
  */
-declare function linecount2(): number;
+function linecount2(): number
 
 /**
  * k    
@@ -1423,7 +1423,7 @@ declare function linecount2(): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen(line_num?: number): number;
+function linelen(line_num?: number): number
 
 /**
  * k
@@ -1443,7 +1443,7 @@ declare function linelen(line_num?: number): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen2(line_num2?: number): number;
+function linelen2(line_num2?: number): number
 
 /**
  * k
@@ -1460,7 +1460,7 @@ declare function linelen2(line_num2?: number): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen_wcs(line_num2?: number): number;
+function linelen_wcs(line_num2?: number): number
 
 /**
  * k
@@ -1478,7 +1478,7 @@ declare function linelen_wcs(line_num2?: number): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen_ucs4(line_num2?: number): number;
+function linelen_ucs4(line_num2?: number): number
 
 /**
  * k
@@ -1496,7 +1496,7 @@ declare function linelen_ucs4(line_num2?: number): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen_cmu(line_num2?: number): number;
+function linelen_cmu(line_num2?: number): number
 
 /**
  * k
@@ -1514,7 +1514,7 @@ declare function linelen_cmu(line_num2?: number): number;
  * 
  * @returns カーソル位置(もしくは指定)の行の長さ
  */
-declare function linelen_gcu(line_num2?: number): number;
+function linelen_gcu(line_num2?: number): number
 
 /**
  * k    
@@ -1522,7 +1522,7 @@ declare function linelen_gcu(line_num2?: number): number;
  * tabcolumnの数え方で、現在のテキスト内容から得られる最大の値を表します。
  * @returns 現在のテキスト内容から得られる最大の値
  */
-declare function tabcolumnmax(): number;
+function tabcolumnmax(): number
 
 /**
  * k    
@@ -1530,7 +1530,7 @@ declare function tabcolumnmax(): number;
  * 範囲選択中かどうかを表します。
  * @returns 範囲選択中の場合は１、そうでない場合は０
  */
-declare function selecting(): number;
+function selecting(): number
 
 /**
  * k    
@@ -1538,7 +1538,7 @@ declare function selecting(): number;
  * BOX範囲選択中かどうかを表します。
  * @returns BOX範囲選択中の場合は１、そうでない場合は０
  */
-declare function rectselecting(): number;
+function rectselecting(): number
 
 /**
  * k    
@@ -1546,7 +1546,7 @@ declare function rectselecting(): number;
  * 「行選択開始」コマンドによる選択中かどうかを表します。
  * @returns 「行選択開始」コマンドによる選択中の場合は１、そうでない場合は０
  */
-declare function lineselecting(): number;
+function lineselecting(): number
 
 /**
  * k    
@@ -1554,7 +1554,7 @@ declare function lineselecting(): number;
  * 「選択開始」「BOX選択開始」「行選択開始」コマンドによる選択中かどうかを表します。
  * @returns 「選択開始」「BOX選択開始」「行選択開始」コマンドによる選択中の場合は１、そうでない場合は０
  */
-declare function selectionlock(): number;
+function selectionlock(): number
 
 /**
  * k    
@@ -1568,7 +1568,7 @@ declare function selectionlock(): number;
  * - 3：行単位（折り返しまで）の選択（行番号表示部分のドラッグ）    
  * - 4：行単位（改行まで）の選択（行番号表示部分のダブルクリックのドラッグ、または本文トリプルクリックのドラッグ操作）    
  */
-declare function mouseselecting(): number;
+function mouseselecting(): number
 
 /**
  * k    
@@ -1577,7 +1577,7 @@ declare function mouseselecting(): number;
  * @returns 複数選択中の場合は１、そうでない場合は０    
  * ただし、複数選択中で、全てが幅ゼロの場合は２
  */
-declare function multiselecting(): number;
+function multiselecting(): number
 
 /**
  * k    
@@ -1585,7 +1585,7 @@ declare function multiselecting(): number;
  * 複数選択時、選択されている個数を表します。    
  * @returns 複数選択時、選択されている個数。    
  */
-declare function multiselectcount(): number;
+function multiselectcount(): number
 
 /**
  * k    
@@ -1597,7 +1597,7 @@ declare function multiselectcount(): number;
  * @returns 検索ダイアログの「選択した範囲」の横の設定が「行単位」の場合は1、    
  * 「文字単位」の場合は2になります。
  */
-declare function inselecting(): number;
+function inselecting(): number
 
 /**
  * k    
@@ -1612,7 +1612,7 @@ declare function inselecting(): number;
  *
  * @returns 範囲選択開始位置のx座標。該当の選択範囲がなければ-1を返す。
  */
-declare function seltopx(selected_range_num?: number): number;
+function seltopx(selected_range_num?: number): number
 
 /**
  * k    
@@ -1627,7 +1627,7 @@ declare function seltopx(selected_range_num?: number): number;
  *
  * @returns 範囲選択開始位置のy座標。該当の選択範囲がなければ-1を返す。
  */
-declare function seltopy(selected_range_num?: number): number;
+function seltopy(selected_range_num?: number): number
 
 /**
  * k    
@@ -1642,7 +1642,7 @@ declare function seltopy(selected_range_num?: number): number;
  *
  * @returns 範囲選択終了位置のx座標。該当の選択範囲がなければ-1を返す。
  */
-declare function selendx(selected_range_num?: number): number;
+function selendx(selected_range_num?: number): number
 
 /**
  * k    
@@ -1657,7 +1657,7 @@ declare function selendx(selected_range_num?: number): number;
  *
  * @returns 範囲選択終了位置のy座標。該当の選択範囲がなければ-1を返す。
  */
-declare function selendy(selected_range_num?: number): number;
+function selendy(selected_range_num?: number): number
 
 /**
  * k    
@@ -1668,7 +1668,7 @@ declare function selendy(selected_range_num?: number): number;
  * @returns 範囲選択開始位置のカラム位置(column相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function seltopcolumn(): number;
+function seltopcolumn(): number
 
 /**
  * k    
@@ -1677,7 +1677,7 @@ declare function seltopcolumn(): number;
  * @returns 範囲選択開始位置のエディタ的に計算した行番号
  * 選択範囲がなければ最後の範囲選択開始位置のエディタ的に計算した行番号
  */
-declare function seltoplineno(): number;
+function seltoplineno(): number
 
 /**
  * k    
@@ -1688,7 +1688,7 @@ declare function seltoplineno(): number;
  * @returns 範囲選択終了位置のカラム位置(column相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function selendcolumn(): number;
+function selendcolumn(): number
 
 /**
  * k    
@@ -1697,7 +1697,7 @@ declare function selendcolumn(): number;
  * @returns 範囲選択終了位置のエディタ的に計算した行番号
  * 選択範囲がなければ最後の範囲選択終了位置のエディタ的に計算した行番号
  */
-declare function selendlineno(): number;
+function selendlineno(): number
 
 /**
  * k    
@@ -1706,7 +1706,7 @@ declare function selendlineno(): number;
  * @returns 範囲選択開始位置のカラム位置(column_wcs相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function seltop_wcs(): number;
+function seltop_wcs(): number
 
 /**
  * k    
@@ -1715,7 +1715,7 @@ declare function seltop_wcs(): number;
  * @returns 範囲選択開始位置のカラム位置(column_ucs4相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function seltop_ucs4(): number;
+function seltop_ucs4(): number
 
 /**
  * k    
@@ -1724,7 +1724,7 @@ declare function seltop_ucs4(): number;
  * @returns 範囲選択開始位置のカラム位置(column_cmu相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function seltop_cmu(): number;
+function seltop_cmu(): number
 
 /**
  * k    
@@ -1733,7 +1733,7 @@ declare function seltop_cmu(): number;
  * @returns 範囲選択開始位置のカラム位置(column_gcu相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function seltop_gcu(): number;
+function seltop_gcu(): number
 
 /**
  * k    
@@ -1742,7 +1742,7 @@ declare function seltop_gcu(): number;
  * @returns 範囲選択終了位置のカラム位置(column_wcs相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function selend_wcs(): number;
+function selend_wcs(): number
 
 /**
  * k    
@@ -1751,7 +1751,7 @@ declare function selend_wcs(): number;
  * @returns 範囲選択終了位置のカラム位置(column_ucs4相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function selend_ucs4(): number;
+function selend_ucs4(): number
 
 /**
  * k    
@@ -1760,7 +1760,7 @@ declare function selend_ucs4(): number;
  * @returns 範囲選択終了位置のカラム位置(column_cmu相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function selend_cmu(): number;
+function selend_cmu(): number
 
 /**
  * k    
@@ -1769,7 +1769,7 @@ declare function selend_cmu(): number;
  * @returns 範囲選択終了位置のカラム位置(column_gcu相当の値)。    
  * 選択範囲がなければ最後の選択範囲のカラム位置を返す。
  */
-declare function selend_gcu(): number;
+function selend_gcu(): number
 
 /**
  * k    
@@ -1779,7 +1779,7 @@ declare function selend_gcu(): number;
  * @returns 範囲選択を開始した時のx位置。    
  * 選択範囲がなければ範囲選択を開始した時のx位置。
  */
-declare function selopenx(): number;
+function selopenx(): number
 
 /**
  * k    
@@ -1789,7 +1789,7 @@ declare function selopenx(): number;
  * @returns 範囲選択を開始した時のy位置。    
  * 選択範囲がなければ範囲選択を開始した時のy位置。
  */
-declare function selopeny(): number;
+function selopeny(): number
 
 /**
  * k    
@@ -1799,7 +1799,7 @@ declare function selopeny(): number;
  * 行番号表示がONの場合はその部分を含んでいます。
  * @returns ウィンドウの横幅を文字数
  */
-declare function windowwidth(): number;
+function windowwidth(): number
 
 /**
  * k    
@@ -1808,7 +1808,7 @@ declare function windowwidth(): number;
  * キャプションやメニューなどの外側の部分は含まれていません。
  * @returns ウィンドウの高さを文字数
  */
-declare function windowheight(): number;
+function windowheight(): number
 
 /**
  * k    
@@ -1816,7 +1816,7 @@ declare function windowheight(): number;
  * ウィンドウ全体の横幅をピクセル単位で表します。
  * @returns ウィンドウ全体の横幅のピクセル数
  */
-declare function windowcx(): number;
+function windowcx(): number
 
 /**
  * k    
@@ -1824,7 +1824,7 @@ declare function windowcx(): number;
  * ウィンドウ全体の高さをピクセル単位で表します。
  * @returns ウィンドウ全体の高さをピクセル数
  */
-declare function windowcy(): number;
+function windowcy(): number
 
 /**
  * k    
@@ -1832,7 +1832,7 @@ declare function windowcy(): number;
  * ウィンドウの左上の位置のx座標をピクセル単位で表します。
  * @returns ウィンドウの左上の位置のx座標をピクセルで返す
  */
-declare function windowposx(): number;
+function windowposx(): number
 
 /**
  * k    
@@ -1840,7 +1840,7 @@ declare function windowposx(): number;
  * ウィンドウの左上の位置のy座標をピクセル単位で表します。
  * @returns ウィンドウの左上の位置のy座標をピクセルで返す。
  */
-declare function windowposy(): number;
+function windowposy(): number
 
 /**
  * k    
@@ -1851,7 +1851,7 @@ declare function windowposy(): number;
  * - 分割されていて、カーソルが上側(左側)にある場合は１
  * - カーソルが下側(右側)にある場合は２です。
  */
-declare function splitstate(): number;
+function splitstate(): number
 
 /**
  * k    
@@ -1862,7 +1862,7 @@ declare function splitstate(): number;
  * - 上下分割は１
  * - 左右分割は２
  */
-declare function splitmode(): number;
+function splitmode(): number
 
 /**
  * k    
@@ -1873,7 +1873,7 @@ declare function splitmode(): number;
  * 全ての行に番号を１から振ったと想定して、何行目相当の位置で分割しているかを返す。    
  * 分割していない場合は、-1を返す
  */
-declare function splitpos(): number;
+function splitpos(): number
 
 /**
  * k    
@@ -1898,7 +1898,7 @@ declare function splitpos(): number;
  * - アイコン化されている場合は２
  * - 最大化されている場合は３
  */
-declare function windowstate(hidemaru_handle?: number): number;
+function windowstate(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -1929,7 +1929,7 @@ declare function windowstate(hidemaru_handle?: number): number;
  * - アイコン化されている場合は２
  * - 最大化されている場合は３
  */
-declare function windowstate2(hidemaru_handle?: number): number;
+function windowstate2(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -1937,7 +1937,7 @@ declare function windowstate2(hidemaru_handle?: number): number;
  * 画面の横サイズをピクセル単位で表します。
  * @returns 画面の横サイズをピクセル単位で返す。
  */
-declare function cxscreen(): number;
+function cxscreen(): number
 
 /**
  * k    
@@ -1945,7 +1945,7 @@ declare function cxscreen(): number;
  * 画面の縦サイズをピクセル単位で表します。
  * @returns 画面の縦サイズをピクセル単位で返す。
  */
-declare function cyscreen(): number;
+function cyscreen(): number
 
 /**
  * k    
@@ -1954,7 +1954,7 @@ declare function cyscreen(): number;
  * ピクセル単位で表します。
  * @returns 画面の作業領域の左上の位置のx座標
  */
-declare function xworkarea(): number;
+function xworkarea(): number
 
 /**
  * k    
@@ -1963,7 +1963,7 @@ declare function xworkarea(): number;
  * ピクセル単位で表します。
  * @returns 画面の作業領域の左上の位置のy座標
  */
-declare function yworkarea(): number;
+function yworkarea(): number
 
 /**
  * k    
@@ -1971,7 +1971,7 @@ declare function yworkarea(): number;
  * 画面の作業領域の横サイズをピクセル単位で表します
  * @returns 画面の作業領域の横サイズをピクセル単位で返す
  */
-declare function cxworkarea(): number;
+function cxworkarea(): number
 
 /**
  * k    
@@ -1979,7 +1979,7 @@ declare function cxworkarea(): number;
  * 画面の作業領域の縦サイズをピクセル単位で表します。
  * @returns 画面の作業領域の縦サイズをピクセル単位で返す
  */
-declare function cyworkarea(): number;
+function cyworkarea(): number
 
 /**
  * k    
@@ -1989,7 +1989,7 @@ declare function cyworkarea(): number;
  * ちなみにsetmonitor文を使うと指定したモニタに移動できます。
  * @returns 現在のモニタ番号を返す。０番から始まります。
  */
-declare function monitor(): number;
+function monitor(): number
 
 /**
  * k    
@@ -1997,7 +1997,7 @@ declare function monitor(): number;
  * マルチモニタ環境において、モニタの数を表します。    
  * @returns モニタの数
  */
-declare function monitorcount(): number;
+function monitorcount(): number
 
 /**
  * k    
@@ -2010,7 +2010,7 @@ declare function monitorcount(): number;
  * 
  * @returns タブモードなら１、そうでないなら０
  */
-declare function tabmode(): number;
+function tabmode(): number
 
 /**
  * k    
@@ -2048,7 +2048,7 @@ declare function tabmode(): number;
  * @returns タブモードのとき、グループIDを返す。自分自身は 0 とは限らない。    
  * ステルスモードでは-1を返す。
  */
-declare function tabgroup(hidemaru_handle?: number): number;
+function tabgroup(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -2080,7 +2080,7 @@ declare function tabgroup(hidemaru_handle?: number): number;
  * @returns タブモードのとき、グループの順番を返す。自分自身は0。     
  * ステルスモードでは-1を返す。
  */
-declare function tabgrouporder(hidemaru_handle?: number): number;
+function tabgrouporder(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -2107,7 +2107,7 @@ declare function tabgrouporder(hidemaru_handle?: number): number;
  * @returns タブモードのとき、自身のタブを同じグループにあるタブの0から数えた順番を返す。
  * ステルスモードでは-1を返す。
  */
-declare function taborder(hidemaru_handle?: number): number;
+function taborder(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -2134,7 +2134,7 @@ declare function taborder(hidemaru_handle?: number): number;
  * @returns タブモードのとき、同じグループにあるタブの総数を返す。
  * ステルスモードでは-1を返す。
  */
-declare function tabtotal(hidemaru_handle?: number): number;
+function tabtotal(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -2142,7 +2142,7 @@ declare function tabtotal(hidemaru_handle?: number): number;
  * タブモードのとき、同じグループにあるタブの総数を表します。    
  * @returns タブモードのとき、同じグループにあるタブの総数を返す。
  */
-declare function tabgrouptotal(): number;
+function tabgrouptotal(): number
 
 /**
  * k    
@@ -2155,7 +2155,7 @@ declare function tabgrouptotal(): number;
  * 
  * @returns 画面の先頭の行のy座標。
  */
-declare function screentopy(): number;
+function screentopy(): number
 
 /**
  * k    
@@ -2168,7 +2168,7 @@ declare function screentopy(): number;
  * 
  * @returns 横スクロール位置のx座標。
  */
-declare function screenleftx(): number;
+function screenleftx(): number
 
 /**
  * k    
@@ -2183,7 +2183,7 @@ declare function screenleftx(): number;
  * @returns 秀丸エディタと内容比較をしている場合、比較中のウィンドウハンドルを返す    
  * 比較中のウィンドウがない場合、0
  */
-declare function compfilehandle(): number;
+function compfilehandle(): number
 
 /**
  * k    
@@ -2197,7 +2197,7 @@ declare function compfilehandle(): number;
  * @returns 他の秀丸エディタと同時スクロールしている場合、同時スクロール中のウィンドウハンドルを返す    
  * 同時スクロール中のウィンドウがない場合、0
  */
-declare function scrolllinkhandle(): number;
+function scrolllinkhandle(): number
 
 /**
  * k    
@@ -2222,7 +2222,7 @@ declare function scrolllinkhandle(): number;
  * 現在編集中のファイル名をドライブ文字も含めたフルパスで返す。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function filename(hidemaru_handle?: number): string;
+function filename(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2236,7 +2236,7 @@ declare function filename(hidemaru_handle?: number): string;
  * @returns
  * 現在編集中のファイル名をドライブ文字も含めたフルパスで返す。    
  */
-declare function filename2(hidemaru_handle?: number): string;
+function filename2(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2252,7 +2252,7 @@ declare function filename2(hidemaru_handle?: number): string;
  * @returns
  * 現在編集中のファイル名をドライブ文字も含めた短縮ファイル名で返す。    
  */
-declare function filename3(hidemaru_handle?: number): string;
+function filename3(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2277,7 +2277,7 @@ declare function filename3(hidemaru_handle?: number): string;
  * ファイル名の、パスを含まない、ベース名だけを返す。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function basename(hidemaru_handle?: number): string;
+function basename(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2291,7 +2291,7 @@ declare function basename(hidemaru_handle?: number): string;
  * @returns
  * ファイル名の、パスを含まない、ベース名だけを返す。    
  */
-declare function basename2(hidemaru_handle?: number): string;
+function basename2(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2307,7 +2307,7 @@ declare function basename2(hidemaru_handle?: number): string;
  * @returns
  * ファイル名の、パスを含まない、ベース名だけを短縮ファイル名で返す。    
  */
-declare function basename3(hidemaru_handle?: number): string;
+function basename3(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2334,7 +2334,7 @@ declare function basename3(hidemaru_handle?: number): string;
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  * ファイル名はすべて小文字に変換されている。
  */
-declare function directory(hidemaru_handle?: number): string;
+function directory(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2349,7 +2349,7 @@ declare function directory(hidemaru_handle?: number): string;
  * カレントフォルダをドライブ名も含めたパス名で返す。    
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  */
-declare function directory2(hidemaru_handle?: number): string;
+function directory2(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2366,7 +2366,7 @@ declare function directory2(hidemaru_handle?: number): string;
  * カレントフォルダをドライブ名も含めた短縮パス名で返す。    
  * ルートフォルダでない場合は最後に「\」が付いていない。    
  */
-declare function directory3(hidemaru_handle?: number): string;
+function directory3(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2409,7 +2409,7 @@ declare function directory3(hidemaru_handle?: number): string;
  * - webbrowse    
  * Webブラウズモード（Hidemarnet Explorerがインストールされているときのみ）
  */
-declare function filetype(hidemaru_handle?: number): string;
+function filetype(hidemaru_handle?: number): string
 
 /**
  * k    
@@ -2419,7 +2419,7 @@ declare function filetype(hidemaru_handle?: number): string;
  * @returns
  * 現在実行中のマクロのファイル名をフルパスで返す。すべて小文字。    
  */
-declare function currentmacrofilename(): string;
+function currentmacrofilename(): string
 
 /**
  * k    
@@ -2429,7 +2429,7 @@ declare function currentmacrofilename(): string;
  * @returns
  * 現在実行中のマクロのファイル名の、パスを含まない、ベース名を返す。すべて小文字。    
  */
-declare function currentmacrobasename(): string;
+function currentmacrobasename(): string
 
 /**
  * k    
@@ -2439,7 +2439,7 @@ declare function currentmacrobasename(): string;
  * @returns
  * 現在実行中のマクロのフォルダを返す。すべて小文字。    
  */
-declare function currentmacrodirectory(): string;
+function currentmacrodirectory(): string
 
 /**
  * k
@@ -2467,7 +2467,7 @@ declare function currentmacrodirectory(): string;
  * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
  * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
  */
-declare function currentjsfilename(): string;
+function currentjsfilename(): string
 
 /**
  * k    
@@ -2477,7 +2477,7 @@ declare function currentjsfilename(): string;
  * @returns
  * hidemaru.exeのフォルダを返す。すべて小文字。
  */
-declare function hidemarudir(): string;
+function hidemarudir(): string
 
 /**
  * k    
@@ -2493,7 +2493,7 @@ declare function hidemarudir(): string;
  * hidemaru.exeのhidemarudirと同じフォルダを返す。    
  * すべて小文字。
  */
-declare function macrodir(): string;
+function macrodir(): string
 
 /**
  * k    
@@ -2509,7 +2509,7 @@ declare function macrodir(): string;
  * hidemaru.exeのhidemarudirと同じフォルダを返す。    
  * すべて小文字。
  */
-declare function settingdir(): string;
+function settingdir(): string
 
 /**
  * k    
@@ -2519,7 +2519,7 @@ declare function settingdir(): string;
  * @returns
  * バックアップファイル用のフォルダを返す。    
  */
-declare function backupdir(): string;
+function backupdir(): string
 
 /**
  * k    
@@ -2531,7 +2531,7 @@ declare function backupdir(): string;
  * バックアップファイル用のフォルダを返す。    
  * すべて小文字。
  */
-declare function windir(): string;
+function windir(): string
 
 /**
  * k    
@@ -2543,7 +2543,7 @@ declare function windir(): string;
  * Windowsのシステムフォルダを返す。    
  * すべて小文字。
  */
-declare function winsysdir(): string;
+function winsysdir(): string
 
 /**
  * k    
@@ -2553,7 +2553,7 @@ declare function winsysdir(): string;
  * @returns
  * ファイルヒストリの項目数    
  */
-declare function filehistcount(): number;
+function filehistcount(): number
 
 /**
  * k    
@@ -2564,7 +2564,7 @@ declare function filehistcount(): number;
  * 上書きモードの場合は0以外、    
  * 挿入モードの場合は0です。
  */
-declare function overwrite(): number;
+function overwrite(): number
 /**
  * s    
  * 
@@ -2584,7 +2584,7 @@ declare function overwrite(): number;
  * 実行に成功した場合は0以外、    
  * 失敗した場合は0。
  */
-declare function overwrite(newtext: string, mode?: number): number;
+function overwrite(newtext: string, mode?: number): number
 
 /**
  * k    
@@ -2608,7 +2608,7 @@ declare function overwrite(newtext: string, mode?: number): number;
  * @returns
  * 対象の秀丸エディタが更新された場合は１、そうでない場合は０です。
  */
-declare function updated(hidemaru_handle?: number): number;
+function updated(hidemaru_handle?: number): number
 
 /**
  * k    
@@ -2623,7 +2623,7 @@ declare function updated(hidemaru_handle?: number): number;
  * 内容が変わったときにカウントが増える値。    
  * 初期値は1以上。32bitの値を超えると一周。
  */
-declare function updatecount(): number;
+function updatecount(): number
 
 /**
  * k    
@@ -2636,7 +2636,7 @@ declare function updatecount(): number;
  * クリップボードに文字列がある場合は１，無い場合は０
  * 文字列ではなく、画像などがクリップボードにある場合も０
  */
-declare function anyclipboard(): number;
+function anyclipboard(): number
 
 /**
  * k    
@@ -2659,7 +2659,7 @@ declare function anyclipboard(): number;
  * @returns
  * 各種の入力ができるかどうかを判断するための状態値を返す
  */
-declare function inputstates(): number;
+function inputstates(): number
 
 /**
  * k    
@@ -2669,7 +2669,7 @@ declare function inputstates(): number;
  * @returns
  * かな漢字変換がONなら１、OFFなら０
  */
-declare function imestate(): number;
+function imestate(): number
 
 /**
  * k    
@@ -2679,7 +2679,7 @@ declare function imestate(): number;
  * @returns
  * 閲覧モードの場合は１、そうでない場合は０
  */
-declare function browsemode(): number;
+function browsemode(): number
 
 /**
  * k    
@@ -2709,7 +2709,7 @@ declare function browsemode(): number;
  * キーが押されていた場合はそのキーコード、押されてなかった場合は０    
  * disablebreakされた状態でのみ利用可能。
  */
-declare function keypressed(): number;
+function keypressed(): number
 
 /**
  * k    
@@ -2726,7 +2726,7 @@ declare function keypressed(): number;
  * @returns
  * 現在のマクロが連続実行である場合1、そうでない場合0
  */
-declare function replay(): number;
+function replay(): number
 
 /**
  * k    
@@ -2736,7 +2736,7 @@ declare function replay(): number;
  * @returns
  * 点滅表示のとき0、範囲選択のときは1
  */
-declare function searchmode(): number;
+function searchmode(): number
 
 /**
  * k    
@@ -2749,7 +2749,7 @@ declare function searchmode(): number;
  * @returns
  * 検索バッファの内容を返す
  */
-declare function searchbuffer(): string;
+function searchbuffer(): string
 
 /**
  * k    
@@ -2854,7 +2854,7 @@ declare function searchbuffer(): string;
  * @returns
  * 検索フラグの状態値
  */
-declare function searchoption(): number;
+function searchoption(): number
 
 /**
  * k    
@@ -2887,7 +2887,7 @@ declare function searchoption(): number;
  * @returns
  * 拡張された検索フラグの状態値
  */
-declare function searchoption2(): number;
+function searchoption2(): number
 
 /**
  * k    
@@ -2901,7 +2901,7 @@ declare function searchoption2(): number;
  * searchdown等でinselect2を指定して検索した後は、    
  * 文字単位の選択用の予約された文字列を返す。
  */
-declare function targetcolormarker(): string;
+function targetcolormarker(): string
 
 /**
  * k    
@@ -2915,7 +2915,7 @@ declare function targetcolormarker(): string;
  * @returns
  * 置換バッファの内容を返す
  */
-declare function replacebuffer(): string;
+function replacebuffer(): string
 
 /**
  * k    
@@ -2933,7 +2933,7 @@ declare function replacebuffer(): string;
  * 「(現在の内容)」でgrepした後は、   
  * 先頭に制御コードの\x01が入った文字列になる。
  */
-declare function grepfilebuffer(): string;
+function grepfilebuffer(): string
 
 /**
  * k    
@@ -2947,7 +2947,7 @@ declare function grepfilebuffer(): string;
  * 前回のフォルダ文字列を返す。    
  * 「前回のフォルダを使う」がOFFの場合は""を返す。
  */
-declare function grepfolderbuffer(): string;
+function grepfolderbuffer(): string
 
 /**
  * k    
@@ -2957,7 +2957,7 @@ declare function grepfolderbuffer(): string;
  * @returns
  * 検索にヒットした文字列の開始位置のx座標
  */
-declare function foundtopx(): number;
+function foundtopx(): number
 
 /**
  * k    
@@ -2967,7 +2967,7 @@ declare function foundtopx(): number;
  * @returns
  * 検索にヒットした文字列の開始位置のy座標
  */
-declare function foundtopy(): number;
+function foundtopy(): number
 
 /**
  * k    
@@ -2977,7 +2977,7 @@ declare function foundtopy(): number;
  * @returns
  * 検索にヒットした文字列の終了位置のx座標
  */
-declare function foundendx(): number;
+function foundendx(): number
 
 /**
  * k    
@@ -2987,7 +2987,7 @@ declare function foundendx(): number;
  * @returns
  * 検索にヒットした文字列の終了位置のy座標
  */
-declare function foundendy(): number;
+function foundendy(): number
 
 /**
  * k    
@@ -2998,7 +2998,7 @@ declare function foundendy(): number;
  * 「検索文字列の強調」が表示状態なら１、    
  * 表示状態でないなら０
  */
-declare function foundhilighting(): number;
+function foundhilighting(): number
 
 /**
  * k    
@@ -3018,7 +3018,7 @@ declare function foundhilighting(): number;
  * 「検索文字列の強調」されているとき、   
  * 強調のために使われている検索文字列を返す。
  */
-declare function foundbuffer(): string;
+function foundbuffer(): string
 
 /**
  * k    
@@ -3030,7 +3030,7 @@ declare function foundbuffer(): string;
  * 「検索文字列の強調」がされているなら１、    
  * されてないなら０
  */
-declare function foundoption(): number;
+function foundoption(): number
 
 /**
  * k    
@@ -3040,7 +3040,7 @@ declare function foundoption(): number;
  * @returns
  * 上書き禁止の場合は１、そうでない場合は０
  */
-declare function readonly(): number;
+function readonly(): number
 
 /**
  * k    
@@ -3136,7 +3136,7 @@ declare function readonly(): number;
  * @returns
  * 現在のエンコードの種類と改行タイプを含んだ値を返す。
  */
-declare function encode(): number;
+function encode(): number
 
 /**
  * k    
@@ -3146,7 +3146,7 @@ declare function encode(): number;
  * @returns
  * 現在のエンコードの種類と改行タイプを含んだ値を返す。
  */
-declare function charset(): number;
+function charset(): number
 
 /**
  * k    
@@ -3160,7 +3160,7 @@ declare function charset(): number;
  * Unicode系でない場合も０
  * 
  */
-declare function bom(): number;
+function bom(): number
 
 /**
  * k    
@@ -3200,7 +3200,7 @@ declare function bom(): number;
  * 現在のエンコードの種類に対応するコードページ
  * 
  */
-declare function codepage(): number;
+function codepage(): number
 
 /**
  * f    
@@ -3229,7 +3229,7 @@ declare function codepage(): number;
  * - 4 ファイルマネージャ枠 
  * - 5 アウトプット枠 
  */
-declare function getfocus(): number;
+function getfocus(): number
 
 /**
  * k    
@@ -3257,7 +3257,7 @@ declare function getfocus(): number;
  * - 0x0002(ビット1)　半角から始まる文字入力の直後でカーソル移動していない状態
  * - 0x0004(ビット2)　「マクロ1」などのコマンドの実行によって単語補完が消えた直後
  */
-declare function autocompstate(): number;
+function autocompstate(): number
 
 /**
  * k    
@@ -3267,7 +3267,7 @@ declare function autocompstate(): number;
  * @returns
  * getarg可能なパラメータの数を返す
  */
-declare function argcount(): number;
+function argcount(): number
 
 /**
  * k    
@@ -3281,7 +3281,7 @@ declare function argcount(): number;
  * @returns
  * setcompatiblemodeの現在の状態を返す
  */
-declare function compatiblemode(): number;
+function compatiblemode(): number
 
 /**
  * k    
@@ -3294,7 +3294,7 @@ declare function compatiblemode(): number;
  * - 2が「右に寄る」
  * - 3が「貫通する」
  */
-declare function carettabmode(): number;
+function carettabmode(): number
 
 /**
  * k    
@@ -3315,7 +3315,7 @@ declare function carettabmode(): number;
  * - 0x0200 CRが見た目上改行されない特殊なCRに変換されています。    
  * - 0x0400 CR+LFが見た目上改行されない特殊なCR+LFに変換されています。
  */
-declare function return_in_cell_mode(): number;
+function return_in_cell_mode(): number
 
 /**
  * k    
@@ -3328,7 +3328,7 @@ declare function return_in_cell_mode(): number;
  * 「ヒストリの記録を中断」の状態かどうかを返す。    
  * 中断しているなら１、そうでないなら０
  */
-declare function stophistory(): number;
+function stophistory(): number
 
 /**
  * k    
@@ -3360,7 +3360,7 @@ declare function stophistory(): number;
  * @returns
  * フォントの種類や描画モードを表す状態値を返す
  */
-declare function fontmode(): number;
+function fontmode(): number
 
 /**
  * k    
@@ -3374,7 +3374,7 @@ declare function fontmode(): number;
  * @returns
  * 整形ラインが表示されていれば１、そうでないなら０    
  */
-declare function formline(): number;
+function formline(): number
 
 /**
  * k    
@@ -3389,7 +3389,7 @@ declare function formline(): number;
  * @returns
  * 現在の「設定のリスト」の名前を返す    
  */
-declare function currentconfigset(): string;
+function currentconfigset(): string
 
 /**
  * k    
@@ -3410,7 +3410,7 @@ declare function currentconfigset(): string;
  * @returns
  * ファイルタイプ別の設定の状態を返す    
  */
-declare function configstate(): number;
+function configstate(): number
 
 /**
  * k    
@@ -3420,7 +3420,7 @@ declare function configstate(): number;
  * @returns
  * フォントの名前を返す    
  */
-declare function fontname(): string;
+function fontname(): string
 
 /**
  * k    
@@ -3432,7 +3432,7 @@ declare function fontname(): string;
  * フォントのサイズ（高さ）を返す。    
  * 単位はピクセル数（ドット数）。    
  */
-declare function fontsize(): number;
+function fontsize(): number
 
 /**
  * s    
@@ -3450,7 +3450,7 @@ declare function fontsize(): number;
  * 更新に成功したら0以外を返す。    
  * 失敗したら0を返す。    
  */
-declare function refreshdatetime(): number;
+function refreshdatetime(): number
 
 /**
  * k    
@@ -3461,7 +3461,7 @@ declare function refreshdatetime(): number;
  * 現在の日付を返す。    
  * "92/10/22(月)"のような文字列形式。
  */
-declare function date(): string;
+function date(): string
 
 /**
  * k    
@@ -3472,7 +3472,7 @@ declare function date(): string;
  * 現在の時刻を返す。    
  * "22:30:45"のような文字列形式。
  */
-declare function time(): string;
+function time(): string
 
 /**
  * k    
@@ -3482,7 +3482,7 @@ declare function time(): string;
  * @returns
  * 年を表す文字列を返す。４桁の文字列
  */
-declare function year(): string;
+function year(): string
 
 /**
  * k    
@@ -3492,7 +3492,7 @@ declare function year(): string;
  * @returns
  * 月を表す文字列を返す。２桁の文字列
  */
-declare function month(): string;
+function month(): string
 
 /**
  * k    
@@ -3502,7 +3502,7 @@ declare function month(): string;
  * @returns
  * 日を表す文字列を返す。２桁の文字列
  */
-declare function day(): string;
+function day(): string
 
 /**
  * k    
@@ -3512,7 +3512,7 @@ declare function day(): string;
  * @returns
  * 時間を表す文字列を返す。２桁の文字列
  */
-declare function hour(): string;
+function hour(): string
 
 /**
  * k    
@@ -3522,7 +3522,7 @@ declare function hour(): string;
  * @returns
  * 分を表す文字列を返す。２桁の文字列
  */
-declare function minute(): string;
+function minute(): string
 
 /**
  * k    
@@ -3532,7 +3532,7 @@ declare function minute(): string;
  * @returns
  * 秒を表す文字列を返す。２桁の文字列
  */
-declare function second(): string;
+function second(): string
 
 /**
  * k    
@@ -3543,7 +3543,7 @@ declare function second(): string;
  * @returns
  * 曜日を表す文字列を返す。１文字。
  */
-declare function dayofweek(): string;
+function dayofweek(): string
 
 /**
  * k    
@@ -3555,7 +3555,7 @@ declare function dayofweek(): string;
  * 曜日を表す数値を返す。    
  * (日曜=0 月曜=1 火曜=2 水曜=3 木曜=4 金曜日=5 土曜日=6)
  */
-declare function dayofweeknum(): number;
+function dayofweeknum(): number
 
 /**
  * k    
@@ -3571,7 +3571,7 @@ declare function dayofweeknum(): number;
  * @returns
  * Windowsが起動されてからの経過時間をミリ秒単位で返す。    
  */
-declare function tickcount(): number;
+function tickcount(): number
 
 /**
  * k    
@@ -3598,7 +3598,7 @@ declare function tickcount(): number;
  * - 0x0040 空行区切り 
  * - 0x0080 行の強調表示区切り 
  */
-declare function foldable(): number;
+function foldable(): number
 
 /**
  * k    
@@ -3616,7 +3616,7 @@ declare function foldable(): number;
  * カーソル行が折りたたみされているかどうかを表します。    
  * 折りたたみされていれば１，そうでなければ０
  */
-declare function folded(): number;
+function folded(): number
 
 /**
  * k    
@@ -3626,7 +3626,7 @@ declare function folded(): number;
  * @returns
  * 部分編集されているとき、部分編集されている先頭の行のy座標を返す    
  */
-declare function rangeedittop(): number;
+function rangeedittop(): number
 
 /**
  * k    
@@ -3636,7 +3636,7 @@ declare function rangeedittop(): number;
  * @returns
  * 部分編集されているとき、部分編集されている最後の行のy座標を返す    
  */
-declare function rangeeditend(): number;
+function rangeeditend(): number
 
 /**
  * k    
@@ -3655,7 +3655,7 @@ declare function rangeeditend(): number;
  * @returns
  * 部分編集されているかどうかの状態値を返す  
  */
-declare function rangeeditmode(): number;
+function rangeeditmode(): number
 
 /**
  * k    
@@ -3723,7 +3723,7 @@ declare function rangeeditmode(): number;
  * @returns
  * アウトライン解析の枠のウィンドウハンドルを返す  
  */
-declare function outlinehandle(): number;
+function outlinehandle(): number
 
 /**
  * k    
@@ -3735,7 +3735,7 @@ declare function outlinehandle(): number;
  * 現在のアウトライン解析の枠の幅(左右の場合)または    
  * 高さ(上下の場合)をピクセル単位で返す。  
  */
-declare function outlinesize(): number;
+function outlinesize(): number
 
 /**
  * k    
@@ -3749,7 +3749,7 @@ declare function outlinesize(): number;
  * @returns
  * アウトライン解析の枠にある項目の数を返す
  */
-declare function outlineitemcount(): number;
+function outlineitemcount(): number
 
 /**
  * f    
@@ -3774,7 +3774,7 @@ declare function outlineitemcount(): number;
  * @returns
  * 引数の「数値」を「文字列の数字」にして返す
  */
-declare function str(num_value: number): string;
+function str(num_value: number): string
 
 /**
  * f    
@@ -3808,7 +3808,7 @@ declare function str(num_value: number): string;
  * @returns
  * 「文字列の数字」を「数値」にして返します。
  */
-declare function val(num_string: string): number;
+function val(num_string: string): number
 
 /**
  * f    
@@ -3829,7 +3829,7 @@ declare function val(num_string: string): number;
  * @returns
  * 数値の文字コードの文字を文字列として返す
  */
-declare function char(char_code: number): string;
+function char(char_code: number): string
 
 /**
  * f    
@@ -3855,7 +3855,7 @@ declare function char(char_code: number): string;
  * @returns
  * 引数の文字列の先頭文字の文字コード（数値）を返す
  */
-declare function ascii(character: string, fallback_behavior?: number): number;
+function ascii(character: string, fallback_behavior?: number): number
 
 /**
  * f    
@@ -3873,7 +3873,7 @@ declare function ascii(character: string, fallback_behavior?: number): number;
  * @returns
  * Unicodeの値に対応する文字コードの文字を文字列として返す
  */
-declare function unichar(unichar_code: number): string;
+function unichar(unichar_code: number): string
 
 /**
  * f    
@@ -3895,7 +3895,7 @@ declare function unichar(unichar_code: number): string;
  * @returns
  * 数値を16進数の文字列にして返す。
  */
-declare function hex(num: number): string;
+function hex(num: number): string
 
 /**
  * f    
@@ -3948,7 +3948,7 @@ declare function hex(num: number): string;
  * @returns
  * 書式によって変換された文字列が返ります。
  */
-declare function sprintf(format: string, ...optional_params: any[]): string;
+function sprintf(format: string, ...optional_params: any[]): string
 
 /**
  * f    
@@ -3978,7 +3978,7 @@ declare function sprintf(format: string, ...optional_params: any[]): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function leftstr(text: string, length: number): string;
+function leftstr(text: string, length: number): string
 
 /**
  * f    
@@ -4008,7 +4008,7 @@ declare function leftstr(text: string, length: number): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function rightstr(text: string, length: number): string;
+function rightstr(text: string, length: number): string
 
 /**
  * f    
@@ -4038,7 +4038,7 @@ declare function rightstr(text: string, length: number): string;
  * 文字列の指定の範囲を返す。  
  * 半角は1文字、全角は2文字として数えます。 
  */
-declare function midstr(text: string, from: number, length?: number): string;
+function midstr(text: string, from: number, length?: number): string
 
 /**
  * f    
@@ -4064,7 +4064,7 @@ declare function midstr(text: string, from: number, length?: number): string;
  * 文字列の長さを返す。    
  * 半角文字は1文字、全角文字は2文字として数えます。
  */
-declare function strlen(text: string): number;
+function strlen(text: string): number
 
 /**
  * f    
@@ -4096,7 +4096,7 @@ declare function strlen(text: string): number;
  * 見つからなかった場合は-1を返す。    
  * 半角文字は1文字、全角文字は2文字として数えます。
  */
-declare function strstr(text: string, pattern: string, from?: number): number;
+function strstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4128,7 +4128,7 @@ declare function strstr(text: string, pattern: string, from?: number): number;
  * 見つからなかった場合は-1を返す。    
  * 半角文字は1文字、全角文字は2文字として数えます。
  */
-declare function strrstr(text: string, pattern: string, from?: number): number;
+function strrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4163,7 +4163,7 @@ declare function strrstr(text: string, pattern: string, from?: number): number;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function wcsleftstr(text: string, length: number): string;
+function wcsleftstr(text: string, length: number): string
 
 /**
  * f    
@@ -4198,7 +4198,7 @@ declare function wcsleftstr(text: string, length: number): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function wcsrightstr(text: string, length: number): string;
+function wcsrightstr(text: string, length: number): string
 
 /**
  * f    
@@ -4232,7 +4232,7 @@ declare function wcsrightstr(text: string, length: number): string;
  * 文字列の指定の範囲を返す。  
  * 単位は、Unicode(UCS-2)単位。
  */
-declare function wcsmidstr(text: string, from: number, length?: number): string;
+function wcsmidstr(text: string, from: number, length?: number): string
 
 /**
  * f    
@@ -4263,7 +4263,7 @@ declare function wcsmidstr(text: string, from: number, length?: number): string;
  * 文字列の長さを返す。    
  * 単位は、Unicode(UCS-2)単位。    
  */
-declare function wcslen(text: string): number;
+function wcslen(text: string): number
 
 /**
  * f    
@@ -4300,7 +4300,7 @@ declare function wcslen(text: string): number;
  * 見つからなかった場合は-1を返す。    
  * 位置の単位は、Unicode(UCS-2)単位。
  */
-declare function wcsstrstr(text: string, pattern: string, from?: number): number;
+function wcsstrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4338,7 +4338,7 @@ declare function wcsstrstr(text: string, pattern: string, from?: number): number
  * 見つからなかった場合は-1を返す。    
  * 位置の単位は、Unicode(UCS-2)単位。
  */
-declare function wcsstrrstr(text: string, pattern: string, from?: number): number;
+function wcsstrrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4373,7 +4373,7 @@ declare function wcsstrrstr(text: string, pattern: string, from?: number): numbe
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function ucs4leftstr(text: string, length: number): string;
+function ucs4leftstr(text: string, length: number): string
 
 /**
  * f    
@@ -4408,7 +4408,7 @@ declare function ucs4leftstr(text: string, length: number): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function ucs4rightstr(text: string, length: number): string;
+function ucs4rightstr(text: string, length: number): string
 
 /**
  * f    
@@ -4442,7 +4442,7 @@ declare function ucs4rightstr(text: string, length: number): string;
  * 文字列の指定の範囲を返す。  
  * 位置の単位は、Unicode(UCS-4)単位
  */
-declare function ucs4midstr(text: string, from: number, length?: number): string;
+function ucs4midstr(text: string, from: number, length?: number): string
 
 /**
  * f    
@@ -4472,7 +4472,7 @@ declare function ucs4midstr(text: string, from: number, length?: number): string
  * 文字列の長さを返す。    
  * 位置の単位は、Unicode(UCS-4)単位    
  */
-declare function ucs4len(text: string): number;
+function ucs4len(text: string): number
 
 /**
  * f    
@@ -4509,7 +4509,7 @@ declare function ucs4len(text: string): number;
  * 見つからなかった場合は-1を返す。    
  * 位置の単位は、Unicode(UCS-4)単位
  */
-declare function ucs4strstr(text: string, pattern: string, from?: number): number;
+function ucs4strstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4547,7 +4547,7 @@ declare function ucs4strstr(text: string, pattern: string, from?: number): numbe
  * 見つからなかった場合は-1を返す。    
  * 位置の単位は、Unicode(UCS-4)単位
  */
-declare function ucs4strrstr(text: string, pattern: string, from?: number): number;
+function ucs4strrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4581,7 +4581,7 @@ declare function ucs4strrstr(text: string, pattern: string, from?: number): numb
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function cmuleftstr(text: string, length: number): string;
+function cmuleftstr(text: string, length: number): string
 
 /**
  * f    
@@ -4615,7 +4615,7 @@ declare function cmuleftstr(text: string, length: number): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function cmurightstr(text: string, length: number): string;
+function cmurightstr(text: string, length: number): string
 
 /**
  * f    
@@ -4648,7 +4648,7 @@ declare function cmurightstr(text: string, length: number): string;
  * 文字列の指定の範囲を返す。  
  * 単位は、カーソル移動単位
  */
-declare function cmumidstr(text: string, from: number, length?: number): string;
+function cmumidstr(text: string, from: number, length?: number): string
 
 /**
  * f    
@@ -4677,7 +4677,7 @@ declare function cmumidstr(text: string, from: number, length?: number): string;
  * 文字列の長さを返す。    
  * 単位は、カーソル移動単位
  */
-declare function cmulen(text: string): number;
+function cmulen(text: string): number
 
 /**
  * f    
@@ -4713,7 +4713,7 @@ declare function cmulen(text: string): number;
  * 見つからなかった場合は-1を返す。    
  * 単位は、カーソル移動単位
  */
-declare function cmustrstr(text: string, pattern: string, from?: number): number;
+function cmustrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4749,7 +4749,7 @@ declare function cmustrstr(text: string, pattern: string, from?: number): number
  * 見つからなかった場合は-1を返す。    
  * 単位は、カーソル移動単位
  */
-declare function cmustrrstr(text: string, pattern: string, from?: number): number;
+function cmustrrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4783,7 +4783,7 @@ declare function cmustrrstr(text: string, pattern: string, from?: number): numbe
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function gculeftstr(text: string, length: number): string;
+function gculeftstr(text: string, length: number): string
 
 /**
  * f    
@@ -4817,7 +4817,7 @@ declare function gculeftstr(text: string, length: number): string;
  * 元の文字列の長さが指定の長さより小さい場合は、   
  * 元の文字列がそのまま返る。
  */
-declare function gcurightstr(text: string, length: number): string;
+function gcurightstr(text: string, length: number): string
 
 /**
  * f    
@@ -4850,7 +4850,7 @@ declare function gcurightstr(text: string, length: number): string;
  * 文字列の指定の範囲を返す。  
  * 単位は、書記素クラスター単位
  */
-declare function gcumidstr(text: string, from: number, length?: number): string;
+function gcumidstr(text: string, from: number, length?: number): string
 
 /**
  * f    
@@ -4879,7 +4879,7 @@ declare function gcumidstr(text: string, from: number, length?: number): string;
  * 文字列の長さを返す。    
  * 単位は、書記素クラスター単位
  */
-declare function gculen(text: string): number;
+function gculen(text: string): number
 
 /**
  * f    
@@ -4915,7 +4915,7 @@ declare function gculen(text: string): number;
  * 見つからなかった場合は-1を返す。    
  * 単位は、書記素クラスター単位
  */
-declare function gcustrstr(text: string, pattern: string, from?: number): number;
+function gcustrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f    
@@ -4951,7 +4951,7 @@ declare function gcustrstr(text: string, pattern: string, from?: number): number
  * 見つからなかった場合は-1を返す。    
  * 単位は、書記素クラスター単位
  */
-declare function gcustrrstr(text: string, pattern: string, from?: number): number;
+function gcustrrstr(text: string, pattern: string, from?: number): number
 
 /**
  * f
@@ -4994,7 +4994,7 @@ declare function gcustrrstr(text: string, pattern: string, from?: number): numbe
  * @returns
  * 文字位置（column相当）を返します。
  */
-declare function wcs_to_char(text_line: string | number, from_column_wcs: number): number;
+function wcs_to_char(text_line: string | number, from_column_wcs: number): number
 
 /**
  * f
@@ -5037,7 +5037,7 @@ declare function wcs_to_char(text_line: string | number, from_column_wcs: number
  * @returns
  * Unicode(UCS-2)単位の文字位置（column_wcs相当）を返す。
  */
-declare function char_to_wcs(text_line: string | number, from_column: number): number;
+function char_to_wcs(text_line: string | number, from_column: number): number
 
 /**
  * f
@@ -5082,7 +5082,7 @@ declare function char_to_wcs(text_line: string | number, from_column: number): n
  * 文字位置（column相当）を返します。
  * 
  */
-declare function ucs4_to_char(text_line: string | number, from_column_ucs4: number): number;
+function ucs4_to_char(text_line: string | number, from_column_ucs4: number): number
 
 /**
  * f
@@ -5126,7 +5126,7 @@ declare function ucs4_to_char(text_line: string | number, from_column_ucs4: numb
  * @returns
  * Unicode(UCS-4)単位の文字位置（column_ucs4相当）を返す。
  */
-declare function char_to_ucs4(text_line: string | number, from_column: number): number;
+function char_to_ucs4(text_line: string | number, from_column: number): number
 
 /**
  * f
@@ -5163,7 +5163,7 @@ declare function char_to_ucs4(text_line: string | number, from_column: number): 
  * @returns
  * 文字位置（column相当）を返します。
  */
-declare function cmu_to_char(text_line: string | number, from_column_cmu: number): number;
+function cmu_to_char(text_line: string | number, from_column_cmu: number): number
 
 /**
  * f
@@ -5201,7 +5201,7 @@ declare function cmu_to_char(text_line: string | number, from_column_cmu: number
  * カーソル移動単位の文字位置（column_cmu相当）を返す。
  * 
  */
-declare function char_to_cmu(text_line: string | number, from_column: number): number;
+function char_to_cmu(text_line: string | number, from_column: number): number
 
 /**
  * f
@@ -5234,7 +5234,7 @@ declare function char_to_cmu(text_line: string | number, from_column: number): n
  * @returns
  * 文字位置（column相当）を返します。
  */
-declare function gcu_to_char(text_line: string | number, from_column_gcu: number): number;
+function gcu_to_char(text_line: string | number, from_column_gcu: number): number
 
 /**
  * f
@@ -5268,7 +5268,7 @@ declare function gcu_to_char(text_line: string | number, from_column_gcu: number
  * 書記素クラスター単位の文字位置（column_gcu相当）を返す。
  * 
  */
-declare function char_to_gcu(text_line: string | number, from_column: number): number;
+function char_to_gcu(text_line: string | number, from_column: number): number
 
 /**
  * f
@@ -5333,7 +5333,7 @@ declare function char_to_gcu(text_line: string | number, from_column: number): n
  * @returns
  * 0から数えた文字位置（column相当）を返す。
  */
-declare function byteindex_to_charindex(text: string, byteindex: number): number;
+function byteindex_to_charindex(text: string, byteindex: number): number
 
 /**
  * f
@@ -5400,7 +5400,7 @@ declare function byteindex_to_charindex(text: string, byteindex: number): number
  * @returns
  * バイト位置を返す。
  */
-declare function charindex_to_byteindex(text: string, charindex: number): number;
+function charindex_to_byteindex(text: string, charindex: number): number
 
 /**
  * f
@@ -5445,7 +5445,7 @@ declare function charindex_to_byteindex(text: string, charindex: number): number
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext(bgn_x: number, bgn_y: number, end_x: number, end_y: number, keep_select?: number, n_replace?: number): string;
+function gettext(bgn_x: number, bgn_y: number, end_x: number, end_y: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f
@@ -5497,7 +5497,7 @@ declare function gettext(bgn_x: number, bgn_y: number, end_x: number, end_y: num
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext2(bgn_column: number, bgn_lineno: number, end_column: number, end_lineno: number, keep_select?: number, n_replace?: number): string;
+function gettext2(bgn_column: number, bgn_lineno: number, end_column: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f
@@ -5547,7 +5547,7 @@ declare function gettext2(bgn_column: number, bgn_lineno: number, end_column: nu
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext_wcs(bgn_column_wcs: number, bgn_lineno: number, end_column_wcs: number, end_lineno: number, keep_select?: number, n_replace?: number): string;
+function gettext_wcs(bgn_column_wcs: number, bgn_lineno: number, end_column_wcs: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f
@@ -5597,7 +5597,7 @@ declare function gettext_wcs(bgn_column_wcs: number, bgn_lineno: number, end_col
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext_ucs4(bgn_column_ucs4: number, bgn_lineno: number, end_column_ucs4: number, end_lineno: number, keep_select?: number, n_replace?: number): string;
+function gettext_ucs4(bgn_column_ucs4: number, bgn_lineno: number, end_column_ucs4: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f
@@ -5647,7 +5647,7 @@ declare function gettext_ucs4(bgn_column_ucs4: number, bgn_lineno: number, end_c
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext_cmu(bgn_column_cmu: number, bgn_lineno: number, end_column_cmu: number, end_lineno: number, keep_select?: number, n_replace?: number): string;
+function gettext_cmu(bgn_column_cmu: number, bgn_lineno: number, end_column_cmu: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f
@@ -5697,7 +5697,7 @@ declare function gettext_cmu(bgn_column_cmu: number, bgn_lineno: number, end_col
  * 指定した範囲の文字列を返す。    
  * 文字列の長さが長すぎると秀丸がエラーになります。
  */
-declare function gettext_gcu(bgn_column_gcu: number, bgn_lineno: number, end_column_gcu: number, end_lineno: number, keep_select?: number, n_replace?: number): string;
+function gettext_gcu(bgn_column_gcu: number, bgn_lineno: number, end_column_gcu: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
 /**
  * f    
@@ -5710,7 +5710,7 @@ declare function gettext_gcu(bgn_column_gcu: number, bgn_lineno: number, end_col
  * @returns
  * 環境変数の値を返す。
  */
-declare function getenv(env_varname: string): string;
+function getenv(env_varname: string): string
 
 /**
  * f    
@@ -5738,7 +5738,7 @@ declare function getenv(env_varname: string): string;
  * 秀丸のウィンドウハンドルを返す。    
  * 見つからなかった場合は0
  */
-declare function findwindow(caption_bar_text: string, window_class_name?: string): number;
+function findwindow(caption_bar_text: string, window_class_name?: string): number
 
 /**
  * f    
@@ -5762,7 +5762,7 @@ declare function findwindow(caption_bar_text: string, window_class_name?: string
  * 秀丸のウィンドウハンドルを返す。    
  * 見つからなかった場合は0
  */
-declare function findwindowclass(window_class_name: string): number;
+function findwindowclass(window_class_name: string): number
 
 /**
  * f
@@ -5791,7 +5791,7 @@ declare function findwindowclass(window_class_name: string): number;
  * メッセージを送ったウィンドウが返した値を返す。    
  * 返す値は、Win32APIのSendMessage関数の返り値そのままで、数値型。
  */
-declare function sendmessage(hwnd: number, wndmsg_id: number, wparam: number, lparam: number): number
+function sendmessage(hwnd: number, wndmsg_id: number, wparam: number, lparam: number): number
 
 /**
  * f
@@ -5819,7 +5819,7 @@ declare function sendmessage(hwnd: number, wndmsg_id: number, wparam: number, lp
  * @returns
  * 引数で指定したヒストリのgrepファイルヒストリの文字列を返す。
  */
-declare function getgrepfilehist(history_ix: number): string
+function getgrepfilehist(history_ix: number): string
 
 /**
  * f
@@ -5856,7 +5856,7 @@ declare function getgrepfilehist(history_ix: number): string
  * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
  */
-declare function getgrepfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
+function getgrepfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
 /**
  * f
@@ -5881,7 +5881,7 @@ declare function getgrepfilehist(history_ix: number, is_pin: 1 | number): "0" | 
  * @returns
  * カラム位置を返します。
  */
-declare function xtocolumn(pos_x: number, pos_y: number): number
+function xtocolumn(pos_x: number, pos_y: number): number
 
 /**
  * f
@@ -5906,7 +5906,7 @@ declare function xtocolumn(pos_x: number, pos_y: number): number
  * @returns
  * 行番号を返します。
  */
-declare function ytolineno(pos_x: number, pos_y: number): number
+function ytolineno(pos_x: number, pos_y: number): number
 
 /**
  * f
@@ -5931,7 +5931,7 @@ declare function ytolineno(pos_x: number, pos_y: number): number
  * @returns
  * X座標を返します。
  */
-declare function columntox(pos_column: number, pos_lineno: number): number
+function columntox(pos_column: number, pos_lineno: number): number
 
 /**
  * f
@@ -5956,7 +5956,7 @@ declare function columntox(pos_column: number, pos_lineno: number): number
  * @returns
  * Y座標を返します。
  */
-declare function linenotoy(pos_column: number, pos_lineno: number): number
+function linenotoy(pos_column: number, pos_lineno: number): number
 
 /**
  * f
@@ -5988,7 +5988,7 @@ declare function linenotoy(pos_column: number, pos_lineno: number): number
  * 0から数えた行数を返します。
  * 
  */
-declare function getlinecount(text: string, pos: number, return_obj: { column: number } | {}): number
+function getlinecount(text: string, pos: number, return_obj: { column: number } | {}): number
 
 /**
  * f
@@ -6059,7 +6059,7 @@ declare function getlinecount(text: string, pos: number, return_obj: { column: n
  * 
  * 0.5文字分を含み、結果が小数点以下になる場合は切り上げられます。
  */
-declare function charcount(count_type: number, text?: string): number
+function charcount(count_type: number, text?: string): number
 
 /**
  * f
@@ -6087,7 +6087,7 @@ declare function charcount(count_type: number, text?: string): number
  * レイヤー名が返ります。    
  * 空の文字列が返ると、これ以上の名前付きレイヤーは無いことを意味します。
  */
-declare function enumcolormarkerlayer(colormarkerlayer_ix: number): string
+function enumcolormarkerlayer(colormarkerlayer_ix: number): string
 
 /**
  * f
@@ -6136,7 +6136,7 @@ declare function enumcolormarkerlayer(colormarkerlayer_ix: number): string
  * -target_attrが2の場合    
  * ファイルのサイズを返す。 サイズはバイト数です。   
  */
-declare function existfile(fullpath: string, target_attr?: number): number
+function existfile(fullpath: string, target_attr?: number): number
 
 /**
  * f
@@ -6210,7 +6210,7 @@ declare function existfile(fullpath: string, target_attr?: number): number
  * @returns
  * 文字列として日時の情報を返します。
  */
-declare function getfiletime(fullpath: string, filetime_attr?: number, format?: string): string
+function getfiletime(fullpath: string, filetime_attr?: number, format?: string): string
 
 /**
  * f
@@ -6234,7 +6234,7 @@ declare function getfiletime(fullpath: string, filetime_attr?: number, format?: 
  * @returns
  * editor_attrによって指定された種類の値が返ります。
  */
-declare function getmaxinfo(editor_attr: number): number
+function getmaxinfo(editor_attr: number): number
 
 /**
  * f
@@ -6260,7 +6260,7 @@ declare function getmaxinfo(editor_attr: number): number
  * @returns
  * outline_ixで指定した項目の、情報を文字列で返します。
  */
-declare function getoutlineitem(outline_ix: number, outline_attr: number): string
+function getoutlineitem(outline_ix: number, outline_attr: number): string
 
 /**
  * f
@@ -6314,7 +6314,7 @@ declare function getoutlineitem(outline_ix: number, outline_attr: number): strin
  * @returns
  * 引数の内容が返ります。
  */
-declare function getarg(arg_ix: number): string
+function getarg(arg_ix: number): string
 
 /**
  * f
@@ -6331,7 +6331,7 @@ declare function getarg(arg_ix: number): string
  * item_ixの番号に対応する候補の文字列を返します。    
  * 候補が無い場合は""を返します。
  */
-declare function getautocompitem(item_ix: number): string
+function getautocompitem(item_ix: number): string
 
 /**
  * f    
@@ -6389,7 +6389,7 @@ declare function getautocompitem(item_ix: number): string
  * @returns
  * 指定した種類の情報を文字列で返します。
  */
-declare function getcolormarker(target_prop: number, layer_name?: string ): string;
+function getcolormarker(target_prop: number, layer_name?: string ): string
 
 /**
  * f
@@ -6410,7 +6410,7 @@ declare function getcolormarker(target_prop: number, layer_name?: string ): stri
  * @returns
  * 指定に対応する文字列を返す。
  */
-declare function getfilehist(history_ix: number): string
+function getfilehist(history_ix: number): string
 
 /**
  * f
@@ -6440,7 +6440,7 @@ declare function getfilehist(history_ix: number): string
  * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
  */
-declare function getfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
+function getfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
 /**
  * f
@@ -6463,7 +6463,7 @@ declare function getfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
  * @returns
  * 指定に対応する文字列を返す。
  */
-declare function getpathhist(history_ix: number): string
+function getpathhist(history_ix: number): string
 
 /**
  * f
@@ -6493,7 +6493,7 @@ declare function getpathhist(history_ix: number): string
  * 指定に対応する文字列を返す。    
  * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
  */
-declare function getreplacehist(history_ix: number | -1): string
+function getreplacehist(history_ix: number | -1): string
 
 /**
  * f
@@ -6528,7 +6528,7 @@ declare function getreplacehist(history_ix: number | -1): string
  * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
  */
-declare function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "1"
+function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
 /**
  * 
@@ -6629,7 +6629,7 @@ declare function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "
  * @returns
  * 指定の対象に対応する数値を返す
  */
-declare function getresultex(result_id: number): number
+function getresultex(result_id: number): number
 
 /**
  * f    
@@ -6653,7 +6653,7 @@ declare function getresultex(result_id: number): number
  * 直近の execmacroで呼ばれたマクロで    
  * endmacroにパラメータを指定したときの文字列値を返す。
  */
-declare function getresultex(result_id: -1): string
+function getresultex(result_id: -1): string
 
 /**
  * f
@@ -6683,7 +6683,7 @@ declare function getresultex(result_id: -1): string
  * 指定に対応する文字列を返す。    
  * history_ix に -1 を指定した場合、ヒストリを使用している数を文字列で返す。
  */
-declare function getsearchhist(history_ix: number | -1): string
+function getsearchhist(history_ix: number | -1): string
 
 /**
  * f
@@ -6718,7 +6718,7 @@ declare function getsearchhist(history_ix: number | -1): string
  * ヒストリに常駐（ピン留め）していれば、文字列で "0"か"1"が返ります。    
  * 文字列なので注意してください。
  */
-declare function getsearchhist(history_ix: number, is_pin: 1 | number): "0" | "1"
+function getsearchhist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
 /**
  * f    
@@ -6741,7 +6741,7 @@ declare function getsearchhist(history_ix: number, is_pin: 1 | number): "0" | "1
  * 指定のtagfile_ixに対応するtagsファイルのファイル名をフルパスで返す。    
  * ファイルが存在しない場合は、空の文字列（""）を返す。
  */
-declare function gettagsfile(tagfile_ix: number): string
+function gettagsfile(tagfile_ix: number): string
 
 /**
  * f
@@ -6767,7 +6767,7 @@ declare function gettagsfile(tagfile_ix: number): string
  * @returns
  * target_idで指定の場所の文字列が返ります。
  */
-declare function gettitle(target_id: number, hidemaru_handle?: number): string
+function gettitle(target_id: number, hidemaru_handle?: number): string
 
 /**
  * f
@@ -6793,7 +6793,7 @@ declare function gettitle(target_id: number, hidemaru_handle?: number): string
  * 選ばれたファイルのフルパスが返ります。    
  * キャンセルされた場合は""が返ります。
  */
-declare function browsefile(target_directory: string, filename_wildcard?: string): string
+function browsefile(target_directory: string, filename_wildcard?: string): string
 
 /**
  * f    
@@ -6858,7 +6858,7 @@ declare function browsefile(target_directory: string, filename_wildcard?: string
  * 
  * disablebreakされた状態でのみ利用可能。
  */
-declare function keypressedex(return_keytype: number): number;
+function keypressedex(return_keytype: number): number
 
 /**
  * f
@@ -6896,7 +6896,7 @@ declare function keypressedex(return_keytype: number): number;
  * @returns 
  * 変換された文字列が返ります。
  */
-declare function quote(text: string): string
+function quote(text: string): string
 
 /**
  * f
@@ -6923,7 +6923,7 @@ declare function quote(text: string): string
  * 見つからなかった場合は、textをそのまま返します。    
  * 
  */
-declare function strreplace(text: string, search_text: string, replace_text: string): string
+function strreplace(text: string, search_text: string, replace_text: string): string
 
 /**
  * s
@@ -6970,7 +6970,7 @@ declare function strreplace(text: string, search_text: string, replace_text: str
  * 成功したらresultは0以外を返す。    
  * 失敗したらresultは0を返す。
  */
-declare function newfile(): number
+function newfile(): number
 
 /**
  * s    
@@ -7092,7 +7092,7 @@ declare function newfile(): number
  * ただし存在しないファイル名を指定して新規作成状態となる場合は、0以外になります。    
  * 詳しいエラーの状態はgetresultexで取得可能です。    
  */
-declare function openfile(filepath: string, fileoption_flag?: number): number
+function openfile(filepath: string, fileoption_flag?: number): number
 
 /**
  * s    
@@ -7157,7 +7157,7 @@ declare function openfile(filepath: string, fileoption_flag?: number): number
  * ただし存在しないファイル名を指定して新規作成状態となる場合は、0以外になります。    
  * 詳しいエラーの状態はgetresultexで取得可能です。    
  */
-declare function loadfile(filepath: string, fileoption_flag?: number): number
+function loadfile(filepath: string, fileoption_flag?: number): number
 
 /**
  * s
@@ -7214,7 +7214,7 @@ declare function loadfile(filepath: string, fileoption_flag?: number): number
  * - 27　Unicode(UTF-32) 
  * - 28　Unicode(UTF-32,Big-Endian)
  */
-declare function openfilepart(filepath: string, seek_cur: number, read_size: number, read_flag: number, n_encode: number): number
+function openfilepart(filepath: string, seek_cur: number, read_size: number, read_flag: number, n_encode: number): number
 
 /**
  * s
@@ -7225,7 +7225,7 @@ declare function openfilepart(filepath: string, seek_cur: number, read_size: num
  * 成功したらresultは0以外になります。    
  * 失敗したらresultは0になります。
  */
-declare function closenew(): number
+function closenew(): number
 
 /**
  * s    
@@ -7287,7 +7287,7 @@ declare function closenew(): number
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function saveas(filepath: string, fileoption_flag?: number): number
+function saveas(filepath: string, fileoption_flag?: number): number
 
 /**
  * s    
@@ -7349,7 +7349,7 @@ declare function saveas(filepath: string, fileoption_flag?: number): number
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function appendsave(filepath: string, fileoption_flag?: number): number
+function appendsave(filepath: string, fileoption_flag?: number): number
 
 /**
  * s
@@ -7380,7 +7380,7 @@ declare function appendsave(filepath: string, fileoption_flag?: number): number
  * 成功したらresultは0以外になります。    
  * 失敗したらresultは0になります。
  */
-declare function changename(filename: "" | "nul" | string): number
+function changename(filename: "" | "nul" | string): number
 
 /**
  * s    
@@ -7442,7 +7442,7 @@ declare function changename(filename: "" | "nul" | string): number
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function insertfile(filepath: string, fileoption_flag?: number): number
+function insertfile(filepath: string, fileoption_flag?: number): number
 
 /**
  * s    
@@ -7506,7 +7506,7 @@ declare function insertfile(filepath: string, fileoption_flag?: number): number
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function readonlyopenfile(filepath: string, fileoption_flag?: number): number
+function readonlyopenfile(filepath: string, fileoption_flag?: number): number
 
 /**
  * s    
@@ -7570,7 +7570,7 @@ declare function readonlyopenfile(filepath: string, fileoption_flag?: number): n
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function readonlyloadfile(filepath: string, fileoption_flag?: number): number
+function readonlyloadfile(filepath: string, fileoption_flag?: number): number
 
 /**
  * s    
@@ -7584,7 +7584,7 @@ declare function readonlyloadfile(filepath: string, fileoption_flag?: number): n
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function save(): number;
+function save(): number
 
 /**
  * s    
@@ -7598,7 +7598,7 @@ declare function save(): number;
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function savelf(): number;
+function savelf(): number
 
 /**
  * s    
@@ -7610,7 +7610,7 @@ declare function savelf(): number;
  * @returns 成功したらresultは0以外になります。    
  *        　失敗したらresultは0になります。
  */
-declare function print(showdialog?: number): number;
+function print(showdialog?: number): number
 
 /**
  * s    
@@ -7640,7 +7640,7 @@ declare function print(showdialog?: number): number;
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function saveall(exclude_flag?: number): number;
+function saveall(exclude_flag?: number): number
 
 /**
  * s    
@@ -7653,7 +7653,7 @@ declare function saveall(exclude_flag?: number): number;
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function saveupdatedall(): number;
+function saveupdatedall(): number
 
 /**
  * s    
@@ -7678,7 +7678,7 @@ declare function saveupdatedall(): number;
  * 選択テキスト(もしくはtext)があり、ファイルのオープンに成功したら、０以外を返す、    
  * 失敗したらエラーダイアログが出て、(マクロを中断しなければ）０を返す
  */
-declare function openbyshell(text?: string): number;
+function openbyshell(text?: string): number
 
 /**
  * s    
@@ -7693,7 +7693,7 @@ declare function openbyshell(text?: string): number;
  * 選択対象があり、ファイルのオープンに成功したら、０以外を返す、    
  * 失敗したらエラーダイアログが出て、(マクロを中断しなければ）０を返す
  */
-declare function openbyhidemaru(): number;
+function openbyhidemaru(): number
 
 /**
  * s
@@ -7721,7 +7721,7 @@ declare function openbyhidemaru(): number;
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setfilehist(history_ix: number, fullpath: string): number
+function setfilehist(history_ix: number, fullpath: string): number
 
 /**
  * s
@@ -7760,7 +7760,7 @@ declare function setfilehist(history_ix: number, fullpath: string): number
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setfilehist(history_ix: number, fullpath: string, is_pin: 0, pos_lineno: number, pos_column: number): number
+function setfilehist(history_ix: number, fullpath: string, is_pin: 0, pos_lineno: number, pos_column: number): number
 
 /**
  * s
@@ -7792,7 +7792,7 @@ declare function setfilehist(history_ix: number, fullpath: string, is_pin: 0, po
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setfilehist(history_ix: number | -1 | -2, pin_status: "0" | "1", is_pin: 1): number
+function setfilehist(history_ix: number | -1 | -2, pin_status: "0" | "1", is_pin: 1): number
 
 /**
  * s
@@ -7816,7 +7816,7 @@ declare function setfilehist(history_ix: number | -1 | -2, pin_status: "0" | "1"
  * 設定に成功した場合は、０以外
  * 失敗した場合は、０
  */
-declare function setpathhist(history_ix: number, fullpath: string): number
+function setpathhist(history_ix: number, fullpath: string): number
 
 /**
  * s    
@@ -7856,7 +7856,7 @@ declare function setpathhist(history_ix: number, fullpath: string): number
  * 成功したら０以外を返す、    
  * 失敗したら０を返す
  */
-declare function setencode(n_encode?: number, text_keep?: number, bom_type?: number): number;
+function setencode(n_encode?: number, text_keep?: number, bom_type?: number): number
 
 /**
  * s
@@ -7882,7 +7882,7 @@ declare function setencode(n_encode?: number, text_keep?: number, bom_type?: num
  * 切り替えに成功したら１を返す。    
  * 失敗したら０を返す。
  */
-declare function stophistoryswitch(): number;
+function stophistoryswitch(): number
 
 /**
  * s
@@ -7912,7 +7912,7 @@ declare function stophistoryswitch(): number;
  * 設定に成功した場合は、０以外
  * 失敗した場合は、０
  */
-declare function deletefilehist(history_ix: number | -1 | -2): number
+function deletefilehist(history_ix: number | -1 | -2): number
 
 /**
  * openfileのダイアログボックス版。
@@ -7928,7 +7928,7 @@ declare function deletefilehist(history_ix: number | -1 | -2): number
  * 
  * 詳しいエラーの状態はgetresultexで取得可能です。    
  */
-declare function OPEN(): number;
+function OPEN(): number
 
 /**
  * saveasのダイアログボックス版。
@@ -7943,7 +7943,7 @@ declare function OPEN(): number;
  * または、保存できずマクロが続行できない場合は、マクロは中断されます。    
  * 詳しいエラーの状態はgetresultexで取得可能です。
  */
-declare function SAVEAS(): number;
+function SAVEAS(): number
 
 /**
  * loadfileのダイアログボックス版。
@@ -7959,7 +7959,7 @@ declare function SAVEAS(): number;
  * 
  * 詳しいエラーの状態はgetresultexで取得可能です。    
  */
-declare function LOAD(): number;
+function LOAD(): number
 
 /**
  * appendsaveのダイアログボックス版。
@@ -7974,7 +7974,7 @@ declare function LOAD(): number;
  * または、保存できずマクロが続行できない場合は、マクロは中断されます。    
  * 詳しいエラーの状態はgetresultexで取得可能です。
  */
-declare function APPENDSAVE(): number;
+function APPENDSAVE(): number
 
 /**
  * changefileのダイアログボックス版。
@@ -7983,7 +7983,7 @@ declare function APPENDSAVE(): number;
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。    
  */
-declare function CHANGENAME(): number;
+function CHANGENAME(): number
 
 /**
  * insertfileのダイアログボックス版。
@@ -7999,7 +7999,7 @@ declare function CHANGENAME(): number;
  * 
  * 詳しいエラーの状態はgetresultexで取得可能です。    
  */
-declare function INSERTFILE(): number;
+function INSERTFILE(): number
 
 /**
  * openfilepartのダイアログボックス版。
@@ -8008,7 +8008,7 @@ declare function INSERTFILE(): number;
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。    
  */
-declare function OPENFILEPART(): number;
+function OPENFILEPART(): number
 
 /**
  * deletefile文は、ファイルを削除します。    
@@ -8033,7 +8033,7 @@ declare function OPENFILEPART(): number;
  * 成功した場合は、resultは0以外を返す。
  * 失敗した場合は、resultは0を返す。
  */
-declare function deletefile(filepath: string, move_to_recyeclebin?: number): number;
+function deletefile(filepath: string, move_to_recyeclebin?: number): number
 
 /**
  * s
@@ -8048,7 +8048,7 @@ declare function deletefile(filepath: string, move_to_recyeclebin?: number): num
  * (無題)など、ダイアログを表示する対象がないなら１を返す。
  * ダイアログを表示した際も１を返す。
  */
-declare function propertydialog(): number;
+function propertydialog(): number
 
 /**
  * s
@@ -8078,7 +8078,7 @@ declare function propertydialog(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function up(n_step?: number): number;
+function up(n_step?: number): number
 
 /**
  * s
@@ -8108,7 +8108,7 @@ declare function up(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function down(n_step?: number): number;
+function down(n_step?: number): number
 
 /**
  * s
@@ -8151,7 +8151,7 @@ declare function down(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function right(n_step?: number): number;
+function right(n_step?: number): number
 
 /**
  * s
@@ -8194,7 +8194,7 @@ declare function right(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function left(n_step?: number): number;
+function left(n_step?: number): number
 
 /**
  * s
@@ -8217,7 +8217,7 @@ declare function left(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function up_nowrap(n_step?: number): number;
+function up_nowrap(n_step?: number): number
 
 /**
  * s
@@ -8240,7 +8240,7 @@ declare function up_nowrap(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function down_nowrap(n_step?: number): number;
+function down_nowrap(n_step?: number): number
 
 /**
  * s
@@ -8272,7 +8272,7 @@ declare function down_nowrap(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function shiftup(n_step?: number): number;
+function shiftup(n_step?: number): number
 
 /**
  * s
@@ -8304,7 +8304,7 @@ declare function shiftup(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function shiftdown(n_step?: number): number;
+function shiftdown(n_step?: number): number
 
 /**
  * s
@@ -8349,7 +8349,7 @@ declare function shiftdown(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function shiftright(n_step?: number): number;
+function shiftright(n_step?: number): number
 
 /**
  * s
@@ -8394,7 +8394,7 @@ declare function shiftright(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function shiftleft(n_step?: number): number;
+function shiftleft(n_step?: number): number
 
 /**
  * s
@@ -8405,7 +8405,7 @@ declare function shiftleft(n_step?: number): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function gofileend(): number;
+function gofileend(): number
 
 /**
  * s
@@ -8416,7 +8416,7 @@ declare function gofileend(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function gofiletop(): number;
+function gofiletop(): number
 
 /**
  * s
@@ -8427,7 +8427,7 @@ declare function gofiletop(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function gokakko(): number;
+function gokakko(): number
 
 /**
  * s
@@ -8438,7 +8438,7 @@ declare function gokakko(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golastupdated(): number;
+function golastupdated(): number
 
 /**
  * s
@@ -8449,7 +8449,7 @@ declare function golastupdated(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function goleftkakko(): number;
+function goleftkakko(): number
 
 /**
  * s
@@ -8460,7 +8460,7 @@ declare function goleftkakko(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function gorightkakko(): number;
+function gorightkakko(): number
 
 /**
  * s
@@ -8471,7 +8471,7 @@ declare function gorightkakko(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golinetop(): number;
+function golinetop(): number
 
 /**
  * s
@@ -8482,7 +8482,7 @@ declare function golinetop(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golinetop2(): number;
+function golinetop2(): number
 
 /**
  * s
@@ -8493,7 +8493,7 @@ declare function golinetop2(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golineend(): number;
+function golineend(): number
 
 /**
  * s
@@ -8504,7 +8504,7 @@ declare function golineend(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golineend2(): number;
+function golineend2(): number
 
 /**
  * s
@@ -8518,7 +8518,7 @@ declare function golineend2(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function golineend3(): number;
+function golineend3(): number
 
 /**
  * s
@@ -8529,7 +8529,7 @@ declare function golineend3(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function goscreenend(): number;
+function goscreenend(): number
 
 /**
  * s
@@ -8540,7 +8540,7 @@ declare function goscreenend(): number;
  * 移動した場合は0以外を返す。    
  * 移動しなかった場合は0を返す。
  */
-declare function goscreentop(): number;
+function goscreentop(): number
 
 /**
  * s
@@ -8550,7 +8550,7 @@ declare function goscreentop(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function jump(): number;
+function jump(): number
 
 /**
  * s
@@ -8589,7 +8589,7 @@ declare function jump(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto(pos_x: number, pos_y: number): number;
+function moveto(pos_x: number, pos_y: number): number
 
 /**
  * s
@@ -8623,7 +8623,7 @@ declare function moveto(pos_x: number, pos_y: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function movetolineno(pos_column_plus: number, pos_lineno: number): number;
+function movetolineno(pos_column_plus: number, pos_lineno: number): number
 
 /**
  * s
@@ -8666,7 +8666,7 @@ declare function movetolineno(pos_column_plus: number, pos_lineno: number): numb
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function movetoview(pos_x: number, pos_y: number): number;
+function movetoview(pos_x: number, pos_y: number): number
 
 /**
  * s
@@ -8698,7 +8698,7 @@ declare function movetoview(pos_x: number, pos_y: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto2(pos_column: number, pos_lineno: number): number;
+function moveto2(pos_column: number, pos_lineno: number): number
 
 /**
  * s
@@ -8714,7 +8714,7 @@ declare function moveto2(pos_column: number, pos_lineno: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto_wcs(pos_column_wcs: number, pos_lineno: number): number;
+function moveto_wcs(pos_column_wcs: number, pos_lineno: number): number
 
 /**
  * s
@@ -8730,7 +8730,7 @@ declare function moveto_wcs(pos_column_wcs: number, pos_lineno: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto_ucs4(pos_column_ucs4: number, pos_lineno: number): number;
+function moveto_ucs4(pos_column_ucs4: number, pos_lineno: number): number
 
 /**
  * s
@@ -8746,7 +8746,7 @@ declare function moveto_ucs4(pos_column_ucs4: number, pos_lineno: number): numbe
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto_cmu(pos_column_cmu: number, pos_lineno: number): number;
+function moveto_cmu(pos_column_cmu: number, pos_lineno: number): number
 
 /**
  * s
@@ -8762,7 +8762,7 @@ declare function moveto_cmu(pos_column_cmu: number, pos_lineno: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function moveto_gcu(pos_column_gcu: number, pos_lineno: number): number;
+function moveto_gcu(pos_column_gcu: number, pos_lineno: number): number
 
 /**
  * s
@@ -8793,7 +8793,7 @@ declare function moveto_gcu(pos_column_gcu: number, pos_lineno: number): number;
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function nextpage(addition_line?: number, is_cursor_keep?: number): number;
+function nextpage(addition_line?: number, is_cursor_keep?: number): number
 
 /**
  * s
@@ -8824,7 +8824,7 @@ declare function nextpage(addition_line?: number, is_cursor_keep?: number): numb
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function prevpage(addition_line?: number, is_cursor_keep?: number): number;
+function prevpage(addition_line?: number, is_cursor_keep?: number): number
 
 /**
  * s
@@ -8855,7 +8855,7 @@ declare function prevpage(addition_line?: number, is_cursor_keep?: number): numb
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function halfnextpage(addition_line?: number, is_cursor_keep?: number): number;
+function halfnextpage(addition_line?: number, is_cursor_keep?: number): number
 
 /**
  * s
@@ -8886,7 +8886,7 @@ declare function halfnextpage(addition_line?: number, is_cursor_keep?: number): 
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function halfprevpage(addition_line?: number, is_cursor_keep?: number): number;
+function halfprevpage(addition_line?: number, is_cursor_keep?: number): number
 
 /**
  * s
@@ -8897,7 +8897,7 @@ declare function halfprevpage(addition_line?: number, is_cursor_keep?: number): 
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function rollup(): number;
+function rollup(): number
 
 /**
  * s
@@ -8908,7 +8908,7 @@ declare function rollup(): number;
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function rollup2(): number;
+function rollup2(): number
 
 /**
  * s
@@ -8919,7 +8919,7 @@ declare function rollup2(): number;
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function rolldown(): number;
+function rolldown(): number
 
 /**
  * s
@@ -8930,7 +8930,7 @@ declare function rolldown(): number;
  * スクロールが発生した場合、0以外を返す。    
  * スクロールが発生しなかった場合、0を返す。
  */
-declare function rolldown2(): number;
+function rolldown2(): number
 
 /**
  * s
@@ -8945,7 +8945,7 @@ declare function rolldown2(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordleft(): number;
+function wordleft(): number
 
 /**
  * s
@@ -8956,7 +8956,7 @@ declare function wordleft(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordleft2(): number;
+function wordleft2(): number
 
 /**
  * s
@@ -8971,7 +8971,7 @@ declare function wordleft2(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordright(): number;
+function wordright(): number
 
 /**
  * s
@@ -8982,7 +8982,7 @@ declare function wordright(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordright2(): number;
+function wordright2(): number
 
 /**
  * s
@@ -8997,7 +8997,7 @@ declare function wordright2(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordrightsalnen(): number;
+function wordrightsalnen(): number
 
 /**
  * s
@@ -9008,7 +9008,7 @@ declare function wordrightsalnen(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function wordrightsalnen2(): number;
+function wordrightsalnen2(): number
 
 /**
  * s
@@ -9022,7 +9022,7 @@ declare function wordrightsalnen2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function gowordtop(): number;
+function gowordtop(): number
 
 /**
  * s
@@ -9036,7 +9036,7 @@ declare function gowordtop(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function gowordend(): number;
+function gowordend(): number
 
 /**
  * s
@@ -9046,7 +9046,7 @@ declare function gowordend(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function gowordtop2(): number;
+function gowordtop2(): number
 
 /**
  * s
@@ -9056,7 +9056,7 @@ declare function gowordtop2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function gowordend2(): number;
+function gowordend2(): number
 
 /**
  * s
@@ -9088,7 +9088,7 @@ declare function gowordend2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevpos(): number;
+function prevpos(): number
 
 /**
  * s
@@ -9103,7 +9103,7 @@ declare function prevpos(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevposhistback(): number;
+function prevposhistback(): number
 /**
  * s
  * 
@@ -9117,7 +9117,7 @@ declare function prevposhistback(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevposhistback(): number;
+function prevposhistback(): number
 
 /**
  * s
@@ -9131,7 +9131,7 @@ declare function prevposhistback(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevposhistforward(): number;
+function prevposhistforward(): number
 
 /**
  * s
@@ -9147,7 +9147,7 @@ declare function prevposhistforward(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setmark(): number;
+function setmark(): number
 
 /**
  * s
@@ -9168,7 +9168,7 @@ declare function setmark(): number;
  * 失敗した場合resultは0を返す。    
  * is_current_hidemaru を省略した場合は、resultが書き換わらないため、有効な値を返さないので注意)
  */
-declare function clearallmark(is_current_hidemaru?: number): number;
+function clearallmark(is_current_hidemaru?: number): number
 
 /**
  * s
@@ -9181,7 +9181,7 @@ declare function clearallmark(is_current_hidemaru?: number): number;
  * (何かマークを操作しても、最終的にダイアログを閉じたりキャンセルボタンをおせば、-1が返ってくる)    
  * その他の場合は、返ってくる値に意味はない。
  */
-declare function marklist(): number;
+function marklist(): number
 
 /**
  * s
@@ -9192,7 +9192,7 @@ declare function marklist(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function nextmark(): number;
+function nextmark(): number
 
 /**
  * s
@@ -9203,7 +9203,7 @@ declare function nextmark(): number;
  * 移動が発生した場合、0以外を返す。    
  * 移動が発生しなかった場合、0を返す。
  */
-declare function prevmark(): number;
+function prevmark(): number
 
 /**
  * s
@@ -9214,7 +9214,7 @@ declare function prevmark(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevfunc(): number;
+function prevfunc(): number
 
 /**
  * s
@@ -9225,7 +9225,7 @@ declare function prevfunc(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function nextfunc(): number;
+function nextfunc(): number
 
 /**
  * s
@@ -9243,7 +9243,7 @@ declare function nextfunc(): number;
  * @returns
  * 有効な値は返ってこない。
  */
-declare function nextresult(target_flag?: number): number;
+function nextresult(target_flag?: number): number
 
 /**
  * s
@@ -9261,7 +9261,7 @@ declare function nextresult(target_flag?: number): number;
  * @returns
  * 有効な値は返ってこない。
  */
-declare function prevresult(target_flag?: number): number;
+function prevresult(target_flag?: number): number
 
 /**
  * s
@@ -9278,7 +9278,7 @@ declare function prevresult(target_flag?: number): number;
  * 対応するタグに移動したら１を返す。    
  * それ以外は０を返す。
  */
-declare function gotagpair(): number;
+function gotagpair(): number
 
 /**
  * s
@@ -9292,7 +9292,7 @@ declare function gotagpair(): number;
  * カーソル移動した場合は０以外を返す。    
  * カーソル移動しなかった場合は０を返す。
  */
-declare function backtab(): number;
+function backtab(): number
 
 /**
  * s
@@ -9306,7 +9306,7 @@ declare function backtab(): number;
  * カーソル移動した場合は０以外を返す。    
  * カーソル移動しなかった場合は０を返す。
  */
-declare function forwardtab(): number;
+function forwardtab(): number
 
 /**
  * s
@@ -9322,7 +9322,7 @@ declare function forwardtab(): number;
  * 追加コピーに成功した場合は、１を返す    
  * 失敗した場合は、０を返す
  */
-declare function appendcopy(): number;
+function appendcopy(): number
 
 /**
  * s
@@ -9338,7 +9338,7 @@ declare function appendcopy(): number;
  * 追加切り抜きに成功した場合は、１を返す    
  * 失敗した場合は、０を返す
  */
-declare function appendcut(): number;
+function appendcut(): number
 
 /**
  * s
@@ -9354,7 +9354,7 @@ declare function appendcut(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beginrect(): number;
+function beginrect(): number
 
 /**
  * s
@@ -9370,7 +9370,7 @@ declare function beginrect(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beginrectmulti(): number;
+function beginrectmulti(): number
 
 /**
  * s
@@ -9386,7 +9386,7 @@ declare function beginrectmulti(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beginsel(): number;
+function beginsel(): number
 
 /**
  * s
@@ -9410,7 +9410,7 @@ declare function beginsel(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beginlinesel(is_multiline?: number): number;
+function beginlinesel(is_multiline?: number): number
 
 /**
  * s
@@ -9421,7 +9421,7 @@ declare function beginlinesel(is_multiline?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function endsel(): number;
+function endsel(): number
 
 /**
  * s
@@ -9439,7 +9439,7 @@ declare function endsel(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copy(): number;
+function copy(): number
 
 /**
  * s
@@ -9457,7 +9457,7 @@ declare function copy(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copy2(): number;
+function copy2(): number
 
 /**
  * s
@@ -9474,7 +9474,7 @@ declare function copy2(): number;
  * 切り抜きに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function cut(): number;
+function cut(): number
 
 /**
  * s
@@ -9492,7 +9492,7 @@ declare function cut(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copyline(is_multiline?: number): number;
+function copyline(is_multiline?: number): number
 
 /**
  * s
@@ -9520,7 +9520,7 @@ declare function copyline(is_multiline?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function cutline(cutmode?: number): number;
+function cutline(cutmode?: number): number
 
 /**
  * s
@@ -9531,7 +9531,7 @@ declare function cutline(cutmode?: number): number;
  * 切り抜きに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function cutafter(): number;
+function cutafter(): number
 
 /**
  * s
@@ -9560,7 +9560,7 @@ declare function cutafter(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copyword(word_count?: number): number;
+function copyword(word_count?: number): number
 
 /**
  * s
@@ -9571,7 +9571,7 @@ declare function copyword(word_count?: number): number;
  * 切り抜きに成功したら１を返す、
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function cutword(): number;
+function cutword(): number
 
 /**
  * s
@@ -9587,7 +9587,7 @@ declare function cutword(): number;
  * @returns
  * 返ってくる値に意味はない。
  */
-declare function escapeselect(): number;
+function escapeselect(): number
 
 /**
  * s
@@ -9612,7 +9612,7 @@ declare function escapeselect(): number;
  * 貼り付けに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function paste(): number;
+function paste(): number
 
 /**
  * s
@@ -9627,7 +9627,7 @@ declare function paste(): number;
  * 貼り付けに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function pasterect(): number;
+function pasterect(): number
 
 /**
  * s
@@ -9644,7 +9644,7 @@ declare function pasterect(): number;
  * 貼り付けに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function refpaste(): number;
+function refpaste(): number
 
 /**
  * s
@@ -9661,7 +9661,7 @@ declare function refpaste(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refcopy(): number;
+function refcopy(): number
 
 /**
  * s
@@ -9678,7 +9678,7 @@ declare function refcopy(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refcopy2(): number;
+function refcopy2(): number
 
 /**
  * s
@@ -9688,7 +9688,7 @@ declare function refcopy2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectall(): number;
+function selectall(): number
 
 /**
  * s
@@ -9699,7 +9699,7 @@ declare function selectall(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectline(): number;
+function selectline(): number
 
 /**
  * s
@@ -9716,7 +9716,7 @@ declare function selectline(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectword(): number;
+function selectword(): number
 
 /**
  * s
@@ -9729,7 +9729,7 @@ declare function selectword(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectword2(): number;
+function selectword2(): number
 
 /**
  * s
@@ -9739,7 +9739,7 @@ declare function selectword2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showcliphist(): number;
+function showcliphist(): number
 
 /**
  * s    
@@ -9778,7 +9778,7 @@ declare function showcliphist(): number;
  * 貼り付けに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function poppaste(): number;
+function poppaste(): number
 
 /**
  * poppaste2文は、「貼り付け＋履歴戻し2」を実行します。    
@@ -9790,7 +9790,7 @@ declare function poppaste(): number;
  * 貼り付けに成功したら１を返す、    
  * 書き込み禁止などで切り抜きに失敗したら０を返す
  */
-declare function poppaste2(): number;
+function poppaste2(): number
 
 /**
  * s
@@ -9812,7 +9812,7 @@ declare function poppaste2(): number;
  * 取り出しに成功すると、0以外を返す。    
  * 存在しない番号を指定したり、常駐秀丸エディタがいないなどの場合は0を返す。
  */
-declare function getcliphist(history_ix?: number): number
+function getcliphist(history_ix?: number): number
 
 /**
  * s
@@ -9828,7 +9828,7 @@ declare function getcliphist(history_ix?: number): number
  * 成功した場合、0以外を返します。    
  * 失敗した場合、0を返します。    
  */
-declare function clearcliphist(history_ix?: number): number;
+function clearcliphist(history_ix?: number): number
 
 /**
  * s
@@ -9845,7 +9845,7 @@ declare function clearcliphist(history_ix?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectcfunc(): number;
+function selectcfunc(): number
 
 /**
  * s
@@ -9861,7 +9861,7 @@ declare function selectcfunc(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copyurl(): number;
+function copyurl(): number
 
 /**
  * s
@@ -9875,7 +9875,7 @@ declare function copyurl(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copyformed(): number;
+function copyformed(): number
 
 /**
  * s
@@ -9941,7 +9941,7 @@ declare function copyformed(): number;
  * 成功時は0以外を返す    
  * 失敗時は0になります。    
  */
-declare function selectcolumn(select_tabcolumn_bgn?: number, select_tabcolumn_end?: number, select_lineno_bgn?: number, select_lineno_end?: number): number;
+function selectcolumn(select_tabcolumn_bgn?: number, select_tabcolumn_end?: number, select_lineno_bgn?: number, select_lineno_end?: number): number
 
 /**
  * s
@@ -9963,7 +9963,7 @@ declare function selectcolumn(select_tabcolumn_bgn?: number, select_tabcolumn_en
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function tomultiselect(): number;
+function tomultiselect(): number
 
 /**
  * s
@@ -9984,7 +9984,7 @@ declare function tomultiselect(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function invertselection(): number;
+function invertselection(): number
 
 /**
  * s
@@ -10009,7 +10009,7 @@ declare function invertselection(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function reservemultisel(): number;
+function reservemultisel(): number
 
 /**
  * s
@@ -10032,7 +10032,7 @@ declare function reservemultisel(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectreservedmultisel(): number;
+function selectreservedmultisel(): number
 
 /**
  * s
@@ -10055,7 +10055,7 @@ declare function selectreservedmultisel(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function clearreservedmultisel(): number;
+function clearreservedmultisel(): number
 
 /**
  * s
@@ -10077,7 +10077,7 @@ declare function clearreservedmultisel(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function clearreservedmultiselall(): number;
+function clearreservedmultiselall(): number
 
 /**
  * s
@@ -10089,7 +10089,7 @@ declare function clearreservedmultiselall(): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function backspace(): number;
+function backspace(): number
 
 /**
  * s
@@ -10101,7 +10101,7 @@ declare function backspace(): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function del(): number;
+function del(): number
 
 /**
  * s
@@ -10113,7 +10113,7 @@ declare function del(): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function deleteafter(): number;
+function deleteafter(): number
 
 /**
  * s
@@ -10125,7 +10125,7 @@ declare function deleteafter(): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function deletebefore(): number;
+function deletebefore(): number
 
 /**
  * s
@@ -10153,7 +10153,7 @@ declare function deletebefore(): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function deleteline(is_selected_lines?: number): number;
+function deleteline(is_selected_lines?: number): number
 
 /**
  * s
@@ -10178,7 +10178,7 @@ declare function deleteline(is_selected_lines?: number): number;
  * 成功した場合、1を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function deleteline2(is_selected_lines?: number): number;
+function deleteline2(is_selected_lines?: number): number
 
 /**
  * s
@@ -10193,7 +10193,7 @@ declare function deleteline2(is_selected_lines?: number): number;
  * 特に編集が発生しなかったとしても1を返す。    
  * そもそも編集禁止モードなどの時は0を返す。
  */
-declare function deleteword(): number;
+function deleteword(): number
 
 /**
  * s
@@ -10206,7 +10206,7 @@ declare function deleteword(): number;
  * 特に編集が発生しなかったとしても1を返す。    
  * そもそも編集禁止モードなどの時は0を返す。
  */
-declare function deletewordall(): number;
+function deletewordall(): number
 
 /**
  * s
@@ -10218,7 +10218,7 @@ declare function deletewordall(): number;
  * 特に編集が発生しなかったとしても1を返す。    
  * そもそも編集禁止モードなどの時は0を返す。
  */
-declare function deletewordfront(): number;
+function deletewordfront(): number
 
 /**
  * s
@@ -10270,7 +10270,7 @@ declare function deletewordfront(): number;
  * 挿入できたら0以外を返す。
  * 書き込み禁止などで挿入できなかったら0を返す。
  */
-declare function insert(text: string, mode1?: number, mode2_flag?: number): number;
+function insert(text: string, mode1?: number, mode2_flag?: number): number
 
 /**
  * s
@@ -10321,7 +10321,7 @@ declare function insert(text: string, mode1?: number, mode2_flag?: number): numb
  * 挿入できたら１を返す、    
  * 書き込み禁止などで挿入できなかったら０を返す。
  */
-declare function insertfix(text: string, mode1: number, mode2_flag?: number): number;
+function insertfix(text: string, mode1: number, mode2_flag?: number): number
 
 /**
  * s
@@ -10339,7 +10339,7 @@ declare function insertfix(text: string, mode1: number, mode2_flag?: number): nu
  * 二重化できたら１を返す、    
  * 書き込み禁止などで挿入できなかったら０を返す。
  */
-declare function dupline(duplicate_mode?: number): number;
+function dupline(duplicate_mode?: number): number
 
 /**
  * s
@@ -10350,7 +10350,7 @@ declare function dupline(duplicate_mode?: number): number;
  * 挿入できたら１を返す、    
  * 書き込み禁止などで挿入できなかったら０を返す。
  */
-declare function insertline(): number;
+function insertline(): number
 
 /**
  * s
@@ -10381,7 +10381,7 @@ declare function insertline(): number;
  * 成功した場合、0以外を返す。
  * 書き込み禁止などで失敗した場合、0を返す。
  */
-declare function insertreturn(): number;
+function insertreturn(): number
 
 /**
  * s
@@ -10392,7 +10392,7 @@ declare function insertreturn(): number;
  * 挿入できたら１を返す、    
  * 書き込み禁止などで挿入できなかったら０を返す。
  */
-declare function tab(): number;
+function tab(): number
 
 /**
  * s
@@ -10426,7 +10426,7 @@ declare function tab(): number;
  * 復元できたら１を返す、    
  * 書き込み禁止などで復元できなかったら０を返す。
  */
-declare function undelete(): number;
+function undelete(): number
 
 /**
  * s
@@ -10448,7 +10448,7 @@ declare function undelete(): number;
  * やり直しできたら１を返す、    
  * 書き込み禁止などでやり直しできなかったら０を返す。
  */
-declare function undo(undo_type?: number): number;
+function undo(undo_type?: number): number
 
 /**
  * s
@@ -10459,7 +10459,7 @@ declare function undo(undo_type?: number): number;
  * 「やり直しのやり直し」をできたら１を返す、    
  * 書き込み禁止などで「やり直しのやり直し」をできなかったら０を返す。
  */
-declare function redo(): number;
+function redo(): number
 
 /**
  * s
@@ -10480,7 +10480,7 @@ declare function redo(): number;
  * @returns
  * 常に0を返しますが、返り値は意味を持ちません。
  */
-declare function casechange(target_char_group_flag?: number): 0;
+function casechange(target_char_group_flag?: number): 0;
 
 /**
  * s
@@ -10498,7 +10498,7 @@ declare function casechange(target_char_group_flag?: number): 0;
  * 「インデント」をできたら１を返す、    
  * 書き込み禁止などで「インデント」をできなかったら０を返す。
  */
-declare function indent(): number;
+function indent(): number
 
 /**
  * s
@@ -10516,7 +10516,7 @@ declare function indent(): number;
  * 「逆インデント」をできたら１を返す、    
  * 書き込み禁止などで「逆インデント」をできなかったら０を返す。
  */
-declare function unindent(): number;
+function unindent(): number
 
 /**
  * s
@@ -10535,7 +10535,7 @@ declare function unindent(): number;
  * 「逆インデント」をできたら１を返す、    
  * 書き込み禁止などで「逆インデント」をできなかったら０を返す。
  */
-declare function shifttab(): number;
+function shifttab(): number
 
 /**
  * s
@@ -10569,7 +10569,7 @@ declare function shifttab(): number;
  * @returns
  * 常に0を返しますが、返り値は意味を持ちません。
  */
-declare function toupper(target_char_group_flag?: number): 0;
+function toupper(target_char_group_flag?: number): 0;
 /**
  * f
  * 
@@ -10605,7 +10605,7 @@ declare function toupper(target_char_group_flag?: number): 0;
  * @returns
  * 大文字に変換された文字列を返します。
  */
-declare function toupper(text: string, target_char_group_flag?: number): string;
+function toupper(text: string, target_char_group_flag?: number): string
 
 /**
  * s
@@ -10639,7 +10639,7 @@ declare function toupper(text: string, target_char_group_flag?: number): string;
  * @returns
  * 常に0を返しますが、返り値は意味を持ちません。
  */
-declare function tolower(target_char_group_flag?: number): 0;
+function tolower(target_char_group_flag?: number): 0;
 /**
  * f
  * 
@@ -10675,7 +10675,7 @@ declare function tolower(target_char_group_flag?: number): 0;
  * @returns
  * 小文字に変換された文字列を返します。
  */
-declare function tolower(text: string, target_char_group_flag?: number): string;
+function tolower(text: string, target_char_group_flag?: number): string
 
 /**
  * s
@@ -10689,7 +10689,7 @@ declare function tolower(text: string, target_char_group_flag?: number): string;
  * 空白に変換できたら１を返す、    
  * 変換できなかったら０を返す。
  */
-declare function tospace(): number;
+function tospace(): number
 
 /**
  * s
@@ -10703,7 +10703,7 @@ declare function tospace(): number;
  * タブに変換できたら１を返す、    
  * タブに変換できなかったら０を返す。
  */
-declare function totab(): number;
+function totab(): number
 
 /**
  * s
@@ -10715,7 +10715,7 @@ declare function totab(): number;
  * 半角文字に変換できたら１を返す、    
  * 変換できなかったら０を返す。
  */
-declare function tohankaku(): number;
+function tohankaku(): number
 
 /**
  * s
@@ -10728,7 +10728,7 @@ declare function tohankaku(): number;
  * 変換できたら１を返す、    
  * 変換できなかったら０を返す。
  */
-declare function tozenkakuhira(): number;
+function tozenkakuhira(): number
 
 /**
  * s
@@ -10741,7 +10741,7 @@ declare function tozenkakuhira(): number;
  * 変換できたら１を返す、    
  * 変換できなかったら０を返す。
  */
-declare function tozenkakukata(): number;
+function tozenkakukata(): number
 
 /**
  * s
@@ -10756,7 +10756,7 @@ declare function tozenkakukata(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function capslockforgot(): number;
+function capslockforgot(): number
 
 /**
  * s
@@ -10775,7 +10775,7 @@ declare function capslockforgot(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function imeconvforgot(): number;
+function imeconvforgot(): number
 
 /**
  * s
@@ -10792,7 +10792,7 @@ declare function imeconvforgot(): number;
  * ファイル名がまだ付いていない場合でテキスト内容が変更されている場合、再読み込みはせず、０を返す。    
  * ファイル名が付いている場合で、テキスト内容が変更されている場合、ダイアログが出た後、１を返す。
  */
-declare function reopen(): number;
+function reopen(): number
 
 /**
  * f
@@ -10853,7 +10853,7 @@ declare function reopen(): number;
  * 変換モジュールのロードや変換モジュールの関数呼び出しに失敗した場合は、特にエラーにはならず、    
  * target_textで指定した文字列がそのまま返ります。    
  */
-declare function filter(module_name: string, module_func_name: string, parameters: string, target_text: string) : string
+function filter(module_name: string, module_func_name: string, parameters: string, target_text: string) : string
 
 /**
  * f
@@ -10918,7 +10918,7 @@ declare function filter(module_name: string, module_func_name: string, parameter
  * 変換モジュールが見つからない場合などの場合は、成功しても失敗してもresultは1になります。    
  * 詳細なエラーは、getresultex(18)やgetresultex(19)でエラー情報を取得できます。 
  */ 
-declare function filter(module_name: string, module_func_name: string, parameters?: string) : number
+function filter(module_name: string, module_func_name: string, parameters?: string) : number
 
 /**
  * s
@@ -10928,7 +10928,7 @@ declare function filter(module_name: string, module_func_name: string, parameter
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function filtermenu(): number;
+function filtermenu(): number
 
 /**
  * autocomplete文は、単語補完を実行します。
@@ -11015,7 +11015,7 @@ declare function filtermenu(): number;
  * @returns
  * 返り値は、同期で動作しているときの詳細情報を返します。
  */
-declare function autocomplete(complete_mode?: number, complete_resource?: number, complete_method?: number, complete_dictionary?: string): number;
+function autocomplete(complete_mode?: number, complete_resource?: number, complete_method?: number, complete_dictionary?: string): number
 
 /**
  * s
@@ -11033,7 +11033,7 @@ declare function autocomplete(complete_mode?: number, complete_resource?: number
  * 整形しなかったとしても１が返ってくる。    
  * 上書き禁止などの時は０が返ってくる。
  */
-declare function form(): number;
+function form(): number
 
 /**
  * s
@@ -11051,7 +11051,7 @@ declare function form(): number;
  * 整形しなかったとしても１が返ってくる。    
  * 上書き禁止などの時は０が返ってくる。
  */
-declare function unform(): number;
+function unform(): number
 
 /**
  * s
@@ -11066,7 +11066,7 @@ declare function unform(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showformline(): number;
+function showformline(): number
 
 /**
  * s
@@ -11080,7 +11080,7 @@ declare function showformline(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function clearundobuffer(): number;
+function clearundobuffer(): number
 
 /**
  * s
@@ -11097,7 +11097,7 @@ declare function clearundobuffer(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function template(filepath?: string): number;
+function template(filepath?: string): number
 
 /**
  * s
@@ -11110,7 +11110,7 @@ declare function template(filepath?: string): number;
  * ダイアログで検索をして、失敗(=ヒットせず)した場合は0を返す。    
  * ダイアログでキャンセルした場合は -2 を返す。
  */
-declare function find1(): number;
+function find1(): number
 
 /**
  * s
@@ -11131,7 +11131,7 @@ declare function find1(): number;
  * ダイアログで検索をして、失敗(=ヒットせず)した場合は0を返す。    
  * ダイアログでキャンセルした場合は -2 を返す。
  */
-declare function find2(): number;
+function find2(): number
 
 /**
  * s
@@ -11143,7 +11143,7 @@ declare function find2(): number;
  * ダイアログで検索をして、失敗(=ヒットせず)した場合は0を返す。    
  * ダイアログでキャンセルした場合は -2 を返す。
  */
-declare function findword(): number;
+function findword(): number
 
 /**
  * s
@@ -11243,7 +11243,7 @@ declare function findword(): number;
  * 失敗した場合は返り値は0になります。    
  * ダイアログでキャンセルした場合は -2 になります。    
  */
-declare function searchdialog(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function searchdialog(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11280,7 +11280,7 @@ declare function searchdialog(search_text: string, searchoption_flag?: number, s
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function searchdown(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function searchdown(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11317,7 +11317,7 @@ declare function searchdown(search_text: string, searchoption_flag?: number, sea
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function searchdown2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function searchdown2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11354,7 +11354,7 @@ declare function searchdown2(search_text: string, searchoption_flag?: number, se
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function searchup(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function searchup(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11392,7 +11392,7 @@ declare function searchup(search_text: string, searchoption_flag?: number, searc
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function searchup2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function searchup2(search_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11416,7 +11416,7 @@ declare function searchup2(search_text: string, searchoption_flag?: number, sear
  * 成功した場合は、resultは置換した個数を返す。
  * ダイアログでキャンセルした場合は -2 を返す。
  */
-declare function replace1(): number;
+function replace1(): number
 
 /**
  * s
@@ -11514,7 +11514,7 @@ declare function replace1(): number;
  * 置換した個数が返ります。    
  * ダイアログでキャンセルした場合は -2 になります。    
  */
-declare function replacedialog(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replacedialog(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11551,7 +11551,7 @@ declare function replacedialog(search_text: string, replace_text:string, searcho
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function replacedown(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replacedown(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11588,7 +11588,7 @@ declare function replacedown(search_text: string, replace_text:string, searchopt
  * 成功した場合は返り値は1になります。    
  * 失敗した場合は返り値は0になります。    
  */
-declare function replaceup(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replaceup(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11632,7 +11632,7 @@ declare function replaceup(search_text: string, replace_text:string, searchoptio
  * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
  * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
  */
-declare function replaceall(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replaceall(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11675,7 +11675,7 @@ declare function replaceall(search_text: string, replace_text:string, searchopti
  * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
  * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
  */
-declare function replaceallfast(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replaceallfast(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11736,7 +11736,7 @@ declare function replaceallfast(search_text: string, replace_text:string, search
  * linknext(0x00000080)を第２引数に付けて置換した場合、resultには現在の秀丸エディタで置換した数しか入りません。    
  * 他の秀丸エディタでも置換した総数を取得するにはgetresultex(14)を使います。
  */
-declare function replaceallquick(search_text: string, replace_text:string, searchoption_flag?: number, searchoption2_flag?: number): number;
+function replaceallquick(search_text: string, replace_text: string, searchoption_flag?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -11779,7 +11779,7 @@ declare function replaceallquick(search_text: string, replace_text:string, searc
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
-declare function finddown(): number;
+function finddown(): number
 
 /**
  * finddown文2は、「下候補」を実行します。    
@@ -11819,7 +11819,7 @@ declare function finddown(): number;
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
-declare function finddown2(): number;
+function finddown2(): number
 
 /**
  * s
@@ -11861,7 +11861,7 @@ declare function finddown2(): number;
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
-declare function findup(): number;
+function findup(): number
 
 /**
  * s
@@ -11904,7 +11904,7 @@ declare function findup(): number;
  * 成功した場合は、0以外にを返す。
  * 失敗した場合は、0を返す。
  */
-declare function findup2(): number;
+function findup2(): number
 
 /**
  * s
@@ -11926,7 +11926,7 @@ declare function findup2(): number;
  * 成功した場合は、resultは0以外になります。    
  * 失敗した場合は、resultは0になります。    
  */
-declare function getsearch(): number;
+function getsearch(): number
 
 /**
  * s
@@ -11937,7 +11937,7 @@ declare function getsearch(): number;
  * 成功した場合は、resultは0以外になります。    
  * 失敗した場合は、resultは0になります。    
  */
-declare function gosearchstarted(): number;
+function gosearchstarted(): number
 
 /**
  * s
@@ -12013,7 +12013,7 @@ declare function gosearchstarted(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setsearch(search_text: string, searchoption_flag: number, searchoption2_flag?: number): number;
+function setsearch(search_text: string, searchoption_flag: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -12042,7 +12042,7 @@ declare function setsearch(search_text: string, searchoption_flag: number, searc
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setsearchhist(history_ix: number, search_text: string, is_pin?: 0): number
+function setsearchhist(history_ix: number, search_text: string, is_pin?: 0): number
 
 /**
  * s
@@ -12071,7 +12071,7 @@ declare function setsearchhist(history_ix: number, search_text: string, is_pin?:
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
+function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
 
 /**
  * s
@@ -12100,7 +12100,7 @@ declare function setsearchhist(history_ix: number, pin_status: "0" | "1", is_pin
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
+function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
 
 /**
  * s
@@ -12141,7 +12141,7 @@ declare function setsearchhist(history_ix: number, noop: "", is_pin: 2): number
  * @returns
  * 返ってくる値に意味はない。
  */
-declare function setreplace(replace_text: string): number
+function setreplace(replace_text: string): number
 
 /**
  * s
@@ -12170,7 +12170,7 @@ declare function setreplace(replace_text: string): number
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setreplacehist(history_ix: number, replace_text: string, is_pin?: 0): number
+function setreplacehist(history_ix: number, replace_text: string, is_pin?: 0): number
 
 /**
  * s
@@ -12199,7 +12199,7 @@ declare function setreplacehist(history_ix: number, replace_text: string, is_pin
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setreplacehist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
+function setreplacehist(history_ix: number, pin_status: "0" | "1", is_pin: 1): number
 
 /**
  * s
@@ -12228,7 +12228,7 @@ declare function setreplacehist(history_ix: number, pin_status: "0" | "1", is_pi
  * 設定に成功した場合は、1
  * 失敗した場合は、０
  */
-declare function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
+function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
 
 /**
  * setgrepfile文は、grepの「検索するファイル」の内容を設定します。
@@ -12246,7 +12246,7 @@ declare function setreplacehist(history_ix: number, noop: "", is_pin: 2): number
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setgrepfile(file_glob: string): number;
+function setgrepfile(file_glob: string): number
 
 /**
  * s
@@ -12288,7 +12288,7 @@ declare function setgrepfile(file_glob: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function forceinselect(select_mode: number): number;
+function forceinselect(select_mode: number): number
 
 /**
  * s
@@ -12299,7 +12299,7 @@ declare function forceinselect(select_mode: number): number;
  * 次の編集箇所へと移動した場合には１を返す、    
  * そうでなければ０を返す。
  */
-declare function goupdatedown(): number;
+function goupdatedown(): number
 
 /**
  * s
@@ -12310,7 +12310,7 @@ declare function goupdatedown(): number;
  * 前の編集箇所へと移動した場合には１を返す、    
  * そうでなければ０を返す。
  */
-declare function goupdateup(): number;
+function goupdateup(): number
 
 /**
  * s
@@ -12320,7 +12320,7 @@ declare function goupdateup(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function clearupdates(): number;
+function clearupdates(): number
 
 /**
  * s
@@ -12406,7 +12406,7 @@ declare function clearupdates(): number;
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
+function grep(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -12429,7 +12429,7 @@ declare function grep(search_text: string, search_file: string, search_dir: stri
  * 通常は、０を返します。    
  * ダイアログでキャンセルした場合は -2 になります。
  */
-declare function grepdialog(): number;
+function grepdialog(): number
 
 /**
  * grepdialog2文は、grep文と同様のパラメータ指定をして、    
@@ -12470,7 +12470,7 @@ declare function grepdialog(): number;
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grepdialog2(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
+function grepdialog2(search_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -12513,7 +12513,7 @@ declare function grepdialog2(search_text: string, search_file: string, search_di
  * resultには見つかった個数が入ります。    
  * 途中で中断された場合は返り値は-1になります。
  */
-declare function localgrep(grep_text:string, searchoption_flag): number;
+function localgrep(grep_text: string, searchoption_flag): number
 
 /**
  * s
@@ -12600,7 +12600,7 @@ declare function localgrep(grep_text:string, searchoption_flag): number;
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grepreplace(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
+function grepreplace(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -12648,7 +12648,7 @@ declare function grepreplace(search_text: string, replace_text: string, search_f
  * ダイアログでキャンセルした場合はresultは-2になります。    
  * 検索したファイルの数をgetresultex(12)で取得可能です。
  */
-declare function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?:number, searchoption2_flag?: number): number;
+function grepreplacedialog2(search_text: string, replace_text: string, search_file: string, search_dir: string, searchoption_flag?: number, n_encode?: number, searchoption2_flag?: number): number
 
 /**
  * s
@@ -12662,7 +12662,7 @@ declare function grepreplacedialog2(search_text: string, replace_text: string, s
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function escapeinselect(): number;
+function escapeinselect(): number
 
 /**
  * s
@@ -12681,7 +12681,7 @@ declare function escapeinselect(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function hilightfound(is_on?: number): number;
+function hilightfound(is_on?: number): number
 
 /**
  * s
@@ -12748,7 +12748,7 @@ declare function hilightfound(is_on?: number): number;
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-declare function colormarker(json: string|object): number;
+function colormarker(json: string|object): number
 /**
  * s
  * 
@@ -12760,7 +12760,7 @@ declare function colormarker(json: string|object): number;
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-declare function colormarker(): number;
+function colormarker(): number
 /**
  * s
  * 
@@ -12894,7 +12894,7 @@ declare function colormarker(): number;
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-declare function colormarker(text_color: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
+function colormarker(text_color: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?: number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number
 
 /**
  * s
@@ -12938,7 +12938,7 @@ declare function colormarker(text_color: number, back_color?: number, style_prop
  * 移動した場合は、0以外を返す。    
  * 移動しなかった場合は、0を返す。
  */
-declare function nextcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
+function nextcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number
 
 /**
  * s
@@ -12982,7 +12982,7 @@ declare function nextcolormarker(target_flag?: number, user_data?: number, layer
  * 移動した場合は、0以外を返す。    
  * 移動しなかった場合は、0を返す。
  */
-declare function prevcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number;
+function prevcolormarker(target_flag?: number, user_data?: number, layer_name?: string): number
 
 /**
  * s
@@ -12993,7 +12993,7 @@ declare function prevcolormarker(target_flag?: number, user_data?: number, layer
  * OKしてカラーマーカーが付けられたときに1を返します。    
  * キャンセルされたときはresultに0を返します。    
  */
-declare function colormarkerdialog(): number;
+function colormarkerdialog(): number
 
 /**
  * s
@@ -13055,7 +13055,7 @@ declare function colormarkerdialog(): number;
  * 成功した場合は、0以外を返す。    
  * 失敗した場合は、0を返す。    
  */
-declare function deletecolormarker(layer_name?: string, user_data?: number, bgn_column?: number, bgn_lineno?: number, end_column?: number, end_lineno?: number): number;
+function deletecolormarker(layer_name?: string, user_data?: number, bgn_column?: number, bgn_lineno?: number, end_column?: number, end_lineno?: number): number
 
 /**
  * s
@@ -13094,7 +13094,7 @@ declare function deletecolormarker(layer_name?: string, user_data?: number, bgn_
  * 成功した場合は、0以外を返す。    
  * 失敗した場合は、0を返す。    
  */
-declare function deletecolormarkerall(layer_name?: string, user_data?: number): number;
+function deletecolormarkerall(layer_name?: string, user_data?: number): number
 
 /**
  * s
@@ -13140,7 +13140,7 @@ declare function deletecolormarkerall(layer_name?: string, user_data?: number): 
  * 成功時は0以外を返す。    
  * 失敗時は0を返す。
  */
-declare function selectcolormarker(layer_name?: string, user_data?: number): number;
+function selectcolormarker(layer_name?: string, user_data?: number): number
 
 /**
  * s
@@ -13157,7 +13157,7 @@ declare function selectcolormarker(layer_name?: string, user_data?: number): num
  * 成功した場合は、ヒットした個数を返す。    
  * 失敗した場合は、０を返す。    
  */
-declare function selectallfound(): number;
+function selectallfound(): number
 
 /**
  * s
@@ -13314,7 +13314,7 @@ declare function selectallfound(): number;
  * 成功した場合は0以外を返す。
  * 失敗した場合は0を返す。
  */
-declare function colormarkerallfound(text_color?: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?:number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number;
+function colormarkerallfound(text_color?: number, back_color?: number, style_prop?: number, marker_type_flags?: number, user_data?: number, layer_name?: string, bgn_lineno?: number, bgn_column?: number, end_lineno?: number, end_column?: number): number
 
 /**
  * s
@@ -13326,7 +13326,7 @@ declare function colormarkerallfound(text_color?: number, back_color?: number, s
  * @returns
  * 
  */
-declare function clearcolormarkerallfound(): number;
+function clearcolormarkerallfound(): number
 
 /**
  * s
@@ -13336,7 +13336,7 @@ declare function clearcolormarkerallfound(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function foundlist(): number;
+function foundlist(): number
 
 /**
  * s
@@ -13346,7 +13346,7 @@ declare function foundlist(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function foundlistoutline(): number;
+function foundlistoutline(): number
 
 /**
  * findmarkerlist文は、「検索の色付け一覧...」コマンドによるダイアログの表示をします。    
@@ -13357,7 +13357,7 @@ declare function foundlistoutline(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function findmarkerlist(): number;
+function findmarkerlist(): number
 /**
  * s
  * 
@@ -13396,7 +13396,7 @@ declare function findmarkerlist(): number;
  * @returns
  * n_actionによって、それぞれの結果に対応する値を返します。
  */
-declare function findmarkerlist(marker_ix: number, n_action: number): number;
+function findmarkerlist(marker_ix: number, n_action: number): number
 /**
  * s
  * 
@@ -13416,7 +13416,7 @@ declare function findmarkerlist(marker_ix: number, n_action: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): number;
+function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): number
 
 /**
  * s
@@ -13431,7 +13431,7 @@ declare function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): numb
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function selectinselect(): number;
+function selectinselect(): number
 
 /**
  * s
@@ -13446,7 +13446,7 @@ declare function selectinselect(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setinselect2(): number;
+function setinselect2(): number
 
 /**
  * s
@@ -13482,7 +13482,7 @@ declare function setinselect2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function settargetcolormarker(layer_name: string): number;
+function settargetcolormarker(layer_name: string): number
 
 /**
  * s
@@ -13522,7 +13522,7 @@ declare function settargetcolormarker(layer_name: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function colormarkersnapshot(lineno_bgn?: number, column_bgn?: number, lineno_end?: number, column_end?: number, layer_name?: string): number;
+function colormarkersnapshot(lineno_bgn?: number, column_bgn?: number, lineno_end?: number, column_end?: number, layer_name?: string): number
 
 /**
  * s
@@ -13543,7 +13543,7 @@ declare function colormarkersnapshot(lineno_bgn?: number, column_bgn?: number, l
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function restoredesktop(virtual_desktop_mode?: number): number;
+function restoredesktop(virtual_desktop_mode?: number): number
 /**
  * s
  * 
@@ -13569,7 +13569,7 @@ declare function restoredesktop(virtual_desktop_mode?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function restoredesktop(filepath: string, virtual_desktop_mode?: number): number;
+function restoredesktop(filepath: string, virtual_desktop_mode?: number): number
 
 /**
  * s
@@ -13589,7 +13589,7 @@ declare function restoredesktop(filepath: string, virtual_desktop_mode?: number)
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function savedesktop(virtual_desktop_mode?: number): number;
+function savedesktop(virtual_desktop_mode?: number): number
 /**
  * s
  * 
@@ -13615,7 +13615,7 @@ declare function savedesktop(virtual_desktop_mode?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function savedesktop(filepath: string, virtual_desktop_mode?: number): number;
+function savedesktop(filepath: string, virtual_desktop_mode?: number): number
 
 /**
  * s
@@ -13637,7 +13637,7 @@ declare function savedesktop(filepath: string, virtual_desktop_mode?: number): n
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function scrolllink(hidemaru_handle?: number | 0 | -1): number;
+function scrolllink(hidemaru_handle?: number | 0 | -1): number
 
 /**
  * s
@@ -13679,7 +13679,7 @@ declare function scrolllink(hidemaru_handle?: number | 0 | -1): number;
  * @returns
  * 返ってくる値に意味はない。
  */
-declare function split(split_type?: number, split_switch?: number, split_pos?: number): number;
+function split(split_type?: number, split_switch?: number, split_pos?: number): number
 
 /**
  * s
@@ -13705,7 +13705,7 @@ declare function split(split_type?: number, split_switch?: number, split_pos?: n
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setsplitinfo(setting_prop: 0, setting_value: number): number;
+function setsplitinfo(setting_prop: 0, setting_value: number): number
 
 /**
  * s
@@ -13715,7 +13715,7 @@ declare function setsplitinfo(setting_prop: 0, setting_value: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function splitswitch(): number;
+function splitswitch(): number
 
 /**
  * s
@@ -13725,7 +13725,7 @@ declare function splitswitch(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function windowcascade(): number;
+function windowcascade(): number
 
 /**
  * s
@@ -13735,7 +13735,7 @@ declare function windowcascade(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function windowhorz(): number;
+function windowhorz(): number
 
 /**
  * s
@@ -13745,7 +13745,7 @@ declare function windowhorz(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function windowtiling(): number;
+function windowtiling(): number
 
 /**
  * s
@@ -13755,7 +13755,7 @@ declare function windowtiling(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function windowvert(): number;
+function windowvert(): number
 
 /**
  * s
@@ -13765,7 +13765,7 @@ declare function windowvert(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function windowlist(): number;
+function windowlist(): number
 
 /**
  * s
@@ -13793,7 +13793,7 @@ declare function windowlist(): number;
  * 比較の結果、違いが見つからなかった場合は結果コードは0、    
  * 違いが見つかってその位置にカーソル移動した場合は1となります。    
  */
-declare function compfile(hidemaru_handle: number, is_after_cursor: number): number;
+function compfile(hidemaru_handle: number, is_after_cursor: number): number
 
 /**
  * compfileのダイアログボックス版。
@@ -13810,7 +13810,7 @@ declare function compfile(hidemaru_handle: number, is_after_cursor: number): num
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function COMPFILE(): number;
+function COMPFILE(): number
 
 /**
  * s
@@ -13830,7 +13830,7 @@ declare function COMPFILE(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function nextcompfile(compare_mode?: number): number;
+function nextcompfile(compare_mode?: number): number
 
 /**
  * s
@@ -13850,7 +13850,7 @@ declare function nextcompfile(compare_mode?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function prevcompfile(compare_mode?: number): number;
+function prevcompfile(compare_mode?: number): number
 
 /**
  * s
@@ -13860,7 +13860,7 @@ declare function prevcompfile(compare_mode?: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function alwaystopswitch(): number;
+function alwaystopswitch(): number
 
 /**
  * s
@@ -13883,7 +13883,7 @@ declare function alwaystopswitch(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function settabmode(to_tabmode: number): number;
+function settabmode(to_tabmode: number): number
 
 /**
  * s
@@ -13934,7 +13934,7 @@ declare function settabmode(to_tabmode: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function settabgroup(hidemaru_handle?: number, groupid?: number): number;
+function settabgroup(hidemaru_handle?: number, groupid?: number): number
 
 /**
  * s
@@ -13970,7 +13970,7 @@ declare function settabgroup(hidemaru_handle?: number, groupid?: number): number
  * 成功した場合、0以外を返す。    
  * 失敗した場合、0を返す。    
  */
-declare function settaborder(hidemaru_handle?: number, taborder?: number): number;
+function settaborder(hidemaru_handle?: number, taborder?: number): number
 
 /**
  * s
@@ -13985,7 +13985,7 @@ declare function settaborder(hidemaru_handle?: number, taborder?: number): numbe
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function iconthistab(): number;
+function iconthistab(): number
 
 /**
  * s
@@ -13995,7 +13995,7 @@ declare function iconthistab(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function fullscreen(): number;
+function fullscreen(): number
 
 /**
  * s
@@ -14009,7 +14009,7 @@ declare function fullscreen(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function backtagjump(): number;
+function backtagjump(): number
 
 /**
  * s
@@ -14032,7 +14032,7 @@ declare function backtagjump(): number;
  * 「ダイレクトタグジャンプ飛び先指定」のダイアログでキャンセルされた場合は-1を返します。    
  * getresultexで、詳しい結果を得ることができます。    
  */
-declare function directtagjump(): number;
+function directtagjump(): number
 
 /**
  * s
@@ -14047,7 +14047,7 @@ declare function directtagjump(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function freecursorswitch(): number;
+function freecursorswitch(): number
 
 /**
  * s
@@ -14057,7 +14057,7 @@ declare function freecursorswitch(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function imeswitch(): number;
+function imeswitch(): number
 
 /**
  * s
@@ -14073,7 +14073,7 @@ declare function imeswitch(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function imeregisterword(): number;
+function imeregisterword(): number
 
 /**
  * s
@@ -14083,7 +14083,7 @@ declare function imeregisterword(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help(): number;
+function help(): number
 
 /**
  * s
@@ -14093,7 +14093,7 @@ declare function help(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help2(): number;
+function help2(): number
 
 /**
  * s
@@ -14103,7 +14103,7 @@ declare function help2(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help3(): number;
+function help3(): number
 
 /**
  * s
@@ -14113,7 +14113,7 @@ declare function help3(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help4(): number;
+function help4(): number
 
 /**
  * s
@@ -14123,7 +14123,7 @@ declare function help4(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help5(): number;
+function help5(): number
 
 /**
  * s
@@ -14133,7 +14133,7 @@ declare function help5(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function help6(): number;
+function help6(): number
 
 /**
  * s
@@ -14143,7 +14143,7 @@ declare function help6(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function hidemaruhelp(): number;
+function hidemaruhelp(): number
 
 /**
  * s
@@ -14157,7 +14157,7 @@ declare function hidemaruhelp(): number;
  * @returns
  * 成功すると0以外、失敗すると0を返します。
  */
-declare function macrohelp(keyword?: string): number;
+function macrohelp(keyword?: string): number
 
 /**
  * s
@@ -14167,7 +14167,7 @@ declare function macrohelp(keyword?: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function overwriteswitch(): number;
+function overwriteswitch(): number
 
 /**
  * s
@@ -14178,7 +14178,7 @@ declare function overwriteswitch(): number;
  * @returns
  * 成功時はresultは0以外、失敗時は0になります。
  */
-declare function readonlyswitch(): number;
+function readonlyswitch(): number
 
 /**
  * s
@@ -14189,7 +14189,7 @@ declare function readonlyswitch(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showcode(): number;
+function showcode(): number
 
 /**
  * s
@@ -14213,7 +14213,7 @@ declare function showcode(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showcharcount(): number;
+function showcharcount(): number
 
 /**
  * s
@@ -14223,7 +14223,7 @@ declare function showcharcount(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showlineno(): number;
+function showlineno(): number
 
 /**
  * s
@@ -14252,7 +14252,7 @@ declare function showlineno(): number;
  * 成功すると0以外を返す、失敗すると0を返す。    
  * getresultex(7)はジャンプした行番号が得られます。
  */
-declare function tagjump(): number;
+function tagjump(): number
 
 /**
  * s
@@ -14262,7 +14262,7 @@ declare function tagjump(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function redraw(): number;
+function redraw(): number
 
 /**
  * s
@@ -14273,7 +14273,7 @@ declare function redraw(): number;
  * @returns
  * 成功時はresultは0以外、失敗時は0になります。
  */
-declare function browsemodeswitch(): number;
+function browsemodeswitch(): number
 
 /**
  * s
@@ -14284,7 +14284,7 @@ declare function browsemodeswitch(): number;
  * @returns
  * 返ってくる値に意味はない。
  */
-declare function clist(): number;
+function clist(): number
 
 /**
  * s
@@ -14294,7 +14294,7 @@ declare function clist(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function clearupdated(): number;
+function clearupdated(): number
 
 /**
  * s
@@ -14308,7 +14308,7 @@ declare function clearupdated(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refreshtabstop(): number;
+function refreshtabstop(): number
 
 /**
  * s
@@ -14322,7 +14322,7 @@ declare function refreshtabstop(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refreshtabstop_pause(): number;
+function refreshtabstop_pause(): number
 
 /**
  * s
@@ -14336,7 +14336,7 @@ declare function refreshtabstop_pause(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refreshtabstop_shrink(): number;
+function refreshtabstop_shrink(): number
 
 /**
  * s
@@ -14351,7 +14351,7 @@ declare function refreshtabstop_shrink(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function refreshtabstop_current(): number;
+function refreshtabstop_current(): number
 
 /**
  * s
@@ -14361,7 +14361,7 @@ declare function refreshtabstop_current(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function autospellcheckswitch(): number;
+function autospellcheckswitch(): number
 
 /**
  * s
@@ -14385,7 +14385,7 @@ declare function autospellcheckswitch(): number;
  * - 6　閉じるを押して終了
  * - 7　その他何らかのエラー
  */
-declare function spellcheckdialog(): number;
+function spellcheckdialog(): number
 
 /**
  * s
@@ -14404,7 +14404,7 @@ declare function spellcheckdialog(): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function savebacktagjump(): number;
+function savebacktagjump(): number
 
 /**
  * s
@@ -14431,7 +14431,7 @@ declare function savebacktagjump(): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function fold(fold_condition_flag?: number): number;
+function fold(fold_condition_flag?: number): number
 
 /**
  * s
@@ -14445,7 +14445,7 @@ declare function fold(fold_condition_flag?: number): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function unfold(): number;
+function unfold(): number
 
 /**
  * s
@@ -14472,7 +14472,7 @@ declare function unfold(): number;
  * 移動に成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
  */
-declare function nextfoldable(fold_condition_flag?: number): number;
+function nextfoldable(fold_condition_flag?: number): number
 
 /**
  * s
@@ -14499,7 +14499,7 @@ declare function nextfoldable(fold_condition_flag?: number): number;
  * 移動に成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
  */
-declare function prevfoldable(fold_condition_flag?: number): number;
+function prevfoldable(fold_condition_flag?: number): number
 
 /**
  * s
@@ -14525,7 +14525,7 @@ declare function prevfoldable(fold_condition_flag?: number): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function selectfoldable(fold_condition_flag?: number): number;
+function selectfoldable(fold_condition_flag?: number): number
 
 /**
  * s
@@ -14564,7 +14564,7 @@ declare function selectfoldable(fold_condition_flag?: number): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function foldall(fold_condition_flag?: number, is_show_dialog?: number): number;
+function foldall(fold_condition_flag?: number, is_show_dialog?: number): number
 
 /**
  * s
@@ -14578,7 +14578,7 @@ declare function foldall(fold_condition_flag?: number, is_show_dialog?: number):
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function unfoldall(): number;
+function unfoldall(): number
 
 /**
  * s
@@ -14589,7 +14589,7 @@ declare function unfoldall(): number;
  * 「部分編集」に成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
  */
-declare function rangeeditin(): number;
+function rangeeditin(): number
 
 /**
  * s
@@ -14599,7 +14599,7 @@ declare function rangeeditin(): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function rangeeditout(): number;
+function rangeeditout(): number
 
 /**
  * s
@@ -14618,7 +14618,7 @@ declare function rangeeditout(): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function nextoutlineitem(outer_target?: number): number;
+function nextoutlineitem(outer_target?: number): number
 
 /**
  * s
@@ -14637,7 +14637,7 @@ declare function nextoutlineitem(outer_target?: number): number;
  * @returns
  * 返り値は意味を持ちません。    
  */
-declare function prevoutlineitem(outer_target?: number): number;
+function prevoutlineitem(outer_target?: number): number
 
 /**
  * s
@@ -14656,7 +14656,7 @@ declare function prevoutlineitem(outer_target?: number): number;
  * @see getconfig
  * 
  */
-declare function showoutline(): number;
+function showoutline(): number
 
 /**
  * s
@@ -14675,7 +14675,7 @@ declare function showoutline(): number;
  * @see getconfig
  * 
  */
-declare function showoutlinebar(): number;
+function showoutlinebar(): number
 
 /**
  * s
@@ -14685,7 +14685,7 @@ declare function showoutlinebar(): number;
  * @returns
  * 返ってくる値に意味はない。    
  */
-declare function showfoldingbar(): number;
+function showfoldingbar(): number
 
 /**
  * s
@@ -14695,7 +14695,7 @@ declare function showfoldingbar(): number;
  * @returns
  * 返ってくる値に意味はない。    
  */
-declare function syncoutline(): number;
+function syncoutline(): number
 
 /**
  * s
@@ -14705,7 +14705,7 @@ declare function syncoutline(): number;
  * @returns
  * 返ってくる値に意味はない。    
  */
-declare function refreshoutline(): number;
+function refreshoutline(): number
 
 /**
  * s
@@ -14721,7 +14721,7 @@ declare function refreshoutline(): number;
  * @returns
  * 返ってくる値に意味はない。    
  */
-declare function setoutlinesize(n_size: number): number;
+function setoutlinesize(n_size: number): number
 
 /**
  * f
@@ -14821,7 +14821,7 @@ declare function setoutlinesize(n_size: number): number;
  * - 6 はい
  * - 7 いいえ
  */
-declare function message(message_text: any, title_text?: any, button_flag?: number, timeout_millisecond?: number, timeout_button_type?: number, msgbox_pos_type?: number, msgbox_pos_x?: number, msgbox_pos_y?: number): number;
+function message(message_text: any, title_text?: any, button_flag?: number, timeout_millisecond?: number, timeout_button_type?: number, msgbox_pos_type?: number, msgbox_pos_x?: number, msgbox_pos_y?: number): number
 
 /**
  * s
@@ -14845,7 +14845,7 @@ declare function message(message_text: any, title_text?: any, button_flag?: numb
  * - 0 いいえ
  * - 1 はい
  */
-declare function question(message: string): number;
+function question(message: string): number
 
 /**
  * s
@@ -14858,7 +14858,7 @@ declare function question(message: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beep(): number;
+function beep(): number
 
 /**
  * s
@@ -14882,7 +14882,7 @@ declare function beep(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function play(wav_filepath: string): number;
+function play(wav_filepath: string): number
 
 /**
  * s
@@ -14906,7 +14906,7 @@ declare function play(wav_filepath: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function playsync(wav_filepath: string): number;
+function playsync(wav_filepath: string): number
 
 /**
  * s
@@ -14919,7 +14919,7 @@ declare function playsync(wav_filepath: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function debuginfo(output_mode: number): number;
+function debuginfo(output_mode: number): number
 /**
  * s
  * 
@@ -14945,7 +14945,7 @@ declare function debuginfo(output_mode: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function debuginfo(output_mode: number): number;
+function debuginfo(output_mode: number): number
 /**
  * s
  * 
@@ -14983,7 +14983,7 @@ declare function debuginfo(output_mode: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function debuginfo(message: string): number;
+function debuginfo(message: string): number
 
 /**
  * s
@@ -15000,7 +15000,7 @@ declare function debuginfo(message: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showvars(): number;
+function showvars(): number
 
 /**
  * s    
@@ -15035,7 +15035,7 @@ declare function showvars(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function title(title_text: string, target_location: number): number;
+function title(title_text: string, target_location: number): number
 /**
  * s
  * 
@@ -15080,7 +15080,7 @@ declare function title(title_text: string, target_location: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function title(title_behavior: number, target_location: number): number;
+function title(title_behavior: number, target_location: number): number
 
 /**
  * s
@@ -15148,7 +15148,7 @@ declare function title(title_behavior: number, target_location: number): number;
  * プログラムの起動に失敗すると0を返す。    
  * プログラムの起動に成功すると0以外を返す。
  */
-declare function run(command: string): number;
+function run(command: string): number
 
 /**
  * s
@@ -15178,7 +15178,7 @@ declare function run(command: string): number;
  * プログラムの起動に成功すると0以外を返す。    
  * 起動に成功した場合の、commandにて実行したプログラムの終了ステータスはgetresultex(9)で取得可能です。
  */
-declare function runsync(command: string): number;
+function runsync(command: string): number
 
 /**
  * s
@@ -15207,7 +15207,7 @@ declare function runsync(command: string): number;
  * プログラムの起動に成功すると0以外を返す。    
  * 起動に成功した場合の、commandにて実行したプログラムの終了ステータスはgetresultex(9)で取得可能です。
  */
-declare function runsync2(command: string): number;
+function runsync2(command: string): number
 
 /**
  * s
@@ -15347,7 +15347,7 @@ declare function runsync2(command: string): number;
  * 失敗時は0を返す。    
  * getresultex(9)で同期実行したときの終了ステータスを取得できます。   
  */
-declare function runex(command: string, is_wait_sync?: number, stdin_prop?: number, in_filepath?: string, stdout_prop?: number, out_filepath?: string, stderr_prop?: number, err_filepath?: string, work_folder_prop?: number, work_folderpath?: string, show_window_prop?: number, is_hide_redirect?: number, n_encode?: number, extension_flags?: number): number;
+function runex(command: string, is_wait_sync?: number, stdin_prop?: number, in_filepath?: string, stdout_prop?: number, out_filepath?: string, stderr_prop?: number, err_filepath?: string, work_folder_prop?: number, work_folderpath?: string, show_window_prop?: number, is_hide_redirect?: number, n_encode?: number, extension_flags?: number): number
 
 /**
  * z    
@@ -15357,7 +15357,7 @@ declare function runex(command: string, is_wait_sync?: number, stdin_prop?: numb
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function endmacro(): 0;
+function endmacro(): 0;
 
 /**
  * z    
@@ -15367,7 +15367,7 @@ declare function endmacro(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function endmacroall(): 0;
+function endmacroall(): 0;
 
 /**
  * s
@@ -15438,7 +15438,7 @@ declare function endmacroall(): 0;
  * 返り値は意味を持ちません。
  * 
  */
-declare function disabledraw(): number;
+function disabledraw(): number
 
 /**
  * s
@@ -15510,7 +15510,7 @@ declare function disabledraw(): number;
  * 返り値は意味を持ちません。
  * 
  */
-declare function enabledraw(pos_y?: number, pos_x?: number): number;
+function enabledraw(pos_y?: number, pos_x?: number): number
 
 /**
  * s
@@ -15529,7 +15529,7 @@ declare function enabledraw(pos_y?: number, pos_x?: number): number;
  * 返り値は意味を持ちません。
  * 
  */
-declare function disabledraw2(): number;
+function disabledraw2(): number
 
 /**
  * s
@@ -15541,7 +15541,7 @@ declare function disabledraw2(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function enablebreak(): number;
+function enablebreak(): number
 
 /**
  * s
@@ -15563,7 +15563,7 @@ declare function enablebreak(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function disablebreak(): number;
+function disablebreak(): number
 
 /**
  * s
@@ -15583,7 +15583,7 @@ declare function disablebreak(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function disableinvert(): number;
+function disableinvert(): number
 
 /**
  * s
@@ -15597,7 +15597,7 @@ declare function disableinvert(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function enableinvert(): number;
+function enableinvert(): number
 
 /**
  * s
@@ -15623,7 +15623,7 @@ declare function enableinvert(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function disableerrormsg(): number;
+function disableerrormsg(): number
 
 /**
  * s
@@ -15638,7 +15638,7 @@ declare function disableerrormsg(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function enableerrormsg(): number;
+function enableerrormsg(): number
 
 /**
  * s
@@ -15670,7 +15670,7 @@ declare function enableerrormsg(): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function disablehistory(history_flag: number): number;
+function disablehistory(history_flag: number): number
 
 /**
  * s
@@ -15686,7 +15686,7 @@ declare function disablehistory(history_flag: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function sleep(millisecond: number): number;
+function sleep(millisecond: number): number
 
 /**
  * f
@@ -15765,7 +15765,7 @@ declare function sleep(millisecond: number): number;
  * 新たな値(new_compatible_flags)を設定する前の値が返ります。    
  * (元のオプション構成に戻すといったことに、この値を利用できます)
  */
-declare function setcompatiblemode(new_compatible_flags: number): number;
+function setcompatiblemode(new_compatible_flags: number): number
 
 /**
  * s
@@ -15802,7 +15802,7 @@ declare function setcompatiblemode(new_compatible_flags: number): number;
  * 秀丸エディタの浮動小数点版で実行すると、０以外の値が返ってくる。    
  * 秀丸エディタ通常版で実行すると、32bit版でも64bit版でも０が返ってくる。
  */
-declare function setfloatmode(to_floatmode_on: number): number;
+function setfloatmode(to_floatmode_on: number): number
 
 /**
  * f
@@ -15891,7 +15891,7 @@ declare function setfloatmode(to_floatmode_on: number): number;
  * var old_value = seterrormode(n_type, new_value);として、設定すると同時に直前の値を知ることもできます。
  * message("設定前：0x"+hex(old_value)+"\n"+"設定後：0x"+hex(new_value));
  */
-declare function seterrormode(n_type: number, n_value: number): number;
+function seterrormode(n_type: number, n_value: number): number
 
 /**
  * s
@@ -15982,7 +15982,7 @@ declare function seterrormode(n_type: number, n_value: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setbackgroundmode(to_background: 1): number;
+function setbackgroundmode(to_background: 1): number
 
 /**
  * s
@@ -16017,7 +16017,7 @@ declare function setbackgroundmode(to_background: 1): number;
  * Enterキーを押して終わった場合は、resultは0以外になります。    
  * Escキーを押して終わった場合は、resultは0になります。    
  */
-declare function inputpos(text: string): number;
+function inputpos(text: string): number
 
 /**
  * s
@@ -16078,7 +16078,7 @@ declare function inputpos(text: string): number;
  * メニューを選択した場合、1から数えた項目の値になります。    
  * 選択しなかった場合、0になります。    
  */
-declare function menu(item1: string, ...optional_items: string[]): number;
+function menu(item1: string, ...optional_items: string[]): number
 
 /**
  * s
@@ -16116,7 +16116,7 @@ declare function menu(item1: string, ...optional_items: string[]): number;
  * メニューを選択した場合、1から数えた項目の値になります。    
  * 選択しなかった場合、0になります。    
  */
-declare function mousemenu(item1: string, ...optional_items: string[]): number;
+function mousemenu(item1: string, ...optional_items: string[]): number
 
 /**
  * s
@@ -16156,7 +16156,7 @@ declare function mousemenu(item1: string, ...optional_items: string[]): number;
  * メニューを選択した場合、1から数えた項目の値になります。    
  * 選択しなかった場合、0になります。    
  */
-declare function menuarray(menu_items: string[], menu_len?: number): number;
+function menuarray(menu_items: string[], menu_len?: number): number
 
 /**
  * s
@@ -16196,7 +16196,7 @@ declare function menuarray(menu_items: string[], menu_len?: number): number;
  * メニューを選択した場合、1から数えた項目の値になります。    
  * 選択しなかった場合、0になります。    
  */
-declare function mousemenuarray(menu_items: string[], menu_len?: number): number;
+function mousemenuarray(menu_items: string[], menu_len?: number): number
 
 /**
  * s
@@ -16227,7 +16227,7 @@ declare function mousemenuarray(menu_items: string[], menu_len?: number): number
  * @returns
  * 返ってくる値に意味はない。
  */
-declare function setmenudelay(millisecond: number): number;
+function setmenudelay(millisecond: number): number
 
 /**
  * s
@@ -16305,7 +16305,7 @@ declare function setmenudelay(millisecond: number): number;
  * 「OK」を押したならinput実行直後、result()は1になります。    
  * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
  */
-declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): string;
+function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): string
 
 /**
  * f
@@ -16347,7 +16347,7 @@ declare function input(message_text: string, message_default?: string, input_pro
  * 文字コードを返します。    
  * タイムアウトした場合は0が返ります。
  */
-declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number;
+function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number
 
 /**
  * s
@@ -16416,7 +16416,7 @@ declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_
  * key_info_typeが1の時、    
  * 対象のvirtual_keyのトグル状態を示す値を返します。
  */
-declare function iskeydown(virtual_key: string, key_info_type?: number): number;
+function iskeydown(virtual_key: string, key_info_type?: number): number
 
 /**
  * f
@@ -16454,7 +16454,7 @@ declare function iskeydown(virtual_key: string, key_info_type?: number): number;
  * 値を数値に変換して返します。    
  * 取り出した値が数値に変換不能な場合は0が返ります。
  */
-declare function getininum(ini_filepath: string, section_name: string, key_name: string): number;
+function getininum(ini_filepath: string, section_name: string, key_name: string): number
 
 /**
  * f
@@ -16492,7 +16492,7 @@ declare function getininum(ini_filepath: string, section_name: string, key_name:
  * 値を数値に変換して返します。    
  * 取り出した値が数値に変換不能な場合は0が返ります。
  */
-declare function getininumw(ini_filepath: string, section_name: string, key_name: string): number;
+function getininumw(ini_filepath: string, section_name: string, key_name: string): number
 
 /**
  * f
@@ -16529,7 +16529,7 @@ declare function getininumw(ini_filepath: string, section_name: string, key_name
  * @returns 
  * 値を文字列で返します。
  */
-declare function getinistr(ini_filepath: string, section_name: string, key_name: string): string;
+function getinistr(ini_filepath: string, section_name: string, key_name: string): string
 
 /**
  * f
@@ -16566,7 +16566,7 @@ declare function getinistr(ini_filepath: string, section_name: string, key_name:
  * @returns 
  * 値を文字列で返します。
  */
-declare function getinistrw(ini_filepath: string, section_name: string, key_name: string): string
+function getinistrw(ini_filepath: string, section_name: string, key_name: string): string
 
 /**
  * s
@@ -16594,7 +16594,7 @@ declare function getinistrw(ini_filepath: string, section_name: string, key_name
  * @returns 
  * 返り値は意味を持ちません。
  */
-declare function writeininum(ini_filepath: string, section_name: string, key_name: string, num_value: number): number;
+function writeininum(ini_filepath: string, section_name: string, key_name: string, num_value: number): number
 
 /**
  * s
@@ -16622,7 +16622,7 @@ declare function writeininum(ini_filepath: string, section_name: string, key_nam
  * @returns 
  * 返り値は意味を持ちません。
  */
-declare function writeininumw(ini_filepath: string, section_name: string, key_name: string, num_value: number): number;
+function writeininumw(ini_filepath: string, section_name: string, key_name: string, num_value: number): number
 
 /**
  * s
@@ -16650,7 +16650,7 @@ declare function writeininumw(ini_filepath: string, section_name: string, key_na
  * @returns 
  * 返り値は意味を持ちません。
  */
-declare function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: value): number;
+function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: value): number
 
 /**
  * s
@@ -16678,7 +16678,7 @@ declare function writeinistr(ini_filepath: string, section_name: string, key_nam
  * @returns 
  * 返り値は意味を持ちません。
  */
-declare function writeinistrw(ini_filepath: string, section_name: string, key_name: string, str_value: string): number;
+function writeinistrw(ini_filepath: string, section_name: string, key_name: string, str_value: string): number
 
 /**
  * s
@@ -16726,7 +16726,7 @@ declare function writeinistrw(ini_filepath: string, section_name: string, key_na
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。
  */
-declare function openreg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
+function openreg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number
 
 /**
  * s
@@ -16767,7 +16767,7 @@ declare function openreg(root_key: string, sub_key: string, own_hidemaru_reg?: n
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。
  */
-declare function createreg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
+function createreg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number
 
 /**
  * s
@@ -16784,7 +16784,7 @@ declare function createreg(root_key: string, sub_key: string, own_hidemaru_reg?:
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function closereg(): number;
+function closereg(): number
 
 /**
  * s
@@ -16822,7 +16822,7 @@ declare function closereg(): number;
  * 成功した場合はresultは0以外になります。    
  * 失敗した場合はresultは0になります。    
  */
-declare function writeregbinary(name: string, value: string, seek_cur?: number, write_mode?: number): number;
+function writeregbinary(name: string, value: string, seek_cur?: number, write_mode?: number): number
 
 /**
  * s
@@ -16850,7 +16850,7 @@ declare function writeregbinary(name: string, value: string, seek_cur?: number, 
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function writeregnum(name: string, value: number): number;
+function writeregnum(name: string, value: number): number
 
 /**
  * s
@@ -16878,7 +16878,7 @@ declare function writeregnum(name: string, value: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function writeregstr(name: string, value: string): number;
+function writeregstr(name: string, value: string): number
 
 /**
  * f
@@ -16911,7 +16911,7 @@ declare function writeregstr(name: string, value: string): number;
  * @returns
  * 16進数の文字列として、１バイトあたり２文字の文字列で返します。
  */
-declare function getregbinary(name: string, seek_cur?: number, read_size?: number): string;
+function getregbinary(name: string, seek_cur?: number, read_size?: number): string
 
 /**
  * f
@@ -16937,7 +16937,7 @@ declare function getregbinary(name: string, seek_cur?: number, read_size?: numbe
  * @returns
  * 数値の内容を返します。
  */
-declare function getregnum(name: string): number;
+function getregnum(name: string): number
 
 /**
  * f
@@ -16963,7 +16963,7 @@ declare function getregnum(name: string): number;
  * @returns
  * 文字列値の内容を返します。
  */
-declare function getregstr(name: string): string;
+function getregstr(name: string): string
 
 /**
  * f
@@ -16997,7 +16997,7 @@ declare function getregstr(name: string): string;
  * サブキーを文字列で返します。    
  * ""を返したらこれ以上のサブキーはありません。    
  */
-declare function enumregkey(subkey_ix: number): string;
+function enumregkey(subkey_ix: number): string
 
 /**
  * f
@@ -17042,7 +17042,7 @@ declare function enumregkey(subkey_ix: number): string;
  * 値名を文字列で返します。    
  * ""を返したらこれ以上の値はありません。
  */
-declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string;
+function enumregvalue(subkey_ix: number, return_obj: { regtype: number } | {}): string
 
 /**
  * s
@@ -17072,7 +17072,7 @@ declare function enumregvalue(subkey_ix: number, return_obj: { regtype: number }
  * 成功したら0以外を返す。    
  * 失敗したら0を返す。
  */
-declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number;
+function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number): number
 
 /**
  * s
@@ -17101,7 +17101,7 @@ declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?:
  * 成功したら0以外を返します。    
  * 失敗したら0を返します。
  */
-declare function configset(string: setting_name, number: config_state): number
+function configset(string: setting_name, number: config_state): number
 
 type typeConfigSettingName = "xFont:"|"xFontSize:"|"xFontPoint:"|"xFontDecimal:"|"xFontCharSet:"|"xBoldFace:"|"xOrikaeshi:"|"xAutoAdjustOrikaeshi:"|"xKinsoku:"|"xCorrectLineNo:"|"xLF:"|"xCharSpace:"|"xTategaki:"|"xDangumi:"|"xFreeCursor:"|"xSaveLastPos:"|"xTab:"|"xTabMode:"|"xIndent:"|"xBlockquote:"|"xBquoteItemized:"|"xBquoteInclude:"|"xBlockquoteFix:"|"xUnderLine:"|"xImeColorCurLine:"|"xHideCR:"|"xShowCR:"|"xHideEOF:"|"xShowEOF:"|"xShowTab:"|"xShowBox:"|"xRuler:"|"xTabRuler:"|"xShowLineNo:"|"xShowPageNo:"|"xFormLine:"|"xActiveKakko:"|"xActiveTagPair:"|"xVertLine:"|"xGuideLine:"|"xGuideLineInterval:"|"xOrikaeshiLine:"|"xLastColor:"|"xStripe:"|"xColorNum:"|"xColorUrl:"|"xColorEmail:"|"xColorFN:"|"xCurLineColor:"|"xCurLineColorEx:"|"xRulerColor:"|"xRulerBack:"|"xColorComment:"|"xAspDefaultScript:"|"xAsp:"|"xJspComment:"|"xPhp:"|"xXml:"|"xColorIfdef:"|"xHilight:"|"xHilightTitle:"|"xHilightDirectWord:"|"xHilightDirectMulti:"|"xHilightDirectIfdef:"|"xOutline:"|"xClistFont:"|"xClistFontSize:"|"xHilightList:"|"xOutlineBar:"|"xRangeEdit:"|"xFolding:"|"xFoldingTwigBar:"|"xIme:"|"xAutocompFlag1:"|"xAutocompFlag2:"|"xAutocompDic:"|"xAutocompAuto:"|"xFiletypeCharcode:"|"xSaveConv:"|"xStripTrail:"|"xSaveWithEOF:"|"xIgnoreEOF:"|"xBackup:"|"xBackupFast:";
 /**
@@ -17601,7 +17601,7 @@ type typeConfigSettingName = "xFont:"|"xFontSize:"|"xFontPoint:"|"xFontDecimal:"
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function config(setting_expression: typeConfigSettingName): number
+function config(setting_expression: typeConfigSettingName): number
 
 /**
  * s
@@ -17620,7 +17620,7 @@ declare function config(setting_expression: typeConfigSettingName): number
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function config(setting_expression: string): number
+function config(setting_expression: string): number
 
 type typeConfigGettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCharSet"|"BoldFace"|"Orikaeshi"|"AutoAdjustOrikaeshi"|"Kinsoku"|"CorrectLineNo"|"LF"|"CharSpace"|"Tategaki"|"Dangumi"|"FreeCursor"|"SaveLastPos"|"Tab"|"TabMode"|"Indent"|"Blockquote"|"BquoteItemized"|"BquoteInclude"|"BlockquoteFix"|"UnderLine"|"ImeColorCurLine"|"HideCR"|"ShowCR"|"HideEOF"|"ShowEOF"|"ShowTab"|"ShowBox"|"Ruler"|"TabRuler"|"ShowLineNo"|"ShowPageNo"|"FormLine"|"ActiveKakko"|"ActiveTagPair"|"VertLine"|"GuideLine"|"GuideLineInterval"|"OrikaeshiLine"|"LastColor"|"Stripe"|"ColorNum"|"ColorUrl"|"ColorEmail"|"ColorFN"|"CurLineColor"|"CurLineColorEx"|"RulerColor"|"RulerBack"|"ColorComment"|"AspDefaultScript"|"Asp"|"JspComment"|"Php"|"Xml"|"ColorIfdef"|"Hilight"|"HilightTitle"|"HilightDirectWord"|"HilightDirectMulti"|"HilightDirectIfdef"|"Outline"|"ClistFont"|"ClistFontSize"|"HilightList"|"OutlineBar"|"RangeEdit"|"Folding"|"FoldingTwigBar"|"Ime"|"AutocompFlag1"|"AutocompFlag2"|"AutocompDic"|"AutocompAuto"|"FiletypeCharcode"|"SaveConv"|"StripTrail"|"SaveWithEOF"|"IgnoreEOF"|"Backup"|"BackupFast";
 /**
@@ -17973,7 +17973,7 @@ type typeConfigGettingName = "Font"|"FontSize"|"FontPoint"|"FontDecimal"|"FontCh
  * @returns
  * 取得する情報によって文字列型と数値型のどちらかが返ります。
  */
-declare function getconfig(key: typeConfigGettingName): string | number
+function getconfig(key: typeConfigGettingName): string | number
 
 /**
  * f
@@ -17992,7 +17992,7 @@ declare function getconfig(key: typeConfigGettingName): string | number
  * @param setting_name
  * 取得する情報によって文字列型と数値型のどちらかが返ります。
  */
-declare function getconfig(key: string): string | number
+function getconfig(key: string): string | number
 
 /**
  * s
@@ -18117,7 +18117,7 @@ declare function getconfig(key: string): string | number
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function configcolor(color_settings: string): number
+function configcolor(color_settings: string): number
 
 /**
  * f    
@@ -18155,7 +18155,7 @@ declare function configcolor(color_settings: string): number
  * configcolorのn3と同じ意味の数値を返します。（透明を除く）    
  *  
  */
-declare function getconfigcolor(n1: number, n2:number): number
+function getconfigcolor(n1: number, n2: number): number
 
 /**
  * s
@@ -18176,7 +18176,7 @@ declare function getconfigcolor(n1: number, n2:number): number
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function saveconfig(filepath?: string): number;
+function saveconfig(filepath?: string): number
 
 /**
  * s
@@ -18201,7 +18201,7 @@ declare function saveconfig(filepath?: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setconfigstate(config_flag: number): number;
+function setconfigstate(config_flag: number): number
 
 /**
  * s
@@ -18231,7 +18231,7 @@ declare function setconfigstate(config_flag: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setfiletype(extension: string, is_read_setting_file): number;
+function setfiletype(extension: string, is_read_setting_file): number
 
 /**
  * s
@@ -18267,7 +18267,7 @@ declare function setfiletype(extension: string, is_read_setting_file): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function envchanged(): number;
+function envchanged(): number
 
 /**
  * s
@@ -18293,7 +18293,7 @@ declare function envchanged(): number;
  * 返り値は意味を持ちません。    
  * 読み込みに失敗した場合は、マクロが中断してしまうため注意。
  */
-declare function loadkeyassign(filepath: string, is_settingdir?: number): number;
+function loadkeyassign(filepath: string, is_settingdir?: number): number
 
 /**
  * s
@@ -18325,7 +18325,7 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
  * 保存に成功した場合、１を返す。    
  * 保存に失敗した場合は、０を返す。
  */
-declare function savekeyassign(filepath: string, n_target?: number, is_settingdir?: number): number;
+function savekeyassign(filepath: string, n_target?: number, is_settingdir?: number): number
 
 /**
  * s
@@ -18365,7 +18365,7 @@ declare function savekeyassign(filepath: string, n_target?: number, is_settingdi
  * 読み込まれた内容のフラグが格納されます。    
  * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
  */
-declare function loadhilight(filepath: string, is_temp: number, read_flag?: number): number;
+function loadhilight(filepath: string, is_temp: number, read_flag?: number): number
 
 /**
  * s
@@ -18397,7 +18397,7 @@ declare function loadhilight(filepath: string, is_temp: number, read_flag?: numb
  * 読み込まれた内容のフラグが値として返る。    
  * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
  */
-declare function savehilight(filepath: string, read_flag?: number): number;
+function savehilight(filepath: string, read_flag?: number): number
 
 /**
  * s
@@ -18415,7 +18415,7 @@ declare function savehilight(filepath: string, read_flag?: number): number;
  * 対象のファイルをロードできたら１を返す、    
  * ロードできなかったら０を返す。
  */
-declare function loadbookmark(filepath: string): number;
+function loadbookmark(filepath: string): number
 
 /**
  * s
@@ -18433,7 +18433,7 @@ declare function loadbookmark(filepath: string): number;
  * 対象のファイルをセーブできたら１を返す、    
  * セーブできなかったら０を返す。
  */
-declare function savebookmark(filepath: string): number;
+function savebookmark(filepath: string): number
 
 /**
  * s
@@ -18451,7 +18451,7 @@ declare function savebookmark(filepath: string): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setfontchangemode(n_mode: number): number;
+function setfontchangemode(n_mode: number): number
 
 /**
  * s
@@ -18475,7 +18475,7 @@ declare function setfontchangemode(n_mode: number): number;
  * @returns
  * ０が返ります。
  */
-declare function settabstop(n_prop: 0 | number, tab_width_settings: string): 0;
+function settabstop(n_prop: 0 | number, tab_width_settings: string): 0;
 
 /**
  * f
@@ -18513,7 +18513,7 @@ declare function settabstop(n_prop: 0 | number, tab_width_settings: string): 0;
  * C列以降はずっと5になっています。    
  * タブ文字数が固定の場合は、""を返します。    
  */
-declare function gettabstop(n_prop: 0 | number): string;
+function gettabstop(n_prop: 0 | number): string
 
 /**
  * s
@@ -18542,7 +18542,7 @@ declare function gettabstop(n_prop: 0 | number): string;
  * １つでも変換したら１を返す。    
  * なにも変換しなければ０を返す。
  */
-declare function convert_return_in_cell(convert_mode: number): number;
+function convert_return_in_cell(convert_mode: number): number
 
 /**
  * s
@@ -18559,7 +18559,7 @@ declare function convert_return_in_cell(convert_mode: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function showwindow(show_mode: number): number;
+function showwindow(show_mode: number): number
 
 /**
  * s
@@ -18579,7 +18579,7 @@ declare function showwindow(show_mode: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setmonitor(monitor_ix: number): number;
+function setmonitor(monitor_ix: number): number
 
 /**
  * s
@@ -18597,7 +18597,7 @@ declare function setmonitor(monitor_ix: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
+function setwindowpos(pos_x_left: number, pos_y_top: number): number
 /**
  * s
  * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
@@ -18620,7 +18620,7 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number;
+function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number
 
 /**
  * s
@@ -18641,7 +18641,7 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setwindowsize(width_column: number, height_lineno): number;
+function setwindowsize(width_column: number, height_lineno): number
 
 /**
  * s
@@ -18664,7 +18664,7 @@ declare function setwindowsize(width_column: number, height_lineno): number;
  * フォーカスを移動したら１を返す、    
  * フォーカスを移動できなければ０を返す
  */
-declare function setfocus(window_target: number): number;
+function setfocus(window_target: number): number
 
 /**
  * s
@@ -18692,7 +18692,7 @@ declare function setfocus(window_target: number): number;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function begingroupundo(): number;
+function begingroupundo(): number
 
 /**
  * s
@@ -18721,7 +18721,7 @@ declare function begingroupundo(): number;
  * begingroupundoされており、それを解除できたなら１が返ってくる    
  * begingroupundoされていなければ、０が返ってくる。
  */
-declare function endgroupundo(): number;
+function endgroupundo(): number
 
 /**
  * s
@@ -18803,7 +18803,7 @@ declare function endgroupundo(): number;
  * 見つかった場合（カーソル移動した場合）、0以外を返す。    
  * 見つからなかった場合、0を返す。    
  */
-declare function findspecial(search_type: number, code: number, search_direction: number): number;
+function findspecial(search_type: number, code: number, search_direction: number): number
 
 /**
  * f
@@ -18855,7 +18855,7 @@ declare function findspecial(search_type: number, code: number, search_direction
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。    
  */
-declare function setstaticvariable(key: string, value: string, scope_type: number): number;
+function setstaticvariable(key: string, value: string, scope_type: number): number
 
 /**
  * f
@@ -18901,7 +18901,7 @@ declare function setstaticvariable(key: string, value: string, scope_type: numbe
  * keyとscope_typeで指定された静的変数の内容を返す。    
  * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
  */
-declare function getstaticvariable(key: string, scope_type: number): string;
+function getstaticvariable(key: string, scope_type: number): string
 
 /**
  * s
@@ -18919,7 +18919,7 @@ declare function getstaticvariable(key: string, scope_type: number): string;
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function setregularcache(cache_mode: number): number;
+function setregularcache(cache_mode: number): number
 /**
  * s
  * 
@@ -18945,7 +18945,7 @@ declare function setregularcache(cache_mode: number): number;
  * キャッシュ格納に成功すれば１が返る。    
  * 正規表現が不正な文字列であることなどが原因により、キャッシュ格納に失敗すれば０が返る。
  */
-declare function setregularcache(cache_regexp: string, is_keep_cache?: number, is_ignore_case?: number): number;
+function setregularcache(cache_regexp: string, is_keep_cache?: number, is_ignore_case?: number): number
 
 /**
  * f
@@ -18964,7 +18964,7 @@ declare function setregularcache(cache_regexp: string, is_keep_cache?: number, i
  * ウィンドウの番号(Z-Order)を返す。    
  * 指定のウィンドウハンドルに対応するものが存在しない場合、-1を返す。
  */
-declare function hidemaruorder(hidemaru_handle: number): number;
+function hidemaruorder(hidemaru_handle: number): number
 
 /**
  * k
@@ -18983,7 +18983,7 @@ declare function hidemaruorder(hidemaru_handle: number): number;
  * 現在起動されている秀丸エディタの数を返す。    
  * 常駐秀丸エディタは数えない。
  */
-declare function hidemarucount(): number;
+function hidemarucount(): number
 
 /**
  * f
@@ -19022,7 +19022,7 @@ declare function hidemarucount(): number;
  * ウィンドウの番号を返します。    
  * 見つからない場合は-1を返します。
  */
-declare function findhidemaru(filepath: string): number;
+function findhidemaru(filepath: string): number
 
 /**
  * f
@@ -19048,7 +19048,7 @@ declare function findhidemaru(filepath: string): number;
  * ウィンドウハンドルの値は32bitの範囲に必ず収まるため、    
  * 秀丸エディタ64bit版でも問題なく取り扱うことが出来ます。
  */
-declare function hidemaruhandle(window_z_order: number): number;
+function hidemaruhandle(window_z_order: number): number
 
 /**
  * s
@@ -19076,7 +19076,7 @@ declare function hidemaruhandle(window_z_order: number): number;
  * 成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
  */
-declare function closehidemaru(hidemaru_handle: number): number;
+function closehidemaru(hidemaru_handle: number): number
 
 /**
  * s
@@ -19096,7 +19096,7 @@ declare function closehidemaru(hidemaru_handle: number): number;
  * 成功した場合は0以外を返す、    
  * 失敗した場合は0を返す。
  */
-declare function closehidemaruforced(hidemaru_handle: number): number;
+function closehidemaruforced(hidemaru_handle: number): number
 
 /**
  * f
@@ -19123,7 +19123,7 @@ declare function closehidemaruforced(hidemaru_handle: number): number;
  * 秀丸エディタのウィンドウハンドルを返します。    
  * 引数に対応するようなタブが存在しない時は、-1を返す。
  */
-declare function getcurrenttab(id_type: number, tab_group_id): number;
+function getcurrenttab(id_type: number, tab_group_id): number
 
 /**
  * f
@@ -19153,7 +19153,7 @@ declare function getcurrenttab(id_type: number, tab_group_id): number;
  * 秀丸エディタのウィンドウハンドルを返します。    
  * 引数に対応するようなタブが存在しない時は、-1を返す。
  */
-declare function gettabhandle(id_type: number, tab_group_id, tab_order: number): number;
+function gettabhandle(id_type: number, tab_group_id, tab_order: number): number
 
 /**
  * s
@@ -19168,7 +19168,7 @@ declare function gettabhandle(id_type: number, tab_group_id, tab_order: number):
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function beginclipboardread(): number;
+function beginclipboardread(): number
 
 /**
  * f
@@ -19205,7 +19205,7 @@ declare function beginclipboardread(): number;
  * @returns
  * 取得した文字列を返します。
  */
-declare function getclipboard(): string;
+function getclipboard(): string
 
 /**
  * s
@@ -19236,7 +19236,7 @@ declare function getclipboard(): string;
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。
  */
-declare function setclipboard(text: string): number;
+function setclipboard(text: string): number
 
 /**
  * s
@@ -19257,7 +19257,7 @@ declare function setclipboard(text: string): number;
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。
  */
-declare function addclipboard(text: string): number;
+function addclipboard(text: string): number
 
 /**
  * f
@@ -19275,7 +19275,7 @@ declare function addclipboard(text: string): number;
  * info_typeが1の場合、クリップボードが秀丸エディタのBOX選択をコピーしたものであるかどうかを返します。
  * BOX選択をコピーしたものなら1、そうでないなら0を返す。
  */
-declare function getclipboardinfo(info_type: number): number;
+function getclipboardinfo(info_type: number): number
 
 /**
  * f
@@ -19298,7 +19298,7 @@ declare function getclipboardinfo(info_type: number): number;
    * 読み込みに成功した場合、hidemaru.ILoadDllResultを満たすオブジェクトを返します。    
    * 失敗した場合、undefinedを返します。
  */
-declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
+function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
 
 /**
  * k    
@@ -19317,7 +19317,7 @@ declare function loaddll(dllpath: string): hidemaru.ILoadDllResult | undefined;
  * 8 アクティブ切り替え後(V8.00以降)    
  * 9 テンプレート(スニペット)による実行(V9.16以降)    
  */
-declare function event(): number;
+function event(): number
 
 /**
  * f
@@ -19484,7 +19484,7 @@ declare function event(): number;
  * eventとパラメータの値によって意味が違います。    
  * 指定によって数値が返るか文字列が返るかも違います。
  */
-declare function geteventparam(event_infomation_ix: number): number | string
+function geteventparam(event_infomation_ix: number): number | string
 
 /**
  * s    
@@ -19541,7 +19541,7 @@ declare function geteventparam(event_infomation_ix: number): number | string
  * @returns
  * result相当。成功すれば1、失敗すれば0;
  */
-declare function seteventnotify(notify_target: number): number;
+function seteventnotify(notify_target: number): number
 
 /**
  * f    
@@ -19554,7 +19554,7 @@ declare function seteventnotify(notify_target: number): number;
  * @returns seteventnotifyで設定された値を返します。
  * 
  */
-declare function geteventnotify(notify_target: 0): number;
+function geteventnotify(notify_target: 0): number
 
 /**
  * s
@@ -19574,7 +19574,7 @@ declare function geteventnotify(notify_target: 0): number;
  * 読み込みに成功した場合、COMオブジェクトを返します。    
  * 失敗した場合、undefinedを返します。    
  */
-declare function createobject(progid: string): any | undefined;
+function createobject(progid: string): any | undefined;
 /**
  * s
  * 
@@ -19617,7 +19617,7 @@ declare function createobject(progid: string): any | undefined;
  * 読み込みに成功した場合、COMオブジェクトを返します。    
  * 失敗した場合、undefinedを返します。    
  */
-declare function createobject(dllpath: string, typeid: string): any | undefined;
+function createobject(dllpath: string, typeid: string): any | undefined;
 
 /**
  * f
@@ -19631,7 +19631,7 @@ declare function createobject(dllpath: string, typeid: string): any | undefined;
  * テキスト全体を返します。    
  * 失敗した場合は空文字列になります
  */
-declare function gettotaltext(): string;
+function gettotaltext(): string
 
 /**
  * f
@@ -19651,7 +19651,7 @@ declare function gettotaltext(): string;
  * 指定した行の内容を返します。    
  * 失敗した場合は空文字になります。
  */
-declare function getlinetext(line_num?: number): string;
+function getlinetext(line_num?: number): string
 
 /**
  * f
@@ -19667,7 +19667,7 @@ declare function getlinetext(line_num?: number): string;
  * 範囲選択の内容を文字列で返します。    
  * (選択していないなどの理由で)失敗した場合は空文字になります。
  */
-declare function getselectedtext(): string;
+function getselectedtext(): string
 
 /**
  * z    
@@ -19675,7 +19675,7 @@ declare function getselectedtext(): string;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function execmacro(): 0;
+function execmacro(): 0;
 
 /**
  * z    
@@ -19683,7 +19683,7 @@ declare function execmacro(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function js(): 0;
+function js(): 0;
 
 /**
  * z    
@@ -19691,7 +19691,7 @@ declare function js(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function jsmode(): 0;
+function jsmode(): 0;
 
 /**
  * z    
@@ -19699,7 +19699,7 @@ declare function jsmode(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function execjs(): 0;
+function execjs(): 0;
 
 /**
  * z    
@@ -19707,7 +19707,7 @@ declare function execjs(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function GREP(): 0;
+function GREP(): 0;
 
 /**
  * z    
@@ -19715,7 +19715,7 @@ declare function GREP(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function FIND(): 0;
+function FIND(): 0;
 
 /**
  * z    
@@ -19723,7 +19723,7 @@ declare function FIND(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ENV(): 0;
+function ENV(): 0;
 
 /**
  * z    
@@ -19731,14 +19731,14 @@ declare function ENV(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function call(): 0;
+function call(): 0;
 /**
  * z    
  * 
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function call(): 0;
+function call(): 0;
 
 /**
  * z    
@@ -19746,7 +19746,7 @@ declare function call(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function refcall(): 0;
+function refcall(): 0;
 
 /**
  * z    
@@ -19754,7 +19754,7 @@ declare function refcall(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function setactivehidemaru(): 0;
+function setactivehidemaru(): 0;
 
 /**
  * z    
@@ -19762,7 +19762,7 @@ declare function setactivehidemaru(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function nexthidemaru(): 0;
+function nexthidemaru(): 0;
 
 /**
  * z    
@@ -19770,7 +19770,7 @@ declare function nexthidemaru(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function prevhidemaru(): 0;
+function prevhidemaru(): 0;
 
 /**
  * z    
@@ -19778,7 +19778,7 @@ declare function prevhidemaru(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function nexthidemaruicon(): 0;
+function nexthidemaruicon(): 0;
 
 /**
  * z    
@@ -19786,7 +19786,7 @@ declare function nexthidemaruicon(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function prevhidemaruicon(): 0;
+function prevhidemaruicon(): 0;
 
 /**
  * z    
@@ -19794,7 +19794,7 @@ declare function prevhidemaruicon(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function nexttab(): 0;
+function nexttab(): 0;
 
 /**
  * z    
@@ -19802,7 +19802,7 @@ declare function nexttab(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function prevtab(): 0;
+function prevtab(): 0;
 
 /**
  * z    
@@ -19810,7 +19810,7 @@ declare function prevtab(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function getobject(): 0;
+function getobject(): 0;
 
 /**
  * z    
@@ -19818,7 +19818,7 @@ declare function getobject(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function msdnlibrary(): 0;
+function msdnlibrary(): 0;
 
 /**
  * z    
@@ -19826,7 +19826,7 @@ declare function msdnlibrary(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddeexecute(): 0;
+function ddeexecute(): 0;
 
 /**
  * z    
@@ -19834,7 +19834,7 @@ declare function ddeexecute(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddeexecutew(): 0;
+function ddeexecutew(): 0;
 
 /**
  * z    
@@ -19842,7 +19842,7 @@ declare function ddeexecutew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddeinitiate(): 0;
+function ddeinitiate(): 0;
 
 /**
  * z    
@@ -19850,7 +19850,7 @@ declare function ddeinitiate(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddeinitiatew(): 0;
+function ddeinitiatew(): 0;
 
 /**
  * z    
@@ -19858,7 +19858,7 @@ declare function ddeinitiatew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddepoke(): 0;
+function ddepoke(): 0;
 
 /**
  * z    
@@ -19866,7 +19866,7 @@ declare function ddepoke(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddepokew(): 0;
+function ddepokew(): 0;
 
 /**
  * z    
@@ -19874,7 +19874,7 @@ declare function ddepokew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function dderequest(): 0;
+function dderequest(): 0;
 
 /**
  * z    
@@ -19882,7 +19882,7 @@ declare function dderequest(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function dderequestw(): 0;
+function dderequestw(): 0;
 
 /**
  * z    
@@ -19890,7 +19890,7 @@ declare function dderequestw(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddestartadvice(): 0;
+function ddestartadvice(): 0;
 
 /**
  * z    
@@ -19898,7 +19898,7 @@ declare function ddestartadvice(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddestartadvicew(): 0;
+function ddestartadvicew(): 0;
 
 /**
  * z    
@@ -19906,7 +19906,7 @@ declare function ddestartadvicew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddestopadvice(): 0;
+function ddestopadvice(): 0;
 
 /**
  * z    
@@ -19914,7 +19914,7 @@ declare function ddestopadvice(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddestopadvicew(): 0;
+function ddestopadvicew(): 0;
 
 /**
  * z    
@@ -19922,7 +19922,7 @@ declare function ddestopadvicew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddeterminate(): 0;
+function ddeterminate(): 0;
 
 /**
  * z    
@@ -19930,7 +19930,7 @@ declare function ddeterminate(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddewaitadvice(): 0;
+function ddewaitadvice(): 0;
 
 /**
  * z    
@@ -19938,7 +19938,7 @@ declare function ddewaitadvice(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function ddewaitadvicew(): 0;
+function ddewaitadvicew(): 0;
 
 /**
  * z    
@@ -19946,7 +19946,7 @@ declare function ddewaitadvicew(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function keepdde(): 0;
+function keepdde(): 0;
 
 /**
  * z    
@@ -19954,7 +19954,7 @@ declare function keepdde(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function exit(): 0;
+function exit(): 0;
 
 /**
  * z    
@@ -19962,16 +19962,7 @@ declare function exit(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function exitall(): 0;
-
- 
-/**
- * z    
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
-declare function saveexit(): 0;
+function exitall(): 0;
 
  
 /**
@@ -19980,7 +19971,7 @@ declare function saveexit(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function saveexitall(): 0;
+function saveexit(): 0;
 
  
 /**
@@ -19989,7 +19980,7 @@ declare function saveexitall(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function quit(): 0;
+function saveexitall(): 0;
 
  
 /**
@@ -19998,6 +19989,15 @@ declare function quit(): 0;
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
-declare function quitall(): 0;
+function quit(): 0;
 
-/// <# GlobalToHidemaruGlobal end#>
+ 
+/**
+ * z    
+ * 
+ * この関数はjsmodeでは機能しません。
+ * @deprecated
+ */
+function quitall(): 0;
+
+} /// <# HidemaruGlobalToGlobal end#>
