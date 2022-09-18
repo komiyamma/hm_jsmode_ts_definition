@@ -9,11 +9,11 @@ p.stdOut.onReadSeparated(function(out3){
     return 3;
 }, 0);
 
-message("OK");
+hideamruGlobal.message("OK");
 
 var processID = hidemaru.runProcess("abc", "def", "gui", "utf");
 processID.stdOut.onReadAll((out: string)=>{
     console.log(out);
 })
 
-insert("あいうえお", 0, 0x0001);
+hideamruGlobal.insert("あいうえお", 0, 0x0001);
