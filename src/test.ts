@@ -1,4 +1,4 @@
-/// <reference path="../types/hm_jsmode.d.ts" />
+/// <reference path="../types/hm_jsmode_strict.d.ts" />
 
  　getconfig("CharSpace")
 
