@@ -13823,9 +13823,9 @@ function COMPFILE(): number
  * 
  * @param compare_mode
  * パラメータで動作を指定できます。    
- * 0 を指定すると、比較結果のカラーマーカーは無視して、V8.00未満の従来通りの次の比較を実行します。    
- * 1 を指定すると、次の比較結果のカラーマーカーにジャンプします。    
- * 2 を指定すると、比較結果のカラーマーカーがあれば次の比較結果へ、無ければ従来通りの次の比較を自動的に判断します。    
+ * - 0 を指定すると、比較結果のカラーマーカーは無視して、V8.00未満の従来通りの次の比較を実行します。    
+ * - 1 を指定すると、次の比較結果のカラーマーカーにジャンプします。    
+ * - 2 を指定すると、比較結果のカラーマーカーがあれば次の比較結果へ、無ければ従来通りの次の比較を自動的に判断します。    
  * 
  * @returns
  * 返り値は意味を持ちません。
@@ -13843,9 +13843,9 @@ function nextcompfile(compare_mode?: number): number
  * 
  * @param compare_mode
  * パラメータで動作を指定できます。    
- * 0 を指定すると、比較結果のカラーマーカーは無視して、V8.00未満の従来通りの前の比較を実行します。    
- * 1 を指定すると、前の比較結果のカラーマーカーにジャンプします。    
- * 2 を指定すると、比較結果のカラーマーカーがあれば前の比較結果へ、無ければ従来通りの前の比較を自動的に判断します。    
+ * - 0 を指定すると、比較結果のカラーマーカーは無視して、V8.00未満の従来通りの前の比較を実行します。    
+ * - 1 を指定すると、前の比較結果のカラーマーカーにジャンプします。    
+ * - 2 を指定すると、比較結果のカラーマーカーがあれば前の比較結果へ、無ければ従来通りの前の比較を自動的に判断します。    
  * 
  * @returns
  * 返り値は意味を持ちません。
@@ -14915,18 +14915,6 @@ function playsync(wav_filepath: string): number
  * 
  * @param output_mode 
  * 出力方法を指定します。    
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-function debuginfo(output_mode: number): number
-/**
- * s
- * 
- * debuginfo文は、デバッグ出力を行います。    
- * 
- * @param output_mode 
- * 出力方法を指定します。    
  * debuginfo文は、デバッグメッセージの表示の禁止／許可を行います。    
  * - 0を指定した場合、デバッグメッセージの表示を禁止します。    
  * - 0以外を指定した場合、デバッグメッセージの表示を許可されます。    
@@ -15899,18 +15887,19 @@ function seterrormode(n_type: number, n_value: number): number
  * setbackgroundmode文は、マクロを非アクティブな状態で実行できるようにします。    
  * この文をJavaScriptで使用するのは適していないかもしれません。    
  * 
+ * @param to_background 
  * setbackgroundmode(1);とすると、バックグラウンドモードが有効になります。    
  * setbackgroundmodeの主な目的は、setactivehidemaru等で２つの秀丸エディタを切り替えながら実行するマクロがあると、    
  * ウィンドウが前面に来てしまうことを防ぐためにあります。    
  * 例えば以下のマクロだと、非タブモードでウィンドウが２つある場合に前面に来てしまい、    
  * 他のアプリの操作や、手動起動で操作する秀丸エディタの操作が困難ですが、    
- * setbackgroundmode 1;をすると前面に来ないようになります。    
+ * setbackgroundmode(1);をすると前面に来ないようになります。    
  * @example
  * // ウィンドウを切り替えながら実行するマクロの例
  * js {
+ *     settabmode(0); // タブモードをやめる
  *     setbackgroundmode(1);
  *     setVar("#tabmode", tabmode());
- *     settabmode(0); // タブモードをやめる
  * }
  * 
  * newfile;
@@ -15977,8 +15966,6 @@ function seterrormode(n_type: number, n_value: number): number
  * @see 影響の及ぶ範囲(execmacro)
  * @see 影響の及ぶ範囲(アクティブ切り替え)
  * 
- * @param to_background 
- * 
  * @returns
  * 返り値は意味を持ちません。
  */
@@ -16025,8 +16012,10 @@ function inputpos(text: string): number
  * menu文はポップアップメニューを表示します。   
  * 
  * @param item1 
+ * メニュー最初の項目に表示される文字列を指定します。
+ * 
  * @param optional_items 
- * メニュー項目に表示される文字列を指定します。    
+ * メニューの２番目以降の項目に表示される文字列を指定します。    
  * 項目の数だけ複数指定できます。    
  * 
  * @example
@@ -16088,8 +16077,10 @@ function menu(item1: string, ...optional_items: string[]): number
  * メニューの表示位置がマウスカーソルの近くになります。    
  * 
  * @param item1 
+ * メニュー最初の項目に表示される文字列を指定します。
+ * 
  * @param optional_items 
- * メニュー項目に表示される文字列を指定します。    
+ * メニューの２番目以降の項目に表示される文字列を指定します。    
  * 項目の数だけ複数指定できます。    
  * 
  * @example
@@ -16650,7 +16641,7 @@ function writeininumw(ini_filepath: string, section_name: string, key_name: stri
  * @returns 
  * 返り値は意味を持ちません。
  */
-function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: value): number
+function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: string): number
 
 /**
  * s
