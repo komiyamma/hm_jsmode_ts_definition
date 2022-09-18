@@ -3784,7 +3784,7 @@ declare function str(num_value: number): string;
  *  JavaScriptは、「文字列の数字」に単項演算子として「+」を付けると数値に変換できますので、    
  *  そちらを使うのが一般的です。)
  * 
- * @param num_value 文字列を指定します。    
+ * @param num_string 文字列を指定します。    
  * 例えばnum_stringが"100"の場合，返す値は100となります。    
  * 16進数の文字列も指定できます。    
  * "0x100"にすると、返す値は256となります。    
@@ -3865,7 +3865,8 @@ declare function ascii(character: string, fallback_behavior?: number): number;
  * char関数のUnicode版です。    
  * unicode関数と逆の関数です。
  * 
- * @param char_code Unicodeの文字コードを指定します。
+ * @param unichar_code Unicodeの文字コードを指定します。
+ * 
  * @example
  * var a = unichar( 0x3042 ); // "あ"が返ってきます。
  * 
@@ -3887,6 +3888,7 @@ declare function unichar(unichar_code: number): string;
  * @see sprintf 関数
  * 
  * @param num 数値を指定します。
+ * 
  * @example
  * var a = hex(123);
  * 
