@@ -64,6 +64,8 @@ declare namespace console {
 
 declare namespace hidemaru {
 
+/// <# HidemaruToGlobal bgn #>
+
   /**
    * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
    * 
@@ -128,6 +130,8 @@ declare namespace hidemaru {
    *        　失敗したらresultは0になります。
    */
   function evalMacro(expression: string): number;
+
+/// <# HidemaruToGlobal end #>
 
   type DllFuncManager = any
   /**
@@ -956,7 +960,7 @@ declare namespace hidemaru {
  */
 declare function evalJs(expression: string): any;
 
-
+/// <# GlobalToHidemaruGlobal bgn #>
 
 /**
  * k    
@@ -19962,3 +19966,4 @@ declare function quit(): 0;
  */
 declare function quitall(): 0;
 
+/// <# GlobalToHidemaruGlobal end#>
