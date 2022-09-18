@@ -5414,9 +5414,9 @@ declare function charindex_to_byteindex(text: string, charindex: number): number
  * 
  * @param bgn_y 範囲の開始位置のY座標を指定します。
  * 
- * @param bgn_x 範囲の終了位置のX座標を指定します。
+ * @param end_x 範囲の終了位置のX座標を指定します。
  * 
- * @param bgn_y 範囲の終了位置のY座標を指定します。
+ * @param end_y 範囲の終了位置のY座標を指定します。
  * 
  * @param keep_select 指定しないか0を指定すると、範囲選択を解除します。    
  * 1を指定すると、範囲選択を維持します。    
@@ -5704,6 +5704,9 @@ declare function gettext_gcu(bgn_column_gcu: number, bgn_lineno: number, end_col
  * 
  * getenv関数は、環境変数の値を取得します。    
  * 
+ * @param env_varname
+ * 環境変数の名前を指定します。
+ *
  * @returns
  * 環境変数の値を返す。
  */
@@ -6920,7 +6923,7 @@ declare function quote(text: string): string
  * 見つからなかった場合は、textをそのまま返します。    
  * 
  */
-declare function strreplace(text: string, search_text: string, replace_text): string
+declare function strreplace(text: string, search_text: string, replace_text: string): string
 
 /**
  * s
@@ -7164,7 +7167,7 @@ declare function loadfile(filepath: string, fileoption_flag?: number): number
  * @param filepath 
  * ファイル名を指定します。
  * 
- * @param seek_cursor 
+ * @param seek_cur 
  * 読込み位置を指定します。    
  * バイト数で指定します。
  * 
@@ -7234,7 +7237,7 @@ declare function closenew(): number
  * ファイル名を指定します    
  * 
  * @param fileoption_flag 
- * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
+ * エンコードの種類（文字コード）を指定することができます。
  * - 1 　Shift-JIS
  * - 2 　Unicode(UTF-16)
  * - 3 　EUC
@@ -7296,7 +7299,7 @@ declare function saveas(filepath: string, fileoption_flag?: number): number
  * ファイル名を指定します    
  * 
  * @param fileoption_flag 
- * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
+ * エンコードの種類（文字コード）を指定することができます。
  * - 1 　Shift-JIS
  * - 2 　Unicode(UTF-16)
  * - 3 　EUC
@@ -7389,7 +7392,7 @@ declare function changename(filename: "" | "nul" | string): number
  * ファイル名を指定します    
  * 
  * @param fileoption_flag 
- * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
+ * エンコードの種類（文字コード）を指定することができます。
  * - 1 　Shift-JIS
  * - 2 　Unicode(UTF-16)
  * - 3 　EUC
@@ -7453,7 +7456,7 @@ declare function insertfile(filepath: string, fileoption_flag?: number): number
  * ファイル名を指定します    
  * 
  * @param fileoption_flag 
- * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
+ * エンコードの種類（文字コード）を指定することができます。
  * - 1 　Shift-JIS
  * - 2 　Unicode(UTF-16)
  * - 3 　EUC
@@ -7517,7 +7520,7 @@ declare function readonlyopenfile(filepath: string, fileoption_flag?: number): n
  * ファイル名を指定します    
  * 
  * @param fileoption_flag 
- * パラメータ２以降で、エンコードの種類（文字コード）を指定することができます。
+ * エンコードの種類（文字コード）を指定することができます。
  * - 1 　Shift-JIS
  * - 2 　Unicode(UTF-16)
  * - 3 　EUC
@@ -7601,7 +7604,9 @@ declare function savelf(): number;
  * s    
  * 
  * print文は、印刷をします。
+ * 
  * @param showdialog 印刷ダイアログを出すかどうかを指定します。
+ * 
  * @returns 成功したらresultは0以外になります。    
  *        　失敗したらresultは0になります。
  */
@@ -7617,7 +7622,7 @@ declare function print(showdialog?: number): number;
  * @example
  * saveall();
  * 
- * @params exclude_flag
+ * @param exclude_flag
  * 保存の対象から除外する動作を指定します。    
  * 以下の値をOR演算した値です。
  * - 0x01 無題ファイルを除外    
@@ -7828,7 +7833,7 @@ declare function setpathhist(history_ix: number, fullpath: string): number
  * encodeキーワードで示される値と同じ、    
  * エンコードの種類を表す値を指定します。    
  * 0を指定すると、「自動判定で読み込みしなおし」と同じになります。    
- * 省略すると0と同じです。
+ * 省略すると0と同じです。    
  * n_encodeでバイナリモードを表す26を指定すると、    
  * バイナリモードに変更することができます。
  * 
