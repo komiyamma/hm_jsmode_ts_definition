@@ -134,7 +134,7 @@ declare namespace hidemaru {
 
 /// <# HidemaruToGlobal end #>
 
-  type DllFuncManager = any
+  type IDllFuncManager = any
   /**
    * hidemaru.loadDll関数の返り値。    
    * 
@@ -181,28 +181,28 @@ declare namespace hidemaru {
      * 引数が数値もしくはマルチバイト(char)文字列で、数値を返す関数であることを意味する。    
      * メソッドには秀丸エディタのdllfuncの呼び出し方法で呼び出される関数群があります。
      */
-    readonly dllFunc: DllFuncManager;
+    readonly dllFunc: IDllFuncManager;
 
     /**
      * DllFuncManagerオブジェクト。    
      * 引数が数値もしくはワイド(wchar)文字列で、数値を返す関数であることを意味する。    
      * メソッドには秀丸エディタのdllfuncwの呼び出し方法で呼び出される関数群があります。
      */
-    readonly dllFuncW: DllFuncManager;
+    readonly dllFuncW: IDllFuncManager;
 
     /**
      * DllFuncManagerオブジェクト。    
      * 引数が数値もしくはマルチバイト(char)文字列で、マルチバイト(char)文字列を返す関数であることを意味する。    
      * メソッドには秀丸エディタのdllfuncstrの呼び出し方法で呼び出される関数群があります。
      */
-    readonly dllFuncStr: DllFuncManager;
+    readonly dllFuncStr: IDllFuncManager;
 
     /**
      * DllFuncManagerオブジェクト。    
      * 引数が数値もしくはワイド(wchar)文字列で、ワイド(wchar)文字列を返す関数であることを意味する。    
      * メソッドには秀丸エディタのdllfuncstrwの呼び出し方法で呼び出される関数群があります。
      */
-    readonly dllFuncStrW: DllFuncManager;
+    readonly dllFuncStrW: IDllFuncManager;
 
     /**
      * 関数名が存在するかどうかを返します。    
@@ -488,7 +488,7 @@ declare namespace hidemaru {
     close(): void
   }
 
-  interface IProcessinfo {
+  interface IProcessInfo {
     /**
      *  標準入力を扱うStdInオブジェクト。
      */
@@ -561,7 +561,7 @@ declare namespace hidemaru {
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
-  function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessinfo;
+  function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessInfo;
 
   /**
    * f
