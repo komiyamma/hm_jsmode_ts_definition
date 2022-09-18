@@ -1943,13 +1943,6 @@ declare function cxworkarea(): number;
  * @returns 画面の作業領域の縦サイズをピクセル単位で返す
  */
 declare function cyworkarea(): number;
-/**
- * k    
- * 
- * 画面の作業領域の縦サイズをピクセル単位で表します。
- * @returns 画面の作業領域の縦サイズをピクセル単位で返す
- */
-declare function cyworkarea(): number;
 
 /**
  * k    
@@ -2629,7 +2622,7 @@ declare function anyclipboard(): number;
  * @returns
  * 各種の入力ができるかどうかを判断するための状態値を返す
  */
-declare function inputstates(): number
+declare function inputstates(): number;
 
 /**
  * k    
@@ -14093,15 +14086,6 @@ declare function help4(): number;
  * 成功すると0以外、失敗すると0を返します。
  */
 declare function help5(): number;
-/**
- * s
- * 
- * help5文は、「外部ヘルプ５」を実行します。
- * 
- * @returns
- * 成功すると0以外、失敗すると0を返します。
- */
-declare function help5(): number;
 
 /**
  * s
@@ -16283,7 +16267,7 @@ declare function setmenudelay(millisecond: number): number;
  * 「OK」を押したならinput実行直後、result()は1になります。    
  * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
  */
-declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): number;
+declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): string;
 
 /**
  * f
@@ -16505,10 +16489,9 @@ declare function getininumw(ini_filepath: string, section_name: string, key_name
  * @see writeinistr
  *
  * @returns 
- * 値を数値に変換して返します。    
- * 取り出した値が数値に変換不能な場合は0が返ります。
+ * 値を文字列で返します。
  */
-declare function getinistr(ini_filepath: string, section_name: string, key_name: string): number;
+declare function getinistr(ini_filepath: string, section_name: string, key_name: string): string;
 
 /**
  * f
@@ -16543,10 +16526,9 @@ declare function getinistr(ini_filepath: string, section_name: string, key_name:
  * @see writeinistrw
  *
  * @returns 
- * 値を数値に変換して返します。    
- * 取り出した値が数値に変換不能な場合は0が返ります。
+ * 値を文字列で返します。
  */
-declare function getinistrw(ini_filepath: string, section_name: string, key_name: string): number;
+declare function getinistrw(ini_filepath: string, section_name: string, key_name: string): string
 
 /**
  * s
@@ -16802,7 +16784,7 @@ declare function closereg(): number;
  * 成功した場合はresultは0以外になります。    
  * 失敗した場合はresultは0になります。    
  */
-declare function writeregbinary(name: string, value: string, seek_cur?: number, write_mode?: number): string;
+declare function writeregbinary(name: string, value: string, seek_cur?: number, write_mode?: number): number;
 
 /**
  * s
@@ -18835,7 +18817,7 @@ declare function findspecial(search_type: number, code: number, search_direction
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。    
  */
-declare function setstaticvariable(key: string, value: string, scope_type: number): string;
+declare function setstaticvariable(key: string, value: string, scope_type: number): number;
 
 /**
  * f
@@ -19185,7 +19167,7 @@ declare function beginclipboardread(): number;
  * @returns
  * 取得した文字列を返します。
  */
-declare function getclipboard(): number;
+declare function getclipboard(): string;
 
 /**
  * s
