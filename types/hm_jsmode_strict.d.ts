@@ -766,7 +766,7 @@ declare namespace hidemaru {
    * 変数名を指定します。大文字と小文字の区別はされません。    
    * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
    * 
-   * @param value
+   * @param str_value
    * 書き込む変数の内容を、文字列で指定します。数値は指定できません。""を指定すると消去します。    
    * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
    * 
@@ -787,7 +787,7 @@ declare namespace hidemaru {
    * 失敗した場合、0を返す。    
    * 成功した場合、0以外を返す。    
    */
-  function setStaticVariable(key: string, value: string, scope_type: number): number
+  function setStaticVariable(key: string, str_value: string, scope_type: number): number
 
   /**
    * getstaticvariableと同様の関数です。    
@@ -16825,7 +16825,7 @@ function writeregbinary(name: string, value: string, seek_cur?: number, write_mo
  * @param name 
  * 値の名前を指定します。    
  * 
- * @param value
+ * @param num_value
  * 数値で値を指定します。
  * 
  * @example
@@ -16841,7 +16841,7 @@ function writeregbinary(name: string, value: string, seek_cur?: number, write_mo
  * @returns
  * 返り値は意味を持ちません。
  */
-function writeregnum(name: string, value: number): number
+function writeregnum(name: string, num_value: number): number
 
 /**
  * s
@@ -16853,7 +16853,7 @@ function writeregnum(name: string, value: number): number
  * @param name 
  * 値の名前を指定します。    
  * 
- * @param value
+ * @param str_value
  * 文字列値で値を指定します。
  * 
  * @example
@@ -16869,7 +16869,7 @@ function writeregnum(name: string, value: number): number
  * @returns
  * 返り値は意味を持ちません。
  */
-function writeregstr(name: string, value: string): number
+function writeregstr(name: string, str_value: string): number
 
 /**
  * f
@@ -16962,8 +16962,7 @@ function getregstr(name: string): string
  * enumregkey関数は、オープンされたレジストリのサブキーを列挙します。
  * 
  * @param subkey_ix 
- * 0から始まるサブキーのインデックスを指定します。
- * 
+ * 0から始まるサブキーのインデックスを指定します。    
  * 0から順番に呼んで、""を返したら終わりです。
  * 
  * @example
@@ -16996,13 +16995,13 @@ function enumregkey(subkey_ix: number): string
  * enumregvalue関数は、オープンされたレジストリの値名と値の種類を列挙します。
  * 
  * @param subkey_ix 
- * 0から始まるサブキーのインデックスを指定します。
+ * 0から始まるサブキーのインデックスを指定します。    
  * 0から順番に呼んで、""を返したら終わりです。
  * 
  * @param return_obj    
  * 値の種類を受け取るオブジェクトを渡します。    
  * オブジェクトを渡し、オブジェクトのregtypeメンバに値が格納されます。    
- * 例えば、以下のようなオブジェクトです。    
+ * 例えば、{ } のようなオブジェクトです。    
  * 
  * 値の種類は、以下の値になります。    
  * - REG_SZ 1 (getregstrに対応)    
@@ -17092,7 +17091,7 @@ function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?: number)
  * 成功したら0以外を返します。    
  * 失敗したら0を返します。
  */
-function configset(string: setting_name, number: config_state): number
+function configset(setting_name: string, config_state: number): number
 
 type typeConfigSettingName = "xFont:"|"xFontSize:"|"xFontPoint:"|"xFontDecimal:"|"xFontCharSet:"|"xBoldFace:"|"xOrikaeshi:"|"xAutoAdjustOrikaeshi:"|"xKinsoku:"|"xCorrectLineNo:"|"xLF:"|"xCharSpace:"|"xTategaki:"|"xDangumi:"|"xFreeCursor:"|"xSaveLastPos:"|"xTab:"|"xTabMode:"|"xIndent:"|"xBlockquote:"|"xBquoteItemized:"|"xBquoteInclude:"|"xBlockquoteFix:"|"xUnderLine:"|"xImeColorCurLine:"|"xHideCR:"|"xShowCR:"|"xHideEOF:"|"xShowEOF:"|"xShowTab:"|"xShowBox:"|"xRuler:"|"xTabRuler:"|"xShowLineNo:"|"xShowPageNo:"|"xFormLine:"|"xActiveKakko:"|"xActiveTagPair:"|"xVertLine:"|"xGuideLine:"|"xGuideLineInterval:"|"xOrikaeshiLine:"|"xLastColor:"|"xStripe:"|"xColorNum:"|"xColorUrl:"|"xColorEmail:"|"xColorFN:"|"xCurLineColor:"|"xCurLineColorEx:"|"xRulerColor:"|"xRulerBack:"|"xColorComment:"|"xAspDefaultScript:"|"xAsp:"|"xJspComment:"|"xPhp:"|"xXml:"|"xColorIfdef:"|"xHilight:"|"xHilightTitle:"|"xHilightDirectWord:"|"xHilightDirectMulti:"|"xHilightDirectIfdef:"|"xOutline:"|"xClistFont:"|"xClistFontSize:"|"xHilightList:"|"xOutlineBar:"|"xRangeEdit:"|"xFolding:"|"xFoldingTwigBar:"|"xIme:"|"xAutocompFlag1:"|"xAutocompFlag2:"|"xAutocompDic:"|"xAutocompAuto:"|"xFiletypeCharcode:"|"xSaveConv:"|"xStripTrail:"|"xSaveWithEOF:"|"xIgnoreEOF:"|"xBackup:"|"xBackupFast:";
 /**
@@ -18206,7 +18205,7 @@ function setconfigstate(config_flag: number): number
  * 拡張子は"."から始まっている必要があります。    
  * "grep"や"exeresult"などの"."から始まらないファイルタイプは指定できません。
  * 
- * @param is_read_setting_file 
+ * @param no_read_setting_file 
  * 拡張子に対応するファイルタイプ別の設定を読み込んで適用するかどうかを指定します。    
  * 省略するか0を指定すると設定を読み込んで適用します。    
  * 1を指定すると、設定は読込まず現在の設定を維持したまま、filetypeだけが書き換わります。    
@@ -18222,7 +18221,7 @@ function setconfigstate(config_flag: number): number
  * @returns
  * 返り値は意味を持ちません。
  */
-function setfiletype(extension: string, is_read_setting_file): number
+function setfiletype(extension: string, no_read_setting_file?: number): number
 
 /**
  * s
@@ -18559,6 +18558,8 @@ function showwindow(show_mode: number): number
  * マルチモニタ環境でないと何も起きません。
  * 
  * @param monitor_ix
+ * 移動先のモニタ番号。    
+ * 0からの番号。    
  * 
  * @example
  * if( monitor() == 0 ) {
@@ -18611,7 +18612,7 @@ function setwindowpos(pos_x_left: number, pos_y_top: number): number
  * @returns
  * 返り値は意味を持ちません。
  */
-function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number
+function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom: number): number
 
 /**
  * s
@@ -18632,7 +18633,7 @@ function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number
  * @returns
  * 返り値は意味を持ちません。
  */
-function setwindowsize(width_column: number, height_lineno): number
+function setwindowsize(width_column: number, height_lineno: number): number
 
 /**
  * s
@@ -18805,7 +18806,7 @@ function findspecial(search_type: number, code: number, search_direction: number
  * 変数名を指定します。大文字と小文字の区別はされません。    
  * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
  * 
- * @param value
+ * @param str_value
  * 書き込む変数の内容を、文字列で指定します。数値は指定できません。""を指定すると消去します。    
  * keyとvalueの両方に""を指定すると、全てのキーと値を消去します。
  * 
@@ -18846,7 +18847,7 @@ function findspecial(search_type: number, code: number, search_direction: number
  * 失敗した場合、0を返す。    
  * 成功した場合、0以外を返す。    
  */
-function setstaticvariable(key: string, value: string, scope_type: number): number
+function setstaticvariable(key: string, str_value: string, scope_type: number): number
 
 /**
  * f
@@ -18907,6 +18908,11 @@ function getstaticvariable(key: string, scope_type: number): string
  * - 数値に1を指定すると、マクロ内で使われた正規表現の検索をキャッシュし、マクロ実行中に同じ正規表現が使われたときはキャッシュを使います。マクロが終了したらキャッシュは無くなります。    
  * - 数値に2を指定すると、マクロ内で使われた正規表現の検索をキャッシュし、同じ正規表現が使われたときはキャッシュを使います。マクロを終了してもキャッシュを保持します。    
  * 
+ * @comment
+ * キャッシュされる数は上限があります。getmaxinfo(8)によって取得できます。    
+ * 参照：
+ * @see getmaxinfo(8)
+ * 
  * @returns
  * 返り値は意味を持ちません。
  */
@@ -18918,7 +18924,7 @@ function setregularcache(cache_mode: number): number
  * 正規表現パターンの文字列を、正規表現DLLによって解析する段階のキャッシュです。    
  * 検索を実行することそのものには影響ありません。
  * 
- * @param cache_mode 
+ * @param cache_regexp 
  * 文字列を指定すると、文字列の正規表現のキャッシュ格納だけを行います。    
  * 
  * @param is_keep_cache
@@ -18931,6 +18937,8 @@ function setregularcache(cache_mode: number): number
  * 
  * @comment
  * キャッシュされる数は上限があります。getmaxinfo(8)によって取得できます。    
+ * 参照：
+ * @see getmaxinfo(8)
  * 
  * @returns
  * キャッシュ格納に成功すれば１が返る。    
@@ -19114,7 +19122,7 @@ function closehidemaruforced(hidemaru_handle: number): number
  * 秀丸エディタのウィンドウハンドルを返します。    
  * 引数に対応するようなタブが存在しない時は、-1を返す。
  */
-function getcurrenttab(id_type: number, tab_group_id): number
+function getcurrenttab(id_type: number, tab_group_id: number): number
 
 /**
  * f
@@ -19144,7 +19152,7 @@ function getcurrenttab(id_type: number, tab_group_id): number
  * 秀丸エディタのウィンドウハンドルを返します。    
  * 引数に対応するようなタブが存在しない時は、-1を返す。
  */
-function gettabhandle(id_type: number, tab_group_id, tab_order: number): number
+function gettabhandle(id_type: number, tab_group_id: number, tab_order: number): number
 
 /**
  * s
@@ -19545,7 +19553,7 @@ function seteventnotify(notify_target: number): number
  * @returns seteventnotifyで設定された値を返します。
  * 
  */
-function geteventnotify(notify_target: 0): number
+function geteventnotify(notify_target: 0 | number): number
 
 /**
  * s
