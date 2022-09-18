@@ -9548,19 +9548,19 @@ declare function cutafter(): number;
  * → abcc123b|  |あいうえお|漢字|です|ナ
  *  　といったように分解し、それぞれを１つの単語とみなす。
  * 
- * @param copy_word_count 
- * copy_word_count を指定することで、単語１つではなく、カーソルがある位置から、指定の数値の分だけ単語をコピーします。
+ * @param word_count 
+ * word_count を指定することで、単語１つではなく、カーソルがある位置から、指定の数値の分だけ単語をコピーします。
  * 
  * @example
  * // 秀丸エディタの内容が 「This is a pen.」だとする。
  * // 現在のカーソルの位置が、Thisの文字列上のどこかにあるものとする。
- * copy_word_count(5);
+ * copyword(5);
  * // 「This is a」という５単語分(空白も単語)の文字列がクリップボードにコピーされる。
  * 
  * @returns
  * 返り値は意味を持ちません。
  */
-declare function copyword(copy_word_count?: number): number;
+declare function copyword(word_count?: number): number;
 
 /**
  * s
@@ -9820,7 +9820,6 @@ declare function getcliphist(history_ix?: number): number
  * clearcliphistは、クリップボード履歴の消去を行います。
  * 
  * @param history_ix 
- * 
  * history_ixに０から数えた数値を指定することで、    
  * 指定した履歴を消すことができます。    
  * history_ixが無い場合は、全ての履歴を消去します。
@@ -10814,12 +10813,12 @@ declare function reopen(): number;
  * 変換モジュール内の関数名を指定します。    
  * 
  * @param parameters 
- * 変換モジュール内の関数に渡すパラメータを指定します。
+ * 変換モジュール内の関数に渡すパラメータを指定します。    
+ * "" を渡すことで省略相当となります。    
  * 
  * @param target_text 
  * 変換対象となる文字列を指定します。
  * 変換モジュールに渡すパラメータの内容は、変換モジュールが自由に決めることができます。    
- * パラメータは省略可能です。
  *
  * @example
  * var s = filter( "", "ToUpper", "", "abc");
@@ -10877,11 +10876,6 @@ declare function filter(module_name: string, module_func_name: string, parameter
  * @param parameters 
  * 変換モジュール内の関数に渡すパラメータを指定します。
  * 
- * @param target_text 
- * 変換対象となる文字列を指定します。
- * 変換モジュールに渡すパラメータの内容は、変換モジュールが自由に決めることができます。    
- * パラメータは省略可能です。
- *
  * @example
  * var s = filter( "", "ToUpper");
  * message(s);
@@ -10924,7 +10918,7 @@ declare function filter(module_name: string, module_func_name: string, parameter
  * 変換モジュールが見つからない場合などの場合は、成功しても失敗してもresultは1になります。    
  * 詳細なエラーは、getresultex(18)やgetresultex(19)でエラー情報を取得できます。 
  */ 
-declare function filter(module_name: string, module_func_name: string, parameters: string) : number
+declare function filter(module_name: string, module_func_name: string, parameters?: string) : number
 
 /**
  * s
