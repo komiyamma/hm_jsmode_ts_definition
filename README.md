@@ -6,3 +6,5 @@
 ![Hidemaru 9.19](https://img.shields.io/badge/Hidemaru-v9.19-6479ff.svg)
 ![JScript](https://img.shields.io/badge/JScript-OK-6479ff.svg)
 ![WebView2](https://img.shields.io/badge/WebView2-OK-6479ff.svg)
+
+https://秀丸マクロ.net/?page=nobu_tool_hm_jsmode_ts_difinition
