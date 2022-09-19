@@ -1,7 +1,11 @@
 /// <reference path="../types/hm_jsmode.d.ts" />
-var _a = myfunc("あいうえお"), a = _a[0], b = _a[1];
+var ret = myfunc("あいうえお");
 function myfunc(msg) {
     debuginfo(2);
     console.log(msg);
-    return [x(), msg.length];
+    var m = new Map();
+    m.
+        return[x(), msg.length];
 }
+var dll = loaddll(currentmacrodirectory() + "\\abc\\aaa.dll");
+dll.setDllDetachFunc("HmDllDetachFunc");
