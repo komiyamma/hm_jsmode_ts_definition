@@ -6,3 +6,6 @@ function myfunc(msg: string): number[] {
     console.log(msg);
     return [x(), msg.length];
 }
+
+let dll = loaddll(currentmacrodirectory() + "\\abc\\aaa.dll");
+dll.setDllDetachFunc("HmDllDetachFunc");
