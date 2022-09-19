@@ -5,8 +5,6 @@ function myfunc(msg: string): number[] {
     debuginfo(2);
     console.log(msg);
     let m:Map<string, string> = new Map<string, string>();
-    m.
-
     return [x(), msg.length];
 }
 
