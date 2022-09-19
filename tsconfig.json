@@ -6,9 +6,9 @@
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "./build",
+    "outDir": "./build"
   },
 
-  "include": ["./src"],
+  "include": ["./src"]
 }
 
