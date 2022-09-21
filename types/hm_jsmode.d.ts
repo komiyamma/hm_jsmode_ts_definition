@@ -356,7 +356,7 @@ declare namespace hidemaru {
    */
   function createObject(dllpath: string, typeid: string): any | undefined;
 
-  interface IProcessInfoStdIn {
+  interface IProcessInfoStdio {
     /**
      * 標準入力に文字列を書き込みます。
      * 
@@ -382,13 +382,7 @@ declare namespace hidemaru {
     writeLine(input: string): void;
 
     /**
-     * 標準入力を閉じます。
-     */
-    close(): void
-  }
-  interface IProcessInfoStdOut {
-    /**
-     * 標準出力から全て読み取って文字列を返します。    
+     * 全て読み取って文字列を返します。    
      * 応答が無い場合は固まります。    
      * 
      * @param timeout_millisecond
@@ -401,7 +395,7 @@ declare namespace hidemaru {
     readAll(timeout_millisecond: number): string
 
     /**
-     * 標準出力から行を読み取って文字列を返します。    
+     * 行を読み取って文字列を返します。    
      * 応答が無い場合は固まります。    
      * 
      * @param timeout_millisecond
@@ -414,7 +408,7 @@ declare namespace hidemaru {
     readLine(timeout_millisecond: number): string
 
     /**
-     * 標準出力から指定バイト数までを読み取って文字列を返します。    
+     * 指定バイト数までを読み取って文字列を返します。    
      * 応答が無い場合は固まります。    
      * 
      * @param timeout_millisecond
@@ -432,12 +426,12 @@ declare namespace hidemaru {
     readSeparated(timeout_millisecond: number, read_byte: number): string
 
     /**
-     * 標準出力から全て読み取って文字列を返す readAllの非同期のバージョンとなります。    
-     * 標準出力に全て出力されているときに呼ばれる関数を指定します。    
+     * 全て読み取って文字列を返す readAllの非同期のバージョンとなります。    
+     * 全て出力されているときに呼ばれる関数を指定します。    
      * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
      * 
      * @param callback 
-     * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+     * 全て出力されているときに呼ばれる関数を指定します。
      * function(out: string) { ... } の形の関数を指定します。
      * 
      * @example
@@ -446,12 +440,12 @@ declare namespace hidemaru {
     onReadAll(callback:(out?: string)=>any): void
 
     /**
-     * 標準出力から全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
-     * 標準出力に行までが出力されているときに呼ばれる関数を指定します。    
+     * 全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
+     * 行までが出力されているときに呼ばれる関数を指定します。    
      * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
      * 
      * @param callback 
-     * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+     * 全て出力されているときに呼ばれる関数を指定します。
      * function(out: string) { ... } の形の関数を指定します。
      * 
      * @example
@@ -460,12 +454,12 @@ declare namespace hidemaru {
     onReadLine(callback:(out?: string)=>any): void
 
     /**
-     * 標準出力から全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
-     * 標準出力に指定バイト数までが出力されているときに呼ばれる関数を指定します。    
+     * 全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
+     * 指定バイト数までが出力されているときに呼ばれる関数を指定します。    
      * マクロが終わった後に呼ばれることになります。応答が無くても固まりせん。    
      * 
      * @param callback 
-     * 標準出力に全て出力されているときに呼ばれる関数を指定します。
+     * 全て出力されているときに呼ばれる関数を指定します。
      * function(out: string) { ... } の形の関数を指定します。
      * 
      * @param read_byte
@@ -479,12 +473,12 @@ declare namespace hidemaru {
       onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
 
     /**
-     * 標準出力し終わっているどうか。
+     * 標準入出力を終わっているどうか。
      */
     readonly atEndOfStream: number
 
     /**
-     * 標準出力を閉じます
+     * 標準入出力を閉じます。
      */
     close(): void
   }
@@ -493,22 +487,27 @@ declare namespace hidemaru {
     /**
      *  標準入力を扱うStdInオブジェクト。
      */
-    stdIn: IProcessInfoStdIn;
+    stdIn: IProcessInfoStdio;
 
     /**
      * 標準出力を扱うStdOutオブジェクト。
      */
-    stdOut: IProcessInfoStdOut;
+    stdOut: IProcessInfoStdio;
 
     /**
      * 標準エラー出力を扱うStdOutオブジェクト。
      */
-    stdErr: IProcessInfoStdOut;
+    stdErr: IProcessInfoStdio;
 
     /**
-     * プロセスID (pid)
+     * プロセスID
      */
     readonly processID: number
+
+    /**
+     * プロセスID
+     */
+    readonly pid: number
 
     /**
      * 終了しているかどうか。
@@ -563,6 +562,47 @@ declare namespace hidemaru {
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
   function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessInfo;
+
+  /**
+   * f
+   * 
+   * getCurrentProcessInfoメソッドは、自分自身(Hidemaru.exe)のProcessInfoオブジェクトを取得します。    
+   *  [非同期]    
+   * 
+   * ProcessInfoオブジェクト内のstdIn, stdOut, stdErrプロパティは、通常は扱えません。    
+   * Hidemaru.exeを、/stdioオプション付きで起動したとき、stdIn, stdOut, stdErrプロパティが扱えるようになります。    
+   * 
+   * @example
+   * js {
+   *  //起動オプション /stdio が必要
+   *  var me = hidemaru.getCurrentProcessInfo();
+   *  var s = me.stdIn.readAll(5*1000);
+   *  s = filter("","ToZenkakuHira","",s);
+   *  me.stdOut.write( s );
+   * }
+   * exit;
+   * 
+   * ------------- コマンドプロンプトから呼び出し -------------
+   * C:\>ver /?
+   * Windows のバージョンを表示します。
+   * VER
+   * C:\>ver /? | ("C:\Program Files\Hidemaru\Hidemaru.exe" /h /i /stdio:sjis /x test.mac)
+   * Ｗｉｎｄｏｗｓ　のばーじょんを表示します。
+   * 
+   * ＶＥＲ
+   * 
+   * C:\>_
+   * ----------------------------------------------------------
+   *
+   * @comment
+   * 参照：
+   * @see runProcess
+   * @see IProcessInfo
+   * 
+   * @returns
+   * プロセスの情報を表すProcessInfoオブジェクトを返します。
+   */
+  function getCurrentProcessInfo(): IProcessInfo;
 
   /**
    * f
