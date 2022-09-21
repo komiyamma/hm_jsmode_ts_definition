@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v1.0.1
+ * @version v1.0.2
  */
 
 /**
@@ -971,7 +971,7 @@ declare namespace hidemaru {
  */
 declare function evalJs(expression: string): any;
 
-declare namespace hideamruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
+declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
 /**
  * k    
@@ -18786,7 +18786,8 @@ function endgroupundo(): number
  * 0や-1など意味を適当な値を指定してください。
  * 
  * @param search_direction 
- * 下方向に検索するとき 0、上方向に検索するとき 1 を入れます。
+ * 下方向に検索するとき 0、上方向に検索するとき 1 を入れます。    
+ * 下方向に検索するときは、現在のカーソル位置の文字を含めて検索します。
  * 
  * @comment
  * 参照：
@@ -37878,7 +37879,8 @@ declare function endgroupundo(): number
  * 0や-1など意味を適当な値を指定してください。
  * 
  * @param search_direction 
- * 下方向に検索するとき 0、上方向に検索するとき 1 を入れます。
+ * 下方向に検索するとき 0、上方向に検索するとき 1 を入れます。    
+ * 下方向に検索するときは、現在のカーソル位置の文字を含めて検索します。
  * 
  * @comment
  * 参照：
