@@ -15577,18 +15577,6 @@ function disabledraw2(): number
 /**
  * s
  * 
- * enablebreak文はdisablebreakされた状態を解除します。    
- * 
- * @see disablebreak
- * 
- * @returns
- * 返り値は意味を持ちません。
- */
-function enablebreak(): number
-
-/**
- * s
- * 
  * disablebreak文は、マクロの中断を禁止します。    
  * 
  * @comment
@@ -15607,6 +15595,18 @@ function enablebreak(): number
  * 返り値は意味を持ちません。
  */
 function disablebreak(): number
+
+/**
+ * s
+ * 
+ * enablebreak文はdisablebreakされた状態を解除します。    
+ * 
+ * @see disablebreak
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+function enablebreak(): number
 
 /**
  * s
