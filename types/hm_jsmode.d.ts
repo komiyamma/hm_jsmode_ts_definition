@@ -543,11 +543,13 @@ declare namespace hidemaru {
    * @param mode_name 
    * 以下の文字列の動作モードを指定します。    
    * - "gui"    
-   * ウィンドウ表示あり、stdIn/stdOutなし。(既定)
+   * ウィンドウ表示あり、stdIn/stdOutなし。(既定)    
    * - "stdio"    
-   * ウィンドウ表示なし、stdIn/stdOutあり。
+   * ウィンドウ表示なし、stdIn/stdOutあり。    
    * - "guiStdio"    
-   * ウィンドウ表示あり、stdIn/stdOutあり。
+   * ウィンドウ表示あり、stdIn/stdOutあり。    
+   * 
+   * "stdio"はProcessInfoオブジェクトが無くなるとプロセスの終了もします。    
    * 
    * @param encode_name 
    * 以下の文字列のエンコードの種類を指定します。    
@@ -557,6 +559,10 @@ declare namespace hidemaru {
    * UTF-16
    * - "sjis"    
    * Shift-JIS
+   * 
+   * @comment
+   * 参照：
+   * @see IProcessInfo
    * 
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
@@ -12735,25 +12741,38 @@ function hilightfound(is_on?: number): number
  * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
  * JSONの項目名と意味：    
  * - "noredraw"(数値)    
- * 0以外を指定したら再描画しない。
+ * 0以外を指定したら再描画しない。    
+ * noredrawはどこかに1つでもあったら有効です。    
  * - "unit"(文字列)    
- * 位置の単位 "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで既定は"char"
+ * 位置の単位    
+ * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。    
+ * "xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * - "text"(文字列)    
  * 文字色 例："#FFFF00"
  * - "back"(文字列)    
  * 背景色 例："#000088"
  * - "wave"(文字列)    
  * 波線色 例："#FF0000"
- * - "style"(数値)    
+ * - "style"(文字列)    
  * スタイル
- * - "kind"(数値)    
+ * styleは、"normal" "bold" "underline" "underline bold" "italic" "italic bold" "underline italic" "underline italic bold" "outline" "superbold" "shadow" "transparent"のいずれかで、    
+ * それぞれ数値のスタイル(0～11)に対応します。    
+ * 既定は"normal"です。    
+ * - "kind"(文字列)    
  * 種類
+ * - "colorcode"(文字列)    
+ * 強調表示    
+ * colorcodeは、"script" "hilight1"(～8) "number" "hilightline1"(～4) "comment" "string" "ifdef" "especially1"(～4)のいずれかで、    
+ * 種類の上位16ビットの数値に対応します。    
+ * 既定はなしです。    
  * - "userdata"(数値)    
  * ユーザーデータ
  * - "layer"(文字列)    
  * レイヤー名
  * - "line1"(数値)    
  * 開始行
+ * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
  * - "col1"(数値)    
  * 開始桁
  * - "line2"(数値)    
@@ -12767,7 +12786,7 @@ function hilightfound(is_on?: number): number
  * js{
  *   var obj = {};
  *   obj.layer="yellowline";
- *   obj.kind=2;
+ *   obj.kind="erase";
  *   obj.text="#000000";
  *   obj.back="#FFFF00";
  *   obj.line1=lineno();
@@ -12779,10 +12798,6 @@ function hilightfound(is_on?: number): number
  * }
  * 
  * @comment
- * noredrawはどこかに1つでもあったら有効です。    
- * unitは文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。    
- * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
- * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * text, back, wave, style, kind, userdataは、全部色は透明("")、スタイルは透過(-1)、種類とユーザーデータは0にしたとき、消去の意味になります。    
  * 
  * @returns
@@ -13814,7 +13829,7 @@ function windowlist(): number
  * compfile文は、他の秀丸エディタと内容比較を実行します。    
  * 
  * @param hidemaru_handle
- * パラメータとして他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
+ * 他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
  * 以下のように使います。
  * 
  * @example
@@ -15847,19 +15862,19 @@ function setfloatmode(to_floatmode_on: number): number
  * @param n_value 
  * - n_type が0の場合    
  * disableerrormsg相当。    
- *   - n_type の意味：    
+ *   - n_value の意味：    
  *     - 0x00000000 enableerrormsgの状態    
  *     - 0x00000001 disableerrormsgの状態    
  * 
  * - n_type が1の場合    
  * 10秒待っても切り替えできないエラーを表示するどうか。    
- *   - n_type の意味：    
+ *   - n_value の意味：    
  *     - 0x00000000 表示しない(抑制する)    
  *     - 0x00000001 表示する(抑制しない)    
  * 
  * - n_type が2の場合        
  * 開くときのエンコードの種類関連。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   -n_value の意味：マスク値(論理積した値)    
  *     - 0x0000000f 変換できない文字（デフォルトOFF）    
  *     - 0x000000f0 NULL文字（デフォルトOFF）    
  *     - 0x00000f00 複数マッチエンコードの選択（デフォルトOFF）    
@@ -15874,7 +15889,7 @@ function setfloatmode(to_floatmode_on: number): number
  * 
  * - n_type が3の場合    
  * 開くときのエンコードの種類関連。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：マスク値(論理積した値)    
  *     - 0x0000000f 上書き保存時の変換できない文字がある場合の問い合わせ（デフォルトON）    
  *     - 0x000000f0 ?に変換した後のメッセージ（デフォルトON）    
  *     - 0x00000f00 空だったとき（デフォルトON）    
@@ -15886,16 +15901,22 @@ function setfloatmode(to_floatmode_on: number): number
  * 
  * - n_type が4の場合    
  * OKボタンだけがある一般的なメッセージを表示するかどうか。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：    
  *     - 0x00000000 表示しない(抑制する)    
  *     - 0x00000001 表示する(抑制しない)    
  * 
  * - n_type が5の場合    
  * call/gotoでラベルが見つからないときにエラーを出してマクロを中断するかどうか。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：    
  *     - 0x00000000 エラーを表示せず(抑制して)、次の文へマクロの実行を継続    
  *     - 0x00000001 エラーを表示して(抑制せず)、マクロの実行を中断    
  *   - エラーを表示しない場合、ラベルが見つからずに次の文に来たかどうかはgetresultex(17)で知ることができます。    
+ * 
+ * - n_type が6の場合    
+ * JavaScript実行時のエラーをメッセージボックスで出すかどうか。<BR>    
+ *   - n_value の意味：    
+ *     - 0x00000000 エラーを表示しない
+ *     - 0x00000001 エラーを表示する
  * 
  * @comment
  * 参照：
@@ -31828,25 +31849,38 @@ declare function hilightfound(is_on?: number): number
  * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
  * JSONの項目名と意味：    
  * - "noredraw"(数値)    
- * 0以外を指定したら再描画しない。
+ * 0以外を指定したら再描画しない。    
+ * noredrawはどこかに1つでもあったら有効です。    
  * - "unit"(文字列)    
- * 位置の単位 "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで既定は"char"
+ * 位置の単位    
+ * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。    
+ * "xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * - "text"(文字列)    
  * 文字色 例："#FFFF00"
  * - "back"(文字列)    
  * 背景色 例："#000088"
  * - "wave"(文字列)    
  * 波線色 例："#FF0000"
- * - "style"(数値)    
+ * - "style"(文字列)    
  * スタイル
- * - "kind"(数値)    
+ * styleは、"normal" "bold" "underline" "underline bold" "italic" "italic bold" "underline italic" "underline italic bold" "outline" "superbold" "shadow" "transparent"のいずれかで、    
+ * それぞれ数値のスタイル(0～11)に対応します。    
+ * 既定は"normal"です。    
+ * - "kind"(文字列)    
  * 種類
+ * - "colorcode"(文字列)    
+ * 強調表示    
+ * colorcodeは、"script" "hilight1"(～8) "number" "hilightline1"(～4) "comment" "string" "ifdef" "especially1"(～4)のいずれかで、    
+ * 種類の上位16ビットの数値に対応します。    
+ * 既定はなしです。    
  * - "userdata"(数値)    
  * ユーザーデータ
  * - "layer"(文字列)    
  * レイヤー名
  * - "line1"(数値)    
  * 開始行
+ * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
  * - "col1"(数値)    
  * 開始桁
  * - "line2"(数値)    
@@ -31860,7 +31894,7 @@ declare function hilightfound(is_on?: number): number
  * js{
  *   var obj = {};
  *   obj.layer="yellowline";
- *   obj.kind=2;
+ *   obj.kind="erase";
  *   obj.text="#000000";
  *   obj.back="#FFFF00";
  *   obj.line1=lineno();
@@ -31872,10 +31906,6 @@ declare function hilightfound(is_on?: number): number
  * }
  * 
  * @comment
- * noredrawはどこかに1つでもあったら有効です。    
- * unitは文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。    
- * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
- * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * text, back, wave, style, kind, userdataは、全部色は透明("")、スタイルは透過(-1)、種類とユーザーデータは0にしたとき、消去の意味になります。    
  * 
  * @returns
@@ -32907,7 +32937,7 @@ declare function windowlist(): number
  * compfile文は、他の秀丸エディタと内容比較を実行します。    
  * 
  * @param hidemaru_handle
- * パラメータとして他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
+ * 他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
  * 以下のように使います。
  * 
  * @example
@@ -34940,19 +34970,19 @@ declare function setfloatmode(to_floatmode_on: number): number
  * @param n_value 
  * - n_type が0の場合    
  * disableerrormsg相当。    
- *   - n_type の意味：    
+ *   - n_value の意味：    
  *     - 0x00000000 enableerrormsgの状態    
  *     - 0x00000001 disableerrormsgの状態    
  * 
  * - n_type が1の場合    
  * 10秒待っても切り替えできないエラーを表示するどうか。    
- *   - n_type の意味：    
+ *   - n_value の意味：    
  *     - 0x00000000 表示しない(抑制する)    
  *     - 0x00000001 表示する(抑制しない)    
  * 
  * - n_type が2の場合        
  * 開くときのエンコードの種類関連。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   -n_value の意味：マスク値(論理積した値)    
  *     - 0x0000000f 変換できない文字（デフォルトOFF）    
  *     - 0x000000f0 NULL文字（デフォルトOFF）    
  *     - 0x00000f00 複数マッチエンコードの選択（デフォルトOFF）    
@@ -34967,7 +34997,7 @@ declare function setfloatmode(to_floatmode_on: number): number
  * 
  * - n_type が3の場合    
  * 開くときのエンコードの種類関連。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：マスク値(論理積した値)    
  *     - 0x0000000f 上書き保存時の変換できない文字がある場合の問い合わせ（デフォルトON）    
  *     - 0x000000f0 ?に変換した後のメッセージ（デフォルトON）    
  *     - 0x00000f00 空だったとき（デフォルトON）    
@@ -34979,16 +35009,22 @@ declare function setfloatmode(to_floatmode_on: number): number
  * 
  * - n_type が4の場合    
  * OKボタンだけがある一般的なメッセージを表示するかどうか。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：    
  *     - 0x00000000 表示しない(抑制する)    
  *     - 0x00000001 表示する(抑制しない)    
  * 
  * - n_type が5の場合    
  * call/gotoでラベルが見つからないときにエラーを出してマクロを中断するかどうか。    
- *   - n_type の意味：マスク値(論理積した値)    
+ *   - n_value の意味：    
  *     - 0x00000000 エラーを表示せず(抑制して)、次の文へマクロの実行を継続    
  *     - 0x00000001 エラーを表示して(抑制せず)、マクロの実行を中断    
  *   - エラーを表示しない場合、ラベルが見つからずに次の文に来たかどうかはgetresultex(17)で知ることができます。    
+ * 
+ * - n_type が6の場合    
+ * JavaScript実行時のエラーをメッセージボックスで出すかどうか。<BR>    
+ *   - n_value の意味：    
+ *     - 0x00000000 エラーを表示しない
+ *     - 0x00000001 エラーを表示する
  * 
  * @comment
  * 参照：

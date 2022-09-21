@@ -542,11 +542,13 @@ declare namespace hidemaru {
    * @param mode_name 
    * 以下の文字列の動作モードを指定します。    
    * - "gui"    
-   * ウィンドウ表示あり、stdIn/stdOutなし。(既定)
+   * ウィンドウ表示あり、stdIn/stdOutなし。(既定)    
    * - "stdio"    
-   * ウィンドウ表示なし、stdIn/stdOutあり。
+   * ウィンドウ表示なし、stdIn/stdOutあり。    
    * - "guiStdio"    
-   * ウィンドウ表示あり、stdIn/stdOutあり。
+   * ウィンドウ表示あり、stdIn/stdOutあり。    
+   * 
+   * "stdio"はProcessInfoオブジェクトが無くなるとプロセスの終了もします。    
    * 
    * @param encode_name 
    * 以下の文字列のエンコードの種類を指定します。    
@@ -556,6 +558,10 @@ declare namespace hidemaru {
    * UTF-16
    * - "sjis"    
    * Shift-JIS
+   * 
+   * @comment
+   * 参照：
+   * @see IProcessInfo
    * 
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
@@ -12734,25 +12740,38 @@ function hilightfound(is_on?: number): number
  * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
  * JSONの項目名と意味：    
  * - "noredraw"(数値)    
- * 0以外を指定したら再描画しない。
+ * 0以外を指定したら再描画しない。    
+ * noredrawはどこかに1つでもあったら有効です。    
  * - "unit"(文字列)    
- * 位置の単位 "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで既定は"char"
+ * 位置の単位    
+ * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。    
+ * "xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * - "text"(文字列)    
  * 文字色 例："#FFFF00"
  * - "back"(文字列)    
  * 背景色 例："#000088"
  * - "wave"(文字列)    
  * 波線色 例："#FF0000"
- * - "style"(数値)    
+ * - "style"(文字列)    
  * スタイル
- * - "kind"(数値)    
+ * styleは、"normal" "bold" "underline" "underline bold" "italic" "italic bold" "underline italic" "underline italic bold" "outline" "superbold" "shadow" "transparent"のいずれかで、    
+ * それぞれ数値のスタイル(0～11)に対応します。    
+ * 既定は"normal"です。    
+ * - "kind"(文字列)    
  * 種類
+ * - "colorcode"(文字列)    
+ * 強調表示    
+ * colorcodeは、"script" "hilight1"(～8) "number" "hilightline1"(～4) "comment" "string" "ifdef" "especially1"(～4)のいずれかで、    
+ * 種類の上位16ビットの数値に対応します。    
+ * 既定はなしです。    
  * - "userdata"(数値)    
  * ユーザーデータ
  * - "layer"(文字列)    
  * レイヤー名
  * - "line1"(数値)    
  * 開始行
+ * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
  * - "col1"(数値)    
  * 開始桁
  * - "line2"(数値)    
@@ -12766,7 +12785,7 @@ function hilightfound(is_on?: number): number
  * js{
  *   var obj = {};
  *   obj.layer="yellowline";
- *   obj.kind=2;
+ *   obj.kind="erase";
  *   obj.text="#000000";
  *   obj.back="#FFFF00";
  *   obj.line1=lineno();
@@ -12778,10 +12797,6 @@ function hilightfound(is_on?: number): number
  * }
  * 
  * @comment
- * noredrawはどこかに1つでもあったら有効です。    
- * unitは文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。    
- * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
- * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * text, back, wave, style, kind, userdataは、全部色は透明("")、スタイルは透過(-1)、種類とユーザーデータは0にしたとき、消去の意味になります。    
  * 
  * @returns
@@ -13813,7 +13828,7 @@ function windowlist(): number
  * compfile文は、他の秀丸エディタと内容比較を実行します。    
  * 
  * @param hidemaru_handle
- * パラメータとして他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
+ * 他の秀丸エディタのウィンドウハンドルまたはウィンドウ番号を指定する必要があります。    
  * 以下のように使います。
  * 
  * @example
