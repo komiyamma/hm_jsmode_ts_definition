@@ -418,6 +418,9 @@ declare namespace hidemaru {
      * 読み込むバイト数を指定します。    
      * 0の場合は空行までになります。    
      * 
+     * onReadLineとは違い、自動的に次の区切りまでは読みません。    
+     * 次の区切りを読む場合、もう一度onReadSeparated()で指定します。    
+     * 
      * @example
      * var nTimeout = 2000;
      * out = stdOut.readSeparated(nTimeout, 0);   // 空行まで読み込む
@@ -470,7 +473,7 @@ declare namespace hidemaru {
      * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
      * stdOut.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
      */
-      onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
+    onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
 
     /**
      * 標準入出力を終わっているどうか。
