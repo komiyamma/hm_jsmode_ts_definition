@@ -469,7 +469,7 @@ declare namespace hidemaru {
      * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
      * stdOut.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
      */
-      onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
+    onReadSeparated(callback:(out?: string)=>any, read_byte: number): void
 
     /**
      * 標準入出力を終わっているどうか。
