@@ -486,17 +486,17 @@ declare namespace hidemaru {
     /**
      *  標準入力を扱うStdInオブジェクト。
      */
-    stdIn: IProcessInfoStdio;
+    readonly stdIn: IProcessInfoStdio;
 
     /**
      * 標準出力を扱うStdOutオブジェクト。
      */
-    stdOut: IProcessInfoStdio;
+    readonly stdOut: IProcessInfoStdio;
 
     /**
      * 標準エラー出力を扱うStdOutオブジェクト。
      */
-    stdErr: IProcessInfoStdio;
+    readonly stdErr: IProcessInfoStdio;
 
     /**
      * プロセスID
@@ -15862,7 +15862,7 @@ function setfloatmode(to_floatmode_on: number): number
  * seterrormode関数は、マクロ実行中に各種エラーを出すかどうかを指示します。    
  * 
  * @example
- * var ret = seterrormode(0, 0);
+ * var old = seterrormode(0, 0);
  * 
  * @param n_type 
  * 設定する種類を指定します。
