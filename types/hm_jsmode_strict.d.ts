@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v1.0.2
+ * @version v1.0.3
  */
 
 /**
@@ -12740,16 +12740,14 @@ function hilightfound(is_on?: number): number
 /**
  * s
  * 
- * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。
- * 任意の位置に、幾つでもカラーマーカーを付けることができます。
- * BOX選択でも適用されます。
+ * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
+ * 任意の位置に、幾つでもカラーマーカーを付けることができます。    
+ * BOX選択でも適用されます。    
+ *  [非同期]    
  * 
  * @param json 
  * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
  * JSONの項目名と意味：    
- * - "noredraw"(数値)    
- * 0以外を指定したら再描画しない。    
- * noredrawはどこかに1つでもあったら有効です。    
  * - "unit"(文字列)    
  * 位置の単位    
  * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。    
@@ -12777,6 +12775,9 @@ function hilightfound(is_on?: number): number
  * ユーザーデータ
  * - "layer"(文字列)    
  * レイヤー名
+ * - "items"(配列)    
+ * 現在のオブジェクトを継承して、上書きできる入れ子構造    
+ * itemsは、配列を指定します。配列の要素の書き方は、このオブジェクトそのものと全く同じです。    
  * - "line1"(数値)    
  * 開始行
  * line1, col1, line2, col2の４つが揃って記述されたら実行されます。    
@@ -12786,8 +12787,13 @@ function hilightfound(is_on?: number): number
  * 終了行
  * - "col2"(数値)    
  * 終了桁
- * - "items"(配列)    
- * 現在のオブジェクトを継承して、上書きできる入れ子構造
+ * - "clear"(数値)
+ * 消去    
+ * clearは、line1, col1, line2, col2と共に指定されている場合は、範囲を消去します。    
+ * 範囲が無い場合は、指定されているレイヤーの全てを消去します。
+ * - "noredraw"(数値)    
+ * 0以外を指定したら再描画しない。    
+ * noredrawはどこかに1つでもあったら有効です。    
  * 
  * @example
  * js{
@@ -12805,7 +12811,11 @@ function hilightfound(is_on?: number): number
  * }
  * 
  * @comment
- * text, back, wave, style, kind, userdataは、全部色は透明("")、スタイルは透過(-1)、種類とユーザーデータは0にしたとき、消去の意味になります。    
+ * その他の説明
+ * - 色やスタイルは現在の状態を継承し、上書きできます。上書きしても継承元は変わりません。    
+ * - unit, text, back, wave, style, kind, colorcode,userdata, layerは継承されます。    
+ * - 効果が無い状態（text, back, wave, styleは透明/透過、kindは0相当、userdataは0）にしたとき、消去の意味になります。    
+ * - line1, col1, line2, col2, clear, noredrawは継承されません。
  * 
  * @returns
  * 成功した場合は0以外を返す。
@@ -12817,7 +12827,7 @@ function colormarker(json: string | object): number
  * 
  * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
  * 
- * 選択範囲のカラーマーカーを削除します。
+ * 選択範囲のカラーマーカーを削除します。    
  * 
  * @returns
  * 成功した場合は0以外を返す。
@@ -12828,8 +12838,8 @@ function colormarker(): number
  * s
  * 
  * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
- * 任意の位置に、幾つでもカラーマーカーを付けることができます。
- * BOX選択でも適用されます。
+ * 任意の位置に、幾つでもカラーマーカーを付けることができます。    
+ * BOX選択でも適用されます。    
  * 
  * @example
  * colormarker(0x0000ff,0xff0000,-1,0);
