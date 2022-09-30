@@ -989,14 +989,10 @@ declare namespace hidemaru {
    * - 0x00020000 マウスキャプチャ状態(ドラッグ状態)    
    * - 0x00040000 Hidemaru_CheckQueueStatus相当    
    * 
-   * @posterior_millisecond
-   * 0x00008000 に相当する、キーやマウスの操作直後であると判定するミリ秒を指定します。    
-   * 省略した場合は、100=(100ミリ秒)を指定したこととなります。
-   * 
    * @returns
    * 各種の入力ができるかどうかを判断するための状態値を返す
    */
-  function getInputStates(posterior_millisecond?: number): number
+  function getInputStates(): number
 
   /**
    * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
