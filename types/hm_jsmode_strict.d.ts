@@ -381,6 +381,23 @@ declare namespace hidemaru {
     writeLine(input: string): void;
 
     /**
+     * writeメソッドで文字列を書き込んだことを想定した場合のバイト数を取得します。  
+     * （書き込みはしません）
+     * 
+     * @param input  
+     * テストする文字列
+     * 
+     * @example
+     * var input_message = "あいうえお";
+     * var nByte = stdIn.writeSimulation(input_message);
+     * 
+     * @returns
+     * 返り値は数値で、バイト数です。  
+     * バイト数を計算するためのエンコーディングはProcessInfoオブジェクトによって決定されています。  
+     */
+     writeSimulation(input: string): number;
+
+    /**
      * 全て読み取って文字列を返します。    
      * 応答が無い場合は固まります。    
      * 

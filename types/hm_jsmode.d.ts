@@ -382,6 +382,19 @@ declare namespace hidemaru {
     writeLine(input: string): void;
 
     /**
+     * 標準入力に文字列に改行を入れて書き込みます。
+     * 
+     * @param input  
+     * 書き込む文字列
+     * 
+     * @example
+     * var input_message = "あいうえお";
+     * stdIn.writeLine(input_message);
+     */
+     writeLine(input: string): void;
+
+
+    /**
      * 全て読み取って文字列を返します。    
      * 応答が無い場合は固まります。    
      * 
