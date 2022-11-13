@@ -677,6 +677,9 @@ declare namespace hidemaru {
    * @param filepath
    * マクロのファイル名を文字列で指定します。
    * 
+   * @param arg
+   * 呼び出されたマクロ側で getarg 関数で取得できるパラメータを１つだけ渡すことが出来る。
+   * 
    * @example
    * // マクロ実行中の中で実行する例
    * js{
@@ -706,7 +709,7 @@ declare namespace hidemaru {
    * @returns
    * 返り値はありません。
    */
-  function postExecMacroFile(filepath: string): void;
+  function postExecMacroFile(filepath: string, arg? : string): void;
 
   /**
    * f
