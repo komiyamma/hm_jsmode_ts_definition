@@ -494,8 +494,15 @@ declare namespace hidemaru {
 
     /**
      * 標準入出力を終わっているどうか。
+     * 数値で、0は終わっていません。0以外は終わっています。
      */
     readonly atEndOfStream: number
+
+    /**
+     * write/writeLineメソッドで出力し切っているいるどうか。
+     * 数値で、0は書き込みし切っていません。0以外は書き込みし切っています。
+     */
+    readonly flushed: number
 
     /**
      * 標準入出力を閉じます。
