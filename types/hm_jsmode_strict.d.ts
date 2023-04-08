@@ -2421,7 +2421,7 @@ function compfilehandle(): number
 function scrolllinkhandle(): number
 
 /**
- * k
+ * k    
  * 
  * ブラウザ枠のウィンドウハンドルを表します。   
  * 
@@ -2432,12 +2432,12 @@ function scrolllinkhandle(): number
  * - 2 : 個別ブラウザ枠が対象。
  * 
  * @returns
- * ブラウザ枠のウィンドウハンドルを数値で返します。
+ * ブラウザ枠のウィンドウハンドルを数値で返す。
  */
 function browserpanehandle(target_pane?: number): number
 
 /**
- * s
+ * s    
  * 
  * ブラウザ枠のサイズを設定します。
  * 
@@ -2456,8 +2456,23 @@ function browserpanehandle(target_pane?: number): number
  */
 function setbrowserpanesize(size: number, target_pane?: number): number
 
-//hg.browserpaneurl = function(){/*括弧を付けて呼んでください*/var m="browserpaneurl";eval(fs);return r;};if(f)browserpaneurl=hg.browserpaneurl;
-
+/**
+ * k    
+ * 
+ * ブラウザ枠に表示されている現在のコンテンツのURLを表します。   
+ * 実行されたブックマークレットの場合は表されません。  
+ * (ブックマークレット＝URLに「javascript:***」としてページに対してjavascriptを実行したもの)
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * ブラウザ枠に表示されている現在のコンテンツのURLを文字列で返す。
+ */
+function browserpaneurl(target_pane?: number): string
 
 /**
  * k    

@@ -16,4 +16,4 @@ let info = hidemaru.runProcess("abc", "abc", "guiStdio", "utf8");
 info.kill
 
 let bb = hidemaru.getCursorPosFromMousePos("gcu", 100, 50);
-let c = hidemaruGlobal.setbrowserpanesize(200, 2);
+let c = hidemaruGlobal.browserpaneurl(2);
