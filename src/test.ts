@@ -9,3 +9,7 @@ function myfunc(msg: string): number {
 }
 
 let v = hidemaruversion();
+
+
+let arr = hidemaru.getCursorPos("wcs");
+

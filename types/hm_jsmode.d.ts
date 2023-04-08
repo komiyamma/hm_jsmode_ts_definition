@@ -862,6 +862,35 @@ declare namespace hidemaru {
   /**
    * f
    * 
+   * getCursorPosメソッドは、現在のカーソル位置を取得します。    
+   *  [非同期]
+   * 
+   * @param literal_unit
+   * 単位を指定します。  
+   * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。  
+   * 省略した場合は、"char"と同じです。  
+   * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
+   * 
+   * @example
+   * js {
+   *    var arr = hidemaru.getCursorPos();
+   * }
+   * 
+   * js{
+   *    var pos = hidemaru.getCursorPos("wcs");
+   *    message( pos[0] + "\n" + pos[1] );
+   * }
+   * 
+   * 
+   * @returns
+   * 範囲選択の内容を文字列で返します。    
+   * (選択していないなどの理由で)失敗した場合はundefinedになります。
+   */
+  function getCursorPos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu"): [lineno:number, column:number]
+
+  /**
+   * f
+   * 
    * getCurrentWindowHandleメソッドは、現在の秀丸エディタのウィンドウハンドルを取得します。    
    *  [非同期]
    * 
