@@ -19068,6 +19068,27 @@ function getstaticvariable(key: string, scope_type: number): string
  * 返り値は意味を持ちません。
  */
 function setregularcache(cache_mode: number): number
+
+/**
+ * f
+ * マクロファイルの先頭に書くことで規定のバージョンを満たしていないとマクロを閉じるといった働きをする関数。  
+ * 
+ * @version_string
+ * バージョン番号は、文字列で指定します。
+ * 
+ * @example
+ * hidemaruversion("9.19.14");
+ * 
+ * 例の最初の9.19の部分は、そのままバージョン9.19を意味しています。  
+ * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。  
+ * 秀丸エディタ本体が指定したバージョンよりも低い場合は、エラーメッセージを出してマクロは終了します。  
+ * この文はV9.19β14以降に追加された文のため、これ未満のバージョンでは、hidemaruversion関数そのものがエラーになります。 
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+function hidemaruversion(version_string: string): number
+
 /**
  * s
  * 
