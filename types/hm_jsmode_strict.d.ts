@@ -603,7 +603,7 @@ declare namespace hidemaru {
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
-  function runProcess(command: string, current_dir: string, mode_name: "gui"|"stdio"|"guiStdio"|string, encode_name: "utf8"|"utf16"|"sjis"|string): IProcessInfo;
+  function runProcess(command: string, current_dir?: string, mode_name?: "gui"|"stdio"|"guiStdio", encode_name?: "utf8"|"utf16"|"sjis"): IProcessInfo;
 
   /**
    * f

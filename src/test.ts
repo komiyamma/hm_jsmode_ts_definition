@@ -12,4 +12,5 @@ let v = hidemaruversion();
 
 
 let arr = hidemaru.getCursorPos("wcs");
-
+let info = hidemaru.runProcess("abc", "abc", "guiStdio", "utf8");
+info.kill
