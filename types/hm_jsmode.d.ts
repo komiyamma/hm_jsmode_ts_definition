@@ -2422,6 +2422,45 @@ function compfilehandle(): number
 function scrolllinkhandle(): number
 
 /**
+ * k
+ * 
+ * ブラウザ枠のウィンドウハンドルを表します。   
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * ブラウザ枠のウィンドウハンドルを数値で返します。
+ */
+function browserpanehandle(target_pane?: number): number
+
+/**
+ * s
+ * 
+ * ブラウザ枠のサイズを設定します。
+ * 
+ * @param size
+ * ピクセル単位の数値を指定します。
+ * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+function setbrowserpanesize(size: number, target_pane?: number): number
+
+//hg.browserpaneurl = function(){/*括弧を付けて呼んでください*/var m="browserpaneurl";eval(fs);return r;};if(f)browserpaneurl=hg.browserpaneurl;
+
+
+/**
  * k    
  * 
  * 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。  
@@ -21581,6 +21620,45 @@ declare function compfilehandle(): number
  * 同時スクロール中のウィンドウがない場合、0
  */
 declare function scrolllinkhandle(): number
+
+/**
+ * k
+ * 
+ * ブラウザ枠のウィンドウハンドルを表します。   
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * ブラウザ枠のウィンドウハンドルを数値で返します。
+ */
+declare function browserpanehandle(target_pane?: number): number
+
+/**
+ * s
+ * 
+ * ブラウザ枠のサイズを設定します。
+ * 
+ * @param size
+ * ピクセル単位の数値を指定します。
+ * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function setbrowserpanesize(size: number, target_pane?: number): number
+
+//hg.browserpaneurl = function(){/*括弧を付けて呼んでください*/var m="browserpaneurl";eval(fs);return r;};if(f)browserpaneurl=hg.browserpaneurl;
+
 
 /**
  * k    
