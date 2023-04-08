@@ -13,4 +13,6 @@ dll.setDllDetachFunc("HmDllDetachFunc");
 
 let proc = hidemaru.runProcess();
 let stdio = proc.stdOut;
-stdio.flush()
+stdio.flush(100)
+
+hidemaru.saveTextFile("abc", "あいうえお", "utf8");

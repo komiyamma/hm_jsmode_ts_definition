@@ -960,6 +960,36 @@ declare namespace hidemaru {
   function loadTextFile(filepath: string): string | undefined;
 
   /**
+   * saveTextFileメソッドは、文字列をテキストファイルに書き込みます。   
+   *  [非同期]
+   * 
+   * @param filepath 
+   * ファイル名をフルパスで指定します。
+   * 
+   * @param text
+   * ファイルの内容を文字列で指定します。
+   * 
+   * @param encode_name
+   * エンコードの種類を文字列で指定します。  
+   * 以下のいずれかのみ対応しています。  
+   * - "utf16" : UTF-16 BOMあり
+   * - "utf8" : UTF-8 BOMなし
+   * - "utf8bom" : UTF-8 BOMあり
+   * - "sjis" : Shift-JIS
+   * 
+   * @example
+   * js{
+   *     var success = hidemaru.saveTextFile("c:\\folder\\a.txt", "テキスト内容", "utf16" );
+   * }
+   * 
+   * @returns
+   * 書き込みに成功した場合、0以外が返ります。  
+   * 失敗した場合、0を返します。
+   */
+  function saveTextFile(filepath: string, text: string, encode_name: "utf16"|"utf8"|"utf8bom"|"sjis"): number;
+
+  
+  /**
    * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
    *  [非同期]
    * 
