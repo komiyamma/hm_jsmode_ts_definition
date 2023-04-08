@@ -19069,6 +19069,46 @@ function getstaticvariable(key: string, scope_type: number): string
  * 返り値は意味を持ちません。
  */
 function setregularcache(cache_mode: number): number
+
+/**
+ * s
+ * 
+ * マクロファイルの先頭に書くことで規定のバージョンを満たしていないとマクロを閉じるといった働きをする関数。  
+ * 
+ * @version_string
+ * バージョン番号は、文字列で指定します。
+ * 
+ * @example
+ * hidemaruversion("9.19.14");
+ * 
+ * 例の最初の9.19の部分は、そのままバージョン9.19を意味しています。  
+ * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。  
+ * 秀丸エディタ本体が指定したバージョンよりも低い場合は、エラーメッセージを出してマクロは終了します。  
+ * この文はV9.19β14以降に追加された文のため、これ未満のバージョンでは、hidemaruversion関数そのものがエラーになります。 
+ * 
+ * @see version
+ * 
+ * @returns
+ * バージョン以上であれば、0以外を返す。  
+ * バージョンに満たなければ、0を返しますがマクロが終了します。
+ */
+function hidemaruversion(version_string: string): number
+
+/**
+ * k
+ * 
+ * 秀丸のバージョンを文字列で取得する関数
+ * 
+ * @example
+ * var v = hidemaruversion();
+ * 
+ * @returns
+ * "9.19.14" などといった文字列を返す。  
+ * 9.19の部分は、そのままバージョン9.19を意味しています。  
+ * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。
+ */
+function hidemaruversion(): string
+
 /**
  * s
  * 
@@ -38190,6 +38230,46 @@ declare function getstaticvariable(key: string, scope_type: number): string
  * 返り値は意味を持ちません。
  */
 declare function setregularcache(cache_mode: number): number
+
+/**
+ * s
+ * 
+ * マクロファイルの先頭に書くことで規定のバージョンを満たしていないとマクロを閉じるといった働きをする関数。  
+ * 
+ * @version_string
+ * バージョン番号は、文字列で指定します。
+ * 
+ * @example
+ * hidemaruversion("9.19.14");
+ * 
+ * 例の最初の9.19の部分は、そのままバージョン9.19を意味しています。  
+ * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。  
+ * 秀丸エディタ本体が指定したバージョンよりも低い場合は、エラーメッセージを出してマクロは終了します。  
+ * この文はV9.19β14以降に追加された文のため、これ未満のバージョンでは、hidemaruversion関数そのものがエラーになります。 
+ * 
+ * @see version
+ * 
+ * @returns
+ * バージョン以上であれば、0以外を返す。  
+ * バージョンに満たなければ、0を返しますがマクロが終了します。
+ */
+declare function hidemaruversion(version_string: string): number
+
+/**
+ * k
+ * 
+ * 秀丸のバージョンを文字列で取得する関数
+ * 
+ * @example
+ * var v = hidemaruversion();
+ * 
+ * @returns
+ * "9.19.14" などといった文字列を返す。  
+ * 9.19の部分は、そのままバージョン9.19を意味しています。  
+ * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。
+ */
+declare function hidemaruversion(): string
+
 /**
  * s
  * 
