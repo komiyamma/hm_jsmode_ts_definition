@@ -900,11 +900,11 @@ declare namespace hidemaru {
    * 省略した場合は、"char"と同じです。  
    * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
    * 
-   * @param pos_x
+   * @param pos_x_pixel
    * 画面のX座標のピクセル位置を指定します。  
    * 省略した場合は、マウスカーソルの位置になります。
    * 
-   * @param pos_x
+   * @param pos_y_pixel
    * 画面のY座標のピクセル位置を指定します。  
    * 省略した場合は、マウスカーソルの位置になります。
    * 
@@ -923,7 +923,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x?: number, pos_y?: number): [lineno:number, column:number]
+  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x_pixel?: number, pos_y_pixel?: number): [lineno:number, column:number]
 
   /**
    * f
