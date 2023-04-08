@@ -501,6 +501,16 @@ declare namespace hidemaru {
      * 標準入出力を閉じます。
      */
     close(): void
+
+    /**
+     * write/writeLineメソッドを呼んだ後の場合、書き込みし切るまで待機します。  
+     * パラメータはタイムアウトを指定します。
+     * @param nTimeout 
+     * 
+     * @returns
+     * 返り値は、書き込みし切っている場合は0以外、書き込みし切っていない場合は0になります。
+     */
+    flush(nTimeout: number): number;
   }
 
   interface IProcessInfo {
@@ -6694,6 +6704,9 @@ function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "1"
  * 
  * - 25：newfile等で新しく秀丸エディタが起動するとき、    
  * 起動数の上限によってエラーになったかどうか　(0以外=失敗／0=成功)
+ * 
+ * - 26：saveas等で保存に失敗したときのWindowsのエラーコード
+ * 
  * 
  * @example
  * tagjump();
@@ -25812,6 +25825,9 @@ declare function getreplacehist(history_ix: number, is_pin: 1 | number): "0" | "
  * 
  * - 25：newfile等で新しく秀丸エディタが起動するとき、    
  * 起動数の上限によってエラーになったかどうか　(0以外=失敗／0=成功)
+ * 
+ * - 26：saveas等で保存に失敗したときのWindowsのエラーコード
+ * 
  * 
  * @example
  * tagjump();

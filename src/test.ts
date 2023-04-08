@@ -11,3 +11,6 @@ function myfunc(msg: string): number {
 let dll = loaddll(currentmacrodirectory() + "\\abc\\aaa.dll");
 dll.setDllDetachFunc("HmDllDetachFunc");
 
+let proc = hidemaru.runProcess();
+let stdio = proc.stdOut;
+stdio.flush()
