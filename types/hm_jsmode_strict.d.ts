@@ -649,6 +649,38 @@ declare namespace hidemaru {
   /**
    * f
    * 
+   * sendMessageメソッドは、sendmessageと同じで、Win32APIのsendmessageを呼びます。  
+   *  [非同期]    
+   * 
+   * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。
+   *メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
+   * 
+   * @example
+   * js{
+   *    var lResult = hidemaru.sendMessage( hwnd, msg_id, wParam, lParam );
+   * }
+   * 
+   * @param hwnd 
+   * ウィンドウハンドルを指定します。
+   * 
+   * @param msg_id 
+   * メッセージIDを指定します。
+   * 
+   * @param wParam 
+   * wParamを指定します。
+   * 
+   * @param lParam 
+   * lParamを指定します。
+   *
+   * @returns
+   * メッセージを送ったウィンドウが返した値を返します。  
+   * Win32APIのSendMessage関数の返り値そのままで、数値型です。
+   */
+  function sendMessage( hwnd: number, msg_id: number, wParam: number, lParam: number ): number;
+
+  /**
+   * f
+   * 
    * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
    *  [非同期]    
    * 
@@ -995,7 +1027,7 @@ declare namespace hidemaru {
    */
   function saveTextFile(filepath: string, text: string, encode_name: "utf16"|"utf8"|"utf8bom"|"sjis"): number;
 
-  
+
   /**
    * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
    *  [非同期]
