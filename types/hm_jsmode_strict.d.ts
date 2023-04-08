@@ -649,34 +649,35 @@ declare namespace hidemaru {
   /**
    * f
    * 
-   * sendMessageメソッドは、sendmessageと同じで、Win32APIのsendmessageを呼びます。  
+   * hwndで指定されるウィンドウハンドルにメッセージを送ります。    
+   * 原則的には、Win32 API の SendMesage と同じものです。    
    *  [非同期]    
    * 
-   * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。
-   *メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
+   * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。  
+   * メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
    * 
    * @example
    * js{
-   *    var lResult = hidemaru.sendMessage( hwnd, msg_id, wParam, lParam );
+   *    var lResult = hidemaru.sendMessage( hWnd, wndmsgID, wParam, lParam );
    * }
    * 
    * @param hwnd 
    * ウィンドウハンドルを指定します。
    * 
-   * @param msg_id 
-   * メッセージIDを指定します。
+   * @param wndmsg_id 
+   * WM_COMMAND のように win32 で定義されている数値
    * 
-   * @param wParam 
+   * @param wparam 
    * wParamを指定します。
    * 
-   * @param lParam 
+   * @param lparam 
    * lParamを指定します。
    *
    * @returns
-   * メッセージを送ったウィンドウが返した値を返します。  
-   * Win32APIのSendMessage関数の返り値そのままで、数値型です。
+   * メッセージを送ったウィンドウが返した値を返す。    
+   * 返す値は、Win32APIのSendMessage関数の返り値そのままで、数値型。
    */
-  function sendMessage( hwnd: number, msg_id: number, wParam: number, lParam: number ): number;
+  function sendMessage( hwnd: number, wndmsg_id: number, wparam: number, lparam: number ): number;
 
   /**
    * f

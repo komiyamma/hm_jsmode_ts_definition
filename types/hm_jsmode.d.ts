@@ -650,34 +650,35 @@ declare namespace hidemaru {
   /**
    * f
    * 
-   * sendMessageメソッドは、sendmessageと同じで、Win32APIのsendmessageを呼びます。  
+   * hwndで指定されるウィンドウハンドルにメッセージを送ります。    
+   * 原則的には、Win32 API の SendMesage と同じものです。    
    *  [非同期]    
    * 
-   * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。
-   *メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
+   * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。  
+   * メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
    * 
    * @example
    * js{
-   *    var lResult = hidemaru.sendMessage( hwnd, msg_id, wParam, lParam );
+   *    var lResult = hidemaru.sendMessage( hWnd, wndmsgID, wParam, lParam );
    * }
    * 
    * @param hwnd 
    * ウィンドウハンドルを指定します。
    * 
-   * @param msg_id 
-   * メッセージIDを指定します。
+   * @param wndmsg_id 
+   * WM_COMMAND のように win32 で定義されている数値
    * 
-   * @param wParam 
+   * @param wparam 
    * wParamを指定します。
    * 
-   * @param lParam 
+   * @param lparam 
    * lParamを指定します。
    *
    * @returns
-   * メッセージを送ったウィンドウが返した値を返します。  
-   * Win32APIのSendMessage関数の返り値そのままで、数値型です。
+   * メッセージを送ったウィンドウが返した値を返す。    
+   * 返す値は、Win32APIのSendMessage関数の返り値そのままで、数値型。
    */
-  function sendMessage( hwnd: number, msg_id: number, wParam: number, lParam: number ): number;
+  function sendMessage( hwnd: number, wndmsg_id: number, wparam: number, lparam: number ): number;
 
   /**
    * f
@@ -900,11 +901,11 @@ declare namespace hidemaru {
    * 省略した場合は、"char"と同じです。  
    * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
    * 
-   * @param pos_x_pixel
+   * @param pos_x
    * 画面のX座標のピクセル位置を指定します。  
    * 省略した場合は、マウスカーソルの位置になります。
    * 
-   * @param pos_y_pixel
+   * @param pos_x
    * 画面のY座標のピクセル位置を指定します。  
    * 省略した場合は、マウスカーソルの位置になります。
    * 
@@ -923,7 +924,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x_pixel?: number, pos_y_pixel?: number): [lineno:number, column:number]
+  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x?: number, pos_y?: number): [lineno:number, column:number]
 
   /**
    * f
