@@ -14295,6 +14295,30 @@ function iconthistab(): number
 function fullscreen(): number
 
 /**
+ * s    
+ * 
+ * 「ブラウザ枠」の表示を切り替える関数。  
+ * (ただし、ファイルタイプ別の設定は書き換わらない)
+ * 
+ * @param show_switch
+ * 引数によって以下のようにブラウザ枠の表示のON/OFFを指定する
+ * - 省略または-1 : ON/OFF切り替え。  
+ * - 0でOFF。  
+ * - 1でON。  
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * ブラウザ枠に表示されている現在のコンテンツのURLを文字列で返す。
+ */
+function showbrowserpane(show_switch?: -1|0|1, target_pane?: number): string
+
+
+/**
  * s
  * 
  * backtagjump文は、バックタグジャンプを実行します。
