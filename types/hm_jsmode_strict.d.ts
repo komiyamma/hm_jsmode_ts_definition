@@ -880,12 +880,49 @@ declare namespace hidemaru {
    *    message( pos[0] + "\n" + pos[1] );
    * }
    * 
-   * 
    * @returns
-   * 範囲選択の内容を文字列で返します。    
-   * (選択していないなどの理由で)失敗した場合はundefinedになります。
+   * 文字の位置を配列で返します。  
+   * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
+   * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
   function getCursorPos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu"): [lineno:number, column:number]
+
+  /**
+   * f
+   * 
+   * getCursorPosFromMousePosメソッドは、画面の指定された座標にある文字の位置を取得します。    
+   *  [非同期]
+   * 
+   * @param literal_unit
+   * 単位を指定します。  
+   * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。  
+   * 省略した場合は、"char"と同じです。  
+   * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
+   * 
+   * @param pos_x
+   * 画面のX座標のピクセル位置を指定します。  
+   * 省略した場合は、マウスカーソルの位置になります。
+   * 
+   * @param pos_x
+   * 画面のY座標のピクセル位置を指定します。  
+   * 省略した場合は、マウスカーソルの位置になります。
+   * 
+   * @example
+   * js {
+   *   var pos = hidemaru.getCursorPosFromMousePos();
+   *   message( pos[0] + "\n" + pos[1] );
+   * }
+   * js {
+   *   var pos = hidemaru.getCursorPosFromMousePos("wcs",1000,500);
+   *   message( pos[0] + "\n" + pos[1] );
+   * }
+   *
+   * @returns
+   * 文字の位置を配列で返します。  
+   * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
+   * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
+   */
+  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x?: number, pos_y?: number): [lineno:number, column:number]
 
   /**
    * f
