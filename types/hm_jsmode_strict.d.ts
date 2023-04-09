@@ -14351,6 +14351,29 @@ function refreshbrowserpane(target_pane?: number): string
 function setbrowserpanesize(size: number, target_pane?: number): number
 
 /**
+ * s    
+ * 
+ * ブラウザ枠のURLを設定します。    
+ * 
+ * @param url
+ * URLを文字列で指定します。    
+ * - Webの場合はhttp:// またはhttps:// から始まる文字列。
+ * - ローカルファイルの場合はfile:/// から始まる文字列。
+ * - ブックマークレットはjavascript: から始まる文字列。    
+ * (ブックマークレット＝URLに「javascript:***」としてページに対してjavascriptを実行したもの)
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * 成功すると0以外、失敗すると0を返します。
+ */
+function setbrowserpaneurl(url: string, target_pane?: number): number
+
+/**
  * s
  * 
  * backtagjump文は、バックタグジャンプを実行します。
