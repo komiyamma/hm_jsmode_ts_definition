@@ -2438,13 +2438,9 @@ function scrolllinkhandle(): number
 function browserpanehandle(target_pane?: number): number
 
 /**
- * s    
+ * k    
  * 
- * ブラウザ枠のサイズを設定します。
- * 
- * @param size
- * ピクセル単位の数値を指定します。
- * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * ブラウザ枠のサイズをピクセル単位で表します。
  * 
  * @param target_pane 
  * 対象となるブラウザ枠を指定します。
@@ -2453,9 +2449,9 @@ function browserpanehandle(target_pane?: number): number
  * - 2 : 個別ブラウザ枠が対象。
  * 
  * @returns
- * 返り値は意味を持ちません。
+ * ブラウザ枠のサイズをピクセル単位で返す。
  */
-function setbrowserpanesize(size: number, target_pane?: number): number
+function browserpanesize(target_pane?: number): number
 
 /**
  * k    
@@ -14335,6 +14331,25 @@ function showbrowserpane(show_switch?: -1|0|1, target_pane?: number): string
  */
 function refreshbrowserpane(target_pane?: number): string
 
+/**
+ * s    
+ * 
+ * ブラウザ枠のサイズを設定します。
+ * 
+ * @param size
+ * ピクセル単位の数値を指定します。
+ * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * 成功すると0以外、失敗すると0を返します。
+ */
+function setbrowserpanesize(size: number, target_pane?: number): number
 
 /**
  * s
@@ -21694,13 +21709,9 @@ declare function scrolllinkhandle(): number
 declare function browserpanehandle(target_pane?: number): number
 
 /**
- * s    
+ * k    
  * 
- * ブラウザ枠のサイズを設定します。
- * 
- * @param size
- * ピクセル単位の数値を指定します。
- * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * ブラウザ枠のサイズをピクセル単位で表します。
  * 
  * @param target_pane 
  * 対象となるブラウザ枠を指定します。
@@ -21709,9 +21720,9 @@ declare function browserpanehandle(target_pane?: number): number
  * - 2 : 個別ブラウザ枠が対象。
  * 
  * @returns
- * 返り値は意味を持ちません。
+ * ブラウザ枠のサイズをピクセル単位で返す。
  */
-declare function setbrowserpanesize(size: number, target_pane?: number): number
+declare function browserpanesize(target_pane?: number): number
 
 /**
  * k    
@@ -33591,6 +33602,25 @@ declare function showbrowserpane(show_switch?: -1|0|1, target_pane?: number): st
  */
 declare function refreshbrowserpane(target_pane?: number): string
 
+/**
+ * s    
+ * 
+ * ブラウザ枠のサイズを設定します。
+ * 
+ * @param size
+ * ピクセル単位の数値を指定します。
+ * パラメータ２：省略または0で、既定の枠が対象。1を指定でブラウザ枠。2を指定で個別ブラウザ枠。
+ * 
+ * @param target_pane 
+ * 対象となるブラウザ枠を指定します。
+ * - パラメータなし、または0 : 既定の枠が対象。
+ * - 1 : ブラウザ枠が対象。
+ * - 2 : 個別ブラウザ枠が対象。
+ * 
+ * @returns
+ * 成功すると0以外、失敗すると0を返します。
+ */
+declare function setbrowserpanesize(size: number, target_pane?: number): number
 
 /**
  * s

@@ -18,4 +18,4 @@ info.kill
 let bb = hidemaru.getCursorPosFromMousePos("gcu", 100, 50);
 let c = hidemaruGlobal.browserpaneurl(2);
 
-let d = hidemaruGlobal.refreshbrowserpane(2);
+let d = hidemaruGlobal.browserpanesize(2);
