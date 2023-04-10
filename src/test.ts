@@ -17,5 +17,5 @@ info.kill
 
 let bb = hidemaru.getCursorPosFromMousePos("gcu", 100, 50);
 let c = hidemaruGlobal.browserpaneurl(2);
-let j = hidemaruGlobal.getselectedrange({unit:"wcs"});
-window.setInterval()
+let j = hidemaruGlobal.getselectedrange({unit:"char"});
+let s = hidemaruGlobal.setselectionrange({unit:"char", "items":[{col1:10, line1:10}], col1:3, col2:5, line1:10, line2:20});

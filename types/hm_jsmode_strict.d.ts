@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.09.00
+ * @version v9.22.09.01
  */
 
 /**
@@ -20090,8 +20090,44 @@ function getlinetext(line_num?: number): string
  */
 function getselectedtext(): string
 
-// function setselectedrange(): string
-
+/**
+ * s
+ * 
+ * setselectionrange文は、まとめて選択します。    
+ * 
+ * @param json_obj
+ * オブジェクトを指定します。    
+ * 書き方はcolormarker文のJSONオブジェクトの指定と類似しており、単位と範囲だけに限定されたものです。
+ * - 指定するプロパティ名と意味： 
+ *   - "unit"   文字列  位置の単位　既定は"char"
+ *   - "items"  配列    入れ子構造のオブジェクトの配列
+ *   - "line1"  数値    開始行
+ *   - "col1"   数値    開始桁
+ *   - "line2"  数値    終了行
+ *   - "col2"   数値    終了桁
+ * 
+ * unitは、"xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
+ * line1, col1, line2, col2の４つが揃って記述されたら選択されます。    
+ * 
+ * @example
+ * js{
+ *   setselectionrange({
+ *     items:[
+ *         {line1:1,col1:0,line2:2,col2:0},
+ *         {line1:5,col1:0,line2:6,col2:0},
+ *     ]
+ *     });
+ * }
+ * endmacro;
+ * 
+ * @see getselectedrange
+ * 
+ * @returns
+ * 失敗した場合、resultは0を返す。
+ * 成功した場合、resultは0以外を返す。
+ */
+function setselectionrange(json_obj: {"unit"?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", "items"?: {"line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}): number
 
 /**
  * f
@@ -20131,6 +20167,8 @@ function getselectedtext(): string
  * }
  * endmacro;
  * 
+ * @see setselectionrange
+ * 
  * @returns
  * 結果の情報をJSONオブジェクトで返します。    
  * - 結果のプロパティ名と意味： 
@@ -20147,14 +20185,8 @@ function getselectedtext(): string
  * 結果は、選択が0個でも1個でも複数でも、"items"の配列があるオブジェクトとして返ります。    
  * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
  * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
- * 
- * @see setselectedrange
  */
-function getselectedrange(json_obj?: {"unit": string}): {"unit": string, "items": {"line1": number, "col1": number, "line2": number, "col2": number}[], "line1": number, "col1": number, "line2": number, "col2": number};
-
-
-
-
+function getselectedrange(json_obj?: {"unit": "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu"}): {"unit": string, "items": {"line1": number, "col1": number, "line2": number, "col2": number}[], "line1": number, "col1": number, "line2": number, "col2": number};
 
 /**
  * z    
