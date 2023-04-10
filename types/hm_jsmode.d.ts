@@ -20091,6 +20091,72 @@ function getlinetext(line_num?: number): string
  */
 function getselectedtext(): string
 
+// function setselectedrange(): string
+
+
+/**
+ * f
+ * 
+ * getselectedrange関数は、範囲選択の情報をまとめて取得します。    
+ * 
+ * @param json_obj
+ * 単位をjsonのオブジェクトで指定します。
+ * 
+ * - 指定するプロパティ名と意味： 
+ * プロパティ名 値の種類 意味  
+ *   - "unit"       文字列   位置の単位（既定は"char"）  
+ *     "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。  
+ *     省略した場合は、"char"と同じです。  
+ *     一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
+ * 
+ * @example
+ * js{
+ *   range = getselectedrange();
+ *   message("選択個数:"+range.items.length);
+ * }
+ * endmacro;
+ * 
+ * @example
+ * js{
+ *   //単位を指定して取得
+ *   range = getselectedrange({unit:"wcs"});
+ * }
+ * endmacro;
+ * 
+ * @example
+ * js{
+ *   //アウトプット枠に整形して出す
+ *   debuginfo(2);
+ *   range = getselectedrange();
+ *   console.log( JSON.stringify(range,null," ").replace(/\n/g,"\r\n") );
+ * }
+ * endmacro;
+ * 
+ * @returns
+ * 結果の情報をJSONオブジェクトで返します。    
+ * - 結果のプロパティ名と意味： 
+ * プロパティ名 値の種類 意味
+ *   - "unit"   文字列  位置の単位
+ *   - "items"  配列    入れ子構造のオブジェクトの配列
+ *   - "line1"  数値    開始行
+ *   - "col1"   数値    開始桁
+ *   - "line2"  数値    終了行
+ *   - "col2"   数値    終了桁
+ * 
+ * unitは、"xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
+ * 結果は、選択が0個でも1個でも複数でも、"items"の配列があるオブジェクトとして返ります。    
+ * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
+ * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
+ * 
+ * @see setselectedrange
+ */
+function getselectedrange(json_obj?: {"unit": string}): {"unit": string, "items": {"line1": number, "col1": number, "line2": number, "col2": number}[], "line1": number, "col1": number, "line2": number, "col2": number};
+
+
+
+
+
 /**
  * z    
  * 
@@ -39384,6 +39450,72 @@ declare function getlinetext(line_num?: number): string
  * (選択していないなどの理由で)失敗した場合は空文字になります。
  */
 declare function getselectedtext(): string
+
+// function setselectedrange(): string
+
+
+/**
+ * f
+ * 
+ * getselectedrange関数は、範囲選択の情報をまとめて取得します。    
+ * 
+ * @param json_obj
+ * 単位をjsonのオブジェクトで指定します。
+ * 
+ * - 指定するプロパティ名と意味： 
+ * プロパティ名 値の種類 意味  
+ *   - "unit"       文字列   位置の単位（既定は"char"）  
+ *     "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。  
+ *     省略した場合は、"char"と同じです。  
+ *     一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
+ * 
+ * @example
+ * js{
+ *   range = getselectedrange();
+ *   message("選択個数:"+range.items.length);
+ * }
+ * endmacro;
+ * 
+ * @example
+ * js{
+ *   //単位を指定して取得
+ *   range = getselectedrange({unit:"wcs"});
+ * }
+ * endmacro;
+ * 
+ * @example
+ * js{
+ *   //アウトプット枠に整形して出す
+ *   debuginfo(2);
+ *   range = getselectedrange();
+ *   console.log( JSON.stringify(range,null," ").replace(/\n/g,"\r\n") );
+ * }
+ * endmacro;
+ * 
+ * @returns
+ * 結果の情報をJSONオブジェクトで返します。    
+ * - 結果のプロパティ名と意味： 
+ * プロパティ名 値の種類 意味
+ *   - "unit"   文字列  位置の単位
+ *   - "items"  配列    入れ子構造のオブジェクトの配列
+ *   - "line1"  数値    開始行
+ *   - "col1"   数値    開始桁
+ *   - "line2"  数値    終了行
+ *   - "col2"   数値    終了桁
+ * 
+ * unitは、"xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
+ * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
+ * 結果は、選択が0個でも1個でも複数でも、"items"の配列があるオブジェクトとして返ります。    
+ * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
+ * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
+ * 
+ * @see setselectedrange
+ */
+declare function getselectedrange(json_obj?: {"unit": string}): {"unit": string, "items": {"line1": number, "col1": number, "line2": number, "col2": number}[], "line1": number, "col1": number, "line2": number, "col2": number};
+
+
+
+
 
 /**
  * z    
