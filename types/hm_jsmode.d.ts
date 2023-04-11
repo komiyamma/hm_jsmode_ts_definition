@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.09.01
+ * @version v9.22.09.02
  */
 
 /**
@@ -20097,8 +20097,8 @@ function getselectedtext(): string
  * setselectionrange文は、まとめて選択します。    
  * 
  * @param json_obj
- * オブジェクトを指定します。    
- * 書き方はcolormarker文のJSONオブジェクトの指定と類似しており、単位と範囲だけに限定されたものです。
+ * JSONのオブジェクトを指定します。    
+ *  * 書き方はcolormarker文のJSONオブジェクトの指定と類似しており、単位と範囲だけに限定されたものです。    
  * - 指定するプロパティ名と意味： 
  *   - "unit"   文字列  位置の単位　既定は"char"
  *   - "items"  配列    入れ子構造のオブジェクトの配列
@@ -20110,6 +20110,8 @@ function getselectedtext(): string
  * unitは、"xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
  * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * line1, col1, line2, col2の４つが揃って記述されたら選択されます。    
+ * 
+ * なお、上記のJSONのオブジェクトに沿ったものを文字列化したものでも引数として受け付けます。    
  * 
  * @example
  * js{
@@ -20128,7 +20130,7 @@ function getselectedtext(): string
  * 失敗した場合、resultは0を返す。
  * 成功した場合、resultは0以外を返す。
  */
-function setselectionrange(json_obj: {"unit"?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", "items"?: {"line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}): number
+function setselectionrange(json_obj: string | {"unit"?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", "items"?: {"line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}): number
 
 /**
  * f
@@ -39489,8 +39491,8 @@ declare function getselectedtext(): string
  * setselectionrange文は、まとめて選択します。    
  * 
  * @param json_obj
- * オブジェクトを指定します。    
- * 書き方はcolormarker文のJSONオブジェクトの指定と類似しており、単位と範囲だけに限定されたものです。
+ * JSONのオブジェクトを指定します。    
+ *  * 書き方はcolormarker文のJSONオブジェクトの指定と類似しており、単位と範囲だけに限定されたものです。    
  * - 指定するプロパティ名と意味： 
  *   - "unit"   文字列  位置の単位　既定は"char"
  *   - "items"  配列    入れ子構造のオブジェクトの配列
@@ -39502,6 +39504,8 @@ declare function getselectedtext(): string
  * unitは、"xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。既定は"char"です。    
  * 既定の"char"のとき、line1, line2は1から数えます。col1, col2は0から数えます。    
  * line1, col1, line2, col2の４つが揃って記述されたら選択されます。    
+ * 
+ * なお、上記のJSONのオブジェクトに沿ったものを文字列化したものでも引数として受け付けます。    
  * 
  * @example
  * js{
@@ -39520,7 +39524,7 @@ declare function getselectedtext(): string
  * 失敗した場合、resultは0を返す。
  * 成功した場合、resultは0以外を返す。
  */
-declare function setselectionrange(json_obj: {"unit"?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", "items"?: {"line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}): number
+declare function setselectionrange(json_obj: string | {"unit"?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", "items"?: {"line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number}): number
 
 /**
  * f
