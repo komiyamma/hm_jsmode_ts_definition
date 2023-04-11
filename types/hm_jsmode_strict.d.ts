@@ -7,7 +7,7 @@
  *            「TypeScript定義ファイル化」については、Akitsugu Komiyama に著作権が帰属します。
  * 
  * @license    - The Custom License
- *                 https://github.com/komiyamma/hm_jsmode_ts_difinition/blob/main/LICENSE*    
+ *                 https://github.com/komiyamma/hm_jsmode_ts_difinition/blob/main/LICENSE    
  * 
  *                 以下に定める条件に従い、「本定義ファイル（hm_jsmode.d.ts）」および関連ファイルの複製を取得するすべての人に対し、
  *                 「本定義ファイル」を「プログラミング構文や単語の強調ファイル」もしくは「プログラミング言語等の定義ファイル」を目的とするという条件下（以下「条件Ａ」）においては、
