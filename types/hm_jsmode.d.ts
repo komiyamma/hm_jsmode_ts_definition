@@ -887,7 +887,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu"): [lineno:number, column:number]
+  function getCursorPos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu"): [lineno: number, column: number]
 
   /**
    * f
@@ -924,7 +924,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x?: number, pos_y?: number): [lineno:number, column:number]
+  function getCursorPosFromMousePos(literal_unit?: "xy"|"char"|"wcs"|"ucs4"|"cmu"|"gcu", pos_x?: number, pos_y?: number): [lineno: number, column: number]
 
   /**
    * f
