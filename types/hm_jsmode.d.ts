@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.09.02
+ * @version v9.22.09.03
  */
 
 /**
@@ -806,6 +806,39 @@ declare namespace hidemaru {
    * 返り値はありません。
    */
   function postExecMacroMemory(expression: string): void;
+
+  /**
+   * getFunctionIdメソッドは、関数のIDを取得します。    
+   *  [非同期]
+   * 
+   * @example
+   * js {
+   *   function myfunc(){
+   *     return;
+   *   }
+   * var id = hidemaru.getFunctionId(myfunc);
+   * }
+   * 
+   * @example
+   * //このマクロを実行してから、右クリックメニューを出します。
+   * js {
+   *   function diag(userdata){
+   *     return "ユーザーデータ"+userdata+"についての情報";
+   *   }
+   *   var idFunc;
+   *   if(typeof(idFunc)=="undefined"){
+   *     idFunc=hidemaru.getFunctionId(diag);
+   *   }
+   *   colormarker({wave:"#FF0000",userdata:123,funcid:idFunc,line1:lineno(),col1:0,line2:lineno(),col2:linelen2()});
+   * }
+   * endmacro;
+   * 
+   * @returns
+   * 関数と結び付けられたIDを返します。    
+   * 関数のIDは秀丸エディタ本体とのやりとりで関数を識別することを想定した値です。    
+   * 関数のIDは、取得するたびに新しいIDが割り当てられるので、一度だけ取得し、それを再利用するようにしてください。    
+   */
+  function getFunctionId(func: Function): number
 
   /**
    * f
