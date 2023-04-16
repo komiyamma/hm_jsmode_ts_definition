@@ -22,3 +22,7 @@ let s = hidemaruGlobal.setselectionrange({ unit: "char", "items": [{ col1: 10, l
 
 let b = hidemaru.getCursorPosFromMousePos();
 let d: number = hidemaru.getTotalText();
+let num = hidemaru.setInterval(()=>{}, 3);
+hidemaru.clearInterval(num);
+
+let f = hidemaruGlobal.setbrowserpanetarget("_each");

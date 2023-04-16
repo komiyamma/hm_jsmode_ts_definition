@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.09.04
+ * @version v9.22.10.01
  */
 
 /**
@@ -1132,8 +1132,7 @@ declare namespace hidemaru {
    * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
    *  [非同期]
    * 
-   * WebView2ではより高機能なwindow.setTimeoutがあるた、利用する意味がありませんが、    
-   * JScriptではこの関数が簡易版として代用できます。    
+   * WebView2 版のwindow.setTimeout と比べ、ウィンドウが非アクティブであってもタイマーがかなり正確に刻まれるという特徴があります。    
    * clearTimeoutメソッドで、解除します。    
    * 既に実行された後では効果はありません。
    * 
@@ -1162,9 +1161,49 @@ declare namespace hidemaru {
    * @param timeout_id
    * 解除したいタイムアウトの識別子です。    
    * この ID は対応する setTimeout() から返されたものです。
+   * 
+   * @see setTimeout
    */
   function clearTimeout(timeout_id: number): void;
 
+
+  /**
+   * setIntervalメソッドは、一定時間ごとに何度も実行する関数を指定します。
+   *  [非同期]
+   * 
+   * WebView2 版のwindow.setInterval と比べ、ウィンドウが非アクティブであってもタイマーがかなり正確に刻まれるという特徴があります。    
+   * clearIntervalメソッドで、解除します。    
+   * 
+   * @param func 
+   * 関数を指定します。
+   * 
+   * @param millisecond 
+   * 時間をミリ秒単位で指定します。
+   * 
+   * @comment
+   * 参照：
+   * @see clearInterval
+   * 
+   * @returns
+   * 固有のIDが返ります。    
+   * 主にclearIntervalをするためのIDとなります。
+   */
+  function setInterval(func: Function, millisecond: number): number
+
+  /**
+   * f
+   * 
+   * setInterval() の呼び出しによって以前に確立されたタイムアウトを解除します。    
+   *  [非同期]    
+   * 
+   * @param timeout_id
+   * 解除したいタイムアウトの識別子です。    
+   * この ID は対応する setInterval() から返されたものです。
+   * 
+   * @see setInterval
+   */
+  function clearInterval(timeout_id: number): void;
+  
   /**
    * k    
    * 
@@ -14326,6 +14365,23 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s    
    * 
+   * ブラウザ枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
+   * 
+   * @param default_target
+   * 以下のように「文字列」もしくは「数値」で設定が可能です。
+   * - "_common" : 共通のブラウザ枠
+   * - "_each" : 個別ブラウザ枠
+   * - 1 : 共通のブラウザ枠
+   * - 2 : 個別ブラウザ枠
+   * 
+   * @returns
+   * 成功すると0以外、失敗すると0を返します。
+   */
+  function setbrowserpanetarget(default_target: "_common" | "_each" | 1 | 2): number
+
+  /**
+   * s    
+   * 
    * 「ブラウザ枠」の表示を切り替える関数。  
    * (ただし、ファイルタイプ別の設定は書き換わらない)
    * 
@@ -14344,7 +14400,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function showbrowserpane(show_switch?: -1 | 0 | 1, target_pane?: number): string
+  function showbrowserpane(show_switch?: -1 | 0 | 1, target_pane?: number): number
 
   /**
    * s    
@@ -14361,7 +14417,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function refreshbrowserpane(target_pane?: number): string
+  function refreshbrowserpane(target_pane?: number): number
 
   /**
    * s    
@@ -14405,6 +14461,19 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 成功すると0以外、失敗すると0を返します。
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
+
+  /**
+   * s    
+   * 
+   * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
+   * 
+   * @param default_target
+   * レンダリング枠の「枠の名前」を指定します。英字から始まる任意の文字列です。
+   * 
+   * @returns
+   * 成功すると0以外、失敗すると0を返します。
+   */
+  function setrenderpanetarget(default_target: string): number
 
   /**
    * s
