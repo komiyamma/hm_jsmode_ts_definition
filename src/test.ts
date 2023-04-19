@@ -26,3 +26,6 @@ let num = hidemaru.setInterval(()=>{}, 3);
 hidemaru.clearInterval(num);
 
 let f = hidemaruGlobal.setbrowserpanetarget("_each");
+
+let url = hidemaruGlobal.browserpaneurl();
+hidemaru.setStaticVariable("abd", "def",);

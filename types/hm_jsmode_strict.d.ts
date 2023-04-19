@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.10.01
+ * @version v9.22.10.02
  */
 
 /**
@@ -991,7 +991,7 @@ declare namespace hidemaru {
    * 
    * @param scope_type
    * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * - 0 を指定するか省略すると、共有せず、現在の秀丸エディタ内だけで有効です。    
    * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
    * - 1 を指定すると、全ての秀丸エディタで有効です。    
    * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
@@ -1006,7 +1006,7 @@ declare namespace hidemaru {
    * 失敗した場合、0を返す。    
    * 成功した場合、0以外を返す。    
    */
-  function setStaticVariable(key: string, str_value: string, scope_type: number): number
+  function setStaticVariable(key: string, str_value: string, scope_type?: number): number
 
   /**
    * getstaticvariableと同様の関数です。    
@@ -1020,7 +1020,7 @@ declare namespace hidemaru {
    * 
    * @param scope_type
    * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * - 0 を指定するか省略すると、共有せず、現在の秀丸エディタ内だけで有効です。    
    * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
    * - 1 を指定すると、全ての秀丸エディタで有効です。    
    * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
@@ -1036,7 +1036,7 @@ declare namespace hidemaru {
    * ""を指定すると、記憶されている変数名を列挙して","でつなげた文字列を返します。    
    * （scope_typeに0以上を指定した場合に限る）
    */
-  function getStaticVariable(key: string, scope_type: number): string
+  function getStaticVariable(key: string, scope_type?: number): string
 
   /**
    * getFileFullPath関数は、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
@@ -19297,7 +19297,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @param scope_type
    * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * - 0 を指定するか省略すると、共有せず、現在の秀丸エディタ内だけで有効です。    
    * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
    * - 1 を指定すると、全ての秀丸エディタで有効です。    
    * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
@@ -19332,7 +19332,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 失敗した場合、0を返す。    
    * 成功した場合、0以外を返す。    
    */
-  function setstaticvariable(key: string, str_value: string, scope_type: number): number
+  function setstaticvariable(key: string, str_value: string, scope_type?: number): number
 
   /**
    * f
@@ -19345,7 +19345,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @param scope_type
    * 共有されている静的な変数かどうかを指定します。    
-   * - 0 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
+   * - 0 を指定するか省略すると、共有せず、現在の秀丸エディタ内だけで有効です。    
    * 同じウィンドウであっても「ファイルを閉じる」「閉じて開く」をすると消去されます。    
    * - 1 を指定すると、全ての秀丸エディタで有効です。    
    * - 2 を指定すると、共有せず、現在の秀丸エディタ内だけで有効です。    
@@ -19378,7 +19378,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * keyとscope_typeで指定された静的変数の内容を返す。    
    * keyに""を指定した場合は、 記憶されている変数名を列挙して","でつなげた文字列を返す。    
    */
-  function getstaticvariable(key: string, scope_type: number): string
+  function getstaticvariable(key: string, scope_type?: number): string
 
   /**
    * s
