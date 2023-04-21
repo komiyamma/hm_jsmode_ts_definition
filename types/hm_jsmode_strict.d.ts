@@ -709,6 +709,7 @@ declare namespace hidemaru {
    * @comment
    * 参照：
    * @see WM_ISMACROEXECUTING
+   * @see プライベートモード
    * 
    * @returns
    * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
@@ -6129,6 +6130,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @example
    * var ret = sendmessage(outlinehandle, 0x111, 7119, 0); //0x111=WM_COMMAND, 7119=枠内の検索 
+   * 
+   * @see hidemaru.sendMessage
    * 
    * @return
    * メッセージを送ったウィンドウが返した値を返す。    
@@ -15320,8 +15323,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @returns
    * 返り値は押したボタンを表します。    
-   * - 0 いいえ
-   * - 1 はい
+   * - 0 : いいえ
+   * - 0以外 : はい
    */
   function question(message: string): number
 
@@ -19629,11 +19632,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 秀丸エディタのウィンドウハンドルを取得します。
    * 
    * @param id_type 
-   * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。
-   * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。
+   * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。  
+   * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。  
    * 
    * @param tab_group_id
-   * id_typeが0の場合、グループIDを指定します。
+   * id_typeが0の場合、グループIDを指定します。  
    * id_typeがが1の場合、0から数えたグループの順番を指定します。自分自身は0になります。
    * 
    * @example
@@ -19656,15 +19659,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * グループとタブの順番を指定して、秀丸エディタのウィンドウハンドルを取得することができます。
    * 
    * @param id_type 
-   * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。
-   * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。
+   * 0を指定すると、次に指定するtab_group_idはグループIDの意味になります。  
+   * 1を指定すると、次に指定するtab_group_idはグループの順番の意味になります。  
    * 
    * @param tab_group_id
-   * id_typeが0の場合、グループIDを指定します。
+   * id_typeが0の場合、グループIDを指定します。  
    * id_typeがが1の場合、0から数えたグループの順番を指定します。自分自身は0になります。
    * 
    * @param tab_order
-   * グループ内のタブの順番を指定します。
+   * グループ内のタブの順番を指定します。  
+   * グループ内のタブの順番は、0から数えた左端からの番号です。
    * 
    * @example
    * var h = gettabhandle(1,0,0);
@@ -20567,7 +20571,14 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * z    
    * 
-   * この関数はjsmodeでは機能しません。
+   * この関数はjsmodeでは機能しません。   
+   * 
+   * @example
+   * 以下のようにすることでjs中に終了することが出来ます。
+   * js {
+   *     hidemaru.postExecMacroMemory('exit;');
+   * }
+   * 
    * @deprecated
    */
   function exit(): 0;
@@ -20602,7 +20613,14 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * z    
    * 
-   * この関数はjsmodeでは機能しません。
+   * この関数はjsmodeでは機能しません。    
+   * 
+   * @example
+   * 以下のようにすることでjs中に破棄して終了することが出来ます。
+   * js {
+   *     hidemaru.postExecMacroMemory('quit;');
+   * }
+   * 
    * @deprecated
    */
   function quit(): 0;
