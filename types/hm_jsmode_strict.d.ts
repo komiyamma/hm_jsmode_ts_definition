@@ -62,11 +62,11 @@ declare namespace console {
   function log(message: any, ...optional_params: any[]): void;
 }
 
-type ILiteralUnit = "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu";
-
 declare namespace hidemaru {
 
   /// <# HidemaruToGlobal bgn #>
+
+  type ILiteralUnit = "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu";
 
   /**
    * 秀丸マクロの「ユーザー定義の変数」の値をJavaScriptの変数の値として取得します。
@@ -934,7 +934,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPos(literal_unit?: ILiteralUnit): [lineno: number, column: number]
+  function getCursorPos(literal_unit?: hidemaru.ILiteralUnit): [lineno: number, column: number]
 
   /**
    * f
@@ -971,7 +971,7 @@ declare namespace hidemaru {
    * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
-  function getCursorPosFromMousePos(literal_unit?: ILiteralUnit, pos_x?: number, pos_y?: number): [lineno: number, column: number]
+  function getCursorPosFromMousePos(literal_unit?: hidemaru.ILiteralUnit, pos_x?: number, pos_y?: number): [lineno: number, column: number]
 
   /**
    * f
@@ -20423,7 +20423,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function getselectedtext(): string
 
-  interface ISetSelectionRangeArg { "unit"?: ILiteralUnit, "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
+  interface ISetSelectionRangeArg { "unit"?: hidemaru.ILiteralUnit, "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
   /**
    * s
    * 
@@ -20466,7 +20466,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setselectionrange(json_obj: string | ISetSelectionRangeArg): number
 
-  interface IGetSelectedRangeReturn { "unit": ILiteralUnit, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
+  interface IGetSelectedRangeReturn { "unit": hidemaru.ILiteralUnit, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
   /**
    * f
    * 
@@ -20525,7 +20525,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
    * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
    */
-  function getselectedrange(json_obj?: { "unit"?: ILiteralUnit }): IGetSelectedRangeReturn;
+  function getselectedrange(json_obj?: { "unit"?: hidemaru.ILiteralUnit }): IGetSelectedRangeReturn;
 
   /**
    * z    

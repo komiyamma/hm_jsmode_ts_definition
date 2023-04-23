@@ -3,12 +3,12 @@
 let len: number = myfunc("あいうえお");
 // コメント
 function myfunc(msg: string): number {
-    debuginfo(2);
+    hidemaruGlobal.debuginfo(2);
     console.log(msg);
     return msg.length;
 }
 
-let v = hidemaruversion();
+let v = hidemaruGlobal.hidemaruversion();
 
 
 let arr = hidemaru.getCursorPos("wcs");
@@ -25,12 +25,12 @@ let d: number = hidemaru.getTotalText();
 let num = hidemaru.setInterval(()=>{}, 3);
 hidemaru.clearInterval(num);
 
-let json3:IBrowsrePaneCommandArg = {
+let json3:hidemaruGlobal.IBrowsrePaneCommandArg = {
     get: "DOMContentLoaded",
     clear:1
 };
 
-let json10: IBrowsrePaneCommandArg = {
+let json10: hidemaruGlobal.IBrowsrePaneCommandArg = {
     get: "load"
 }
 
@@ -39,12 +39,12 @@ let json: ISetSelectionRangeArg = {
     col1: 10,
     line1: 20,
 }
-var ret = setselectionrange(json)
+var ret = hidemaruGlobal.setselectionrange(json)
 
 var bbc: ILiteralUnit = "char";
 
 var ret3 = getselectedrange({unit:"gcu"});
 
-let a:"wcs" | "ucs2" = "wcs"
+let a:ILiteralUnit = "wcs"
 let b = hidemaru.getCursorPos(a);
 
