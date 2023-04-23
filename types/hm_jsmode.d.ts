@@ -14555,7 +14555,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
+  interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
    * 
@@ -14564,10 +14564,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
-   *  - target: 対象となる枠の名前。"_common"は共通のブラウザ枠。"_each"は個別ブラウザ枠。記述が無い場合は既定の枠が対象。
+   *  - target: 対象となる枠の名前。英字から始まる任意の文字列を指定します。記述が無い場合は既定の枠が対象。
    *  - show: 表示するかどうか。1で表示、0で非表示。
-   *  - uri: URI。（urlでも可）
-   *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
+   *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
+   *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
@@ -34168,7 +34168,7 @@ declare function browserpanecommand(request_command: "get_DOMContentLoaded" | "g
    */
 declare function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
+  interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
    * 
@@ -34177,10 +34177,10 @@ declare function browserpanecommand(url: string): string
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
-   *  - target: 対象となる枠の名前。"_common"は共通のブラウザ枠。"_each"は個別ブラウザ枠。記述が無い場合は既定の枠が対象。
+   *  - target: 対象となる枠の名前。英字から始まる任意の文字列を指定します。記述が無い場合は既定の枠が対象。
    *  - show: 表示するかどうか。1で表示、0で非表示。
-   *  - uri: URI。（urlでも可）
-   *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
+   *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
+   *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
