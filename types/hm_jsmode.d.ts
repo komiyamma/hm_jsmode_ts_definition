@@ -18955,6 +18955,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * ただし、ファイルタイプ別の設定が一時的な設定になっている場合は、反映されません。    
    * 一時的な設定かどうかはconfigstateで判断できます。
    * 
+   * @example
+   * js {
+   *     envchanged();
+   * }
+   * 
    * @comment
    * 参照：
    * @see writeregstr
@@ -38605,6 +38610,11 @@ declare function setfiletype(extension: string, no_read_setting_file?: number): 
    * config文で使えないものに関しては、envchangedで反映が可能です。    
    * ただし、ファイルタイプ別の設定が一時的な設定になっている場合は、反映されません。    
    * 一時的な設定かどうかはconfigstateで判断できます。
+   * 
+   * @example
+   * js {
+   *     envchanged();
+   * }
    * 
    * @comment
    * 参照：
