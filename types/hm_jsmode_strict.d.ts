@@ -407,8 +407,12 @@ declare namespace hidemaru {
      * @example
      * var nTimeout = 2000;
      * var outmsg = stdOut.readAll(nTimeout);
+     * 
+     * @returns
+     * 読み取った文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
      */
-    readAll(timeout_millisecond: number): string
+    readAll(timeout_millisecond: number): string | undefined
 
     /**
      * 行を読み取って文字列を返します。    
@@ -420,8 +424,12 @@ declare namespace hidemaru {
      * @example
      * var nTimeout = 2000;
      * var outmsg = stdOut.readLine(nTimeout);
+     * 
+     * @returns
+     * 読み取った行の文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
      */
-    readLine(timeout_millisecond: number): string
+    readLine(timeout_millisecond: number): string | undefined
 
     /**
      * 指定バイト数までを読み取って文字列を返します。    
@@ -441,8 +449,12 @@ declare namespace hidemaru {
      * var nTimeout = 2000;
      * out = stdOut.readSeparated(nTimeout, 0);   // 空行まで読み込む
      * out = stdOut.readSeparated(nTimeout, 123); // 123バイト読み込む
+     * 
+     * @returns
+     * 読み取った文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
      */
-    readSeparated(timeout_millisecond: number, read_byte: number): string
+    readSeparated(timeout_millisecond: number, read_byte: number): string | undefined
 
     /**
      * 全て読み取って文字列を返す readAllの非同期のバージョンとなります。    
@@ -3593,13 +3605,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * のように判定してください。    
    * 0x0001は、自動起動マクロのときに効果があります。    
    * 手動によるマクロ実行ではマクロ実行した時点で    
-   * 単語補完は消えるので効果はありません。
+   * 単語補完は消えるので効果はありません。    
+   * 0x0004は、タブキーにマクロを割り当てている場合はできません。    
    * 
    * @returns
    * 単語補完の状態を返す、以下の値の論理和。
    * - 0x0001(ビット0)　単語補完が動作中
    * - 0x0002(ビット1)　半角から始まる文字入力の直後でカーソル移動していない状態
    * - 0x0004(ビット2)　「マクロ1」などのコマンドの実行によって単語補完が消えた直後
+	 * - 0x0008(ビット3)  「マクロ1」などのコマンドの実行によって単語補完のツールチップが消えた直後 (V9.20以降)
    */
   function autocompstate(): number
 
@@ -14501,6 +14515,17 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - 　"load"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    * 
+   * @example
+   * js {
+   *   browserpanecommand({
+   *     target:"_each",
+   *     show:1,
+   *     uri:"https://hide.maruo.co.jp/",
+   *     place:"leftside",
+   *   });
+   * }
+   * endmacro;
+   * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
    * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
@@ -17364,6 +17389,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 管理者権限の注意：    
    * HKEY_CURRENT_USER以外は管理者権限がないと書き込みはできません。    
    * 
+   * @comment
+   * リダイレクト：    
+   * HKEY_CURRENT_USER\Software\Hidemaruo\Hidemaru\Env配下の書き換えや読み取りは、秀丸エディタの設定へのアクセスとみなして、特別な動作になることがあります。    
+   * writeregnumで、"SelectFound"を書き換えると、検索での表示が書き換えられたとみなされ、envchanged相当が自動的に働きます。(V7.08以降)     
+   *（現在のバージョンでは、setcompatiblemodeを使うとマクロ内での検索での表示を指定できるので、この書き換えはしないほうがいいです）    
+   * getregstrで、"MacroPath"と"SettingPath"は、環境変数が指定されていたとしても、フルパスに展開されたパスが返ります。(V8.88以降)    
+   * getregnum/writeregnumで、"MenuBar"はメニューバーON/OFF、"TitleBar"はタイトルバーON/OFF、の数値として振る舞います。(V9.20以降)    
+   * 実際はレジストリにはこの値は無く、"ExEnv2"というバイナリ値の一部が書き換わります。
+   * 
    * @returns
    * 成功したら0以外を返す。    
    * 失敗したら0を返す。
@@ -19025,7 +19059,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * savehilight("C-language.hilight");
    * 
    * @param read_flag
-   * 書き込む対象を指定できます。    
+   * 保存する対象を指定できます。    
    * 省略すると1を指定したことと同じとなり、強調表示が対象となります。    
    * 
    * 以下の値をOR演算した値を指定します。    
@@ -19041,8 +19075,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @see getresultex(13)
    * 
    * @returns
-   * 読み込まれた内容のフラグが値として返る。    
-   * 個数が多すぎて全て読み込めなかった場合は、getresultex(13)で状態を取得できます。
+   * 返り値は意味を持ちません。
    */
   function savehilight(filepath: string, read_flag?: number): number
 
@@ -20015,6 +20048,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 7 ファイルを閉じる直前    
    * 8 アクティブ切り替え後(V8.00以降)    
    * 9 テンプレート(スニペット)による実行(V9.16以降)    
+   * 10 registercallbackされたマクロによる実行(V9.22以降)    
    */
   function event(): number
 
