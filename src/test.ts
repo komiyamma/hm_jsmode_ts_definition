@@ -25,7 +25,10 @@ let d: number = hidemaru.getTotalText();
 let num = hidemaru.setInterval(()=>{}, 3);
 hidemaru.clearInterval(num);
 
-let f = hidemaruGlobal.setbrowserpanetarget("_each");
+let json3 = {
+    get:"DOMContentLoaded"
+};
 
-let url = hidemaruGlobal.browserpaneurl();
-hidemaru.setStaticVariable("abd", "def",);
+
+
+var ret = browserpanecommand(json3);

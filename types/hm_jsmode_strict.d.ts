@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.10.02
+ * @version v9.22.10.03
  */
 
 /**
@@ -14371,6 +14371,19 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * ブラウザ枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
    * @param default_target
+   * 英字から始まる任意の文字列を指定します。
+   * 
+   * @returns
+   * 成功すると0以外、失敗すると0を返します。
+   */
+  function setbrowserpanetarget(default_target: "_common" | "_each" | 1 | 2): number
+
+  /**
+   * s    
+   * 
+   * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
+   * 
+   * @param default_target
    * 以下のように「文字列」もしくは「数値」で設定が可能です。
    * - "_common" : 共通のブラウザ枠
    * - "_each" : 個別ブラウザ枠
@@ -14380,7 +14393,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function setbrowserpanetarget(default_target: "_common" | "_each" | 1 | 2): number
+  function setrenderpanetarget(default_target: string): number
 
   /**
    * s    
@@ -14464,6 +14477,74 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 成功すると0以外、失敗すると0を返します。
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
+
+  /**
+   * s    
+   * 
+   * ブラウザ枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。
+   * 
+   * @param json_obj
+   * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
+   *  - target: 対象となる枠の名前。"_common"は共通のブラウザ枠。"_each"は個別ブラウザ枠。記述が無い場合は既定の枠が対象。
+   *  - show: 表示するかどうか。1で表示、0で非表示。
+   *  - uri: URI。（urlでも可）
+   *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
+   *  - get: 関数として呼ばれたときに取得される情報の指定。
+   *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
+   *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
+   *  - 　"load"の場合、"0"または"1"が返る。
+   *  - clear: 1を指定するとクリアします。
+   * 
+   * @returns
+   * 指定したコマンドにより返り値が異なります。
+   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - その他の場合、空の文字列が返ります。
+   */
+  function browserpanecommand(json_obj: {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 } | object): string
+
+  /**
+   * s    
+   * 
+   * ブラウザ枠に対し、コマンド文字列により、枠の設定を指定します。
+   * 
+   * @param url
+   * コマンドの文字列で取得したい情報を指示します。
+   *   - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   *   - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   *   - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   *   - "left" 位置を左にします。
+   *   - "right" 位置を右にします。
+   *   - "top" 位置を上にします。
+   *   - "bottom" 位置を下にします。
+   *   - "clear" クリアします。
+   * 
+   * @returns
+   * 指定したコマンドにより返り値が異なります。
+   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - その他の場合、空の文字列が返ります。
+   */
+  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear"): string
+
+  /**
+   * s    
+   * 
+   * ブラウザ枠に対し、指定のURL表示や、javascriptの実行をします。
+   * 
+   * @param url
+   * URLを文字列で指定します。    
+   *   - Webの場合はhttp:// またはhttps:// から始まる文字列。
+   *   - ローカルファイルの場合はfile:/// から始まる文字列。
+   *   - ブックマークレットはjavascript: から始まる文字列。    
+   *     (ブックマークレット＝URLに「javascript:***」としてページに対してjavascriptを実行したもの)
+   * 
+   * @returns
+   * 原則、「空の文字列」が返ります。
+   */
+  function browserpanecommand(url: string): string
 
   /**
    * s    
