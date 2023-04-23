@@ -32,5 +32,5 @@ let json3:IBrowsrePaneCommandArg = {
 
 
 
-var ret = browserpanecommand(json3)
+var ret = forwardtab();
 

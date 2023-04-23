@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.10.04
+ * @version v9.22.10.05
  */
 
 /**
@@ -9653,12 +9653,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * タブ後退は、カーソル位置よりも左にあるタブストップにジャンプします。    
    * TSV/CSVモードではタブ区切り/カンマ区切りの前の位置にジャンプします。    
    * 
+   * @param move_step
+   * パラメータで移動する量を指定できます。    
+   * 省略すると1と同じです。（V9.22以降）
+   * 
    * @returns
    * resultがカーソル移動しかたどうかが得られます。    
    * カーソル移動した場合は０以外を返す。    
    * カーソル移動しなかった場合は０を返す。
    */
-  function backtab(): number
+  function backtab(move_step?: number): number
 
   /**
    * s
@@ -9667,12 +9671,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * タブ後退は、カーソル位置よりも左にあるタブストップにジャンプします。    
    * TSV/CSVモードではタブ区切り/カンマ区切りの次の位置にジャンプします
    * 
+   * @param move_step
+   * パラメータで移動する量を指定できます。    
+   * 省略すると1と同じです。（V9.22以降）
+   * 
    * @returns
    * resultがカーソル移動しかたどうかが得られます。    
    * カーソル移動した場合は０以外を返す。    
    * カーソル移動しなかった場合は０を返す。
    */
-  function forwardtab(): number
+  function forwardtab(move_step?: number): number
 
   /**
    * s
@@ -14070,14 +14078,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * s
    * 
    * @param setting_prop
-   * 設定する情報の種類です。    
-   * 現在は 0 固定です。    
-   * 0 を指定してください。     
+   * 設定する情報の種類を数値で指定します。    
+   * - 0 : フォーカスが無いほうの分割のスクロールする量
+   * - 1 : フォーカスが無いほうの分割の画面の先頭のスクロール位置のy座標
+   * 
    * 
    * @param setting_value
-   * 設定する値です。    
-   * - setting_propが0の時    
-   * フォーカスが無いほうの分割のスクロールする量を指定して、スクロールさせます。    
+   * setting_propで指定した項目に対して、値を設定します。    
+   * - setting_propが0の時 : フォーカスが無いほうの分割のスクロールする量を指定して、スクロールさせます。
+   * - setting_propが1の時 : フォーカスが無いほうの分割の画面の先頭のスクロール位置のy座標を指定します。（V9.20以降）
    * 
    * @comment
    * 参照：    
@@ -14090,7 +14099,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 返り値は意味を持ちません。
    */
-  function setsplitinfo(setting_prop: 0, setting_value: number): number
+  function setsplitinfo(setting_prop: number, setting_value: number): number
 
   /**
    * s
@@ -14255,7 +14264,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param to_tabmode 
    * 値に 0 を指定すると、タブモードを解除します。    
    * 値に 1 を指定すると、タブモードになります。    
-   * 値を省略すると、このようにタブモードを切り替えます。即ち、現在タブモードならタブモードを解除し、現在タブモードでなければ、タブモードにします。
+   * 値を省略すると、このようにタブモードを切り替えます。    
+   * 即ち、現在タブモードならタブモードを解除し、現在タブモードでなければ、タブモードにします。
    *
    * @example
    * settabmode(1);
@@ -14266,7 +14276,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @see 秀丸エディタ管理(タブ編)
    * 
    * @returns
-   * 返り値は意味を持ちません。
+   * 成功した場合、0以外を返す。    
+   * 失敗した場合、0を返す。
    */
   function settabmode(to_tabmode: number): number
 
@@ -15313,6 +15324,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * s
    * 
    * showoutline文は、「アウトライン解析の枠表示/非表示」を実行します。    
+   * （ただし、ファイルタイプ別の設定は書き換わらない）    
    * アウトライン解析の枠が表示されているかどうかは、getconfig("Outline")で知ることができます。     
    * 
    * @example
@@ -15415,17 +15427,20 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * フラグを指定します。    
    * 以下の値のOR論理輪を指定します。
    * - ボタンの種類：
-   *   - 0x00 OKのみ
-   *   - 0x01 OK/キャンセル
-   *   - 0x02 中止/再試行/無視
-   *   - 0x03 はい/いいえ/キャンセル
-   *   - 0x04 はい/いいえ
-   *   - 0x05 再試行/キャンセル
+   *   - 0x0000 OKのみ
+   *   - 0x0001 OK/キャンセル
+   *   - 0x0002 中止/再試行/無視
+   *   - 0x0003 はい/いいえ/キャンセル
+   *   - 0x0004 はい/いいえ
+   *   - 0x0005 再試行/キャンセル
    * - アイコンの種類：
-   *   - 0x10 中止アイコン
-   *   - 0x20 ？マークアイコン
-   *   - 0x30 ！マークアイコン
-   *   - 0x40 ｉマークアイコン
+   *   - 0x0010 中止アイコン
+   *   - 0x0020 ？マークアイコン
+   *   - 0x0030 ！マークアイコン
+   *   - 0x0040 ｉマークアイコン
+   * - デフォルトボタン：
+   *   - 0x0100 2番目のボタン
+   *   - 0x0200 3番目のボタン
    * 
    * @example
    * var ret = message("内容", "タイトル", 0x03|0x20); //OK /キャンセル | ？アイコン
