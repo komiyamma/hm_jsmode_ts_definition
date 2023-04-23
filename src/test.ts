@@ -25,11 +25,12 @@ let d: number = hidemaru.getTotalText();
 let num = hidemaru.setInterval(()=>{}, 3);
 hidemaru.clearInterval(num);
 
-let json3 = {
-    get:"DOMContentLoaded"
+let json3:IBrowsrePaneCommandArg = {
+    get: "DOMContentLoaded",
+    clear:1
 };
 
 
 
-var ret = setbrowserpanetarget(2);
+var ret = browserpanecommand(json3)
 

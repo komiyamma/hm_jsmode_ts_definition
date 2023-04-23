@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.10.03
+ * @version v9.22.10.04
  */
 
 /**
@@ -14482,6 +14482,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
+  interface IBrowsrePaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 }
   /**
    * f    
    * 
@@ -14507,7 +14508,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(json_obj: {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 } | object): string
+  function browserpanecommand(json_obj: IBrowsrePaneCommandArg | object): string
 
   /**
    * f    
@@ -14553,6 +14554,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
+  interface IRenderPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
    * 
@@ -14570,6 +14572,12 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
    *  - 　"load"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
+   *  - align: オーバーレイ時の水平配置。"left" "center" "right" "screenleft" "screencenter" "screenright"のいずれか。（ただしウィンドウの外には出ない）
+   *  - valign: オーバーレイ時の垂直配置。"top" "center"または"middle" "bottom" "top" "screencenter" "screenbottom"のいずれか。（ただしウィンドウの外には出ない）
+   *  - x: オーバーレイ時の左から（右から）のx位置。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
+   *  - y: オーバーレイ時の上から（下から）のy位置。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
+   *  - cx: オーバーレイ時の幅。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
+   *  - cy: オーバーレイ時の高さ。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -14578,7 +14586,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(json_obj: {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 } | object): string
+  function renderpanecommand(json_obj: IRenderPaneCommandArg | object): string
 
   /**
    * s    
