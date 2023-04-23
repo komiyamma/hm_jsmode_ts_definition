@@ -14371,7 +14371,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * ブラウザ枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
    * @param default_target
-   * 英字から始まる任意の文字列を指定します。
+   * 以下のように「文字列」もしくは「数値」で設定が可能です。
+   * - "_common" : 共通のブラウザ枠
+   * - "_each" : 個別ブラウザ枠
+   * - 1 : 共通のブラウザ枠
+   * - 2 : 個別ブラウザ枠
    * 
    * @returns
    * 成功すると0以外、失敗すると0を返します。
@@ -14384,11 +14388,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
    * @param default_target
-   * 以下のように「文字列」もしくは「数値」で設定が可能です。
-   * - "_common" : 共通のブラウザ枠
-   * - "_each" : 個別ブラウザ枠
-   * - 1 : 共通のブラウザ枠
-   * - 2 : 個別ブラウザ枠
+   * 英字から始まる任意の文字列を指定します。
    * 
    * @returns
    * 成功すると0以外、失敗すると0を返します。

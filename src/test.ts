@@ -31,4 +31,5 @@ let json3 = {
 
 
 
-var ret = browserpanecommand(json3);
+var ret = setbrowserpanetarget(2);
+
