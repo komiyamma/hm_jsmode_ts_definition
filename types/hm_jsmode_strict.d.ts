@@ -4204,7 +4204,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f    
    * 
-   * unichar関数は、Unicodeの値を文字列にして返します。
+   * unichar関数は、Unicodeの値を文字列にして返します。  
+   * [非同期]
    * 
    * char関数のUnicode版です。    
    * unicode関数と逆の関数です。
@@ -6682,7 +6683,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f    
    * 
-   * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。
+   * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。   
+   * [非同期]
    * 
    * @param target_prop
    * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
@@ -6740,7 +6742,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f
    * 
-   * getfilehist関数は、ファイルヒストリの文字列を取得します。
+   * getfilehist関数は、ファイルヒストリの文字列を取得します。  
+   * [非同期]
    * 
    * @param history_ix    
    * 0から始まるヒストリの番号を指定します。
@@ -14385,7 +14388,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s    
    * 
-   * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
+   * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。  
+   * [非同期]
    * 
    * @param default_target
    * 英字から始まる任意の文字列を指定します。
@@ -14479,9 +14483,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
   /**
-   * s    
+   * f    
    * 
-   * ブラウザ枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。
+   * ブラウザ枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
+   * [非同期]
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
@@ -14505,9 +14510,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function browserpanecommand(json_obj: {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 } | object): string
 
   /**
-   * s    
+   * f    
    * 
-   * ブラウザ枠に対し、コマンド文字列により、枠の設定を指定します。
+   * ブラウザ枠に対し、コマンド文字列により、枠の設定を指定します。  
+   * [非同期]
    * 
    * @param url
    * コマンドの文字列で取得したい情報を指示します。
@@ -14530,9 +14536,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear"): string
 
   /**
-   * s    
+   * f    
    * 
-   * ブラウザ枠に対し、指定のURL表示や、javascriptの実行をします。
+   * ブラウザ枠に対し、指定のURL表示や、javascriptの実行をします。  
+   * [非同期]
    * 
    * @param url
    * URLを文字列で指定します。    
@@ -14546,6 +14553,74 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
+  /**
+   * f    
+   * 
+   * レンダリング枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
+   * [非同期]
+   * 
+   * @param json_obj
+   * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
+   *  - target: 対象となる枠の名前。"_common"は共通のブラウザ枠。"_each"は個別ブラウザ枠。記述が無い場合は既定の枠が対象。
+   *  - show: 表示するかどうか。1で表示、0で非表示。
+   *  - uri: URI。（urlでも可）
+   *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
+   *  - get: 関数として呼ばれたときに取得される情報の指定。
+   *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
+   *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
+   *  - 　"load"の場合、"0"または"1"が返る。
+   *  - clear: 1を指定するとクリアします。
+   * 
+   * @returns
+   * 指定したコマンドにより返り値が異なります。
+   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - その他の場合、空の文字列が返ります。
+   */
+  function browserpanecommand(json_obj: {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 } | object): string
+
+  /**
+   * s    
+   * 
+   * レンダリング枠に対し、コマンド文字列により、枠の設定を指定します。
+   * 
+   * @param url
+   * コマンドの文字列で取得したい情報を指示します。
+   *   - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   *   - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   *   - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   *   - "left" 位置を左にします。
+   *   - "right" 位置を右にします。
+   *   - "top" 位置を上にします。
+   *   - "bottom" 位置を下にします。
+   *   - "clear" クリアします。
+   * 
+   * @returns
+   * 指定したコマンドにより返り値が異なります。
+   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - その他の場合、空の文字列が返ります。
+   */
+  function renderpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear"): string
+
+  /**
+   * s    
+   * 
+   * レンダリング枠に対し、指定のURL表示や、javascriptの実行をします。
+   * 
+   * @param url
+   * URLを文字列で指定します。    
+   *   - ローカルファイルの場合はfile:/// から始まる文字列。
+   *   - ブックマークレットはjavascript: から始まる文字列。    
+   *     (ブックマークレット＝URLに「javascript:***」としてページに対してjavascriptを実行したもの)
+   * 
+   * @returns
+   * 原則、「空の文字列」が返ります。
+   */
+  function renderpanecommand(url: string): string
+  
   /**
    * s    
    * 
@@ -17665,7 +17740,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s
    * 
-   * config文は、ファイルタイプ別の設定を変更します。
+   * config文は、ファイルタイプ別の設定を変更します。  
+   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -18164,7 +18240,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s
    * 
-   * config文は、ファイルタイプ別の設定を変更します。
+   * config文は、ファイルタイプ別の設定を変更します。  
+   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -18184,7 +18261,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f
    * 
-   * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。
+   * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
+   * [非同期]
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -18536,7 +18614,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f
    * 
-   * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。
+   * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
+   * [非同期]  
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -18555,7 +18634,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s
    * 
-   * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。
+   * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。  
+   * [非同期]
    *
    * @param color_settings
    * 設定箇所と、文字色と背景食とスタイルを文字列で表した情報を指定します。    
@@ -18680,7 +18760,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * f    
    * 
-   * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。
+   * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
+   * [非同期]
    * 
    * @param n1 
    * 設定の種類を指定します。    
@@ -20281,6 +20362,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * s
    * 
    * setselectionrange文は、まとめて選択します。    
+   * [非同期]
    * 
    * @param json_obj
    * JSONのオブジェクトを指定します。    
@@ -20322,6 +20404,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * f
    * 
    * getselectedrange関数は、範囲選択の情報をまとめて取得します。    
+   * [非同期]
    * 
    * @param json_obj
    * 単位をjsonのオブジェクトで指定します。
