@@ -2918,11 +2918,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * overwrite文は上書きモードでの入力に相当します。    
    * 
    * @param newtext
-   * 指定の文字列で上書きする
+   * 上書きする文字列を指定します
+   * 
    * @param mode
-   * 第２パラメータに１を指定すると、    
-   * 全角の上に半角を上書きしたとき、    
-   * 右半分が空白になる動作が無効になります
+   * 全角の上に半角を上書きしたときの動作を指定します。  
+   * １を指定 : 全角の上に半角を上書きしたとき、右半分が空白になる動作が無効になります
    * 
    * @returns
    * 実行に成功した場合は0以外、    
@@ -19286,6 +19286,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @example
    * setwindowsize(80, 20); // この場合は横80桁×縦20行となります。
+   *                        // 横幅の文字数は、行番号部分は含まれていません。行番号も含めてサイズ変更するには、行番号相当だけ加算して指定する必要があります。
    * 
    * @returns
    * 返り値は意味を持ちません。
