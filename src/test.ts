@@ -30,7 +30,19 @@ let json3:IBrowsrePaneCommandArg = {
     clear:1
 };
 
+let json10: IBrowsrePaneCommandArg = {
+    get: "load"
+}
 
+let json: ISetSelectionRangeArg = {
+    unit:"char",
+    col1: 10,
+    line1: 20,
+}
+var ret = setselectionrange(json)
 
-var ret = forwardtab();
+var ret3 = getselectedrange("cmu");
+
+let a:"wcs" | "ucs2" = "wcs"
+let b = hidemaru.getCursorPos(a);
 

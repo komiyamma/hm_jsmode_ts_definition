@@ -17794,7 +17794,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function configset(setting_name: string, config_state: number): number
 
-  type typeConfigSettingName = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
+  type IConfigArg = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
   /**
    * s
    * 
@@ -18293,7 +18293,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 返り値は意味を持ちません。
    */
-  function config(setting_expression: typeConfigSettingName): number
+  function config(setting_expression: IConfigArg): number
 
   /**
    * s
@@ -18315,7 +18315,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function config(setting_expression: string): number
 
-  type typeConfigGettingName = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
+  type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
    * f
    * 
@@ -18667,7 +18667,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 取得する情報によって文字列型と数値型のどちらかが返ります。
    */
-  function getconfig(key: typeConfigGettingName): string | number
+  function getconfig(key: IGetConfigArg): string | number
 
   /**
    * f
@@ -20422,6 +20422,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function getselectedtext(): string
 
+  interface ISetSelectionRangeArg { "unit"?: "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu", "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
   /**
    * s
    * 
@@ -20462,8 +20463,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 失敗した場合、resultは0を返す。
    * 成功した場合、resultは0以外を返す。
    */
-  function setselectionrange(json_obj: string | { "unit"?: "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu", "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }): number
+  function setselectionrange(json_obj: string | ISetSelectionRangeArg): number
 
+  interface IGetSelectedRangeReturn { "unit": string, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
   /**
    * f
    * 
@@ -20522,7 +20524,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
    * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
    */
-  function getselectedrange(json_obj?: { "unit": "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu" }): { "unit": string, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number };
+  function getselectedrange(json_obj?: { "unit": "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu" }): IGetSelectedRangeReturn;
 
   /**
    * z    
@@ -37450,7 +37452,7 @@ declare function deletereg(root_key: string, sub_key: string, own_hidemaru_reg?:
    */
 declare function configset(setting_name: string, config_state: number): number
 
-  type typeConfigSettingName = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
+  type IConfigArg = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
   /**
    * s
    * 
@@ -37949,7 +37951,7 @@ declare function configset(setting_name: string, config_state: number): number
    * @returns
    * 返り値は意味を持ちません。
    */
-declare function config(setting_expression: typeConfigSettingName): number
+declare function config(setting_expression: IConfigArg): number
 
   /**
    * s
@@ -37971,7 +37973,7 @@ declare function config(setting_expression: typeConfigSettingName): number
    */
 declare function config(setting_expression: string): number
 
-  type typeConfigGettingName = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
+  type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
    * f
    * 
@@ -38323,7 +38325,7 @@ declare function config(setting_expression: string): number
    * @returns
    * 取得する情報によって文字列型と数値型のどちらかが返ります。
    */
-declare function getconfig(key: typeConfigGettingName): string | number
+declare function getconfig(key: IGetConfigArg): string | number
 
   /**
    * f
@@ -40078,6 +40080,7 @@ declare function getlinetext(line_num?: number): string
    */
 declare function getselectedtext(): string
 
+  interface ISetSelectionRangeArg { "unit"?: "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu", "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
   /**
    * s
    * 
@@ -40118,8 +40121,9 @@ declare function getselectedtext(): string
    * 失敗した場合、resultは0を返す。
    * 成功した場合、resultは0以外を返す。
    */
-declare function setselectionrange(json_obj: string | { "unit"?: "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu", "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }): number
+declare function setselectionrange(json_obj: string | ISetSelectionRangeArg): number
 
+  interface IGetSelectedRangeReturn { "unit": string, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
   /**
    * f
    * 
@@ -40178,7 +40182,7 @@ declare function setselectionrange(json_obj: string | { "unit"?: "xy" | "char" |
    * 選択が1個以上ある場合は、"unit"が根本にあり、"items"の配列に"line1","col1","line2","col2"があるオブジェクトとして返ります。    
    * (※colormarker, getcolormarker, setselectionrange, getselectedrangeのオブジェクト指定はだいたい同じ書き方になっていて、相互に呼び換えることができます。    
    */
-declare function getselectedrange(json_obj?: { "unit": "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu" }): { "unit": string, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number };
+declare function getselectedrange(json_obj?: { "unit": "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu" }): IGetSelectedRangeReturn;
 
   /**
    * z    
