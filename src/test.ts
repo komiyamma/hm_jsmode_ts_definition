@@ -41,7 +41,9 @@ let json: ISetSelectionRangeArg = {
 }
 var ret = setselectionrange(json)
 
-var ret3 = getselectedrange("cmu");
+var bbc: ILiteralUnit = "char";
+
+var ret3 = getselectedrange({unit:"gcu"});
 
 let a:"wcs" | "ucs2" = "wcs"
 let b = hidemaru.getCursorPos(a);
