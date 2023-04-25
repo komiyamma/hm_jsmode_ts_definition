@@ -20311,6 +20311,19 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     var seltext = geteventparam( 0 );
    * }
    * 
+   * @comment
+   * - registercallbackされたマクロによる実行(event==10)    
+   *   - geteventparam(0)の返り値：    
+   *     - 0 直前の選択内容    
+   * 
+   * @example
+   * if ( event() == 10 ) {
+   *     var param = geteventparam( 0 ); // 0 文字列のパラメータ(V9.22以降)。レンダリング枠で使います
+   * }
+   * 
+   * @see registercallback
+   * @see レンダリング枠
+   * 
    * @returns
    * 指定された情報を返します。    
    * eventとパラメータの値によって意味が違います。    
@@ -40046,6 +40059,19 @@ declare function event(): number
    * if ( event() == 9 ) {
    *     var seltext = geteventparam( 0 );
    * }
+   * 
+   * @comment
+   * - registercallbackされたマクロによる実行(event==10)    
+   *   - geteventparam(0)の返り値：    
+   *     - 0 直前の選択内容    
+   * 
+   * @example
+   * if ( event() == 10 ) {
+   *     var param = geteventparam( 0 ); // 0 文字列のパラメータ(V9.22以降)。レンダリング枠で使います
+   * }
+   * 
+   * @see registercallback
+   * @see レンダリング枠
    * 
    * @returns
    * 指定された情報を返します。    

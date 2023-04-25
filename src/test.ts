@@ -8,3 +8,5 @@ function SelectMenuIndex() {
     console.log(menu)
 }
 
+let keyhook_id  = keyhook(1, 3);
+clearkeyhook(keyhook_id);
