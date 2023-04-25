@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.10.05
+ * @version v9.22.12.01
  */
 
 /**
@@ -19671,6 +19671,82 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。
    */
   function hidemaruversion(): string
+
+  /**
+   * f
+   * 
+   * keyhook関数は、キー割り当てを一時的に変更します。    
+   * 一時的なキー割り当ての変更は、clearkeyhookを呼ぶと解除されます。    
+   * 有効範囲は現在開いているファイルのみです。    
+   * 同じ秀丸エディタ上でファイルを閉じたり別のファイルを開いても自動的に解除されます。
+   * 
+   * @key
+   * キーを数値で指定します。    
+   * 以下の値の組み合わせです。
+   * - 0x00010000 : Shift
+   * - 0x00020000 : Ctrl
+   * - 0x00040000 : Alt
+   * 下位8ビットは仮想キーコード
+   * 
+   * @function_id
+   * 実行される関数のIDを指定します。
+   * IDはJavaScriptの @see hidemaru.getFunctionId で取得できます。
+   * 
+   * @example
+   * js{
+   *     debuginfo(2);
+   *     function myfunc(){
+   *         console.log("myfunc");
+   *     }
+   *     var id = hidemaru.getFunctionId(myfunc);
+   *     keyhook(0x00020041, id); // CTRL + A
+   * }
+   * 
+   * @see hidemaru.getFunctionId
+   * @see clearkeyhook
+   * 
+   * @returns
+   * IDを数値で返します。clearkeyhookで使うことができます。
+   */
+  function keyhook(key: number, function_id: number): number
+
+  /**
+   * s
+   * 
+   * clearkeyhook文は、keyhookを解除します。    
+   * 
+   * @keyhook_id
+   * keyhookしたときのID、または0を指定します。
+   * 0を指定した場合は全て解除します。
+   * IDはJavaScriptの @see keyhook で取得できます。
+   * 
+   * @example
+   * js{
+   *     debuginfo(2);
+   * 
+   *     var id = hidemaru.getFunctionId(myfunc);
+   * 
+   *     function myfunc(){
+   *         console.log("myfunc");
+   *         // 1回実行されたら、キーフックを解除
+   *         hidemaru.postExecMacroMemory("js { myclearkeyhook(); }");
+   *     }
+   * 
+   *     function myclearkeyhook() {
+   *         clearkeyhook(id);
+   *     }
+   * 
+   *     keyhook(0x00020041, id); // CTRL + A
+   * }
+   * 
+   * @see hidemaru.getFunctionId
+   * @see keyhook
+   * 
+   * @returns
+   * 成功時は0以外を返す。    
+   * 失敗時は0を返す。
+   */
+  function clearkeyhook(keyhook_id: number | 0): number
 
   /**
    * s
@@ -39331,6 +39407,82 @@ declare function hidemaruversion(version_string: string): number
    * 一番下の14は、1～98までの場合、β版の番号を意味します。99にすると正式版を意味します。
    */
 declare function hidemaruversion(): string
+
+  /**
+   * f
+   * 
+   * keyhook関数は、キー割り当てを一時的に変更します。    
+   * 一時的なキー割り当ての変更は、clearkeyhookを呼ぶと解除されます。    
+   * 有効範囲は現在開いているファイルのみです。    
+   * 同じ秀丸エディタ上でファイルを閉じたり別のファイルを開いても自動的に解除されます。
+   * 
+   * @key
+   * キーを数値で指定します。    
+   * 以下の値の組み合わせです。
+   * - 0x00010000 : Shift
+   * - 0x00020000 : Ctrl
+   * - 0x00040000 : Alt
+   * 下位8ビットは仮想キーコード
+   * 
+   * @function_id
+   * 実行される関数のIDを指定します。
+   * IDはJavaScriptの @see hidemaru.getFunctionId で取得できます。
+   * 
+   * @example
+   * js{
+   *     debuginfo(2);
+   *     function myfunc(){
+   *         console.log("myfunc");
+   *     }
+   *     var id = hidemaru.getFunctionId(myfunc);
+   *     keyhook(0x00020041, id); // CTRL + A
+   * }
+   * 
+   * @see hidemaru.getFunctionId
+   * @see clearkeyhook
+   * 
+   * @returns
+   * IDを数値で返します。clearkeyhookで使うことができます。
+   */
+declare function keyhook(key: number, function_id: number): number
+
+  /**
+   * s
+   * 
+   * clearkeyhook文は、keyhookを解除します。    
+   * 
+   * @keyhook_id
+   * keyhookしたときのID、または0を指定します。
+   * 0を指定した場合は全て解除します。
+   * IDはJavaScriptの @see keyhook で取得できます。
+   * 
+   * @example
+   * js{
+   *     debuginfo(2);
+   * 
+   *     var id = hidemaru.getFunctionId(myfunc);
+   * 
+   *     function myfunc(){
+   *         console.log("myfunc");
+   *         // 1回実行されたら、キーフックを解除
+   *         hidemaru.postExecMacroMemory("js { myclearkeyhook(); }");
+   *     }
+   * 
+   *     function myclearkeyhook() {
+   *         clearkeyhook(id);
+   *     }
+   * 
+   *     keyhook(0x00020041, id); // CTRL + A
+   * }
+   * 
+   * @see hidemaru.getFunctionId
+   * @see keyhook
+   * 
+   * @returns
+   * 成功時は0以外を返す。    
+   * 失敗時は0を返す。
+   */
+declare function clearkeyhook(keyhook_id: number | 0): number
 
   /**
    * s
