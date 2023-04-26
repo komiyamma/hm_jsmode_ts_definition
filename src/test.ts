@@ -12,5 +12,7 @@ function getClipboarText() {
     return "";
 }
 
+let xp1: number = xpixel2();
+let xp2: number = ypixel2();
 
 
