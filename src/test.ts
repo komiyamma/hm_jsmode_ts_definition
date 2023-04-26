@@ -1,12 +1,16 @@
 /// <reference path="../types/hm_jsmode.d.ts" />
 
-let selectedNumber: number = hidemaruGlobal.mousemenu("あいうえ","kakiku")
+hidemaruGlobal
+hidemaru
 
-// メニューを表示して、選択したindexを取得する
-function SelectMenuIndex() {
-    let menu: number = hidemaruGlobal.mousemenu("あいうえ","kakiku")
-    console.log(menu)
+// クリップボードの内容を取得する hidemaruGlobal.*** の関数を使って
+function getClipboarText() {
+    let b = hidemaruGlobal.getclipboard();
+    if (b) {
+        return b;
+    }
+    return "";
 }
 
-let keyhook_id  = keyhook(1, 3);
-clearkeyhook(keyhook_id);
+
+

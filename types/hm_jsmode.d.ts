@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.12.01
+ * @version v9.22.13.01
  */
 
 /**
@@ -1616,8 +1616,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * k    
    * 
    * カーソルのX座標のピクセル位置を返します。    
+   * （スクリーン座標）
    * 
-   * @returns カーソルのX座標のピクセル位置
+   * @returns
+   * カーソルのX座標のピクセル位置    
+   *  （スクリーン座標）
    */
   function xpixel(): number
 
@@ -1625,10 +1628,37 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * k    
    * 
    * カーソルのY座標のピクセル位置を返します。    
+   * （スクリーン座標）
    * 
-   * @returns カーソルのY座標のピクセル位置
+   * @returns
+   * カーソルのY座標のピクセル位置    
+   *  （スクリーン座標）
    */
   function ypixel(): number
+
+  /**
+   * k    
+   * 
+   * カーソルのX座標のピクセル位置を返します。    
+   * （編集エリア左上からの相対位置）
+   * 
+   * @returns
+   * カーソルのX座標のピクセル位置    
+   * （編集エリア左上からの相対位置）
+   */
+  function xpixel2(): number
+
+  /**
+   * k    
+   * 
+   * カーソルのY座標のピクセル位置を返します。    
+   * （編集エリア左上からの相対位置）
+   * 
+   * @returns
+   * カーソルのY座標のピクセル位置    
+   * （編集エリア左上からの相対位置）
+   */
+  function ypixel2(): number
 
   /**
    * k    
@@ -21365,8 +21395,11 @@ declare function lineupdated(): number
    * k    
    * 
    * カーソルのX座標のピクセル位置を返します。    
+   * （スクリーン座標）
    * 
-   * @returns カーソルのX座標のピクセル位置
+   * @returns
+   * カーソルのX座標のピクセル位置    
+   *  （スクリーン座標）
    */
 declare function xpixel(): number
 
@@ -21374,10 +21407,37 @@ declare function xpixel(): number
    * k    
    * 
    * カーソルのY座標のピクセル位置を返します。    
+   * （スクリーン座標）
    * 
-   * @returns カーソルのY座標のピクセル位置
+   * @returns
+   * カーソルのY座標のピクセル位置    
+   *  （スクリーン座標）
    */
 declare function ypixel(): number
+
+  /**
+   * k    
+   * 
+   * カーソルのX座標のピクセル位置を返します。    
+   * （編集エリア左上からの相対位置）
+   * 
+   * @returns
+   * カーソルのX座標のピクセル位置    
+   * （編集エリア左上からの相対位置）
+   */
+declare function xpixel2(): number
+
+  /**
+   * k    
+   * 
+   * カーソルのY座標のピクセル位置を返します。    
+   * （編集エリア左上からの相対位置）
+   * 
+   * @returns
+   * カーソルのY座標のピクセル位置    
+   * （編集エリア左上からの相対位置）
+   */
+declare function ypixel2(): number
 
   /**
    * k    
