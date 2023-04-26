@@ -14553,7 +14553,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - show: 表示するかどうか。1で表示、0で非表示。
    *  - uri: URI。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
-   *  - get: 関数として呼ばれたときに取得される情報の指定。
+   *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
    *  - 　"load"の場合、"0"または"1"が返る。
@@ -14638,7 +14638,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - invisible: 見えないようにするかどうか。1で見えない。0で見える。
    *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
-   *  - get: 関数として呼ばれたときに取得される情報の指定。
+   *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
    *  - 　"load"の場合、"0"または"1"が返る。
