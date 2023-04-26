@@ -15,4 +15,6 @@ function getClipboarText() {
 let xp1: number = xpixel2();
 let xp2: number = ypixel2();
 
+browserpanecommand({get:"show"})
 
+renderpanecommand("top")

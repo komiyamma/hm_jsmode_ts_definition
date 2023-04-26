@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.01
+ * @version v9.22.13.02
  */
 
 /**
@@ -14540,7 +14540,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
-  interface IBrowsrePaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1 }
+  interface IBrowsrePaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
   /**
    * f    
    * 
@@ -14557,6 +14557,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
    *  - 　"load"の場合、"0"または"1"が返る。
+   *  -   "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    * 
    * @example
@@ -14623,7 +14624,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
+  interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, invisible?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
    * 
@@ -14633,13 +14634,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
    *  - target: 対象となる枠の名前。英字から始まる任意の文字列を指定します。記述が無い場合は既定の枠が対象。
-   *  - show: 表示するかどうか。1で表示、0で非表示。
+   *  - show: 表示するかどうか。1で表示、0で非表示。非表示の場合はインスタンスが無くなります。（コンテンツが閉じます）
+   *  - invisible: 見えないようにするかどうか。1で見えない。0で見える。
    *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。
    *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
    *  - 　"load"の場合、"0"または"1"が返る。
+   *  -   "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - align: オーバーレイ時の水平配置。"left" "center" "right" "screenleft" "screencenter" "screenright"のいずれか。（ただしウィンドウの外には出ない）
    *  - valign: オーバーレイ時の垂直配置。"top" "center"または"middle" "bottom" "top" "screencenter" "screenbottom"のいずれか。（ただしウィンドウの外には出ない）
