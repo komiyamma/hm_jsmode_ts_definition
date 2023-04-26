@@ -15,6 +15,18 @@ function getClipboarText() {
 let xp1: number = xpixel2();
 let xp2: number = ypixel2();
 
-browserpanecommand({get:"show"})
 
 renderpanecommand("top")
+
+let objFormat = {
+         items:[{
+           layer:"*",
+           items:[
+             {line1:"*",col1:"*",line2:"*",col2:"*",},
+           ]
+         }]
+       };
+
+let b:IConfigRGBHex = "#124";
+
+config(b);
