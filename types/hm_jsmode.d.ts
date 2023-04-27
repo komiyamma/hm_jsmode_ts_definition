@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.04
+ * @version v9.22.13.05
  */
 
 /**
@@ -18655,9 +18655,39 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * }
    * 
    * @returns
-   * 取得結果をオブジェクトで返します。 
+   * 返り値は意味を持ちません。
    */
-  function config(json_obj: IConfigJsonArg | object): object
+  function config(json_obj: IConfigJsonArg | object): number;
+
+  interface IGetConfigJsonArg extends IConfigJsonArg {};
+  interface IGetConfigJsonReturn extends IConfigJsonArg {};
+  /**
+   * f
+   * 
+   * getconfig関数は、ファイルタイプ別の取得する情報をJSONオブジェクトで指定し、JSONオブジェクトで取得します。
+   * 
+   * @param json_obj
+   * プロパティ名はconfigのJSON/オブジェクト指定と同じです。    
+   * プロパティと共に適当な値を指定します。    
+   * 取得されると値は上書きされます。    
+   * プロパティ名に"*"を指定すると、取得可能なものを全て取得します。    
+   * ただし、ColorSetは明示的に指定して取得する必要があります。
+   * 
+   * @example
+   * js{
+   *    var obj = getconfig({
+   *       Font: "",
+   *       FontPoint: 0,
+   *       FontDecimal: 0,
+   *     });
+   *     message( JSON.stringify(obj,null," "));
+   *     message( obj.Font );
+   * }
+   *  
+   * @returns
+   * 取得した情報をJSONオブジェクトで返します。
+   */
+  function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | object): IGetConfigJsonReturn;
 
   type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
@@ -19232,7 +19262,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * この際も、型は IGetConfigColorJsonReturn 型に従います。
    *  
    */
-  function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn;
+  function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*": {} } | object): IGetConfigColorJsonReturn;
 
   /**
    * s
@@ -38785,9 +38815,39 @@ declare function config(setting_expression: string): number
    * }
    * 
    * @returns
-   * 取得結果をオブジェクトで返します。 
+   * 返り値は意味を持ちません。
    */
-declare function config(json_obj: IConfigJsonArg | object): object
+declare function config(json_obj: IConfigJsonArg | object): number;
+
+  interface IGetConfigJsonArg extends IConfigJsonArg {};
+  interface IGetConfigJsonReturn extends IConfigJsonArg {};
+  /**
+   * f
+   * 
+   * getconfig関数は、ファイルタイプ別の取得する情報をJSONオブジェクトで指定し、JSONオブジェクトで取得します。
+   * 
+   * @param json_obj
+   * プロパティ名はconfigのJSON/オブジェクト指定と同じです。    
+   * プロパティと共に適当な値を指定します。    
+   * 取得されると値は上書きされます。    
+   * プロパティ名に"*"を指定すると、取得可能なものを全て取得します。    
+   * ただし、ColorSetは明示的に指定して取得する必要があります。
+   * 
+   * @example
+   * js{
+   *    var obj = getconfig({
+   *       Font: "",
+   *       FontPoint: 0,
+   *       FontDecimal: 0,
+   *     });
+   *     message( JSON.stringify(obj,null," "));
+   *     message( obj.Font );
+   * }
+   *  
+   * @returns
+   * 取得した情報をJSONオブジェクトで返します。
+   */
+declare function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | object): IGetConfigJsonReturn;
 
   type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
@@ -39362,7 +39422,7 @@ declare function getconfigcolor(n1: number, n2: number): number
    * この際も、型は IGetConfigColorJsonReturn 型に従います。
    *  
    */
-declare function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn;
+declare function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*": {} } | object): IGetConfigColorJsonReturn;
 
   /**
    * s

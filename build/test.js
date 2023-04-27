@@ -21,5 +21,7 @@ hidemaru.clearInterval(num);
 var json3 = {
     clear: 1
 };
-var ret = browserpanecommand(json3);
+var ret = getconfig({"*":{}});
+
+
 
