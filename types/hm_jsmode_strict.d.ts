@@ -18082,6 +18082,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   フラグの場合は値に+か-を指定できます。数値の場合は値に数値を指定できます。文字列の場合は値に文字列を指定できます。空白を含む文字列は()でくくることができます。
    *   config "x"で指定できる名前は以下。
    * - xFont(文字列)    
+   *     フォントの名前の中に空白がある場合は"xFont:(名 前)"といったように括弧でくくって指定します。    
    *     フォントの名前    
    *     参照：fontmode
    * - xFontSize(数値)    
@@ -18093,7 +18094,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - xFontCharSet(数値)    
    *     フォントの文字セット 
    * - xBoldFace(フラグ)    
-   *     太字 
+   *     太字(重ね書き)
    * --------------------------------------------------------------------------------
    * - xOrikaeshi(数値)    
    *     折り返し桁数 
@@ -18119,9 +18120,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     - 0x0002　行番号も縦書き
    *     - 0x0004　半角も縦書き
    *     - 0x0008　半角漢数字
-   *     - 0x0010　半角数字２文字をセットにして縦書きにする
+   *     - 0x0010　縦中横（半角数字２文字をセットにして縦書きにする）
    *     - 0x0020　カーソル行の下線モードは右側
    *     - 0x0040　全角の記号類を９０度回転
+   *     - 0x0080  Windows8で非互換となった文字を回転
    * 
    * - xDangumi(数値)    
    *     段組数    
@@ -18140,8 +18142,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     TSVモード/CSVモード/自由配置モード    
    *     - 0x000fで論理積(&)されたビット
    *         - 0x0000　通常モード
-   *         - 0x0001　TSVまたはCSVモード（TSVかCSVかは0x0100で判断）
    *         - 0x0002　自由配置モード
+   *         - 0x0001　TSVモード
+   *         - 0x0101　CSVモード
    * 
    *     - 0x0f00で論理積(&)されたビット
    *         - 0x0100　CSVモード（0x0001もあるとき）    
