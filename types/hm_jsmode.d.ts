@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.05
+ * @version v9.22.13.06
  */
 
 /**
@@ -34971,6 +34971,56 @@ declare function browserpanecommand(url: string): string
    *  - y: オーバーレイ時の上から（下から）のy位置。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - cx: オーバーレイ時の幅。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - cy: オーバーレイ時の高さ。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
+   * 
+   * @example
+   * //非同期的にページ作成完了まで待って、イベントなどの応答を得る(js版)
+   * js{
+   *   //debuginfo(2);
+   *   var strTarget="rendering#1";
+   *   
+   *   function checkComplete(){
+   *     //実行の順番(3) 繰り返し
+   *     var readyState = renderpanecommand({target:strTarget,get:"readyState"});
+   *     console.log(readyState);
+   *     if( readyState == "complete" ) {
+   *       hidemaru.clearInterval(idInterval);
+   *       funcCompleted();
+   *     }
+   *   }
+   *   
+   *   function funcCompleted() {
+   *     //実行の順番(4)
+   *     var idCallback=hidemaru.getFunctionId(funcCallback);
+   *     renderpanecommand({
+   *         target:strTarget,
+   *         uri:'javascript:idCallback='+idCallback+';',
+   *         });
+   *   }
+   *   
+   *   var sGlobal="";
+   *   function funcCallback(s){
+   *     //実行の順番(5) 手動操作時
+   *     sGlobal=s;
+   *     console.log(s);
+   *     hidemaru.postExecMacroMemory('js{message(sGlobal);}');
+   *   }
+   *   
+   *   //実行の順番(1)
+   *   renderpanecommand({
+   *       target:strTarget,
+   *       show:1,
+   *       uri:"file:///c:/folder/rendering.html",
+   *       place:"leftside",
+   *       });
+   *       
+   * 
+   *   //実行の順番(2)
+   *   var idInterval;
+   *   if( typeof(idInterval)!="undefined" ) {
+   *     hidemaru.clearInterval(idInterval);
+   *   }
+   *   idInterval = hidemaru.setInterval(checkComplete,100);
+   * }
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
