@@ -30,5 +30,7 @@ let objFormat = {
 let b:IConfigRGBHex = "#124";
 
 
-let r = getconfigcolor({"*":{}})
-r.
+let r = getselectedrange()
+if (r.items?.length > 0) {
+  
+}
