@@ -19358,18 +19358,20 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * パラメータでキー割り当てファイルの名前を指定してください。    
    * 
    * @param filepath 
-   * ファイルのパスを指定します。
+   * キー割り当てファイルのファイルのパスを指定します。
    * 
    * @example
    * loadkeyassign("default.key");
    * 
    * @param is_settingdir
-   * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
-   * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+   * is_settingdir は filepath 引数がフルパスでないときだけ適用されます。    
+   * - 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+   * - 指定しないか 0 の場合、秀丸エディタをインストールしたフォルダが対象となります。
    * 
    * @comment
    * 参照：
    * @see savekeyassign
+   * @see KEYASSIGN (秀丸マクロ)
    * 
    * @returns
    * 返り値は意味を持ちません。    
@@ -19384,17 +19386,17 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * パラメータでキー割り当てファイルの名前を指定してください。    
    * 
    * @param filepath 
-   * ファイルのパスを指定します。
+   * キー割り当てファイルのファイルのパスを指定します。
    * 
    * @param n_target
    * 0か1かの数字を指定します。    
-   * 0にすると、キー割り当てのみの保存、    
-   * 1にすると、マクロ登録の内容も保存します。    
-   * 省略すると0になります。    
+   * - 0もしくは省略すると、キー割り当てのみの保存、    
+   * - 1にすると、マクロ登録の内容も保存します。    
    * 
    * @param is_settingdir
-   * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
-   * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+   * is_settingdir は filepath 引数がフルパスでないときだけ適用されます。    
+   * - 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+   * - 指定しないか0の場合、秀丸エディタをインストールしたフォルダが対象となります。
    * 
    * @example
    * savekeyassign("temp.key", 0, 1);
@@ -19415,7 +19417,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * loadhilight文は、パラメータで指定された強調表示ファイルを読み込み，画面を再描画します。
    * 
    * @param filepath 
-   * 
+   * ファイル名を指定します。    
+   * フルパスでない場合は、設定ファイル用のフォルダからの相対パスになります。
+   *
    * @param is_temp
    * 0か1かの数字を指定します。    
    * - 0にすると読み込んだものは一時的な設定になり、保存させません。（ファイルタイプ別の設定で「保存しないで更新」を押したときの状態）    
@@ -39484,18 +39488,20 @@ declare function envchanged(): number
    * パラメータでキー割り当てファイルの名前を指定してください。    
    * 
    * @param filepath 
-   * ファイルのパスを指定します。
+   * キー割り当てファイルのファイルのパスを指定します。
    * 
    * @example
    * loadkeyassign("default.key");
    * 
    * @param is_settingdir
-   * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
-   * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+   * is_settingdir は filepath 引数がフルパスでないときだけ適用されます。    
+   * - 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+   * - 指定しないか 0 の場合、秀丸エディタをインストールしたフォルダが対象となります。
    * 
    * @comment
    * 参照：
    * @see savekeyassign
+   * @see KEYASSIGN (秀丸マクロ)
    * 
    * @returns
    * 返り値は意味を持ちません。    
@@ -39510,17 +39516,17 @@ declare function loadkeyassign(filepath: string, is_settingdir?: number): number
    * パラメータでキー割り当てファイルの名前を指定してください。    
    * 
    * @param filepath 
-   * ファイルのパスを指定します。
+   * キー割り当てファイルのファイルのパスを指定します。
    * 
    * @param n_target
    * 0か1かの数字を指定します。    
-   * 0にすると、キー割り当てのみの保存、    
-   * 1にすると、マクロ登録の内容も保存します。    
-   * 省略すると0になります。    
+   * - 0もしくは省略すると、キー割り当てのみの保存、    
+   * - 1にすると、マクロ登録の内容も保存します。    
    * 
    * @param is_settingdir
-   * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
-   * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+   * is_settingdir は filepath 引数がフルパスでないときだけ適用されます。    
+   * - 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+   * - 指定しないか0の場合、秀丸エディタをインストールしたフォルダが対象となります。
    * 
    * @example
    * savekeyassign("temp.key", 0, 1);
@@ -39541,7 +39547,9 @@ declare function savekeyassign(filepath: string, n_target?: number, is_settingdi
    * loadhilight文は、パラメータで指定された強調表示ファイルを読み込み，画面を再描画します。
    * 
    * @param filepath 
-   * 
+   * ファイル名を指定します。    
+   * フルパスでない場合は、設定ファイル用のフォルダからの相対パスになります。
+   *
    * @param is_temp
    * 0か1かの数字を指定します。    
    * - 0にすると読み込んだものは一時的な設定になり、保存させません。（ファイルタイプ別の設定で「保存しないで更新」を押したときの状態）    
