@@ -30,7 +30,5 @@ let objFormat = {
 let b:IConfigRGBHex = "#124";
 
 
-let r:IGetConfigColorJsonReturn = getconfigcolor({cr:{text:"default",}})
-
-
-config(b);
+let r = getconfigcolor({"*":{}})
+r.
