@@ -19198,8 +19198,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function getconfigcolor(n1: number, n2: number): number
 
-  type IGetConfigColorJsonArg = IConfigColorSet;
-  type IGetConfigColorJsonReturn = IConfigColorSet;
+  interface IGetConfigColorJsonArg extends IConfigColorSet {};
+  interface IGetConfigColorJsonReturn extends IConfigColorSet {};
   /**
    * f    
    * 
@@ -19232,7 +19232,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * この際も、型は IGetConfigColorJsonReturn 型に従います。
    *  
    */
-  function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn | object;
+  function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn;
 
   /**
    * s
@@ -39324,8 +39324,8 @@ declare function configcolor(color_settings: string): number
    */
 declare function getconfigcolor(n1: number, n2: number): number
 
-  type IGetConfigColorJsonArg = IConfigColorSet;
-  type IGetConfigColorJsonReturn = IConfigColorSet;
+  interface IGetConfigColorJsonArg extends IConfigColorSet {};
+  interface IGetConfigColorJsonReturn extends IConfigColorSet {};
   /**
    * f    
    * 
@@ -39358,7 +39358,7 @@ declare function getconfigcolor(n1: number, n2: number): number
    * この際も、型は IGetConfigColorJsonReturn 型に従います。
    *  
    */
-declare function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn | object;
+declare function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn;
 
   /**
    * s

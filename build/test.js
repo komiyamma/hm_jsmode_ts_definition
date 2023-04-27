@@ -23,6 +23,3 @@ var json3 = {
 };
 var ret = browserpanecommand(json3);
 
-window.setTimeout(() => {
-    Animation
-}, timeout);
