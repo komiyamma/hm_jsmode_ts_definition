@@ -20968,7 +20968,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setselectionrange(json_obj: string | ISetSelectionRangeArg): number
 
-  interface IGetSelectedRangeReturn { "unit": hidemaru.ILiteralUnit, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
+  interface IGetSelectedRangeReturn extends ISetSelectionRangeArg {};
   /**
    * f
    * 
@@ -41128,7 +41128,7 @@ declare function getselectedtext(): string
    */
 declare function setselectionrange(json_obj: string | ISetSelectionRangeArg): number
 
-  interface IGetSelectedRangeReturn { "unit": hidemaru.ILiteralUnit, "items": { "line1": number, "col1": number, "line2": number, "col2": number }[], "line1": number, "col1": number, "line2": number, "col2": number }
+  interface IGetSelectedRangeReturn extends ISetSelectionRangeArg {};
   /**
    * f
    * 
