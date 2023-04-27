@@ -17177,7 +17177,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s
    * 
-   * iskeydown関数は、指定されたキーの状態を取得します。
+   * iskeydown関数は、指定されたキーの状態を取得します。  
+   * [非同期]
    * 
    * @example
    * var f =iskeydown( 'A' );
@@ -37337,7 +37338,8 @@ declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_
   /**
    * s
    * 
-   * iskeydown関数は、指定されたキーの状態を取得します。
+   * iskeydown関数は、指定されたキーの状態を取得します。  
+   * [非同期]
    * 
    * @example
    * var f =iskeydown( 'A' );
