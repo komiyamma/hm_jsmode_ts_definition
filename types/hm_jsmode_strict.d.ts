@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.03
+ * @version v9.22.13.04
  */
 
 /**
@@ -18532,83 +18532,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
     ShowFormLine?: IBooleanFlag;                              //[デザイン]→[行番号]→[整形ライン] ON/OFF
     FormLine?: number;                                    //[デザイン]→[行番号]→[整形ライン] 桁数
 
-    ColorSet?: {                                                //[デザイン]
-        normal?: IConfigTextColorAndBackStyle;           //普通の文字
-        curline?: IConfigTextColor;                             //カーソル行
-        curlineime?: IConfigTextColor;                             //カーソル行(IME ON時)
-        caretime?: IConfigTextColor;                             //キャレット(IME ON時)
-        imeinput?: IConfigTextColorAndBackTransparency;               //IME変換中の色
-        curlinevert?: IConfigTextColor;                             //カーソル位置の縦線
-        selection?: IConfigTextColorAndBackStyleTransparency;     //範囲選択
-        cr?: IConfigTextColor;                             //改行文字、EOF(ファイルの末尾)
-        tab?: IConfigTextColor;                             //タブ文字
-        space?: IConfigTextColor;                             //全角空白、半角空白
-        ruler?: IConfigTextColorAndBackColor;                     //ルーラー
-        foldable?: IConfigTextColorAndBackTransparency;               //折りたたみ用の余白
-        folded?: IConfigTextColorAndBackTransparency;               //折りたたまれた行の表示
-        lineno?: IConfigTextColorAndBackStyleTransparency;     //行番号
-        linenoupdated?: IConfigTextColorAndBackStyleTransparency;     //編集した行の行番号
-        linenomark?: IConfigTextColorAndBackStyleTransparency;     //マークした行の行番号
-        kakkopair?: IConfigTextColorAndBackStyleTransparency;     //対応する括弧の強調表示
-        tagpair?: IConfigTextColorAndBackStyleTransparency;     //対応するタグの強調表示
-        curword?: IConfigTextColorAndBackStyleTransparency;     //カーソル位置の単語
-        guidelinevert?: IConfigTextColor;                             //ガイドライン(縦)
-        indent1?: IConfigTextColorTransparency;                       //深さの色1
-        indent2?: IConfigTextColorTransparency;                       //深さの色2
-        indent3?: IConfigTextColorTransparency;                       //深さの色3
-        indent4?: IConfigTextColorTransparency;                       //深さの色4
-        indent5?: IConfigTextColorTransparency;                       //深さの色5
-        indent6?: IConfigTextColorTransparency;                       //深さの色6
-        indent7?: IConfigTextColorTransparency;                       //深さの色7
-        indent8?: IConfigTextColorTransparency;                       //深さの色8
-        guidelinehorz?: IConfigTextColor;                             //ガイドライン(横)
-        orikaeshiline?: IConfigTextColor;                             //折り返し桁数の縦線
-        formline?: IConfigTextColor;                             //整形ライン
-        outlinepane?: IConfigTextColorAndBackColor;                     //アウトライン解析の枠
-        tree1?: IConfigTextColorAndBackColor;                     //レベルの色1
-        tree2?: IConfigTextColorAndBackColor;                     //レベルの色2
-        tree3?: IConfigTextColorAndBackColor;                     //レベルの色3
-        tree4?: IConfigTextColorAndBackColor;                     //レベルの色4
-        tree5?: IConfigTextColorAndBackColor;                     //レベルの色5
-        tree6?: IConfigTextColorAndBackColor;                     //レベルの色6
-        tree7?: IConfigTextColorAndBackColor;                     //レベルの色7
-        tree8?: IConfigTextColorAndBackColor;                     //レベルの色8
-        outlinepanesel?: IConfigTextColorAndBackColor;                     //アウトライン解析の枠選択
-        outlinebar?: IConfigTextColorAndBackColor;                     //見出しバー
-        stripe?: IConfigTextColor;                             //背景ストライプ表示
-        lastedit?: IConfigTextColor;                             //最後の編集した所
-        tabmode?: IConfigTextColorAndBackColor;                     //タブモードでのタブの色
-        inactivetab?: IConfigTextColorAndBackColor;                     //非アクティブなタブの色
-        //----------------------
-        script?: IConfigTextColorAndBackStyleTransparency;     //スクリプト部分
-        hilight1?: IConfigTextColorAndBackStyleTransparency;     //強調表示1
-        hilight2?: IConfigTextColorAndBackStyleTransparency;     //強調表示2
-        hilight3?: IConfigTextColorAndBackStyleTransparency;     //強調表示3
-        hilight4?: IConfigTextColorAndBackStyleTransparency;     //強調表示4
-        hilight5?: IConfigTextColorAndBackStyleTransparency;     //強調表示5
-        hilight6?: IConfigTextColorAndBackStyleTransparency;     //強調表示6
-        hilight7?: IConfigTextColorAndBackStyleTransparency;     //強調表示7
-        hilight8?: IConfigTextColorAndBackStyleTransparency;     //強調表示8
-        num?: IConfigTextColorAndBackStyleTransparency;     //number
-        string?: IConfigTextColorAndBackStyleTransparency;     //文字定数
-        htmltag?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグ全体
-        htmlelem?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグのエレメント
-        htmlattr?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグのアトリビュート
-        hilightline1?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示1
-        hilightline2?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示2
-        hilightline3?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示3
-        hilightline4?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示4
-        comment?: IConfigTextColorAndBackStyleTransparency;     //コメント
-        ifdef?: IConfigTextColorAndBackStyleTransparency;     //#ifdef等での無効部分
-        email?: IConfigTextColorAndBackStyleTransparency;     //メールアドレス
-        url?: IConfigTextColorAndBackStyleTransparency;     //ホームページURL
-        filename?: IConfigTextColorAndBackStyleTransparency;     //ファイル名と思わしき場所
-        especially1?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示1
-        especially2?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示2
-        especially3?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示3
-        especially4?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示4
-        hilightfound?: IConfigTextColorAndBackStyleTransparency;     //検索stringの強調
-    };
+    ColorSet?: IConfigColorSetJsonArg;
   }
 
   interface IForbiddenProcessingDetail {                                      //IForbiddenProcessingDetail
@@ -18633,6 +18557,84 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   interface IConfigTextColorAndBackStyle { text?: IConfigRGBHex | IConfigSysColor; back?: IConfigRGBHex | IConfigSysColor; style?: IConfigStyles; }
   interface IConfigTextColorAndBackStyleTransparency { text?: IConfigRGBHex | IConfigSysColor | "transparent"; back?: IConfigRGBHex | IConfigSysColor | "transparent"; style?: IConfigStyles | "transparent"; }
 
+  interface IConfigColorSet {
+    normal?: IConfigTextColorAndBackStyle;           //普通の文字
+    curline?: IConfigTextColor;                             //カーソル行
+    curlineime?: IConfigTextColor;                             //カーソル行(IME ON時)
+    caretime?: IConfigTextColor;                             //キャレット(IME ON時)
+    imeinput?: IConfigTextColorAndBackTransparency;               //IME変換中の色
+    curlinevert?: IConfigTextColor;                             //カーソル位置の縦線
+    selection?: IConfigTextColorAndBackStyleTransparency;     //範囲選択
+    cr?: IConfigTextColor;                             //改行文字、EOF(ファイルの末尾)
+    tab?: IConfigTextColor;                             //タブ文字
+    space?: IConfigTextColor;                             //全角空白、半角空白
+    ruler?: IConfigTextColorAndBackColor;                     //ルーラー
+    foldable?: IConfigTextColorAndBackTransparency;               //折りたたみ用の余白
+    folded?: IConfigTextColorAndBackTransparency;               //折りたたまれた行の表示
+    lineno?: IConfigTextColorAndBackStyleTransparency;     //行番号
+    linenoupdated?: IConfigTextColorAndBackStyleTransparency;     //編集した行の行番号
+    linenomark?: IConfigTextColorAndBackStyleTransparency;     //マークした行の行番号
+    kakkopair?: IConfigTextColorAndBackStyleTransparency;     //対応する括弧の強調表示
+    tagpair?: IConfigTextColorAndBackStyleTransparency;     //対応するタグの強調表示
+    curword?: IConfigTextColorAndBackStyleTransparency;     //カーソル位置の単語
+    guidelinevert?: IConfigTextColor;                             //ガイドライン(縦)
+    indent1?: IConfigTextColorTransparency;                       //深さの色1
+    indent2?: IConfigTextColorTransparency;                       //深さの色2
+    indent3?: IConfigTextColorTransparency;                       //深さの色3
+    indent4?: IConfigTextColorTransparency;                       //深さの色4
+    indent5?: IConfigTextColorTransparency;                       //深さの色5
+    indent6?: IConfigTextColorTransparency;                       //深さの色6
+    indent7?: IConfigTextColorTransparency;                       //深さの色7
+    indent8?: IConfigTextColorTransparency;                       //深さの色8
+    guidelinehorz?: IConfigTextColor;                             //ガイドライン(横)
+    orikaeshiline?: IConfigTextColor;                             //折り返し桁数の縦線
+    formline?: IConfigTextColor;                             //整形ライン
+    outlinepane?: IConfigTextColorAndBackColor;                     //アウトライン解析の枠
+    tree1?: IConfigTextColorAndBackColor;                     //レベルの色1
+    tree2?: IConfigTextColorAndBackColor;                     //レベルの色2
+    tree3?: IConfigTextColorAndBackColor;                     //レベルの色3
+    tree4?: IConfigTextColorAndBackColor;                     //レベルの色4
+    tree5?: IConfigTextColorAndBackColor;                     //レベルの色5
+    tree6?: IConfigTextColorAndBackColor;                     //レベルの色6
+    tree7?: IConfigTextColorAndBackColor;                     //レベルの色7
+    tree8?: IConfigTextColorAndBackColor;                     //レベルの色8
+    outlinepanesel?: IConfigTextColorAndBackColor;                     //アウトライン解析の枠選択
+    outlinebar?: IConfigTextColorAndBackColor;                     //見出しバー
+    stripe?: IConfigTextColor;                             //背景ストライプ表示
+    lastedit?: IConfigTextColor;                             //最後の編集した所
+    tabmode?: IConfigTextColorAndBackColor;                     //タブモードでのタブの色
+    inactivetab?: IConfigTextColorAndBackColor;                     //非アクティブなタブの色
+    //----------------------
+    script?: IConfigTextColorAndBackStyleTransparency;     //スクリプト部分
+    hilight1?: IConfigTextColorAndBackStyleTransparency;     //強調表示1
+    hilight2?: IConfigTextColorAndBackStyleTransparency;     //強調表示2
+    hilight3?: IConfigTextColorAndBackStyleTransparency;     //強調表示3
+    hilight4?: IConfigTextColorAndBackStyleTransparency;     //強調表示4
+    hilight5?: IConfigTextColorAndBackStyleTransparency;     //強調表示5
+    hilight6?: IConfigTextColorAndBackStyleTransparency;     //強調表示6
+    hilight7?: IConfigTextColorAndBackStyleTransparency;     //強調表示7
+    hilight8?: IConfigTextColorAndBackStyleTransparency;     //強調表示8
+    num?: IConfigTextColorAndBackStyleTransparency;     //number
+    string?: IConfigTextColorAndBackStyleTransparency;     //文字定数
+    htmltag?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグ全体
+    htmlelem?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグのエレメント
+    htmlattr?: IConfigTextColorAndBackStyleTransparency;     //HTMLタグのアトリビュート
+    hilightline1?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示1
+    hilightline2?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示2
+    hilightline3?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示3
+    hilightline4?: IConfigTextColorAndBackStyleTransparency;     //行の強調表示4
+    comment?: IConfigTextColorAndBackStyleTransparency;     //コメント
+    ifdef?: IConfigTextColorAndBackStyleTransparency;     //#ifdef等での無効部分
+    email?: IConfigTextColorAndBackStyleTransparency;     //メールアドレス
+    url?: IConfigTextColorAndBackStyleTransparency;     //ホームページURL
+    filename?: IConfigTextColorAndBackStyleTransparency;     //ファイル名と思わしき場所
+    especially1?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示1
+    especially2?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示2
+    especially3?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示3
+    especially4?: IConfigTextColorAndBackStyleTransparency;     //特に強調表示4
+    hilightfound?: IConfigTextColorAndBackStyleTransparency;     //検索stringの強調
+  };
+  
   /**
    * f    
    * 
@@ -19194,6 +19196,42 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  
    */
   function getconfigcolor(n1: number, n2: number): number
+
+  type IGetConfigColorJsonArg = IConfigColorSet;
+  type IGetConfigColorJsonReturn = IConfigColorSet;
+  /**
+   * f    
+   * 
+   * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
+   * 取得する情報をJSONオブジェクトで指定し、JSONオブジェクトで取得します。   
+   * [非同期]
+   * 
+   * @example
+   * js{
+   *   var obj = hidemaruGlobal.getconfigcolor({
+   *     normal: {},
+   *     comment: {},
+   *     hilight1: ,
+   *   });
+   *   message( JSON.stringify(obj).replace(/},/g,"},\r\n") );
+   *   message( JSON.stringify(obj.comment) );
+   *   message( obj.comment.text );
+   * }
+   * 
+   * @comment
+   * プロパティ名はconfigcolorのJSON/オブジェクト指定と同じです。  
+   * プロパティと共に適当な値を指定します。取得されると値は上書きされます。  
+   * プロパティ名に"*"を指定すると、取得可能なものを全て取得します。  
+   * 
+   * 
+   * @returns
+   * ファイルタイプ別のカラー情報をJSONオブジェクトで返します。    
+   * 型は IGetConfigColorJsonReturn型 に従います。    
+   * 引数に { "*": {} } が指定されている場合には、取得可能なものを全て取得したオブジェクトを返します。   
+   * この際も、型は IGetConfigColorJsonReturn 型に従います。
+   *  
+   */
+  function getconfigcolor(json_obj: IGetConfigColorJsonArg | { "*"?: {} } | object): IGetConfigColorJsonReturn | object;
 
   /**
    * s
