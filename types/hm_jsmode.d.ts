@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.06
+ * @version v9.22.13.07
  */
 
 /**
@@ -869,7 +869,7 @@ declare namespace hidemaru {
    * テキスト全体を返します。    
    * 失敗した場合はundefinedになります
    */
-  function getTotalText(): string
+  function getTotalText(): string | undefined
 
   /**
    * f
@@ -890,7 +890,7 @@ declare namespace hidemaru {
    * 指定した行の内容を返します。    
    * 失敗した場合はundefinedになります。
    */
-  function getLineText(line_num?: number): string
+  function getLineText(line_num?: number): string | undefined
 
   /**
    * f
@@ -907,7 +907,7 @@ declare namespace hidemaru {
    * 範囲選択の内容を文字列で返します。    
    * (選択していないなどの理由で)失敗した場合はundefinedになります。
    */
-  function getSelectedText(): string
+  function getSelectedText(): string | undefined
 
   /**
    * f

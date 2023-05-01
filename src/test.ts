@@ -6,3 +6,5 @@ console.log("hello");
 let selectedMenuNumber = menu("あいうえ", "かきく");
 console.log(selectedMenuNumber);
 
+ var thistext = "This is a paragraph.\n\n\n\nThis is another paragraph.\n\n\n";
+ var trimmedStr = thistext.replace(/\n+$/, "");
