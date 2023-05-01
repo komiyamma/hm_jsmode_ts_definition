@@ -14647,7 +14647,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
-  interface IBrowsrePaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
+  interface IBrowserPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
   /**
    * f    
    * 
@@ -14685,7 +14685,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(json_obj: IBrowsrePaneCommandArg | object): string
+  function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
 
   /**
    * f    
@@ -34861,7 +34861,7 @@ declare function setbrowserpanesize(size: number, target_pane?: number): number
    */
 declare function setbrowserpaneurl(url: string, target_pane?: number): number
 
-  interface IBrowsrePaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
+  interface IBrowserPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
   /**
    * f    
    * 
@@ -34899,7 +34899,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-declare function browserpanecommand(json_obj: IBrowsrePaneCommandArg | object): string
+declare function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
 
   /**
    * f    
