@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.13.07
+ * @version v9.22.14.01
  */
 
 /**
@@ -1284,6 +1284,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * (※JavaScriptにおいては、文も関数化されており、返り値がresult相当であるため、    
    * この関数を使う機会はほとんど無いはずです。    
@@ -1368,6 +1369,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのx座標を表します。    
    * カーソルが一番左にいる時が0です。    
@@ -1386,6 +1388,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのy座標を表します。    
    * y座標は、現在編集中のテキストの先頭行からワープロ的に行番号を計算した値です。    
@@ -1397,6 +1400,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのカラム位置を表します。    
    * カラム位置は、論理行頭（直前の改行文字の次）から現在のカーソル位置までの文字数を数えた値です。    
@@ -1446,6 +1450,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソル位置の、エディタ的に計算した行番号を表します。    
    * ファイルの先頭が1です。 
@@ -1489,6 +1494,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソル位置の文字コードを表します。    
    * 2バイト文字の場合は2バイトのコードを返します。    
@@ -1614,6 +1620,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのX座標のピクセル位置を返します。    
    * （スクリーン座標）
@@ -1626,6 +1633,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのY座標のピクセル位置を返します。    
    * （スクリーン座標）
@@ -1638,6 +1646,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのX座標のピクセル位置を返します。    
    * （編集エリア左上からの相対位置）
@@ -1650,6 +1659,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのY座標のピクセル位置を返します。    
    * （編集エリア左上からの相対位置）
@@ -3002,6 +3012,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
    * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
@@ -3030,6 +3041,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * inputstatesは、各種の入力ができるかどうかを判断するための状態を取得します。    
    * 
@@ -4145,6 +4157,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]    
    * 
    * str関数は、数値を文字列に変換します。    
    * (秀丸マクロの互換のために実装されていますが、    
@@ -4270,6 +4283,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]    
    * 
    * hex関数は、数値を16進数の文字列に変換します。
    * 
@@ -8558,6 +8572,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]    
    * 
    * up文は、カーソル上コマンドと同等のカーソル移動を行います。
    * 
@@ -8588,6 +8603,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]    
    * 
    * down文は、カーソル下コマンドと同等のカーソル移動を行います。
    * 
@@ -8618,6 +8634,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]    
    * 
    * right文は、カーソル右コマンドと同等のカーソル移動を行います。
    * 
@@ -8663,6 +8680,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * s
    * 
    * left文は、カーソル左コマンドと同等のカーソル移動を行います。
+   * [非同期]    
    * 
    * @example
    * left();
@@ -21498,6 +21516,7 @@ declare function evalMacro(expression: string): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * (※JavaScriptにおいては、文も関数化されており、返り値がresult相当であるため、    
    * この関数を使う機会はほとんど無いはずです。    
@@ -21582,6 +21601,7 @@ declare function regulardll(): string
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのx座標を表します。    
    * カーソルが一番左にいる時が0です。    
@@ -21600,6 +21620,7 @@ declare function x(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのy座標を表します。    
    * y座標は、現在編集中のテキストの先頭行からワープロ的に行番号を計算した値です。    
@@ -21611,6 +21632,7 @@ declare function y(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのカラム位置を表します。    
    * カラム位置は、論理行頭（直前の改行文字の次）から現在のカーソル位置までの文字数を数えた値です。    
@@ -21660,6 +21682,7 @@ declare function column_gcu(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソル位置の、エディタ的に計算した行番号を表します。    
    * ファイルの先頭が1です。 
@@ -21703,6 +21726,7 @@ declare function xview(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソル位置の文字コードを表します。    
    * 2バイト文字の場合は2バイトのコードを返します。    
@@ -21828,6 +21852,7 @@ declare function lineupdated(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのX座標のピクセル位置を返します。    
    * （スクリーン座標）
@@ -21840,6 +21865,7 @@ declare function xpixel(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのY座標のピクセル位置を返します。    
    * （スクリーン座標）
@@ -21852,6 +21878,7 @@ declare function ypixel(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのX座標のピクセル位置を返します。    
    * （編集エリア左上からの相対位置）
@@ -21864,6 +21891,7 @@ declare function xpixel2(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * カーソルのY座標のピクセル位置を返します。    
    * （編集エリア左上からの相対位置）
@@ -23216,6 +23244,7 @@ declare function updated(hidemaru_handle?: number): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
    * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
@@ -23244,6 +23273,7 @@ declare function anyclipboard(): number
 
   /**
    * k    
+   * [非同期]    
    * 
    * inputstatesは、各種の入力ができるかどうかを判断するための状態を取得します。    
    * 
@@ -24359,6 +24389,7 @@ declare function outlineitemcount(): number
 
   /**
    * f    
+   * [非同期]    
    * 
    * str関数は、数値を文字列に変換します。    
    * (秀丸マクロの互換のために実装されていますが、    
@@ -24484,6 +24515,7 @@ declare function unichar(unichar_code: number): string
 
   /**
    * f    
+   * [非同期]    
    * 
    * hex関数は、数値を16進数の文字列に変換します。
    * 
@@ -28772,6 +28804,7 @@ declare function propertydialog(): number
 
   /**
    * s
+   * [非同期]    
    * 
    * up文は、カーソル上コマンドと同等のカーソル移動を行います。
    * 
@@ -28802,6 +28835,7 @@ declare function up(n_step?: number): number
 
   /**
    * s
+   * [非同期]    
    * 
    * down文は、カーソル下コマンドと同等のカーソル移動を行います。
    * 
@@ -28832,6 +28866,7 @@ declare function down(n_step?: number): number
 
   /**
    * s
+   * [非同期]    
    * 
    * right文は、カーソル右コマンドと同等のカーソル移動を行います。
    * 
@@ -28877,6 +28912,7 @@ declare function right(n_step?: number): number
    * s
    * 
    * left文は、カーソル左コマンドと同等のカーソル移動を行います。
+   * [非同期]    
    * 
    * @example
    * left();
