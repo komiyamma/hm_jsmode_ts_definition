@@ -9811,11 +9811,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * TSV/CSVモードではタブ区切り/カンマ区切りの前の位置にジャンプします。    
    * 
    * @param move_step
-   * パラメータで移動する量を指定できます。    
-   * 省略すると1と同じです。（V9.22以降）
+   * 戻る量を指定します。省略すると１つ戻ります。（V9.22以降）
    * 
    * @returns
-   * resultがカーソル移動しかたどうかが得られます。    
+   * カーソル移動しかたどうかが得られます。    
    * カーソル移動した場合は０以外を返す。    
    * カーソル移動しなかった場合は０を返す。
    */
@@ -9829,11 +9828,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * TSV/CSVモードではタブ区切り/カンマ区切りの次の位置にジャンプします
    * 
    * @param move_step
-   * パラメータで移動する量を指定できます。    
-   * 省略すると1と同じです。（V9.22以降）
+   * 進む量を指定します。省略すると１つ進みます。（V9.22以降）
    * 
    * @returns
-   * resultがカーソル移動しかたどうかが得られます。    
+   * カーソル移動しかたどうかが得られます。    
    * カーソル移動した場合は０以外を返す。    
    * カーソル移動しなかった場合は０を返す。
    */
@@ -14678,9 +14676,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - uri: URI。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
-   *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
-   *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
-   *  - 　"load"の場合、"0"または"1"が返る。
+   *    - "readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
+   *    - "DOMContentLoaded"の場合、"0"または"1"が返る。
+   *    - "load"の場合、"0"または"1"が返る。
    *  -   "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    * 
@@ -14763,10 +14761,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
-   *  - 　"readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
-   *  - 　"DOMContentLoaded"の場合、"0"または"1"が返る。
-   *  - 　"load"の場合、"0"または"1"が返る。
-   *  -   "show"の場合、"0"または"1"が返る。
+   *    - "readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
+   *    - "DOMContentLoaded"の場合、"0"または"1"が返る。
+   *    - "load"の場合、"0"または"1"が返る。
+   *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - align: オーバーレイ時の水平配置。"left" "center" "right" "screenleft" "screencenter" "screenright"のいずれか。（ただしウィンドウの外には出ない）
    *  - valign: オーバーレイ時の垂直配置。"top" "center"または"middle" "bottom" "top" "screencenter" "screenbottom"のいずれか。（ただしウィンドウの外には出ない）
@@ -20631,6 +20629,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 8 アクティブ切り替え後(V8.00以降)    
    * 9 テンプレート(スニペット)による実行(V9.16以降)    
    * 10 registercallbackされたマクロによる実行(V9.22以降)    
+   * 11 keyhookによる実行(V9.22以降)    
    */
   function event(): number
 
@@ -20806,6 +20805,18 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @see registercallback
    * @see レンダリング枠
+   * 
+   * @comment
+   * - keyhookによる実行(event==11)    
+   *   - geteventparam(0)の返り値：    
+   *     - keyhookで登録されたID    
+   *   - geteventparam(1)の返り値：    
+   *     - keyhookで登録されたキーコード    
+   * 
+   * @example
+   * if ( event() == 11 ) {
+   *     var param = geteventparam( 0 );
+   * }
    * 
    * @returns
    * 指定された情報を返します。    
