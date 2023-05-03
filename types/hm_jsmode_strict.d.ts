@@ -14679,7 +14679,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    - "readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
    *    - "DOMContentLoaded"の場合、"0"または"1"が返る。
    *    - "load"の場合、"0"または"1"が返る。
-   *  -   "show"の場合、"0"または"1"が返る。
+   *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    * 
    * @example
@@ -14698,6 +14698,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
    * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "get" の "show"の場合、"0"または"1"が返る。
    * - その他の場合、空の文字列が返ります。
    */
   function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
@@ -14828,6 +14829,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
    * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "get" の "show"の場合、"0"または"1"が返る。
    * - その他の場合、空の文字列が返ります。
    */
   function renderpanecommand(json_obj: IRenderPaneCommandArg | object): string
