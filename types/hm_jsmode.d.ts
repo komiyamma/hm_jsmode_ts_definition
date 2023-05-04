@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.14.01
+ * @version v9.22.14.02
  */
 
 /**
@@ -974,6 +974,43 @@ declare namespace hidemaru {
    * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
    */
   function getCursorPosFromMousePos(literal_unit?: hidemaru.ILiteralUnit, pos_x?: number, pos_y?: number): [lineno: number, column: number]
+
+  /**
+   * f
+   * 
+   * getPixelPosFromCursorPosメソッドは、指定された文字の位置（カーソル位置）の画面上のピクセル位置を取得します。    
+   *  [非同期]
+   * 
+   * @param literal_unit
+   * 単位を指定します。  
+   * "xy" "char" "wcs" "ucs4" "cmu" "gcu" のいずれかで、文字の単位に準じます。"xy"は秀丸単位(座標)で、"char"は秀丸単位(文字列/行)です。  
+   * 省略した場合は、"char"と同じです。  
+   * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
+   * 
+   * @param pos_column
+   * 桁位置（または文字のX座標）を指定します。桁位置の場合、0から数えます。    
+   * 省略した場合は、カーソルの位置になります。
+   * 
+   * @param pos_lineno
+   * 行番号（または文字のY座標）を指定します。行番号の場合、1から数えます。    
+   * 省略した場合は、カーソルの位置になります。
+   * 
+   * @example
+   * js {
+   *   var ayx = hidemaru.getPixelPosFromCursorPos();
+   *   message( "xpixel=" + ayx[1] + "\nypixel=" + ayx[0] );
+   * }
+   * js {
+   *   var ayx = hidemaru.getPixelPosFromCursorPos("wcs",0 ,1); // 0桁目,1行目
+   *   message( "xpixel=" + ayx[1] + "\nypixel=" + ayx[0] );
+   * }
+   * 
+   * @returns
+   * スクリーン座標のピクセル数の位置を配列で返します。    
+   * [0]はX軸のピクセル数です。
+   * [1]はY軸のピクセル数です。
+   */
+  function getPixelPosFromCursorPos(literal_unit?: hidemaru.ILiteralUnit, pos_column?: number, pos_lineno?: number): [pos_x: number, pos_y: number]
 
   /**
    * f
