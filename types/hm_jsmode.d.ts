@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.14.02
+ * @version v9.22.15.01
  */
 
 /**
@@ -267,8 +267,10 @@ declare namespace hidemaru {
   }
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * loadDllメソッドは、秀丸用のdllfunc対応のDLLを読み込みます。
-   * [非同期]
    * 
    * @param dllpath 
    * DLLのファイル名を指定します。
@@ -288,10 +290,10 @@ declare namespace hidemaru {
   function loadDll(dllpath: string): ILoadDllResult | undefined;
 
   /**
-   * s
+   * s    
+   * [非同期]    
    * 
    * createobject関数は、COMオブジェクトを作成します。    
-   * [非同期]
    * 
    * @param progid 
    * 登録されたCOMオブジェクトのProgIdを指定します。
@@ -314,10 +316,10 @@ declare namespace hidemaru {
   function createObject(progid: string): any | undefined;
 
   /**
-   * s
+   * s    
+   * [非同期]    
    * 
    * createobject関数は、COMオブジェクトを作成します。
-   * [非同期]
    * 
    * @param dllpath 
    * DLLのファイル名をフルパスで指定します。
@@ -582,8 +584,10 @@ declare namespace hidemaru {
   }
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * runProcessメソッドは、プロセスを起動します。    
-   *  [非同期]    
    * 
    * @param command 
    * コマンドラインの文字列を指定します。
@@ -621,10 +625,10 @@ declare namespace hidemaru {
   function runProcess(command: string, current_dir?: string, mode_name?: "gui" | "stdio" | "guiStdio", encode_name?: "utf8" | "utf16" | "sjis"): IProcessInfo;
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getCurrentProcessInfoメソッドは、自分自身(Hidemaru.exe)のProcessInfoオブジェクトを取得します。    
-   *  [非同期]    
    * 
    * ProcessInfoオブジェクト内のstdIn, stdOut, stdErrプロパティは、通常は扱えません。    
    * Hidemaru.exeを、/stdioオプション付きで起動したとき、stdIn, stdOut, stdErrプロパティが扱えるようになります。    
@@ -662,11 +666,11 @@ declare namespace hidemaru {
   function getCurrentProcessInfo(): IProcessInfo;
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * hwndで指定されるウィンドウハンドルにメッセージを送ります。    
    * 原則的には、Win32 API の SendMesage と同じものです。    
-   *  [非同期]    
    * 
    * sendmessageは、使い方を誤るとハングしたり異常終了することもあるので注意して下さい。  
    * メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
@@ -695,10 +699,10 @@ declare namespace hidemaru {
   function sendMessage(hwnd: number, wndmsg_id: number, wparam: number, lparam: number): number;
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * isMacroExecutingメソッドは、現在マクロ実行中かどうかを取得します。    
-   *  [非同期]    
    * 
    * @example
    * js{
@@ -732,11 +736,11 @@ declare namespace hidemaru {
   function isMacroExecuting(): number
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * postExecMacroFileメソッドは、ファイル名を指定して、マクロ実行をスケジュールします。    
    * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
-   *  [非同期]    
    * 
    * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
    * 
@@ -779,10 +783,10 @@ declare namespace hidemaru {
   function postExecMacroFile(filepath: string, arg?: string): void;
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
-   *  [非同期]
    * 
    * @param expression
    * マクロの内容を文字列で指定します。
@@ -823,8 +827,10 @@ declare namespace hidemaru {
   function postExecMacroMemory(expression: string): void;
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * getFunctionIdメソッドは、関数のIDを取得します。    
-   *  [非同期]
    * 
    * @example
    * js {
@@ -857,10 +863,10 @@ declare namespace hidemaru {
   function getFunctionId(func: Function): number
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getTotalTextは、現在の編集ペインのテキスト全体を文字列にして返します。    
-   *  [非同期]
    * 
    * @example
    * var text = hidemaru.getTotalText();
@@ -872,10 +878,10 @@ declare namespace hidemaru {
   function getTotalText(): string | undefined
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getLineTextメソッドは、指定行のテキストを文字列にして取得します。    
-   *  [非同期]
    * 
    * @param line_num
    * 行番号を指定します。先頭が1です。    
@@ -893,10 +899,10 @@ declare namespace hidemaru {
   function getLineText(line_num?: number): string | undefined
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getSelectedTextメソッドは、範囲選択の内容を取得します。     
-   *  [非同期]
    * 
    * @example
    * js {
@@ -910,10 +916,10 @@ declare namespace hidemaru {
   function getSelectedText(): string | undefined
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getCursorPosメソッドは、現在のカーソル位置を取得します。    
-   *  [非同期]
    * 
    * @param literal_unit
    * 単位を指定します。  
@@ -939,10 +945,10 @@ declare namespace hidemaru {
   function getCursorPos(literal_unit?: hidemaru.ILiteralUnit): [lineno: number, column: number]
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getCursorPosFromMousePosメソッドは、画面の指定された座標にある文字の位置を取得します。    
-   *  [非同期]
    * 
    * @param literal_unit
    * 単位を指定します。  
@@ -976,10 +982,10 @@ declare namespace hidemaru {
   function getCursorPosFromMousePos(literal_unit?: hidemaru.ILiteralUnit, pos_x?: number, pos_y?: number): [lineno: number, column: number]
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getPixelPosFromCursorPosメソッドは、指定された文字の位置（カーソル位置）の画面上のピクセル位置を取得します。    
-   *  [非同期]
    * 
    * @param literal_unit
    * 単位を指定します。  
@@ -1013,10 +1019,10 @@ declare namespace hidemaru {
   function getPixelPosFromCursorPos(literal_unit?: hidemaru.ILiteralUnit, pos_column?: number, pos_lineno?: number): [pos_x: number, pos_y: number]
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * getCurrentWindowHandleメソッドは、現在の秀丸エディタのウィンドウハンドルを取得します。    
-   *  [非同期]
    * 
    * 値としては、hidemaruhandle(0)と同じですが、非同期で使えるところに価値があります。
    * 
@@ -1031,9 +1037,11 @@ declare namespace hidemaru {
 
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * setstaticvariableと同様の関数です。    
    * 静的な変数を書き込みます。    
-   *  [非同期]
    * 
    * @param key 
    * 変数名を指定します。大文字と小文字の区別はされません。    
@@ -1063,9 +1071,11 @@ declare namespace hidemaru {
   function setStaticVariable(key: string, str_value: string, scope_type?: number): number
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * getstaticvariableと同様の関数です。    
    * 静的な変数を取得します。    
-   *  [非同期]
    *
    * @param key
    * 変数名を指定します。大文字と小文字の区別はされません。    
@@ -1093,9 +1103,11 @@ declare namespace hidemaru {
   function getStaticVariable(key: string, scope_type?: number): string
 
   /**
+   * f    
+   * [非同期]
+   * 
    * getFileFullPath関数は、 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。    
    * filename2()とほぼ同じですが、非同期で使えるところに価値があります。    
-   *  [非同期]
    * 
    * @example
    * js {
@@ -1108,8 +1120,10 @@ declare namespace hidemaru {
   function getFileFullPath(): string
 
   /**
+   * f     
+   * [非同期]    
+   * 
    * getUpdateCount関数は、編集のたびに加算されるupdatecountキーワードに相当する値を表します。    
-   *  [非同期]
    * 
    * 何らかの操作によって本文テキストの内容が変わったときにカウントされる値です。    
    * ファイルを閉じても初期値には戻らず、ひたすらカウントします。    
@@ -1153,8 +1167,10 @@ declare namespace hidemaru {
   function loadTextFile(filepath: string): string | undefined;
 
   /**
-   * saveTextFileメソッドは、文字列をテキストファイルに書き込みます。   
-   *  [非同期]
+   * f    
+   * [非同期]  
+   * 
+   saveTextFileメソッドは、文字列をテキストファイルに書き込みます。   
    * 
    * @param filepath 
    * ファイル名をフルパスで指定します。
@@ -1183,8 +1199,10 @@ declare namespace hidemaru {
 
 
   /**
+   * f    
+   * [非同期]
+   * 
    * setTimeoutメソッドは、一定時間経過後に実行する関数を指定します。    
-   *  [非同期]
    * 
    * WebView2 版のwindow.setTimeout と比べ、ウィンドウが非アクティブであってもタイマーがかなり正確に刻まれるという特徴があります。    
    * clearTimeoutメソッドで、解除します。    
@@ -1207,10 +1225,10 @@ declare namespace hidemaru {
   function setTimeout(func: Function, millisecond: number): number
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * setTimeout() の呼び出しによって以前に確立されたタイムアウトを解除します。    
-   *  [非同期]    
    * 
    * @param timeout_id
    * 解除したいタイムアウトの識別子です。    
@@ -1222,8 +1240,10 @@ declare namespace hidemaru {
 
 
   /**
+   * f    
+   * [非同期]    
+   * 
    * setIntervalメソッドは、一定時間ごとに何度も実行する関数を指定します。
-   *  [非同期]
    * 
    * WebView2 版のwindow.setInterval と比べ、ウィンドウが非アクティブであってもタイマーがかなり正確に刻まれるという特徴があります。    
    * clearIntervalメソッドで、解除します。    
@@ -1245,10 +1265,10 @@ declare namespace hidemaru {
   function setInterval(func: Function, millisecond: number): number
 
   /**
-   * f
+   * f    
+   * [非同期]    
    * 
    * setInterval() の呼び出しによって以前に確立されたタイムアウトを解除します。    
-   *  [非同期]    
    * 
    * @param timeout_id
    * 解除したいタイムアウトの識別子です。    
@@ -1260,9 +1280,9 @@ declare namespace hidemaru {
   
   /**
    * k    
+   * [非同期]    
    * 
    * getInputStates関数は、各種の入力ができるかどうかを判断するための状態を取得します。    
-   *  [非同期]    
    * 
    * 各種の入力ができるかどうかを判断するための状態を表します。    
    * 以下の値の論理和です。    
@@ -1288,8 +1308,10 @@ declare namespace hidemaru {
   function getInputStates(): number
 
   /**
-   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
+   * f    
    * [非同期]
+   * 
+   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
    * 
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    * 
@@ -1428,6 +1450,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * [非同期]    
    * 
    * カーソルのy座標を表します。    
+   * 
    * y座標は、現在編集中のテキストの先頭行からワープロ的に行番号を計算した値です。    
    * 一番上にいる時が0です。 
    * 
@@ -1440,6 +1463,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * [非同期]    
    * 
    * カーソルのカラム位置を表します。    
+   * 
    * カラム位置は、論理行頭（直前の改行文字の次）から現在のカーソル位置までの文字数を数えた値です。    
    * カーソルが論理行頭にいる時が0です。    
    * 半角は1文字、全角は2文字、タブ文字は1文字として数えられます。    
@@ -1534,6 +1558,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * [非同期]    
    * 
    * カーソル位置の文字コードを表します。    
+   * 
    * 2バイト文字の場合は2バイトのコードを返します。    
    * 例えば全角空白の場合は0x8140になります。    
    * 
@@ -2638,9 +2663,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]   
    * 
    * 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。  
    * ファイル名はすべて小文字に変換されています。
+   * 
    * @example
    * var a = filename();
    * 
@@ -4301,9 +4328,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * unichar関数は、Unicodeの値を文字列にして返します。  
-   * [非同期]
    * 
    * char関数のUnicode版です。    
    * unicode関数と逆の関数です。
@@ -6783,7 +6810,6 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * f    
    * 
    * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。   
-   * [非同期]
    * 
    * @param target_prop
    * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
@@ -6840,8 +6866,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   interface IGetColorMarkerJsonArg {unit?: hidemaru.ILiteralUnit; text?: string, back?: string, wave?: string, style?: string, kind?: string, colorcode?: string, userdata?: number | "*" | "", funcid?: number | "*" | "", layer?: string, items?: IGetColorMarkerArg[], line1?: number | "*" | "", col1?: number | "*" | "", line2?: number | "*" | "", col2?: number | "*" | "", index?: number | "*" | "" };
   /**
-   * f
-   * getcolormarker関数のパラメータ１をJSONオブジェクトで指定し、JSONオブジェクトで取得します。[非同期]
+   * f  
+   * [非同期]   
+   * 
+   * getcolormarker関数のパラメータ１をJSONオブジェクトで指定し、JSONオブジェクトで取得します。    
    * 
    * @param json_obj
    * プロパティ名と意味：
@@ -6945,10 +6973,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getcolormarker(json_obj: IGetColorMarkerJsonArg | object): object
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getfilehist関数は、ファイルヒストリの文字列を取得します。  
-   * [非同期]
    * 
    * @param history_ix    
    * 0から始まるヒストリの番号を指定します。
@@ -8608,7 +8636,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function propertydialog(): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * up文は、カーソル上コマンドと同等のカーソル移動を行います。
@@ -8639,7 +8667,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function up(n_step?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * down文は、カーソル下コマンドと同等のカーソル移動を行います。
@@ -8670,7 +8698,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function down(n_step?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * right文は、カーソル右コマンドと同等のカーソル移動を行います。
@@ -8714,10 +8742,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function right(n_step?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]    
    * 
    * left文は、カーソル左コマンドと同等のカーソル移動を行います。
-   * [非同期]    
    * 
    * @example
    * left();
@@ -9114,7 +9142,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function jump(): number
 
   /**
-   * s
+   * s  
+   * [非同期]   
    * 
    * moveto文は、任意の位置にカーソルを移動します。
    * 
@@ -9153,7 +9182,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function moveto(pos_x: number, pos_y: number): number
 
   /**
-   * s
+   * s   
+   * [非同期]   
    * 
    * movetolineno文は、任意の位置にカーソルを移動します。    
    * エディタ的に計算した行番号と桁番号でカーソルを移動します。（改行だけを数える）    
@@ -9230,7 +9260,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function movetoview(pos_x: number, pos_y: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]   
    * 
    * moveto2文は、任意の位置にカーソルを移動します。
    * 
@@ -13251,12 +13282,12 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function hilightfound(is_on?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]    
    * 
    * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
    * 任意の位置に、幾つでもカラーマーカーを付けることができます。    
    * BOX選択でも適用されます。    
-   *  [非同期]    
    * 
    * @param json 
    * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
@@ -14605,9 +14636,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s    
+   * [非同期]   
    * 
    * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。  
-   * [非同期]
    * 
    * @param default_target
    * 英字から始まる任意の文字列を指定します。
@@ -14703,9 +14734,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   interface IBrowserPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
-   * [非同期]
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
@@ -14743,9 +14774,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対し、コマンド文字列により、枠の設定を指定します。  
-   * [非同期]
    * 
    * @param url
    * コマンドの文字列で取得したい情報を指示します。
@@ -14769,9 +14800,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対し、指定のURL表示や、javascriptの実行をします。  
-   * [非同期]
    * 
    * @param url
    * URLを文字列で指定します。    
@@ -14788,9 +14819,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, invisible?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
+   * [非同期]  
    * 
    * レンダリング枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
-   * [非同期]
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
@@ -17280,10 +17311,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * iskeydown関数は、指定されたキーの状態を取得します。  
-   * [非同期]
    * 
    * @example
    * var f =iskeydown( 'A' );
@@ -18044,10 +18075,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   type IConfigArg = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -18547,10 +18578,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function config(setting_expression: IConfigArg): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -18747,9 +18778,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   
   /**
    * f    
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param json_obj
    * 設定内容を含んだ json オブジェクトを指定します。
@@ -18800,10 +18831,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
-   * [非同期]
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -19153,10 +19184,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getconfig(key: IGetConfigArg): string | number
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
-   * [非同期]  
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -19173,10 +19204,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getconfig(key: string): string | number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。  
-   * [非同期]
    *
    * @param color_settings
    * 設定箇所と、文字色と背景食とスタイルを文字列で表した情報を指定します。    
@@ -19300,9 +19331,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
-   * [非同期]
    * 
    * @param n1 
    * 設定の種類を指定します。    
@@ -19341,10 +19372,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   interface IGetConfigColorJsonReturn extends IConfigColorSet {};
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 取得する情報をJSONオブジェクトで指定し、JSONオブジェクトで取得します。   
-   * [非同期]
    * 
    * @example
    * js{
@@ -20630,10 +20661,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getclipboardinfo(info_type: number): number
 
   /**
-   * f
+   * f  
+   *  [非同期]  
    * 
    * loaddll関数は、hidemaru.loadDll関数の別名となります。    
-   *  [非同期]
    * 
    * @param dllpath
    * DLLのファイル名を指定します。
@@ -21049,10 +21080,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   interface ISetSelectionRangeArg { "unit"?: hidemaru.ILiteralUnit, "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * setselectionrange文は、まとめて選択します。    
-   * [非同期]
    * 
    * @param json_obj
    * JSONのオブジェクトを指定します。    
@@ -21092,10 +21123,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   interface IGetSelectedRangeReturn extends ISetSelectionRangeArg {};
   /**
-   * f
+   * f    
+   * [非同期]   
    * 
    * getselectedrange関数は、範囲選択の情報をまとめて取得します。    
-   * [非同期]
    * 
    * @param json_obj
    * 単位をjsonのオブジェクトで指定します。
@@ -21673,6 +21704,7 @@ declare function x(): number
    * [非同期]    
    * 
    * カーソルのy座標を表します。    
+   * 
    * y座標は、現在編集中のテキストの先頭行からワープロ的に行番号を計算した値です。    
    * 一番上にいる時が0です。 
    * 
@@ -21685,6 +21717,7 @@ declare function y(): number
    * [非同期]    
    * 
    * カーソルのカラム位置を表します。    
+   * 
    * カラム位置は、論理行頭（直前の改行文字の次）から現在のカーソル位置までの文字数を数えた値です。    
    * カーソルが論理行頭にいる時が0です。    
    * 半角は1文字、全角は2文字、タブ文字は1文字として数えられます。    
@@ -21779,6 +21812,7 @@ declare function xview(): number
    * [非同期]    
    * 
    * カーソル位置の文字コードを表します。    
+   * 
    * 2バイト文字の場合は2バイトのコードを返します。    
    * 例えば全角空白の場合は0x8140になります。    
    * 
@@ -22883,9 +22917,11 @@ declare function browserpaneurl(target_pane?: number): string
 
   /**
    * k    
+   * [非同期]   
    * 
    * 現在編集中のファイル名をドライブ文字も含めたフルパスで表します。  
    * ファイル名はすべて小文字に変換されています。
+   * 
    * @example
    * var a = filename();
    * 
@@ -24546,9 +24582,9 @@ declare function ascii(character: string, fallback_behavior?: number): number
 
   /**
    * f    
+   * [非同期]  
    * 
    * unichar関数は、Unicodeの値を文字列にして返します。  
-   * [非同期]
    * 
    * char関数のUnicode版です。    
    * unicode関数と逆の関数です。
@@ -27028,7 +27064,6 @@ declare function getautocompitem(item_ix: number): string
    * f    
    * 
    * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。   
-   * [非同期]
    * 
    * @param target_prop
    * どのような情報を取得するかを、以下の値をOR演算した値によって指定します。
@@ -27085,8 +27120,10 @@ declare function getcolormarker(target_prop: number, layer_name?: string): strin
 
   interface IGetColorMarkerJsonArg {unit?: hidemaru.ILiteralUnit; text?: string, back?: string, wave?: string, style?: string, kind?: string, colorcode?: string, userdata?: number | "*" | "", funcid?: number | "*" | "", layer?: string, items?: IGetColorMarkerArg[], line1?: number | "*" | "", col1?: number | "*" | "", line2?: number | "*" | "", col2?: number | "*" | "", index?: number | "*" | "" };
   /**
-   * f
-   * getcolormarker関数のパラメータ１をJSONオブジェクトで指定し、JSONオブジェクトで取得します。[非同期]
+   * f  
+   * [非同期]   
+   * 
+   * getcolormarker関数のパラメータ１をJSONオブジェクトで指定し、JSONオブジェクトで取得します。    
    * 
    * @param json_obj
    * プロパティ名と意味：
@@ -27190,10 +27227,10 @@ declare function getcolormarker(target_prop: number, layer_name?: string): strin
 declare function getcolormarker(json_obj: IGetColorMarkerJsonArg | object): object
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getfilehist関数は、ファイルヒストリの文字列を取得します。  
-   * [非同期]
    * 
    * @param history_ix    
    * 0から始まるヒストリの番号を指定します。
@@ -28853,7 +28890,7 @@ declare function deletefile(filepath: string, move_to_recyeclebin?: number): num
 declare function propertydialog(): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * up文は、カーソル上コマンドと同等のカーソル移動を行います。
@@ -28884,7 +28921,7 @@ declare function propertydialog(): number
 declare function up(n_step?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * down文は、カーソル下コマンドと同等のカーソル移動を行います。
@@ -28915,7 +28952,7 @@ declare function up(n_step?: number): number
 declare function down(n_step?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]    
    * 
    * right文は、カーソル右コマンドと同等のカーソル移動を行います。
@@ -28959,10 +28996,10 @@ declare function down(n_step?: number): number
 declare function right(n_step?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]    
    * 
    * left文は、カーソル左コマンドと同等のカーソル移動を行います。
-   * [非同期]    
    * 
    * @example
    * left();
@@ -29359,7 +29396,8 @@ declare function goscreentop(): number
 declare function jump(): number
 
   /**
-   * s
+   * s  
+   * [非同期]   
    * 
    * moveto文は、任意の位置にカーソルを移動します。
    * 
@@ -29398,7 +29436,8 @@ declare function jump(): number
 declare function moveto(pos_x: number, pos_y: number): number
 
   /**
-   * s
+   * s   
+   * [非同期]   
    * 
    * movetolineno文は、任意の位置にカーソルを移動します。    
    * エディタ的に計算した行番号と桁番号でカーソルを移動します。（改行だけを数える）    
@@ -29475,7 +29514,8 @@ declare function movetolineno(pos_column_plus: number, pos_lineno: number): numb
 declare function movetoview(pos_x: number, pos_y: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]   
    * 
    * moveto2文は、任意の位置にカーソルを移動します。
    * 
@@ -33496,12 +33536,12 @@ declare function escapeinselect(): number
 declare function hilightfound(is_on?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]    
    * 
    * colormarker文は、範囲選択をした部分に、カラーマーカーを付けたりするなどの操作をします。    
    * 任意の位置に、幾つでもカラーマーカーを付けることができます。    
    * BOX選択でも適用されます。    
-   *  [非同期]    
    * 
    * @param json 
    * colormarkerの設定項目を、文字列をJSONで渡すことで、まとめて処理できます。    
@@ -34850,9 +34890,9 @@ declare function setbrowserpanetarget(default_target: "_common" | "_each" | 1 | 
 
   /**
    * s    
+   * [非同期]   
    * 
    * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。  
-   * [非同期]
    * 
    * @param default_target
    * 英字から始まる任意の文字列を指定します。
@@ -34948,9 +34988,9 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
   interface IBrowserPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
-   * [非同期]
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
@@ -34988,9 +35028,9 @@ declare function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): 
 
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対し、コマンド文字列により、枠の設定を指定します。  
-   * [非同期]
    * 
    * @param url
    * コマンドの文字列で取得したい情報を指示します。
@@ -35014,9 +35054,9 @@ declare function browserpanecommand(request_command: "get_DOMContentLoaded" | "g
 
   /**
    * f    
+   * [非同期]  
    * 
    * ブラウザ枠に対し、指定のURL表示や、javascriptの実行をします。  
-   * [非同期]
    * 
    * @param url
    * URLを文字列で指定します。    
@@ -35033,9 +35073,9 @@ declare function browserpanecommand(url: string): string
   interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, invisible?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
+   * [非同期]  
    * 
    * レンダリング枠に対する何らかの操作・取得・設定をJSONオブジェクトで指定します。  
-   * [非同期]
    * 
    * @param json_obj
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
@@ -37525,10 +37565,10 @@ declare function input(message_text: string, message_default?: string, input_pro
 declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * iskeydown関数は、指定されたキーの状態を取得します。  
-   * [非同期]
    * 
    * @example
    * var f =iskeydown( 'A' );
@@ -38289,10 +38329,10 @@ declare function configset(setting_name: string, config_state: number): number
 
   type IConfigArg = "xFont:" | "xFontSize:" | "xFontPoint:" | "xFontDecimal:" | "xFontCharSet:" | "xBoldFace:" | "xOrikaeshi:" | "xAutoAdjustOrikaeshi:" | "xKinsoku:" | "xCorrectLineNo:" | "xLF:" | "xCharSpace:" | "xTategaki:" | "xDangumi:" | "xFreeCursor:" | "xSaveLastPos:" | "xTab:" | "xTabMode:" | "xIndent:" | "xBlockquote:" | "xBquoteItemized:" | "xBquoteInclude:" | "xBlockquoteFix:" | "xUnderLine:" | "xImeColorCurLine:" | "xHideCR:" | "xShowCR:" | "xHideEOF:" | "xShowEOF:" | "xShowTab:" | "xShowBox:" | "xRuler:" | "xTabRuler:" | "xShowLineNo:" | "xShowPageNo:" | "xFormLine:" | "xActiveKakko:" | "xActiveTagPair:" | "xVertLine:" | "xGuideLine:" | "xGuideLineInterval:" | "xOrikaeshiLine:" | "xLastColor:" | "xStripe:" | "xColorNum:" | "xColorUrl:" | "xColorEmail:" | "xColorFN:" | "xCurLineColor:" | "xCurLineColorEx:" | "xRulerColor:" | "xRulerBack:" | "xColorComment:" | "xAspDefaultScript:" | "xAsp:" | "xJspComment:" | "xPhp:" | "xXml:" | "xColorIfdef:" | "xHilight:" | "xHilightTitle:" | "xHilightDirectWord:" | "xHilightDirectMulti:" | "xHilightDirectIfdef:" | "xOutline:" | "xClistFont:" | "xClistFontSize:" | "xHilightList:" | "xOutlineBar:" | "xRangeEdit:" | "xFolding:" | "xFoldingTwigBar:" | "xIme:" | "xAutocompFlag1:" | "xAutocompFlag2:" | "xAutocompDic:" | "xAutocompAuto:" | "xFiletypeCharcode:" | "xSaveConv:" | "xStripTrail:" | "xSaveWithEOF:" | "xIgnoreEOF:" | "xBackup:" | "xBackupFast:";
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -38792,10 +38832,10 @@ declare function configset(setting_name: string, config_state: number): number
 declare function config(setting_expression: IConfigArg): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param setting_expression
    * 設定する箇所と内容を指定します。    
@@ -38992,9 +39032,9 @@ declare function config(setting_expression: string): number
   
   /**
    * f    
+   * [非同期]  
    * 
    * config文は、ファイルタイプ別の設定を変更します。  
-   * [非同期]
    * 
    * @param json_obj
    * 設定内容を含んだ json オブジェクトを指定します。
@@ -39045,10 +39085,10 @@ declare function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | object): IGe
 
   type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
-   * [非同期]
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -39398,10 +39438,10 @@ declare function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | object): IGe
 declare function getconfig(key: IGetConfigArg): string | number
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * getconfig関数は、ファイルタイプ別の設定の値を、設定の名前で取得します。  
-   * [非同期]  
    * 
    * config("x...")で指定できる名前と同じものを指定します。
    *（getconfigのときは 頭についている x は不要です ）
@@ -39418,10 +39458,10 @@ declare function getconfig(key: IGetConfigArg): string | number
 declare function getconfig(key: string): string | number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。  
-   * [非同期]
    *
    * @param color_settings
    * 設定箇所と、文字色と背景食とスタイルを文字列で表した情報を指定します。    
@@ -39545,9 +39585,9 @@ declare function configcolor(color_settings: string): number
 
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
-   * [非同期]
    * 
    * @param n1 
    * 設定の種類を指定します。    
@@ -39586,10 +39626,10 @@ declare function getconfigcolor(n1: number, n2: number): number
   interface IGetConfigColorJsonReturn extends IConfigColorSet {};
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 取得する情報をJSONオブジェクトで指定し、JSONオブジェクトで取得します。   
-   * [非同期]
    * 
    * @example
    * js{
@@ -40875,10 +40915,10 @@ declare function addclipboard(text: string): number
 declare function getclipboardinfo(info_type: number): number
 
   /**
-   * f
+   * f  
+   *  [非同期]  
    * 
    * loaddll関数は、hidemaru.loadDll関数の別名となります。    
-   *  [非同期]
    * 
    * @param dllpath
    * DLLのファイル名を指定します。
@@ -41294,10 +41334,10 @@ declare function getselectedtext(): string
 
   interface ISetSelectionRangeArg { "unit"?: hidemaru.ILiteralUnit, "items"?: { "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }[], "line1"?: number, "col1"?: number, "line2"?: number, "col2"?: number }
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * setselectionrange文は、まとめて選択します。    
-   * [非同期]
    * 
    * @param json_obj
    * JSONのオブジェクトを指定します。    
@@ -41337,10 +41377,10 @@ declare function setselectionrange(json_obj: string | ISetSelectionRangeArg): nu
 
   interface IGetSelectedRangeReturn extends ISetSelectionRangeArg {};
   /**
-   * f
+   * f    
+   * [非同期]   
    * 
    * getselectedrange関数は、範囲選択の情報をまとめて取得します。    
-   * [非同期]
    * 
    * @param json_obj
    * 単位をjsonのオブジェクトで指定します。
