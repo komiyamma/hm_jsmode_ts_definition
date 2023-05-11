@@ -21164,6 +21164,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * }
    * endmacro;
    * 
+   * @example
+   * js{
+   *   //選択箇所に色を付ける（複数でも）
+   *   colormarker({
+   *     text: "#F00",
+   *     items: getselectedrange({}).items
+   *   });
+   * }
+   * 
    * @see setselectionrange
    * 
    * @returns
@@ -41420,6 +41429,15 @@ declare function setselectionrange(json_obj: string | ISetSelectionRangeArg): nu
    *   console.log( JSON.stringify(range,null," ").replace(/\n/g,"\r\n") );
    * }
    * endmacro;
+   * 
+   * @example
+   * js{
+   *   //選択箇所に色を付ける（複数でも）
+   *   colormarker({
+   *     text: "#F00",
+   *     items: getselectedrange({}).items
+   *   });
+   * }
    * 
    * @see setselectionrange
    * 

@@ -21163,6 +21163,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * }
    * endmacro;
    * 
+   * @example
+   * js{
+   *   //選択箇所に色を付ける（複数でも）
+   *   colormarker({
+   *     text: "#F00",
+   *     items: getselectedrange({}).items
+   *   });
+   * }
+   * 
    * @see setselectionrange
    * 
    * @returns
