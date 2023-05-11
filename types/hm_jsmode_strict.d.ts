@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.15.01
+ * @version v9.22.15.02
  */
 
 /**
@@ -14730,7 +14730,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
-  interface IBrowserPaneCommandArg {target?: "_common" | "_each", show?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1 }
+  interface IBrowserPaneCommandArg { target?: "_common" | "_each", show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, size?: number }
   /**
    * f    
    * [非同期]  
@@ -14749,6 +14749,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    - "load"の場合、"0"または"1"が返る。
    *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
+   *  - refresh: 1を指定すると更新します。
+   *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
    * 
    * @example
    * js {
@@ -14787,6 +14789,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - "top" 位置を上にします。
    *   - "bottom" 位置を下にします。
    *   - "clear" クリアします。
+   *   - "refresh" 更新します。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -14795,7 +14798,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear"): string
+  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" ): string
 
   /**
    * f    
@@ -14815,7 +14818,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg {target?: string, show?: 1 | 0, invisible?: 1 | 0, uri? : string , url?: string , place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?:1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
+  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string }
   /**
    * f    
    * [非同期]  
