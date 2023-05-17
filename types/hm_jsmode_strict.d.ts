@@ -14830,7 +14830,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - target: 対象となる枠の名前。英字から始まる任意の文字列を指定します。記述が無い場合は既定の枠が対象。
    *  - show: 表示するかどうか。1で表示、0で非表示。非表示の場合はインスタンスが無くなります。（コンテンツが閉じます）
    *  - invisible: 見えないようにするかどうか。1で見えない。0で見える。
-   *  - uri: URI。"file:"から始まるローカルファイル、または"javascript:"から始まるスクリプト。（urlでも可）
+   *  - uri: URI。"file:"から始まるローカルファイル、もしくはhttp:localhostから始まるアドレス、または"javascript:"から始まるスクリプト。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside" "overlay"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
    *    - "readyState"の場合、"loading" "interactive" "complete"のいずれかが返る。
