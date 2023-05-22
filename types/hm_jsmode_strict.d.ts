@@ -1012,10 +1012,10 @@ declare namespace hidemaru {
    * 
    * @returns
    * スクリーン座標のピクセル数の位置を配列で返します。    
-   * [0]はX軸のピクセル数です。
-   * [1]はY軸のピクセル数です。
+   * [0]はY軸のピクセル数です。
+   * [1]はX軸のピクセル数です。
    */
-  function getPixelPosFromCursorPos(literal_unit?: hidemaru.ILiteralUnit, pos_column?: number, pos_lineno?: number): [pos_x: number, pos_y: number]
+  function getPixelPosFromCursorPos(literal_unit?: hidemaru.ILiteralUnit, pos_column?: number, pos_lineno?: number): [pos_y: number, pos_x: number]
 
   /**
    * f    
