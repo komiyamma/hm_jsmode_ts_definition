@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.17.01
+ * @version v9.22.17.02
  */
 
 /**
@@ -2624,7 +2624,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * ブラウザ枠のウィンドウハンドルを数値で返す。
    */
-  function browserpanehandle(target_pane?: number): number
+  function browserpanehandle(target_pane?: IBrowserPaneTarget): number
 
   /**
    * k    
@@ -2640,7 +2640,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * ブラウザ枠のサイズをピクセル単位で返す。
    */
-  function browserpanesize(target_pane?: number): number
+  function browserpanesize(target_pane?: IBrowserPaneTarget): number
 
   /**
    * k    
@@ -2658,7 +2658,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * ブラウザ枠に表示されている現在のコンテンツのURLを文字列で返す。
    */
-  function browserpaneurl(target_pane?: number): string
+  function browserpaneurl(target_pane?: IBrowserPaneTarget): string
 
   /**
    * k    
@@ -14631,7 +14631,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function setbrowserpanetarget(default_target: "_common" | "_each" | 1 | 2): number
+  function setbrowserpanetarget(default_target: IBrowserPaneTarget): number
 
   /**
    * s    
@@ -14668,7 +14668,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function showbrowserpane(show_switch?: -1 | 0 | 1, target_pane?: number): number
+  function showbrowserpane(show_switch?: -1 | 0 | 1, target_pane?: IBrowserPaneTarget): number
 
   /**
    * s    
@@ -14685,7 +14685,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 成功すると0以外、失敗すると0を返します。
    */
-  function refreshbrowserpane(target_pane?: number): number
+  function refreshbrowserpane(target_pane?: IBrowserPaneTarget): number
 
   /**
    * s    
@@ -14730,7 +14730,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function setbrowserpaneurl(url: string, target_pane?: number): number
 
-  interface IBrowserPaneCommandArg { target?: "_common" | "_each", show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, size?: number }
+  type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
+  type IBrowserPaneTargetString = "_common" | "_each";
+  type IBrowserPaneTargetNumber = 0 | 1 | 2;
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, size?: number }
   /**
    * f    
    * [非同期]  

@@ -14,3 +14,5 @@ console.log(selectedMenuNumber);
 
  browserpanecommand({refresh:1});
 renderpanecommand({refresh:1})
+
+showbrowserpane(1, "_common");
