@@ -12,7 +12,7 @@ console.log(selectedMenuNumber);
  let pos = hidemaru.getPixelPosFromCursorPos("wcs", 0, 1);
  console.log(pos[1]);
 
- browserpanecommand({refresh:1});
+browserpanecommand({focus:1}});
 renderpanecommand({refresh:1})
 
 showbrowserpane(1, "_common");

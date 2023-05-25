@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.17.02
+ * @version v9.22.18.01
  */
 
 /**
@@ -14734,7 +14734,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, size?: number }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number }
   /**
    * f    
    * [非同期]  
@@ -14754,7 +14754,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - refresh: 1を指定すると更新します。
+   *  - focus: 1を指定するとフォーカスします。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
+   *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    * 
    * @example
    * js {
@@ -14769,10 +14771,13 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
-   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
-   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
-   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - "get" の "show"の場合、"0"または"1"が返る。
+   * - "uri" の場合、URIが返ります。(uriでも可)
+   * - "size" の場合、上下左右の枠の配置のときのピクセル単位のサイズが文字列として返ります。
+   * - "initialized" の場合、個別ブラウザ枠で初期化が完了している場合に"1"、そうでなければ"0"が返ります。（initialize: "async"の場合だけに意味がある）   * 
    * - その他の場合、空の文字列が返ります。
    */
   function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
@@ -14794,6 +14799,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - "bottom" 位置を下にします。
    *   - "clear" クリアします。
    *   - "refresh" 更新します。
+   *   - "focus" フォーカスします。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -14802,7 +14808,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" ): string
+  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus"): string
 
   /**
    * f    
@@ -14822,7 +14828,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number }
+  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number }
   /**
    * f    
    * [非同期]  
@@ -14843,6 +14849,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - refresh: 1を指定すると更新します。
+   *  - focus: 1を指定するとフォーカスします。
    *  - align: オーバーレイ時の水平配置。"left" "center" "right" "screenleft" "screencenter" "screenright"のいずれか。（ただしウィンドウの外には出ない）
    *  - valign: オーバーレイ時の垂直配置。"top" "center"または"middle" "bottom" "top" "screencenter" "screenbottom"のいずれか。（ただしウィンドウの外には出ない）
    *  - x: オーバーレイ時の左から（右から）のx位置。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
@@ -14850,6 +14857,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - cx: オーバーレイ時の幅。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - cy: オーバーレイ時の高さ。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
+   *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    * 
    * @example
    * //非同期的にページ作成完了まで待って、イベントなどの応答を得る(js版)
@@ -14903,10 +14911,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
-   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
-   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
-   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - "get" の "show"の場合、"0"または"1"が返る。
+   * - "uri" の場合、URIが返ります。(uriでも可)
+   * - "size" の場合、上下左右の枠の配置のときのピクセル単位のサイズが文字列として返ります。
+   * - "invisible"の場合、"0"または"1"が返ります。
+   * - "place"の場合、"leftside" "rightside" "upside" "downside" "overlay"のいずれかが返ります。
+   * - "initialized" の場合、個別ブラウザ枠で初期化が完了している場合に"1"、そうでなければ"0"が返ります。（initialize: "async"の場合だけに意味がある）   * 
    * - その他の場合、空の文字列が返ります。
    */
   function renderpanecommand(json_obj: IRenderPaneCommandArg | object): string
@@ -14927,6 +14940,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - "bottom" 位置を下にします。
    *   - "clear" クリアします。
    *   - "refresh" 更新します。
+   *   - "focus" フォーカスします。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -14935,7 +14949,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function renderpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh"): string
+  function renderpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus"): string
 
   /**
    * s    
@@ -35006,7 +35020,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, size?: number }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number }
   /**
    * f    
    * [非同期]  
@@ -35026,7 +35040,9 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - refresh: 1を指定すると更新します。
+   *  - focus: 1を指定するとフォーカスします。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
+   *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    * 
    * @example
    * js {
@@ -35041,10 +35057,13 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
-   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
-   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
-   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - "get" の "show"の場合、"0"または"1"が返る。
+   * - "uri" の場合、URIが返ります。(uriでも可)
+   * - "size" の場合、上下左右の枠の配置のときのピクセル単位のサイズが文字列として返ります。
+   * - "initialized" の場合、個別ブラウザ枠で初期化が完了している場合に"1"、そうでなければ"0"が返ります。（initialize: "async"の場合だけに意味がある）   * 
    * - その他の場合、空の文字列が返ります。
    */
 declare function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
@@ -35066,6 +35085,7 @@ declare function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): 
    *   - "bottom" 位置を下にします。
    *   - "clear" クリアします。
    *   - "refresh" 更新します。
+   *   - "focus" フォーカスします。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -35074,7 +35094,7 @@ declare function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): 
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-declare function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" ): string
+declare function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus"): string
 
   /**
    * f    
@@ -35094,7 +35114,7 @@ declare function browserpanecommand(request_command: "get_DOMContentLoaded" | "g
    */
 declare function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number }
+  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number }
   /**
    * f    
    * [非同期]  
@@ -35115,6 +35135,7 @@ declare function browserpanecommand(url: string): string
    *    - "show"の場合、"0"または"1"が返る。
    *  - clear: 1を指定するとクリアします。
    *  - refresh: 1を指定すると更新します。
+   *  - focus: 1を指定するとフォーカスします。
    *  - align: オーバーレイ時の水平配置。"left" "center" "right" "screenleft" "screencenter" "screenright"のいずれか。（ただしウィンドウの外には出ない）
    *  - valign: オーバーレイ時の垂直配置。"top" "center"または"middle" "bottom" "top" "screencenter" "screenbottom"のいずれか。（ただしウィンドウの外には出ない）
    *  - x: オーバーレイ時の左から（右から）のx位置。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
@@ -35122,6 +35143,7 @@ declare function browserpanecommand(url: string): string
    *  - cx: オーバーレイ時の幅。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - cy: オーバーレイ時の高さ。文字列で"300px"といったピクセル指定、または"50%"といったパーセント指定。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
+   *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    * 
    * @example
    * //非同期的にページ作成完了まで待って、イベントなどの応答を得る(js版)
@@ -35175,10 +35197,15 @@ declare function browserpanecommand(url: string): string
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
-   * - "get_DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
-   * - "get_load" 未完了では"0"、すべて完了では"1"が返ります。
-   * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
+   * - "DOMContentLoaded" 未完了では"0"、DOM操作まで完了では"1"が返ります。
+   * - "load" 未完了では"0"、すべて完了では"1"が返ります。
+   * - "readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - "get" の "show"の場合、"0"または"1"が返る。
+   * - "uri" の場合、URIが返ります。(uriでも可)
+   * - "size" の場合、上下左右の枠の配置のときのピクセル単位のサイズが文字列として返ります。
+   * - "invisible"の場合、"0"または"1"が返ります。
+   * - "place"の場合、"leftside" "rightside" "upside" "downside" "overlay"のいずれかが返ります。
+   * - "initialized" の場合、個別ブラウザ枠で初期化が完了している場合に"1"、そうでなければ"0"が返ります。（initialize: "async"の場合だけに意味がある）   * 
    * - その他の場合、空の文字列が返ります。
    */
 declare function renderpanecommand(json_obj: IRenderPaneCommandArg | object): string
@@ -35199,6 +35226,7 @@ declare function renderpanecommand(json_obj: IRenderPaneCommandArg | object): st
    *   - "bottom" 位置を下にします。
    *   - "clear" クリアします。
    *   - "refresh" 更新します。
+   *   - "focus" フォーカスします。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -35207,7 +35235,7 @@ declare function renderpanecommand(json_obj: IRenderPaneCommandArg | object): st
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-declare function renderpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh"): string
+declare function renderpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus"): string
 
   /**
    * s    
