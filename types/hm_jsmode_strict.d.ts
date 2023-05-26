@@ -20270,10 +20270,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * js{
    *     debuginfo(2);
    *     function myfunc(){
-   *         console.log("myfunc");
+   *         console.log("Ctrl+B\r\n");
+   *         return;
    *     }
    *     var id = hidemaru.getFunctionId(myfunc);
-   *     keyhook(0x00020041, id); // CTRL + A
+   *     var idKeyHook = keyhook(0x00020042, id); // CTRL + B
    * }
    * 
    * @see hidemaru.getFunctionId
@@ -20298,7 +20299,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * js{
    *     debuginfo(2);
    * 
-   *     var id = hidemaru.getFunctionId(myfunc);
+   *     var fundID = hidemaru.getFunctionId(myfunc);
    * 
    *     function myfunc(){
    *         console.log("myfunc");
@@ -20307,10 +20308,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     }
    * 
    *     function myclearkeyhook() {
-   *         clearkeyhook(id);
+   *         clearkeyhook(idKeyHook);
    *     }
    * 
-   *     keyhook(0x00020041, id); // CTRL + A
+   *     var idKeyHook = keyhook(0x00020041, fundID); // CTRL + A
    * }
    * 
    * @see hidemaru.getFunctionId
