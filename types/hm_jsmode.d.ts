@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.19.01
+ * @version v9.22.19.02
  */
 
 /**
@@ -14619,6 +14619,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s    
+   * [非同期]  
    * 
    * ブラウザ枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
@@ -14969,6 +14970,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   
   /**
    * s    
+   * [非同期]  
    * 
    * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
@@ -19359,6 +19361,147 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 返り値は意味を持ちません。
    */
   function configcolor(color_settings: string): number
+
+  interface IConfigColorJsonArg extends IConfigColorSet {};
+  /**
+   * s  
+   * [非同期]  
+   * 
+   * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。  
+   *
+   * @param json_obj
+   * 設定箇所と、文字色と背景食とスタイルをJSONで指定します。    
+   *    
+   * - configcolorでJSONまたはJavaScriptのオブジェクト指定で設定する場合の、指定可能なプロパティの一覧です。
+   *   - normal
+   *   - lineno
+   *   - linenoupdated
+   *   - comment
+   *   - hilight1
+   *   - especially1
+   *   - hilightline1
+   *   - hilight2
+   *   - especially2
+   *   - hilightline2
+   *   - linenomark
+   *   - url
+   *   - email
+   *   - htmltag
+   *   - htmlelem
+   *   - htmlattr
+   *   - cr
+   *   - selection
+   *   - tab
+   *   - space
+   *   - string
+   *   - filename
+   *   - hilight3
+   *   - hilight4
+   *   - kakkopair
+   *   - script
+   *   - ifdef
+   *   - curlinevert
+   *   - guidelinevert
+   *   - orikaeshiline
+   *   - outlinepane
+   *   - stripe
+   *   - curlineime
+   *   - guidelinehorz
+   *   - hilightfound
+   *   - lastedit
+   *   - hilight5
+   *   - hilight6
+   *   - hilight7
+   *   - hilight8
+   *   - especially3
+   *   - especially4
+   *   - hilightline3
+   *   - hilightline4
+   *   - num
+   *   - outlinebar
+   *   - foldable
+   *   - folded
+   *   - outlinepanesel
+   *   - imeinput
+   *   - formline
+   *   - tabmode
+   *   - tree1
+   *   - tree2
+   *   - tree3
+   *   - tree4
+   *   - tree5
+   *   - tree6
+   *   - tree7
+   *   - tree8
+   *   - inactivetab
+   *   - caretime
+   *   - tagpair
+   *   - curword
+   *   - curline
+   *   - ruler
+   *   - indent1
+   *   - indent2
+   *   - indent3
+   *   - indent4
+   *   - indent5
+   *   - indent6
+   *   - indent7
+   *   - indent8
+   *   - 
+   * 
+   * - それぞれの値は、色とスタイルのオブジェクトになります。  
+   *   色とスタイルのオブジェクトのプロパティは以下になります。
+   *   - text
+   *   - back
+   *   - style
+   *   - 
+   *   - 
+   * 
+   * - 色は文字列で#から始まるRGB値か、以下の文字列のいずれかになります。
+   *   - transparent
+   *   - syswindow
+   *   - syswindowtext
+   *   - syshighlight
+   *   - syshighlighttext
+   *   - 
+   *   - 
+   * 
+   * - スタイルは、以下の文字列のいずれかになります。
+   *   - normal
+   *   - bold
+   *   - underline
+   *   - underline bold
+   *   - italic
+   *   - italic bold
+   *   - underline italic
+   *   - underline italic bold
+   *   - outline
+   *   - superbold
+   *   - shadow
+   *   - transparent
+   * 
+   * @example
+   * js {
+   *   configcolor({
+   *     normal: {text: "#FFFFFF", back: "#000000", style: "normal"},
+   *     comment: {text: "#008000", back: "transparent", style: "normal"},
+   *     hilight1: {text: "#FFFF00", back: "#FF0000", style: "bold"},
+   *   });
+   * }
+   * 
+   * @comment
+   * configcolor文を実行すると、ファイルタイプ別の設定は一時的な設定になります。    
+   * 一時的な設定を保存するには、saveconfig文を使います。    
+   * 一時的な設定でない状態にするには、setconfigstate文を使います。    
+   * 
+   * @comment
+   * 参照：    
+   * @see getconfigcolor
+   * 
+   * @returns
+   * 返り値は意味を持ちません。
+   */
+  function configcolor(json_obj: IConfigColorJsonArg): number
 
   /**
    * f    
@@ -34914,6 +35057,7 @@ declare function fullscreen(): number
 
   /**
    * s    
+   * [非同期]  
    * 
    * ブラウザ枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
@@ -35264,6 +35408,7 @@ declare function renderpanecommand(url: string): string
   
   /**
    * s    
+   * [非同期]  
    * 
    * レンダリング枠関係の文/キーワードで操作の対象となる既定の枠を指定します。
    * 
@@ -39654,6 +39799,147 @@ declare function getconfig(key: string): string | number
    * 返り値は意味を持ちません。
    */
 declare function configcolor(color_settings: string): number
+
+  interface IConfigColorJsonArg extends IConfigColorSet {};
+  /**
+   * s  
+   * [非同期]  
+   * 
+   * configcolor文は、ファイルタイプ別の設定のカラーとスタイルを変更します。  
+   *
+   * @param json_obj
+   * 設定箇所と、文字色と背景食とスタイルをJSONで指定します。    
+   *    
+   * - configcolorでJSONまたはJavaScriptのオブジェクト指定で設定する場合の、指定可能なプロパティの一覧です。
+   *   - normal
+   *   - lineno
+   *   - linenoupdated
+   *   - comment
+   *   - hilight1
+   *   - especially1
+   *   - hilightline1
+   *   - hilight2
+   *   - especially2
+   *   - hilightline2
+   *   - linenomark
+   *   - url
+   *   - email
+   *   - htmltag
+   *   - htmlelem
+   *   - htmlattr
+   *   - cr
+   *   - selection
+   *   - tab
+   *   - space
+   *   - string
+   *   - filename
+   *   - hilight3
+   *   - hilight4
+   *   - kakkopair
+   *   - script
+   *   - ifdef
+   *   - curlinevert
+   *   - guidelinevert
+   *   - orikaeshiline
+   *   - outlinepane
+   *   - stripe
+   *   - curlineime
+   *   - guidelinehorz
+   *   - hilightfound
+   *   - lastedit
+   *   - hilight5
+   *   - hilight6
+   *   - hilight7
+   *   - hilight8
+   *   - especially3
+   *   - especially4
+   *   - hilightline3
+   *   - hilightline4
+   *   - num
+   *   - outlinebar
+   *   - foldable
+   *   - folded
+   *   - outlinepanesel
+   *   - imeinput
+   *   - formline
+   *   - tabmode
+   *   - tree1
+   *   - tree2
+   *   - tree3
+   *   - tree4
+   *   - tree5
+   *   - tree6
+   *   - tree7
+   *   - tree8
+   *   - inactivetab
+   *   - caretime
+   *   - tagpair
+   *   - curword
+   *   - curline
+   *   - ruler
+   *   - indent1
+   *   - indent2
+   *   - indent3
+   *   - indent4
+   *   - indent5
+   *   - indent6
+   *   - indent7
+   *   - indent8
+   *   - 
+   * 
+   * - それぞれの値は、色とスタイルのオブジェクトになります。  
+   *   色とスタイルのオブジェクトのプロパティは以下になります。
+   *   - text
+   *   - back
+   *   - style
+   *   - 
+   *   - 
+   * 
+   * - 色は文字列で#から始まるRGB値か、以下の文字列のいずれかになります。
+   *   - transparent
+   *   - syswindow
+   *   - syswindowtext
+   *   - syshighlight
+   *   - syshighlighttext
+   *   - 
+   *   - 
+   * 
+   * - スタイルは、以下の文字列のいずれかになります。
+   *   - normal
+   *   - bold
+   *   - underline
+   *   - underline bold
+   *   - italic
+   *   - italic bold
+   *   - underline italic
+   *   - underline italic bold
+   *   - outline
+   *   - superbold
+   *   - shadow
+   *   - transparent
+   * 
+   * @example
+   * js {
+   *   configcolor({
+   *     normal: {text: "#FFFFFF", back: "#000000", style: "normal"},
+   *     comment: {text: "#008000", back: "transparent", style: "normal"},
+   *     hilight1: {text: "#FFFF00", back: "#FF0000", style: "bold"},
+   *   });
+   * }
+   * 
+   * @comment
+   * configcolor文を実行すると、ファイルタイプ別の設定は一時的な設定になります。    
+   * 一時的な設定を保存するには、saveconfig文を使います。    
+   * 一時的な設定でない状態にするには、setconfigstate文を使います。    
+   * 
+   * @comment
+   * 参照：    
+   * @see getconfigcolor
+   * 
+   * @returns
+   * 返り値は意味を持ちません。
+   */
+declare function configcolor(json_obj: IConfigColorJsonArg): number
 
   /**
    * f    
