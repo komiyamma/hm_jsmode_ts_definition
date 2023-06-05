@@ -11,3 +11,4 @@ browserpanecommand({ focus: 1 });
 renderpanecommand({ refresh: 1 });
 showbrowserpane(1, "_common");
 config({ Font: "Consalas" });
+configcolor()
