@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.19.02
+ * @version v9.22.19.03
  */
 
 /**
@@ -14734,7 +14734,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "initialized", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async" }
   /**
    * f    
    * [非同期]  
@@ -14828,7 +14828,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(url: string): string
 
-  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show", clear?: 1, refresh?: 1, focus?: 1 | 0, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number }
+  interface IRenderPaneCommandArg { target?: string, show?: 1 | 0, invisible?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside" | "overlay", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "initialized", clear?: 1, refresh?: 1, focus?: 1 | 0, align?: "left" | "center" | "right" | "screenleft" | "screencenter" | "screenright", valign?: "top" | "center" | "middle" | "bottom" | "top" | "screencenter" | "screenbottom", x?: string, y?: string, cx?: string, cy?: string, size?: number, initialize?: "async" }
   /**
    * f    
    * [非同期]  

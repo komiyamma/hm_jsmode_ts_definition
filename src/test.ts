@@ -13,7 +13,7 @@ console.log(selectedMenuNumber);
  console.log(pos[1]);
 
 browserpanecommand({focus:1});
-renderpanecommand({refresh:1})
+renderpanecommand({get:"initialized"})
 
 showbrowserpane(1, "_common");
 
