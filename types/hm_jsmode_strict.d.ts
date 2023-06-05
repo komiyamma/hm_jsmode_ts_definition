@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.18.01
+ * @version v9.22.19.01
  */
 
 /**
@@ -18666,6 +18666,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
     BquoteItemized?: IBooleanFlag;                            //[体裁]→[インデント]→[箇条書きへのインテリジェントな対応]
     BquoteInclude?: string;                             //[体裁]→[インデント]→[インデント対象に追加する文字]
     BlockquoteFix?: number;                               //[体裁]→[インデント]→[指定桁数をインデントする]
+    BlockquoteFixRelative?: IBooleanFlag;                     //[体裁]→[インデント]→[指定桁数をインデントする] 相対位置
 
     CurLineEnable?: IBooleanFlag;                             //[デザイン]→[カーソル行] ON/OFF
     CurLineActive?: IBooleanFlag;                             //[デザイン]→[カーソル行] アクティブ時のみ
@@ -18694,8 +18695,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
     OrikaeshiLine?: number;                               //[デザイン]→[折り返し桁数の縦線] 0:なし　1:点線　2:実線
     ShowFormLine?: IBooleanFlag;                              //[デザイン]→[行番号]→[整形ライン] ON/OFF
     FormLine?: number;                                    //[デザイン]→[行番号]→[整形ライン] 桁数
+    Stripe?: number;                                      //[デザイン]→[背景ストライプ表示]
+    LastColor?: IBooleanFlag;                                 //[デザイン]→[最後に編集した所]
+    
+    ColorNum?: IBooleanFlag;                                  //[デザイン]→[数値]
+    ColorEmail?: IBooleanFlag;                                //[デザイン]→[メールアドレス]
+    ColorUrl?: IBooleanFlag;                                  //[デザイン]→[ホームページURL]
+    ColorFN?: IBooleanFlag;                                   //[デザイン]→[ファイル名と思わしき場所]
 
-    ColorSet?: IConfigColorSetJsonArg;
+    ColorSet?: IConfigColorSet;
   }
 
   interface IForbiddenProcessingDetail {                                      //IForbiddenProcessingDetail
