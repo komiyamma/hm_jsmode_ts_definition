@@ -19446,15 +19446,12 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - indent6
    *   - indent7
    *   - indent8
-   *   - 
    * 
    * - それぞれの値は、色とスタイルのオブジェクトになります。  
    *   色とスタイルのオブジェクトのプロパティは以下になります。
    *   - text
    *   - back
    *   - style
-   *   - 
-   *   - 
    * 
    * - 色は文字列で#から始まるRGB値か、以下の文字列のいずれかになります。
    *   - transparent
@@ -19462,8 +19459,6 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - syswindowtext
    *   - syshighlight
    *   - syshighlighttext
-   *   - 
-   *   - 
    * 
    * - スタイルは、以下の文字列のいずれかになります。
    *   - normal
