@@ -14734,7 +14734,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async" }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1 }
   /**
    * f    
    * [非同期]  
@@ -14757,6 +14757,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - focus: 1を指定するとフォーカスします。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
    *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
+   * - watch: 1を指定するとローカルファイルの自動更新をします。
    * 
    * @example
    * js {
