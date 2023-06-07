@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.19.04
+ * @version v9.22.20.01
  */
 
 /**
@@ -939,8 +939,8 @@ declare namespace hidemaru {
    * 
    * @returns
    * 文字の位置を配列で返します。  
-   * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
-   * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
+   * [0]は行番号またはY座標です。行番号の場合1から、Y座標の場合0から数えます。  
+   * [1]は桁位置またはX座標です。桁位置、X座標とも、0から数えます。  
    */
   function getCursorPos(literal_unit?: hidemaru.ILiteralUnit): [lineno: number, column: number]
 
@@ -976,8 +976,8 @@ declare namespace hidemaru {
    *
    * @returns
    * 文字の位置を配列で返します。  
-   * [0]は行番号またはY座標です。行番号の場合、1から数えます。  
-   * [1]は桁位置またはX座標です。桁位置の場合、0から数えます。  
+   * [0]は行番号またはY座標です。行番号の場合1から、Y座標の場合0から数えます。  
+   * [1]は桁位置またはX座標です。桁位置、X座標とも、0から数えます。  
    */
   function getCursorPosFromMousePos(literal_unit?: hidemaru.ILiteralUnit, pos_x?: number, pos_y?: number): [lineno: number, column: number]
 
@@ -994,11 +994,11 @@ declare namespace hidemaru {
    * 一般的なWindows上でのプログラミング言語各種と同じカウントは概ね「wcs」となります。
    * 
    * @param pos_column
-   * 桁位置（または文字のX座標）を指定します。桁位置の場合、0から数えます。    
+   * 桁位置（または文字のX座標）を指定します。桁位置の場合0から、X座標の場合も0から数えます。    
    * 省略した場合は、カーソルの位置になります。
    * 
    * @param pos_lineno
-   * 行番号（または文字のY座標）を指定します。行番号の場合、1から数えます。    
+   * 行番号（または文字のY座標）を指定します。行番号の場合1から、Y座標の場合は0から数えます。    
    * 省略した場合は、カーソルの位置になります。
    * 
    * @example
