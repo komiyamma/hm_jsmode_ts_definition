@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.20.01
+ * @version v9.22.20.02
  */
 
 /**
@@ -61,6 +61,32 @@ declare namespace console {
    * @see debuginfo
    */
   function log(message: any, ...optional_params: any[]): void;
+
+  /**
+   * console.warn()を、秀丸エディタ上で実装しています。    
+   * 
+   * あらかじめ、debuginfo(2);をしておくと    
+   * 適所でconsole.warn("text");等を入れておくと、アウトプット枠に出力できます。
+   *  
+   * @param message    
+   * 出力する対象の文字列や数値、オブジェクトなど
+   * 
+   * @param optional_params    
+   * その他の、出力する対象の文字列や数値、オブジェクトなど。    
+   * 複数の引数を受け付ける。
+   * 
+   * @example
+   * debuginfo(2);
+   * console.warn("OK1");
+   * console.warn("OK2");
+   * console.warn(typeof(str)); // function
+   * console.warn(str);  // 関数の中身が出る
+   * 
+   * @comment
+   * 参照：
+   * @see debuginfo
+   */
+  function warn(message: any, ...optional_params: any[]): void;
 }
 
 declare namespace hidemaru {
