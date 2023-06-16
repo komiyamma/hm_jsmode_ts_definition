@@ -8,3 +8,7 @@ console.log(selectedMenuNumber);
 
 let pos = hidemaru.getPixelPosFromCursorPos("wcs", 0, 1);
 console.log(pos);
+
+browserpanecommand("focusinputfield")
+
+browserpanecommand({"setinputfield": "hello"});
