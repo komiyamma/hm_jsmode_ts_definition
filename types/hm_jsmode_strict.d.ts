@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.99.01
+ * @version v9.22.99.02
  */
 
 /**
@@ -5940,7 +5940,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function charindex_to_byteindex(text: string, charindex: number): number
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext関数は、座標で指定する範囲にある文字列を取得します。
    * エディタのテキストを操作する上では、gettextではなく、    
@@ -5985,7 +5986,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettext(bgn_x: number, bgn_y: number, end_x: number, end_y: number, keep_select?: number, n_replace?: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext2関数は、行と桁で指定する範囲にある文字列を取得します。
    * 
@@ -6037,7 +6039,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettext2(bgn_column: number, bgn_lineno: number, end_column: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext_wcs関数は、行と桁で指定する範囲にある文字列を取得します。    
    * gettextのUnicode(UCS-2)単位版です。
@@ -6087,7 +6090,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettext_wcs(bgn_column_wcs: number, bgn_lineno: number, end_column_wcs: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext_ucs4関数は、行と桁で指定する範囲にある文字列を取得します。    
    * gettextのUnicode(UCS-4)単位版です。
@@ -6137,7 +6141,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettext_ucs4(bgn_column_ucs4: number, bgn_lineno: number, end_column_ucs4: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext_cmu関数は、行と桁で指定する範囲にある文字列を取得します。    
    * gettextのカーソル移動単位版です。
@@ -6187,7 +6192,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettext_cmu(bgn_column_cmu: number, bgn_lineno: number, end_column_cmu: number, end_lineno: number, keep_select?: number, n_replace?: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * gettext_gcu関数は、行と桁で指定する範囲にある文字列を取得します。    
    * gettextの書記素クラスター単位版です。
@@ -6398,7 +6404,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getgrepfilehist(history_ix: number, is_pin: 1 | number): "0" | "1"
 
   /**
-   * f
+   * f  
+   * [非同期]   
    * 
    * xtocolumn関数は、X座標からカラム位置への変換をします。
    * 
@@ -6424,6 +6431,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]   
    * 
    * ytolineno関数は、Y座標から行番号への変換をします。
    * 
@@ -21781,22 +21789,6 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * この関数はjsmodeでは機能しません。    
    * 
-   * @example
-   * 以下のようにすることでjs中に破棄して終了することが出来ます。
-   * js {
-   *     hidemaru.postExecMacroMemory('quit;');
-   * }
-   * 
-   * @deprecated
-   */
-  function quit(): 0;
-
-
-  /**
-   * z    
-   * 
-   * この関数はjsmodeでは機能しません。    
-   * 
    * @param target_process
    * V9.25以降で、パラメータを記述して条件を指定できます。  
    * 条件は"by-pid:"に続いてプロセスIDを指定する方法のみです。  
@@ -21812,6 +21804,23 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    */
   function quit(target_process: string): 0;
+
+
+  /**
+   * z    
+   * 
+   * この関数はjsmodeでは機能しません。    
+   * 
+   * @example
+   * 以下のようにすることでjs中に破棄して終了することが出来ます。
+   * js {
+   *     hidemaru.postExecMacroMemory('quit;');
+   * }
+   * 
+   * @deprecated
+   */
+  function quit(): 0;
+
 
   /**
    * z    
