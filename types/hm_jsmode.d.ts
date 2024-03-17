@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.22.99.02
+ * @version v9.24.99.01
  */
 
 /**
@@ -1242,6 +1242,9 @@ declare namespace hidemaru {
    * @param millisecond 
    * 時間をミリ秒単位で指定します。
    * 
+   * @param arguments
+   * 関数が呼ばれるときのパラメータになります。
+   * 
    * @comment
    * 参照：
    * @see clearTimeout
@@ -1250,7 +1253,7 @@ declare namespace hidemaru {
    * 固有のIDが返ります。    
    * 主にclearTimeoutをするためのIDとなります。
    */
-  function setTimeout(func: Function, millisecond: number): number
+  function setTimeout(func: Function, millisecond: number, ...arguments: any[]): number;
 
   /**
    * f    
@@ -1282,6 +1285,9 @@ declare namespace hidemaru {
    * @param millisecond 
    * 時間をミリ秒単位で指定します。
    * 
+   * @param arguments
+   * 関数が呼ばれるときのパラメータになります。
+   * 
    * @comment
    * 参照：
    * @see clearInterval
@@ -1290,7 +1296,7 @@ declare namespace hidemaru {
    * 固有のIDが返ります。    
    * 主にclearIntervalをするためのIDとなります。
    */
-  function setInterval(func: Function, millisecond: number): number
+  function setInterval(func: Function, millisecond: number ...arguments: any[]): number;
 
   /**
    * f    
@@ -9063,6 +9069,28 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   /**
    * s
    * 
+   * shifthome文は、Shiftキーを押しながらHOMEキーを押すことに相当する文です。    
+   * 
+   * @returns
+   * 移動した場合は0以外を返す。    
+   * 移動しなかった場合は0を返す。
+   */
+  function shifthome(): number
+
+  /**
+   * s
+   * 
+   * shiftend文は、Shiftキーを押しながらENDキーを押すことに相当する文です。    
+   * 
+   * @returns
+   * 移動した場合は0以外を返す。    
+   * 移動しなかった場合は0を返す。
+   */
+  function shiftend(): number
+
+  /**
+   * s
+   * 
    * ファイルの最後に移動する。
    * 
    * @returns
@@ -14814,7 +14842,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized" | "title", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized" | "title", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string, copy?: number }
   /**
    * f    
    * [非同期]  
@@ -14843,6 +14871,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
+   *  - copy: 1を指定すると、ブラウザ枠の内容をクリップボードにコピーします。
    * 
    * @example
    * js {
@@ -29600,6 +29629,28 @@ declare function shiftleft(n_step?: number): number
   /**
    * s
    * 
+   * shifthome文は、Shiftキーを押しながらHOMEキーを押すことに相当する文です。    
+   * 
+   * @returns
+   * 移動した場合は0以外を返す。    
+   * 移動しなかった場合は0を返す。
+   */
+declare function shifthome(): number
+
+  /**
+   * s
+   * 
+   * shiftend文は、Shiftキーを押しながらENDキーを押すことに相当する文です。    
+   * 
+   * @returns
+   * 移動した場合は0以外を返す。    
+   * 移動しなかった場合は0を返す。
+   */
+declare function shiftend(): number
+
+  /**
+   * s
+   * 
    * ファイルの最後に移動する。
    * 
    * @returns
@@ -35351,7 +35402,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized" | "title", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized" | "title", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string, copy?: number }
   /**
    * f    
    * [非同期]  
@@ -35380,6 +35431,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
+   *  - copy: 1を指定すると、ブラウザ枠の内容をクリップボードにコピーします。
    * 
    * @example
    * js {

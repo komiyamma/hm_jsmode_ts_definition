@@ -13,4 +13,13 @@ browserpanecommand("focusinputfield")
 
 browserpanecommand({"setinputfield": "hello"});
 
-quit()
+hidemaru.getPixelPosFromCursorPos("wcs", 0, 1);
+let b:IBrowserPaneCommandArg = {"copy": 1};
+browserpanecommand(b)
+
+window.setInterval
+
+
+
+shifthome();
+shiftend();
