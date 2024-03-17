@@ -12,3 +12,5 @@ console.log(pos);
 browserpanecommand("focusinputfield")
 
 browserpanecommand({"setinputfield": "hello"});
+
+quit("quit from test.ts");

@@ -1414,6 +1414,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * ダークモードの状態を表します。    
    * 以下の値を論理積(&)した値で各種状態を取得できます。    
@@ -1502,6 +1503,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * カーソルのカラム位置を表します。    
    * columnの「UCS-2単」位版
@@ -1511,6 +1513,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * カーソルのカラム位置を表します。    
    * columnの「UCS-4」単位版
@@ -1520,6 +1523,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * カーソルのカラム位置を表します。    
    * columnの「カーソル移動」単位版
@@ -1529,6 +1533,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * カーソルのカラム位置を表します。    
    * columnの「書記素クラスター」単位版
@@ -1761,6 +1766,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 「前のカーソル位置」として記憶されているカーソル位置のX座標を表します。    
    * （xキーワードと同じ文字単位）
@@ -1771,6 +1777,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 「前のカーソル位置」として記憶されているカーソル位置のY座標を表します。    
    * （yキーワードと同じワープロ的）
@@ -1847,6 +1854,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在のカーソル位置の行の長さを表します。    
    * この値は画面上での１行の長さで、右端で折り返している場合は、    
@@ -1866,6 +1874,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k
+   * [非同期]  
    * 
    * linelen の「エディタ的に計算した」長さを返します。    
    * つまり、論理行頭から改行文字（または[EOF]）までの文字数を計算します。    
@@ -1965,6 +1974,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択中かどうかを表します。
    * @returns 範囲選択中の場合は１、そうでない場合は０
@@ -2011,6 +2021,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 複数選択中であるかどうかを表します。    
    * @returns 複数選択中の場合は１、そうでない場合は０    
@@ -2040,6 +2051,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択開始位置のx座標を表します。    
    * 複数選択時、選択している番目を指定することで該当の範囲選択開始位置を取得できます。    
@@ -2055,6 +2067,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択開始位置のy座標を表します。    
    * 複数選択時、選択している番目を指定することで該当の範囲選択開始位置を取得できます。    
@@ -2070,6 +2083,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択終了位置のx座標を表します。    
    * 複数選択時、選択している番目を指定することで該当の範囲選択開始位置を取得できます。    
@@ -2085,6 +2099,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択終了位置のy座標を表します。    
    * 複数選択時、選択している番目を指定することで該当の範囲選択開始位置を取得できます。    
@@ -2100,6 +2115,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択開始位置のカラム位置(column相当の値)を表します。    
    * 文字の単位ごとに各種のバリエーションがあります。
@@ -2111,6 +2127,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択開始位置のエディタ的に計算した行番号を表します。
    * @returns 範囲選択開始位置のエディタ的に計算した行番号
@@ -2120,6 +2137,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択終了位置のカラム位置(column相当の値)を表します。    
    * 文字の単位ごとに各種のバリエーションがあります。
@@ -2131,6 +2149,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 範囲選択終了位置のエディタ的に計算した行番号を表します。
    * @returns 範囲選択終了位置のエディタ的に計算した行番号
@@ -2140,6 +2159,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * seltopcolumnのUCS-2単位版
    * @returns 範囲選択開始位置のカラム位置(column_wcs相当の値)。    
@@ -2149,6 +2169,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * seltopcolumnのUCS-4単位版
    * @returns 範囲選択開始位置のカラム位置(column_ucs4相当の値)。    
@@ -2158,6 +2179,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * seltopcolumnの秀丸単位(カーソル移動)版
    * @returns 範囲選択開始位置のカラム位置(column_cmu相当の値)。    
@@ -2167,6 +2189,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * seltopcolumnの書記素クラスター単位版
    * @returns 範囲選択開始位置のカラム位置(column_gcu相当の値)。    
@@ -2176,6 +2199,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * selendcolumnのUCS-2単位版
    * @returns 範囲選択終了位置のカラム位置(column_wcs相当の値)。    
@@ -2185,6 +2209,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * selendcolumnのUCS-4単位版
    * @returns 範囲選択終了位置のカラム位置(column_ucs4相当の値)。    
@@ -2194,6 +2219,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * selendcolumnの秀丸単位(カーソル移動)版
    * @returns 範囲選択終了位置のカラム位置(column_cmu相当の値)。    
@@ -2203,6 +2229,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * selendcolumnの書記素クラスター単位版
    * @returns 範囲選択終了位置のカラム位置(column_gcu相当の値)。    
@@ -2717,6 +2744,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * filenameの小文字に変換しないバージョンです。    
    * 
@@ -2731,6 +2759,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * filenameの短縮ファイル名バージョンです。   
    * 短縮ファイル名とは、主にMS-DOSやWindows95の頃まで利用されていた「8.3形式」のことです。    
@@ -2747,6 +2776,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * ファイル名の、パスを含まない、ベース名だけを表します。    
    * すべて小文字に変換されています。
@@ -2772,6 +2802,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * basenameの小文字に変換しないバージョンです。    
    * 
@@ -2786,6 +2817,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * basenameの短縮ファイル名バージョンです。   
    * 短縮ファイル名とは、主にMS-DOSやWindows95の頃まで利用されていた「8.3形式」のことです。    
@@ -2802,6 +2834,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * カレントフォルダをドライブ名も含めたパス名で表します。    
    * ルートフォルダでない場合は最後に「\」が付いていません。
@@ -2829,6 +2862,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * directoryの小文字に変換しないバージョンです。    
    * 
@@ -2844,6 +2878,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * directoryの短縮ファイル名バージョンです。   
    * 短縮ファイル名とは、主にMS-DOSやWindows95の頃まで利用されていた「8.3形式」のことです。    
@@ -2904,6 +2939,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在実行中のマクロのファイル名をフルパスで表します。すべて小文字です。
    * 
@@ -2914,6 +2950,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在実行中のマクロのファイル名の、パスを含まない、ベース名だけを表します。すべて小文字です。
    * 
@@ -2924,6 +2961,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在実行中のマクロのフォルダを表します。すべて小文字です。
    * 
@@ -10000,6 +10038,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * 範囲選択開始を実行する    
    * 
@@ -10040,6 +10079,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * beginsel, beginrect, beginlinesel, beginrectmultiなど    
    * 範囲選択モードになっている状態（範囲選択はそのまま）    
@@ -10201,6 +10241,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * escapeselect文は、範囲選択の取り消しを行います。    
    * （秀丸マクロでは、これはescape文のことです）    
@@ -10848,6 +10889,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * insert文は、textで指定された文字列を挿入したのち、    
    * カーソルを挿入した文字列の最後に移動します。    
@@ -15314,6 +15356,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * clearupdated文は、編集マークを全て消去して「(更新)」状態を解除します。
    *  
@@ -17598,6 +17641,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * writeininum文は、INIファイルに数値のデータを書き込みます。
    * 文字列を書き込む場合は、この関数ではなく、writeinistr関数を使ってください。
@@ -17626,6 +17670,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * writeininumw文は、writeininumのUnicode版です。    
    * 使い方はwriteininumと同じです。
@@ -17654,6 +17699,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * writeinistr文は、INIファイルに文字列のデータを書き込みます。
    * 数値を書き込む場合は、この関数ではなく、writeininum関数を使ってください。
@@ -17682,6 +17728,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * writeinistrw文は、writeinistrのUnicode版です。    
    * 使い方はwriteinistrと同じです。
@@ -19692,6 +19739,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * envchanged文は、レジストリから動作環境とファイルタイプ別の設定の内容を再読込みし、秀丸エディタの動作環境とファイルタイプ別の設定を更新します。    
    * 
@@ -20050,6 +20098,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
+   * 
    * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
    * 
    * ウィンドウが最大化されている場合は何もしません。   
@@ -20276,6 +20326,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * setstaticvariable関数は、静的な変数を書き込みます。
    * 
@@ -20328,6 +20379,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * getstaticvariable関数は、静的な変数を取得します。
    * 
@@ -20397,6 +20449,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * マクロファイルの先頭に書くことで規定のバージョンを満たしていないとマクロを閉じるといった働きをする関数。  
    * 
@@ -20436,6 +20489,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * keyhook関数は、キー割り当てを一時的に変更します。    
    * 一時的なキー割り当ての変更は、clearkeyhookを呼ぶと解除されます。    
@@ -20475,6 +20529,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * clearkeyhook文は、keyhookを解除します。    
    * 
@@ -20873,7 +20928,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f  
-   *  [非同期]  
+   * [非同期]  
    * 
    * loaddll関数は、hidemaru.loadDll関数の別名となります。    
    * 
@@ -21241,6 +21296,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
    * 
@@ -21255,6 +21311,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * getlinetext関数は、指定行のテキストを文字列にして取得します。    
    * 
@@ -21275,6 +21332,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f
+   * [非同期]  
    * 
    * getselectedtext関数は、範囲選択の内容を取得します。     
    * 選択は、単一選択の場合のみ結果を返します。   
@@ -21733,6 +21791,27 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function quit(): 0;
 
+
+  /**
+   * z    
+   * 
+   * この関数はjsmodeでは機能しません。    
+   * 
+   * @param target_process
+   * V9.25以降で、パラメータを記述して条件を指定できます。  
+   * 条件は"by-pid:"に続いてプロセスIDを指定する方法のみです。  
+   * 複数回呼ぶと、条件は追加されます。  
+   * 指定したプロセスIDのプロセスが全部終わっていたら自動的に破棄して終了します。  
+   * 
+   * @example
+   * 以下のようにすることでjs中に破棄して終了することが出来ます。
+   * js {
+   *     quit("by-pid:1234");
+   *     quit("by-pid:5678");
+   * }
+   * 
+   */
+  function quit(target_process: string): 0;
 
   /**
    * z    
