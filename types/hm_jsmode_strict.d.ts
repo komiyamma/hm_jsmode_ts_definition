@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.24.99.01
+ * @version v9.24.99.02
  */
 
 /**
@@ -3765,6 +3765,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 3 ツールバーの検索ボックス 
    * - 4 ファイルマネージャ枠 
    * - 5 アウトプット枠 
+   * - 6 個別ブラウザ枠
+   * - 7 ブラウザ枠
    */
   function getfocus(): number
 
@@ -20210,6 +20212,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 3  ツールバーの検索ボックス 
    * - 4  ファイルマネージャ枠
    * - 5  アウトプット枠
+   * - 6 個別ブラウザ枠
+   * - 7 ブラウザ枠
    * 
    * @comment
    * 参照：    

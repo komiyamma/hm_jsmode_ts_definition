@@ -19,7 +19,7 @@ browserpanecommand(b)
 
 window.setInterval
 
-
+hidemaru.setTimeout(()=>{}, 1000, 1);)
 
 shifthome();
 shiftend();
