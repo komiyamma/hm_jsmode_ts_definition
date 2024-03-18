@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.26.99.03
+ * @version v9.26.99.04
  */
 
 /**
@@ -21920,6 +21920,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     quit("by-pid:1234");
    *     quit("by-pid:5678");
    * }
+   * 
+   * @comment
+   * 秀丸エディタの以下の起動引数とも関係している  
+   * @quit-by-pid:プロセスID 
+   * 指定したプロセスIDのプロセスの存在をチェックして、無くなったら自動的に終了します。  
+   * 未保存の状態であっても終了します。  
+   * 
+   * @example  
+   * Hidemaru.exe /@quit-by-pid:1234
    * 
    */
   function quit(target_process: string): 0;
