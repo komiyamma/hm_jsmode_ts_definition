@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.24.99.02
+ * @version v9.26.99.01
  */
 
 /**
@@ -7606,6 +7606,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param text 
    * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
    * 
+   * @example
+   * // Google日本語入力
+   * var valid = =getimecandidate("{d5a86fd5-5308-47ea-ad16-9c4eb160ec3c}");  
+   * 
+   * @comment
+   * 既知のclsidの例（WindowsやIMEのバージョンによっては変わる可能性があります）  
+   * Google日本語入力 {d5a86fd5-5308-47ea-ad16-9c4eb160ec3c}  
+   * Microsoft IME {03b5835f-f03c-411b-9ce2-aa23e1171e36}  
+   * インストールされているIMEによっては、変換候補の取得の機能に差異がある可能性があります。  
+   * 
    * @return
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
    * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
@@ -7624,7 +7634,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * ""の場合は現在のIMEが使用されます。
    * 
    * @param text 
-   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 変換元の文字列を指定します。
+   * 
+   * @example
+   * // Google日本語入力
+   * var list=getimecandidate("","テスト");  
+   * var a=list.split("\r\n");  
+   * if(a.length >=2 ){ 
+   *   menuarray(a,a.length-1);
+   * }
    * 
    * @return
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
@@ -28209,6 +28227,16 @@ declare function strreplace(text: string, search_text: string, replace_text: str
    * @param text 
    * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
    * 
+   * @example
+   * // Google日本語入力
+   * var valid = =getimecandidate("{d5a86fd5-5308-47ea-ad16-9c4eb160ec3c}");  
+   * 
+   * @comment
+   * 既知のclsidの例（WindowsやIMEのバージョンによっては変わる可能性があります）  
+   * Google日本語入力 {d5a86fd5-5308-47ea-ad16-9c4eb160ec3c}  
+   * Microsoft IME {03b5835f-f03c-411b-9ce2-aa23e1171e36}  
+   * インストールされているIMEによっては、変換候補の取得の機能に差異がある可能性があります。  
+   * 
    * @return
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
    * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
@@ -28227,7 +28255,15 @@ declare function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
    * ""の場合は現在のIMEが使用されます。
    * 
    * @param text 
-   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 変換元の文字列を指定します。
+   * 
+   * @example
+   * // Google日本語入力
+   * var list=getimecandidate("","テスト");  
+   * var a=list.split("\r\n");  
+   * if(a.length >=2 ){ 
+   *   menuarray(a,a.length-1);
+   * }
    * 
    * @return
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
