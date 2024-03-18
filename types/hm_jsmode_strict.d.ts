@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.26.99.01
+ * @version v9.26.99.02
  */
 
 /**
@@ -14900,7 +14900,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "uri" | "url" | "size" | "initialized" | "title", clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string, copy?: number }
+  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string }
   /**
    * f    
    * [非同期]  
@@ -14911,6 +14911,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * JSON/オブジェクトの場合のプロパティの意味は以下の通りです。
    *  - target: 対象となる枠の名前。"_common"は共通のブラウザ枠。"_each"は個別ブラウザ枠。記述が無い場合は既定の枠が対象。
    *  - show: 表示するかどうか。1で表示、0で非表示。
+   *  - invisible:　見えないようにするかどうか。1で見えない。0で見える。非表示にしてもインスタンスは継続します。
    *  - uri: URI。（urlでも可）
    *  - place: 位置。"leftside" "rightside" "upside" "downside"のいずれか。
    *  - get: 関数として呼ばれたときに取得される情報の指定。１つの取得のみに使用してください。他のプロパティは無視されます。
@@ -14918,18 +14919,23 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    - "DOMContentLoaded"の場合、"0"または"1"が返る。
    *    - "load"の場合、"0"または"1"が返る。
    *    - "show"の場合、"0"または"1"が返る。
+   *    - "invisible"　見えない状態の場合"1"、見える状態の場合"0"が返ります。
    *    - "uri" の場合、URIが返ります。(uriでも可)
    *    - "size" の場合、上下左右の枠の配置のときのピクセル単位のサイズが文字列として返ります。
    *    - "initialized" の場合、個別ブラウザ枠で初期化が完了している場合に"1"、そうでなければ"0"が返ります。（initialize: "async"の場合だけに意味がある）
    *    - "title"の場合、タイトルが返ります。
+   *    - "watch"の場合、ウォッチの状態を返します。
+   *    - "watchsave"の場合、ウォッチの状態を返します。[上書き保存で更新]の状態を返します。
+   *    - "maximize"の場合、最大化の状態を返します。
    *  - clear: 1を指定するとクリアします。
    *  - refresh: 1を指定すると更新します。
    *  - focus: 1を指定するとフォーカスします。
    *  - size: 上下左右の枠の配置のときのピクセル単位のサイズの数値。
+   *  - syncsize:　1を指定すると枠のサイズを他の秀丸エディタにも反映させます。
    *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
+   *  - watchsave:　[上書き保存で更新]の状態を0か1で指定します。（1を指定すると[上書き保存で更新]をON）
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
-   *  - copy: 1を指定すると、ブラウザ枠の内容をクリップボードにコピーします。
    * 
    * @example
    * js {
@@ -14939,6 +14945,12 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *     uri:"https://hide.maruo.co.jp/",
    *     place:"leftside",
    *   });
+   * }
+   * endmacro;
+   * 
+   * js{
+   *   var fInvisible=Number(browserpanecommand({target:"_each",get:"invisible"}));
+   *   browserpanecommand({target:"_each",invisible:!fInvisible});
    * }
    * endmacro;
    * 
@@ -14975,6 +14987,13 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *   - "refresh" 更新します。
    *   - "focus" フォーカスします。
    *   - "focusinputfield" コンテンツ内に入力欄があれば入力欄にフォーカスを移動します。
+   *   - "watch"　ウォッチをONにします。
+   *   - "nowatch"　ウォッチをOFFにします。
+   *   - "watchsave"　上書き保存で更新をONにします。（個別ブラウザ枠のみ）
+   *   - "nowatchsave"　上書き保存で更新をOFFにします。（個別ブラウザ枠のみ）
+   *   - "maximize"　最大化します。（個別ブラウザ枠のみ）
+   *   - "restoremaximize"　最大化を解除します。（個別ブラウザ枠のみ）
+   *   - "copy"　ブラウザ枠の内容をクリップボードにコピーします。
    * 
    * @returns
    * 指定したコマンドにより返り値が異なります。
@@ -14983,7 +15002,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" ): string
+  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy" ): string
 
   /**
    * f    
@@ -19044,7 +19063,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @returns
    * 取得した情報をJSONオブジェクトで返します。
    */
-  function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | object): IGetConfigJsonReturn;
+  function getconfig(json_obj: IGetConfigJsonArg | {"*":{}} | {} | object ): IGetConfigJsonReturn;
 
   type IGetConfigArg = "Font" | "FontSize" | "FontPoint" | "FontDecimal" | "FontCharSet" | "BoldFace" | "Orikaeshi" | "AutoAdjustOrikaeshi" | "Kinsoku" | "CorrectLineNo" | "LF" | "CharSpace" | "Tategaki" | "Dangumi" | "FreeCursor" | "SaveLastPos" | "Tab" | "TabMode" | "Indent" | "Blockquote" | "BquoteItemized" | "BquoteInclude" | "BlockquoteFix" | "UnderLine" | "ImeColorCurLine" | "HideCR" | "ShowCR" | "HideEOF" | "ShowEOF" | "ShowTab" | "ShowBox" | "Ruler" | "TabRuler" | "ShowLineNo" | "ShowPageNo" | "FormLine" | "ActiveKakko" | "ActiveTagPair" | "VertLine" | "GuideLine" | "GuideLineInterval" | "OrikaeshiLine" | "LastColor" | "Stripe" | "ColorNum" | "ColorUrl" | "ColorEmail" | "ColorFN" | "CurLineColor" | "CurLineColorEx" | "RulerColor" | "RulerBack" | "ColorComment" | "AspDefaultScript" | "Asp" | "JspComment" | "Php" | "Xml" | "ColorIfdef" | "Hilight" | "HilightTitle" | "HilightDirectWord" | "HilightDirectMulti" | "HilightDirectIfdef" | "Outline" | "ClistFont" | "ClistFontSize" | "HilightList" | "OutlineBar" | "RangeEdit" | "Folding" | "FoldingTwigBar" | "Ime" | "AutocompFlag1" | "AutocompFlag2" | "AutocompDic" | "AutocompAuto" | "FiletypeCharcode" | "SaveConv" | "StripTrail" | "SaveWithEOF" | "IgnoreEOF" | "Backup" | "BackupFast";
   /**
@@ -21567,6 +21586,14 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @deprecated
    */
   function execmacro(): 0;
+
+  /**
+   * z    
+   * 
+   * この関数はjsmodeでは機能しません。
+   * @deprecated
+   */
+  function execeventmacro(): 0;
 
   /**
    * z    
