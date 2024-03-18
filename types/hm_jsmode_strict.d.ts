@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.26.99.02
+ * @version v9.26.99.03
  */
 
 /**
@@ -14900,7 +14900,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string }
+  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string }
   /**
    * f    
    * [非同期]  
@@ -14966,8 +14966,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "title"の場合、タイトルが返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(json_obj: IBrowserPaneCommandArg | object): string
+  function browserpanecommand(json_obj: IBrowserPaneCommandJsonArg | object): string
 
+  type IBrowserPaneCommandArg = "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy":
+  
   /**
    * f    
    * [非同期]  
@@ -15002,7 +15004,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - "get_readyState" 未完了では"loading"、DOM操作まで完了では"interactive"、すべて完了では"complete"が返ります。
    * - その他の場合、空の文字列が返ります。
    */
-  function browserpanecommand(request_command: "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy" ): string
+  function browserpanecommand(request_command: IBrowserPaneCommandArg | string): string
 
   /**
    * f    

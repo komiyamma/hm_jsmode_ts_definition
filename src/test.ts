@@ -26,14 +26,9 @@ shiftend();
 
 getimecandidatelist("abc", "abc");
 
-interface IBrowserPaneCommandArg {
-    target?: IBrowserPaneTargetString, show?: 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", 
-    
-    get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize", 
-    
-    
-    
-    clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, initialize?: "async", watch?: 0 | 1, setinputfield?: string, copy?: number
-}
+browserpanecommand("copy");
 
-getconfig({});
+let ab : IBrowserPaneCommandArg = "copy";
+
+browserpanecommand("copy");
+
