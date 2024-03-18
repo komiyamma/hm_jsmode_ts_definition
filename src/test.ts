@@ -23,3 +23,5 @@ hidemaru.setTimeout(()=>{}, 1000, 1);)
 
 shifthome();
 shiftend();
+
+getimecandidatelist("abc", "abc");

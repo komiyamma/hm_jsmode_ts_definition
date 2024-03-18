@@ -7594,6 +7594,45 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function strreplace(text: string, search_text: string, replace_text: string): string
 
   /**
+   * f
+   * [非同期]
+   * 
+   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * 
+   * @param clsid 
+   * インストールされているIMEをclsidで指定します。  
+   * ""の場合は現在のIMEが使用されます。
+   * 
+   * @param text 
+   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 
+   * @return
+   * 変換候補を改行文字("\r\n")区切の複数行で返します。
+   * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
+   * エラーは"-1"という文字列が返ります。
+   */
+  function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
+
+  /**
+   * f
+   * [非同期]
+   * 
+   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * 
+   * @param clsid 
+   * インストールされているIMEをclsidで指定します。  
+   * ""の場合は現在のIMEが使用されます。
+   * 
+   * @param text 
+   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 
+   * @return
+   * 変換候補を改行文字("\r\n")区切の複数行で返します。
+   * エラーは"-1"という文字列が返ります。
+   */
+  function getimecandidatelist(clsid: string, text: string): "-1" | string
+
+  /**
    * s
    * 
    * newfile文は、新しい秀丸エディタを起動します。    
@@ -28156,6 +28195,45 @@ declare function quote(text: string): string
    * 
    */
 declare function strreplace(text: string, search_text: string, replace_text: string): string
+
+  /**
+   * f
+   * [非同期]
+   * 
+   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * 
+   * @param clsid 
+   * インストールされているIMEをclsidで指定します。  
+   * ""の場合は現在のIMEが使用されます。
+   * 
+   * @param text 
+   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 
+   * @return
+   * 変換候補を改行文字("\r\n")区切の複数行で返します。
+   * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
+   * エラーは"-1"という文字列が返ります。
+   */
+declare function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
+
+  /**
+   * f
+   * [非同期]
+   * 
+   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * 
+   * @param clsid 
+   * インストールされているIMEをclsidで指定します。  
+   * ""の場合は現在のIMEが使用されます。
+   * 
+   * @param text 
+   * ""または省略した場合、パラメータ１の clsid が有効かどうかを返します。
+   * 
+   * @return
+   * 変換候補を改行文字("\r\n")区切の複数行で返します。
+   * エラーは"-1"という文字列が返ります。
+   */
+declare function getimecandidatelist(clsid: string, text: string): "-1" | string
 
   /**
    * s
