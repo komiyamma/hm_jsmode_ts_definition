@@ -40,7 +40,9 @@ let c = hidemaru.createHttpServer( {makeKey:"1"}, function(req, res,) {
 });
 
 let d = hidemaru.runProcess("notepad.exe", "c:\\temp\\test.txt");
-d.onClose(ccc);
+let e = d.stdOut
+e.onReadLine((out, id) => {
+});
 
 function ccc(abc): number {
     return 3;

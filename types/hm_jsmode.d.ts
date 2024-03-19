@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.28.99.01
+ * @version v9.28.99.02
  */
 
 /**
@@ -494,26 +494,31 @@ declare namespace hidemaru {
      * 
      * @param callback 
      * 全て出力されているときに呼ばれる関数を指定します。
-     * function(out: string) { ... } の形の関数を指定します。
+     * function(out: string, id: number) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
      * 
      * @example
      * stdOut.onReadAll(function(out){});
      */
-    onReadAll(callback: (out?: string) => any): void
+    onReadAll(callback: (out?: string, id?: number) => any): void
 
     /**
      * 全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
      * 行までが出力されているときに呼ばれる関数を指定します。    
      * マクロが終わった後に非同期的に呼ばれることになります。応答が無くても固まりせん。    
+     * 一度関数を指定すると、自動的に次の行も読んでいきます。
      * 
      * @param callback 
-     * 全て出力されているときに呼ばれる関数を指定します。
-     * function(out: string) { ... } の形の関数を指定します。
+     * 行までが出力されているときに呼ばれる関数を指定します。  
+     * function(out: string, id: number) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
      * 
      * @example
      * stdOut.onReadLine(function(out){});
      */
-    onReadLine(callback: (out?: string) => any): void
+    onReadLine(callback: (out?: string, id?: number) => any): void
 
     /**
      * 全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
@@ -523,6 +528,8 @@ declare namespace hidemaru {
      * @param callback 
      * 全て出力されているときに呼ばれる関数を指定します。
      * function(out: string) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
      * 
      * @param read_byte
      * 読み込むバイト数を指定します。    
@@ -530,9 +537,18 @@ declare namespace hidemaru {
      * 
      * @example
      * stdOut.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
+     * stdOut.onReadSeparated(function(s,id){},0);   //空行までid付き
      * stdOut.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
+     * stdOut.onReadSeparated(function(s,id){},123);//123バイトまでid付き
+     * stdOut.onReadSeparated(onReadA,0);  
+     * function onReadA(s){
+     *   stdOut.onReadSeparated(onReadB,123);
+     * }
+     * function onReadB(s){
+     *   stdOut.onReadSeparated(onReadA,0);
+     * }
      */
-    onReadSeparated(callback: (out?: string) => any, read_byte: number): void
+    onReadSeparated(callback: (out?: string, id?: number) => any, read_byte: number): void
 
     /**
      * 標準入出力を終わっているどうか。
@@ -545,6 +561,12 @@ declare namespace hidemaru {
      * 数値で、0は書き込みし切っていません。0以外は書き込みし切っています。
      */
     readonly flushed: number
+
+    /**
+     * このStdioを識別するIDです。
+     * 同一プロセスの秀丸エディタ上で、1から加算され、他のStdioと被ることはない値です。
+     */
+    readonly id: number
 
     /**
      * 標準入出力を閉じます。
@@ -611,7 +633,7 @@ declare namespace hidemaru {
     /**
      * プロセスが終了したときに呼ばれる関数を指定します。  
      * 
-     * @param callback_func
+     * @param callback
      * 非同期的に呼ばれることになります。  
      * 応答が無くても固まりせん。  
      * 返り値はありません。  
@@ -629,7 +651,7 @@ declare namespace hidemaru {
      *  }
      *  endmacro;
      */
-    onClose(callback_func: ()=>void): void
+    onClose(callback: ()=>void): void
   }
 
   /**
@@ -810,7 +832,7 @@ declare namespace hidemaru {
    * Webページをホストするためのものではなく、URLを元にtext/plainでテキストの応答ができるだけです。  
    * 同一PC内のアクセスを想定していますが、CORS回避しているので関係無いところから接続が発生しないか注意が必要です。  
    * 
-   * @param callback_func
+   * @param callback
    * httpリクエストがあったときに呼ばれる関数を指定します。  
    * 関数のパラメータ１はHttpRequest、パラメータ２はHttpResponseが与えられて呼ばれます。  
    * 
@@ -833,7 +855,7 @@ declare namespace hidemaru {
    * @returns
    * HttpServerオブジェクトを返します。
    */
-  function createHttpServer(callback_func: ICreateHttpServerFunc) : IHttpServer;
+  function createHttpServer(callback: ICreateHttpServerFunc) : IHttpServer;
 
   /**
    * createHttpServerの第１引数としてオブジェクトを指定することでオプションの指定ができます。
@@ -860,7 +882,7 @@ declare namespace hidemaru {
    * オプションの指定ができます。  
    * オプションのmakeKeyを指定すると、URLの最初のパス部分がHttpServer.keyと一致していないとできないようになります。  
    * 
-   * @param callback_func
+   * @param callback
    * httpリクエストがあったときに呼ばれる関数を指定します。  
    * 関数のパラメータ１はHttpRequest、パラメータ２はHttpResponseが与えられて呼ばれます。  
    * 
@@ -882,7 +904,7 @@ declare namespace hidemaru {
    * @returns
    * HttpServerオブジェクトを返します。
    */
-  function createHttpServer(option: ICreateHttpServerOption, callback_func: ICreateHttpServerFunc) : IHttpServer;
+  function createHttpServer(option: ICreateHttpServerOption, callback: ICreateHttpServerFunc) : IHttpServer;
 
   /**
    * f    
