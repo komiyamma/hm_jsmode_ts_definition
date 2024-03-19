@@ -32,3 +32,17 @@ let ab : IBrowserPaneCommandArg = "copy";
 
 browserpanecommand("copy");
 
+let c = hidemaru.createHttpServer( {makeKey:"1"}, function(req, res,) {
+    res.writeHead(200);
+    res.write('Hello, world!');
+    res.end('Hello, world!');
+
+});
+
+let d = hidemaru.runProcess("notepad.exe", "c:\\temp\\test.txt");
+d.onClose(ccc);
+
+function ccc(abc): number {
+    return 3;
+}
+}

@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.26.99.04
+ * @version v9.28.99.01
  */
 
 /**
@@ -53,8 +53,8 @@ declare namespace console {
    * debuginfo(2);
    * console.log("OK1");
    * console.log("OK2");
-   * console.log(typeof(str)); // function
-   * console.log(str);  // 関数の中身が出る
+   * console.log(typeof(hidemaruGlobal.str)); // function
+   * console.log(hidemaruGlobal.str);  // 関数の中身が出る
    * 
    * @comment
    * 参照：
@@ -79,8 +79,8 @@ declare namespace console {
    * debuginfo(2);
    * console.warn("OK1");
    * console.warn("OK2");
-   * console.warn(typeof(str)); // function
-   * console.warn(str);  // 関数の中身が出る
+   * console.warn(typeof(hidemaruGlobal.str)); // function
+   * console.warn(hidemaruGlobal.str);  // 関数の中身が出る
    * 
    * @comment
    * 参照：
@@ -607,6 +607,29 @@ declare namespace hidemaru {
      * プロセスを強制終了します。
      */
     kill(): void
+
+    /**
+     * プロセスが終了したときに呼ばれる関数を指定します。  
+     * 
+     * @param callback_func
+     * 非同期的に呼ばれることになります。  
+     * 応答が無くても固まりせん。  
+     * 返り値はありません。  
+     * 呼ばれる関数のパラメータはありません。
+     * 
+     * @example
+     * js{
+     *  debuginfo(2);
+     *    var exe = hidemaru.runProcess("cmd.exe", directory2(), "gui" );
+     *    exe.onClose( closeAsync ); //固まりません
+     *    function closeAsync() {
+     *      //ここはマクロ実行中ではない
+     *      console.log("cmd.exe closed");
+     *    }
+     *  }
+     *  endmacro;
+     */
+    onClose(callback_func: ()=>void): void
   }
 
   /**
@@ -625,10 +648,12 @@ declare namespace hidemaru {
    * 以下の文字列の動作モードを指定します。    
    * - "gui"    
    * ウィンドウ表示あり、stdIn/stdOutなし。(既定)    
-   * - "stdio"    
-   * ウィンドウ表示なし、stdIn/stdOutあり。    
    * - "guiStdio"    
    * ウィンドウ表示あり、stdIn/stdOutあり。    
+   * - "stdio"    
+   * ウィンドウ表示なし、stdIn/stdOutあり。    
+   * - "stdioAlive"    
+   * ウィンドウ表示なし、stdIn/stdOutあり、jsインスタンス終了でプロセス終了しない。
    * 
    * "stdio"はProcessInfoオブジェクトが無くなるとプロセスの終了もします。    
    * 
@@ -690,6 +715,174 @@ declare namespace hidemaru {
    * プロセスの情報を表すProcessInfoオブジェクトを返します。
    */
   function getCurrentProcessInfo(): IProcessInfo;
+
+  /**
+   * HttpServerオブジェクトは、createHttpServerによって作成されます。
+   */
+  interface IHttpServer {
+
+    /**
+     * localhostの指定したポート番号で、listenを開始します。  
+     * パラメータにポート番号を指定します。  
+     * 0を指定するとポート番号が自動的に割り当てられます。  
+     * 返り値は決まっていません。
+     */
+    listen(): number;
+
+    /**
+     * listenを停止して閉じます。  
+     * パラメータはありません。  
+     * 返り値はありません。  
+     */
+    close(): void
+
+    /**
+     * listen中かどうかを表します。
+     */
+    readonly listening: number
+
+    /**
+     * listen中のポート番号を表します。  
+     * 指定されたポート番号でlistenが失敗している場合は0になります。  
+     */
+    readonly port: number
+
+    /**
+     * URLのパスの最初の部分がkeyと一致しているときのみリクエストを受け付けるようになる文字列です。  
+     * 空の場合は判定しません。
+     */
+    key : string;
+  }
+
+  /**
+   * HttpRequestオブジェクトは、createHttpServerで指定する関数のパラメータとして呼ばれます。
+   */
+  interface IHttpRequest {
+
+    /**
+     * "GET"や"POST"などを表しますが、"GET"しかサポートしていないので、得られるのは"GET"のみです。
+     */
+    readonly method : string
+
+    /**
+     * ホスト名より後のURLを表します。
+     */
+    readonly url : string
+  }
+
+  /**
+   * HttpRequestオブジェクトは、createHttpServerで指定する関数のパラメータとして呼ばれます。
+   */
+  interface IHttpResponse {
+
+    /**
+     * 応答ヘッダのステータスコードを指定します。通常は200を指定します。  
+     * ヘッダの指定はできません。  
+     * text/plainで固定です。  
+     * 返り値はありません。  
+     */
+    writeHead(status_code: number): void;
+
+    /**
+     * 内容のバッファに文字列を追加します。  
+     * 返り値はありません。
+     */
+    write(add_text: string): void;
+
+    /**
+     * 内容のバッファに文字列を追加し、  
+     * レスポンスを実行します。  
+     * 返り値はありません。  
+     */
+    end(add_text: string): void
+  }
+
+  type ICreateHttpServerFunc = (request:IHttpRequest, response:IHttpResponse)=>void;
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * createHttpServerメソッドは、HttpServerオブジェクトを作成します。  
+   * 
+   * createHttpServerで得られるHttpServerオブジェクトは、最小限の機能だけのhttpサーバーです。  
+   * GETのみです。レスポンスヘッダの指定はありません。  
+   * POSTはできません。Keep-Aliveは未定です。  
+   * Webページをホストするためのものではなく、URLを元にtext/plainでテキストの応答ができるだけです。  
+   * 同一PC内のアクセスを想定していますが、CORS回避しているので関係無いところから接続が発生しないか注意が必要です。  
+   * 
+   * @param callback_func
+   * httpリクエストがあったときに呼ばれる関数を指定します。  
+   * 関数のパラメータ１はHttpRequest、パラメータ２はHttpResponseが与えられて呼ばれます。  
+   * 
+   * @example
+   * js{
+   *   server = hidemaru.createHttpServer(function(req, res) {
+   *     if(req.url=="/abc"){
+   *       res.writeHead(200);//OK
+   *       res.write("Hello World" );
+   *       res.end("requested url:"+req.url );
+   *     } else {
+   *       res.writeHead(404);//Not found
+   *       res.end("");
+   *     }
+   *   });
+   *   server.listen(54321);// http://localhost:54321/abc
+   * }
+   * endmacro;
+   * 
+   * @returns
+   * HttpServerオブジェクトを返します。
+   */
+  function createHttpServer(callback_func: ICreateHttpServerFunc) : IHttpServer;
+
+  /**
+   * createHttpServerの第１引数としてオブジェクトを指定することでオプションの指定ができます。
+   */
+  interface ICreateHttpServerOption {
+    /**
+     * 0以外を指定してkeyをランダムに自動設定します
+     */
+    makeKey: number;
+  }
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * createHttpServerメソッドは、HttpServerオブジェクトを作成します。  
+   * 
+   * createHttpServerで得られるHttpServerオブジェクトは、最小限の機能だけのhttpサーバーです。  
+   * GETのみです。レスポンスヘッダの指定はありません。  
+   * POSTはできません。Keep-Aliveは未定です。  
+   * Webページをホストするためのものではなく、URLを元にtext/plainでテキストの応答ができるだけです。  
+   * 同一PC内のアクセスを想定していますが、CORS回避しているので関係無いところから接続が発生しないか注意が必要です。  
+   * 
+   * @param option
+   * オプションの指定ができます。  
+   * オプションのmakeKeyを指定すると、URLの最初のパス部分がHttpServer.keyと一致していないとできないようになります。  
+   * 
+   * @param callback_func
+   * httpリクエストがあったときに呼ばれる関数を指定します。  
+   * 関数のパラメータ１はHttpRequest、パラメータ２はHttpResponseが与えられて呼ばれます。  
+   * 
+   * @example
+   * js{
+   *  server = hidemaru.createHttpServer({makeKey:1},function(req, res) {
+   *      res.writeHead(200);//OK
+   *      res.end("Hello World Secure\r\n");
+   *  });
+   *  server.listen(0);//ランダムなポート
+   *  input("URLです","http://localhost:"+server.port+"/"+server.key+"/foobar");
+   *}
+   *endmacro;
+   * 
+   * @see ICreateHttpServerOption
+   * @see ICreateHttpServerFunc
+   * @see IHttpServer
+   * 
+   * @returns
+   * HttpServerオブジェクトを返します。
+   */
+  function createHttpServer(option: ICreateHttpServerOption, callback_func: ICreateHttpServerFunc) : IHttpServer;
 
   /**
    * f    
@@ -1296,7 +1489,7 @@ declare namespace hidemaru {
    * 固有のIDが返ります。    
    * 主にclearIntervalをするためのIDとなります。
    */
-  function setInterval(func: Function, millisecond: number ...arguments: any[]): number;
+  function setInterval(func: Function, millisecond: number, ...arguments: any[]): number;
 
   /**
    * f    
