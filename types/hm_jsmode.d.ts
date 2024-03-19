@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.28.99.02
+ * @version v9.28.99.03
  */
 
 /**
@@ -22147,6 +22147,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * z    
+   * [非同期]
    * 
    * この関数はjsmodeでは機能しません。    
    * 
@@ -22172,8 +22173,11 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @example  
    * Hidemaru.exe /@quit-by-pid:1234
    * 
+   * @returns
+   * 返り値は意味を持ちません。
+   * 
    */
-  function quit(target_process: string): 0;
+  function quit(target_process: string): number;
 
 
   /**
@@ -42806,6 +42810,7 @@ declare function saveexitall(): 0;
 
   /**
    * z    
+   * [非同期]
    * 
    * この関数はjsmodeでは機能しません。    
    * 
@@ -42831,8 +42836,11 @@ declare function saveexitall(): 0;
    * @example  
    * Hidemaru.exe /@quit-by-pid:1234
    * 
+   * @returns
+   * 返り値は意味を持ちません。
+   * 
    */
-declare function quit(target_process: string): 0;
+declare function quit(target_process: string): number;
 
 
   /**
