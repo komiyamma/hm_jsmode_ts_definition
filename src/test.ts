@@ -47,4 +47,6 @@ e.onReadLine((out, id) => {
 function ccc(abc): number {
     return 3;
 }
-}
+
+if (hidemaru.isProcessIdValid(123454))
+

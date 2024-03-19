@@ -737,6 +737,32 @@ declare namespace hidemaru {
    */
   function getCurrentProcessInfo(): IProcessInfo;
 
+  
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * isProcessIdValidメソッドは、プロセスIDが有効かどうかを判定します。  
+   * 
+   * @param process_id
+   * プロセスIDを指定します。  
+   * 通常は、 hidemaru.runProcess の返り値の IProcessInfo オブジェクトのプロパティ processID を引数とすることが多いでしょう。  
+   * 
+   * @example
+   * if( hidemaru.isProcessIdValid(12345) != 0 ) {
+   * }
+   * 
+   * 参照：
+   * @see runProcess
+   * @see IProcessInfo
+   * 
+   * @returns
+   * プロセスIDが有効な場合は0以外、無効な場合は0が返ります。
+   */
+  function isProcessIdValid(process_id: number): number;
+
+
+
   /**
    * HttpServerオブジェクトは、createHttpServerによって作成されます。
    */
