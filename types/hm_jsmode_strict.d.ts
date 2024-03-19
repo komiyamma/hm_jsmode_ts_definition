@@ -17697,6 +17697,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * input_dialog_typeで左上/右上/左下/右下からの位置を指定しているときに、input_pos_x、input_pos_yのX,Y座標が使われます。    
    * X,Y座標の値は、DPIが100%のときのピクセル単位で、DPIが200%のときは指定の2倍の値のピクセル数になります。    
    * 
+   * @param dialog_width
+   * 複数行の入力ボックスのとき、ダイアログのサイズの幅を指定します。  
+   * input_prop の引数で「複数行の入力ボックス」の指定をしている際に機能します。
+   * DPIが100%のときのピクセル単位です。DPIが200%のときは指定の2倍の値のピクセル数になります。
+   * 
+   * @param dialog_height
+   * 複数行の入力ボックスのとき、ダイアログのサイズの高さを指定します。  
+   * input_prop の引数で「複数行の入力ボックス」の指定をしている際に機能します。
+   * DPIが100%のときのピクセル単位です。DPIが200%のときは指定の2倍の値のピクセル数になります。
+   * 
    * @example
    * var a = input( "入力してください", "", 0x01 ); //画面の中央
    * var a = input( "入力してください", "", 0x15, 100, 50 ); //ウィンドウ右下からの位置
@@ -17733,7 +17743,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 「OK」を押したならinput実行直後、result()は1になります。    
    * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
    */
-  function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number): string
+  function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number, dialog_width?: number, dialog_height?: number): string
 
   /**
    * f
