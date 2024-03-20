@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.28.99.03
+ * @version v9.28.99.04
  */
 
 /**
@@ -389,32 +389,32 @@ declare namespace hidemaru {
     /**
      * 標準入力に文字列を書き込みます。
      * 
-     * @param input  
+     * @param output  
      * 書き込む文字列
      * 
      * @example
      * var input_message = "あいうえお";
      * stdIn.write(input_message);
      */
-    write(input: string): void;
+    write(output: string): void;
 
     /**
      * 標準入力に文字列に改行を入れて書き込みます。
      * 
-     * @param input  
+     * @param output  
      * 書き込む文字列
      * 
      * @example
      * var input_message = "あいうえお";
      * stdIn.writeLine(input_message);
      */
-    writeLine(input: string): void;
+    writeLine(output: string): void;
 
     /**
      * writeメソッドで文字列を書き込んだことを想定した場合のバイト数を取得します。  
      * （書き込みはしません）
      * 
-     * @param input  
+     * @param output  
      * テストする文字列
      * 
      * @example
@@ -425,7 +425,7 @@ declare namespace hidemaru {
      * 返り値は数値で、バイト数です。  
      * バイト数を計算するためのエンコーディングはProcessInfoオブジェクトによって決定されています。  
      */
-    writeSimulation(input: string): number;
+    writeSimulation(output: string): number;
 
     /**
      * 全て読み取って文字列を返します。    
@@ -762,7 +762,6 @@ declare namespace hidemaru {
   function isProcessIdValid(process_id: number): number;
 
 
-
   /**
    * HttpServerオブジェクトは、createHttpServerによって作成されます。
    */
@@ -930,6 +929,261 @@ declare namespace hidemaru {
    * HttpServerオブジェクトを返します。
    */
   function createHttpServer(option: ICreateHttpServerOption, callback: ICreateHttpServerFunc) : IHttpServer;
+
+  /**
+   * SocketIOオブジェクトは、ソケットの入出力を扱うオブジェクトです。  
+   * サーバーの場合、createSocketServerで指定する関数のパラメータにあります。  
+   * クライアントの場合、createSocketClientで作成できます。
+   */
+  interface ISocketIO {
+    /**
+     * サーバーの場合、このメソッドを呼ぶ必要はありません。
+     * クライアントの場合、サーバーに接続します。
+     * @param port  
+     * ポート番号を指定します。
+     * 
+     * @param ipaddress 
+     * IPアドレスを指定します。省略可能です。多くの場合、自身のPCとして、'127.0.0.1'を指定します。省略すると'127.0.0.1'になります。
+     * 
+     * @example
+     * socket.connect(1234,'127.0.0.1');
+     * 
+     * @returns
+     * 返り値はありません。
+     */
+    connect(port: number,ipaddress: string): void
+
+    /**
+     * ソケットに文字列を書き込みます。
+     * 
+     * @param input  
+     * 書き込む文字列
+     * 
+     * @example
+     * socket.write(s);
+     */
+    write(input: string): void;
+
+    /**
+     * 文字列の末尾に改行を追加して書き込みます。
+     * 
+     * @param output  
+     * 書き込む文字列
+     * 
+     * @example
+     * socket.writeLine(s);
+     */
+    writeLine(output: string): void;
+
+    /**
+     * writeメソッドで文字列を書き込んだことを想定した場合のバイト数を取得します。  
+     * （書き込みはしません）
+     * 
+     * @param output  
+     * テストする文字列
+     * 
+     * @example
+     * var nByte = socket.writeSimulation(s);
+     * 
+     * @returns
+     * 返り値は数値で、バイト数です。  
+     * バイト数を計算するためのエンコーディングはUTF-8です。
+     */
+    writeSimulation(output: string): number;
+
+    /**
+     * 全て読み取って文字列を返します。    
+     * 応答が無い場合は、タイムアウトまで固まります。
+     * 
+     * @param timeout_millisecond
+     * タイムアウトをミリ秒で指定します。
+     * 
+     * @example
+     * var s=socket.readAll(nTimeout);
+     * 
+     * @returns
+     * 読み取った文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
+     */
+    readAll(timeout_millisecond: number): string | undefined
+
+    /**
+     * 行を読み取って文字列を返します。    
+     * 応答が無い場合は、タイムアウトまで固まります。
+     * 
+     * @param timeout_millisecond
+     * タイムアウトをミリ秒で指定します。
+     * 
+     * @example
+     * var s=socket.readLine(nTimeout);
+     * 
+     * @returns
+     * 読み取った行の文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
+     */
+    readLine(timeout_millisecond: number): string | undefined
+
+    /**
+     * 指定バイト数までを読み取って文字列を返します。    
+     * 応答が無い場合は、タイムアウトまで固まります。
+     * 
+     * @param timeout_millisecond
+     * タイムアウトをミリ秒で指定します。
+     * 
+     * @param read_byte
+     * 0を指定すると空行（改行だけの行）までを読み取ります。
+     * 1以上を指定すると、指定バイト数までを読み取ります。
+     * 
+     * onReadLineとは違い、自動的に次の区切りまでは読みません。    
+     * 次の区切りを読む場合、もう一度onReadSeparated()で指定します。    
+     * 
+     * @example
+     * 例：
+     * var s=socket.readSeparated(nTimeout,0); //空行まで
+     * 例：
+     * var s=socket.readSeparated(nTimeout,123); //123バイトまで
+     * 
+     * @returns
+     * 読み取った文字列を返します。    
+     * タイムアウトの場合はundefinedが返ります。
+     */
+    readSeparated(timeout_millisecond: number, read_byte: number): string | undefined
+
+    /**
+     * 全て読み取って文字列を返す readAllの非同期のバージョンとなります。    
+     * 全て出力されているときに呼ばれる関数を指定します。    
+     * マクロが終わった後に非同期的に呼ばれることになります。応答が無くても固まりせん。    
+     * 
+     * @param callback 
+     * 全て出力されているときに呼ばれる関数を指定します。
+     * function(out: string, id: number) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
+     * 
+     * @example
+     * socket.onReadAll(function(s,id){});
+     */
+    onReadAll(callback: (out?: string, id?: number) => any): void
+
+    /**
+     * 全て読み取って文字列を返す readLineの非同期のバージョンとなります。    
+     * 行までが出力されているときに呼ばれる関数を指定します。    
+     * マクロが終わった後に非同期的に呼ばれることになります。応答が無くても固まりせん。    
+     * 一度関数を指定すると、自動的に次の行も読んでいきます。
+     * 
+     * @param callback 
+     * 行までが出力されているときに呼ばれる関数を指定します。  
+     * function(out: string, id: number) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
+     * 
+     * @example
+     * socket.onReadLine(function(s,id){});
+     */
+    onReadLine(callback: (out?: string, id?: number) => any): void
+
+    /**
+     * 全て読み取って文字列を返す readSeparatedの非同期のバージョンとなります。    
+     * 指定バイト数までが出力されているときに呼ばれる関数を指定します。    
+     * マクロが終わった後に非同期的に呼ばれることになります。応答が無くても固まりせん。    
+     * onReadLineとは違い、自動的に次の区切りまでは読みません。  
+     * 次の区切りを読む場合、もう一度onReadSeparated()で指定します。
+     * 
+     * @param callback 
+     * 全て出力されているときに呼ばれる関数を指定します。
+     * function(out: string) { ... } の形の関数を指定します。
+     * callback関数のoutに、読み込まれた文字列があります。
+     * idに、idがあります。
+     * 
+     * @param read_byte
+     * 読み込むバイト数を指定します。    
+     * 0の場合は空行までになります。    
+     * 
+     * @example
+     * socket.onReadSeparated(function(out){}, 0);   // 空行まで読み込んだ時、outに内容が渡ってくる
+     * socket.onReadSeparated(function(s,id){},0);   //空行までid付き
+     * socket.onReadSeparated(function(out){}, 123); // 123バイト読み込んだ時、outに内容が渡ってくる
+     * socket.onReadSeparated(function(s,id){},123);//123バイトまでid付き
+     * socket.onReadSeparated(onReadA,0);  
+     * function onReadA(s){
+     *   socket.onReadSeparated(onReadB,123);
+     * }
+     * function onReadB(s){
+     *   socket.onReadSeparated(onReadA,0);
+     * }
+     */
+    onReadSeparated(callback: (out?: string, id?: number) => any, read_byte: number): void
+
+    /**
+     * ソケット閉じます。
+     */
+    close(): void
+
+    /**
+     * 接続しているかどうか。
+     */
+    readonly connecting: number
+
+    /**
+     * このソケットを識別するID。
+     */
+    readonly id: number
+
+    /**
+     * 接続に使われているポート番号。
+     */
+    readonly port : number
+  }
+
+  /**
+   * SocketServerオブジェクトは、createSocketServerによって作成されます。
+   */
+  interface ISocketServer {
+
+    /**
+     * localhostの指定したポート番号で、listenを開始します。  
+     * 
+     * @param port 
+     * ポート番号を指定します。
+     * 0を指定するとポート番号が自動的に割り当てられます。
+     * 
+     * @returns
+     * 返り値は決まっていません。
+     */
+    listen(port: number): number;
+
+    /**
+     * listenを停止して閉じます。  
+     */
+    close(): void
+
+    /**
+     * listen中かどうかを表します。
+     */
+    readonly listening: number
+
+    /**
+     * listen中のポート番号を表します。  
+     * 指定されたポート番号でlistenが失敗している場合は0になります。
+     */
+    readonly port : number
+  }
+
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * createSocketClientメソッドは、SocketIOオブジェクトを作成します。
+   * 
+   * @example
+   * js{
+   *   var client = hidemaru.createSocketClient();
+   * }
+   * 
+   * @returns
+   * SocketIOオブジェクトを返します。
+   */
+  function createSocketClient(): ISocketIO;
 
   /**
    * f    
@@ -2120,7 +2374,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function linelen(line_num?: number): number
 
   /**
-   * k
+   * k  
    * [非同期]  
    * 
    * linelen の「エディタ的に計算した」長さを返します。    
@@ -6679,7 +6933,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function xtocolumn(pos_x: number, pos_y: number): number
 
   /**
-   * f
+   * f  
    * [非同期]   
    * 
    * ytolineno関数は、Y座標から行番号への変換をします。
@@ -7834,7 +8088,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function strreplace(text: string, search_text: string, replace_text: string): string
 
   /**
-   * f
+   * f  
    * [非同期]
    * 
    * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
@@ -7864,7 +8118,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
 
   /**
-   * f
+   * f  
    * [非同期]
    * 
    * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
@@ -10373,7 +10627,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function beginrectmulti(): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * 範囲選択開始を実行する    
@@ -10414,7 +10668,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function beginlinesel(is_multiline?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * beginsel, beginrect, beginlinesel, beginrectmultiなど    
@@ -10576,7 +10830,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function cutword(): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * escapeselect文は、範囲選択の取り消しを行います。    
@@ -11224,7 +11478,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function deletewordfront(): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * insert文は、textで指定された文字列を挿入したのち、    
@@ -15713,7 +15967,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function clist(): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * clearupdated文は、編集マークを全て消去して「(更新)」状態を解除します。
@@ -18008,7 +18262,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getinistrw(ini_filepath: string, section_name: string, key_name: string): string
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * writeininum文は、INIファイルに数値のデータを書き込みます。
@@ -18037,7 +18291,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function writeininum(ini_filepath: string, section_name: string, key_name: string, num_value: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * writeininumw文は、writeininumのUnicode版です。    
@@ -18066,7 +18320,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function writeininumw(ini_filepath: string, section_name: string, key_name: string, num_value: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * writeinistr文は、INIファイルに文字列のデータを書き込みます。
@@ -18095,7 +18349,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function writeinistr(ini_filepath: string, section_name: string, key_name: string, str_value: string): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * writeinistrw文は、writeinistrのUnicode版です。    
@@ -20106,7 +20360,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setfiletype(extension: string, no_read_setting_file?: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * envchanged文は、レジストリから動作環境とファイルタイプ別の設定の内容を再読込みし、秀丸エディタの動作環境とファイルタイプ別の設定を更新します。    
@@ -20465,7 +20719,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setmonitor(monitor_ix: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
@@ -20695,7 +20949,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function findspecial(search_type: number, code: number, search_direction: number): number
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * setstaticvariable関数は、静的な変数を書き込みます。
@@ -20748,7 +21002,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setstaticvariable(key: string, str_value: string, scope_type?: number): number
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * getstaticvariable関数は、静的な変数を取得します。
@@ -20818,7 +21072,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setregularcache(cache_mode: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * マクロファイルの先頭に書くことで規定のバージョンを満たしていないとマクロを閉じるといった働きをする関数。  
@@ -20858,7 +21112,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function hidemaruversion(): string
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * keyhook関数は、キー割り当てを一時的に変更します。    
@@ -20898,7 +21152,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function keyhook(key: number, function_id: number): number
 
   /**
-   * s
+   * s  
    * [非同期]  
    * 
    * clearkeyhook文は、keyhookを解除します。    
@@ -21665,7 +21919,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function createobject(dllpath: string, typeid: string): any | undefined;
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
@@ -21680,7 +21934,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function gettotaltext(): string
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * getlinetext関数は、指定行のテキストを文字列にして取得します。    
@@ -21701,7 +21955,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getlinetext(line_num?: number): string
 
   /**
-   * f
+   * f  
    * [非同期]  
    * 
    * getselectedtext関数は、範囲選択の内容を取得します。     

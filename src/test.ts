@@ -48,5 +48,5 @@ function ccc(abc): number {
     return 3;
 }
 
-if (hidemaru.isProcessIdValid(123454))
-
+let s = hidemaru.createSocketClient();
+s.connecting
