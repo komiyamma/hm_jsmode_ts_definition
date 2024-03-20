@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.28.99.04
+ * @version v9.30.99.01
  */
 
 /**
@@ -1185,6 +1185,83 @@ declare namespace hidemaru {
    * SocketIOオブジェクトを返します。
    */
   function createSocketClient(): ISocketIO;
+
+
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * createSocketServerメソッドは、SocketServerオブジェクトを作成します。
+   * 
+   * @callback
+   * 接続が発生したときに呼ばれる関数を指定します。  
+   * 呼ばれる関数のパラメータはSocketIOです。  
+   * 
+   * @example
+   * js{
+   *   var client = hidemaru.createSocketClient();
+   * }
+   * 
+   * @example
+   * debuginfo 2;
+   * jsmode "\\socketServer";
+   * js{
+   *   if(typeof(server)=="undefined"){
+   *     server=hidemaru.createSocketServer(onAccept);
+   *     server.listen(51234);
+   *     if(server.listening){
+   *       console.log("Server started");
+   *     }
+   *   }
+   *   
+   *   function onAccept(socket){
+   *     console.log("Server accept");
+   *     if(typeof(socket)!="undefined"){
+   *       socket.onReadLine(function(s){
+   *         console.log("Server received:"+s);
+   *         socket.write("(echo)"+s);
+   *         });
+   *     }
+   *   }
+   * }
+   * endmacro;
+   * 
+   * @example
+   * debuginfo 2;
+   * jsmode "\\socketServer";
+   * js{
+   *   var g_aSocket={};
+   *   if(typeof(server)=="undefined"){
+   *     server=hidemaru.createSocketServer(onAccept);
+   *     server.listen(51234);
+   *     if(server.listening){
+   *       console.log("Server started:"+server.port);
+   *     }
+   *   }
+   *   
+   *   function onAccept(socketNew){
+   *     console.log("Server accept");
+   *     if(typeof(socketNew)!="undefined"){
+   *       var idSockNew=socketNew.id;
+   *       g_aSocket[idSockNew]=socketNew;
+   *       socketNew.onReadSeparated(onSeparated);
+   *     }
+   *   }
+   *   
+   *   function onSeparated(s,idSock){
+   *     console.log("Server received:"+s);
+   *     g_aSocket[idSock].write("(echo)"+s+"\r\n");
+   *     g_aSocket[idSock].onReadSeparated(onSeparated);
+   *   }
+   *   
+   * }
+   * endmacro;
+   * 
+   * @returns
+   * SocketIOオブジェクトを返します。
+   */
+  function createSocketServer( callback:(socket: ISocketIO)=>void  ): ISocketServer;
+
 
   /**
    * f    
