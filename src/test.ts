@@ -48,5 +48,4 @@ function ccc(abc): number {
     return 3;
 }
 
-let s = hidemaru.createSocketClient();
-s.connecting
+let path: string = hidemarudir + "text.txt";

@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.30.99.01
+ * @version v9.30.99.02
  */
 
 /**
@@ -20827,16 +20827,16 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param pos_y_top 
    * ウィンドウの左上のyピクセル位置、
    * 
-   * @param pos_x_right 
-   * ウィンドウの右下のxピクセル位置、
+   * @param width 
+   * ウィンドウの幅のピクセル数、
    * 
-   * @param pos_y_bottom 
-   * ウィンドウの右下のyピクセル位置、
+   * @param height 
+   * ウィンドウの高さのピクセル数、
    * 
    * @returns
    * 返り値は意味を持ちません。
    */
-  function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom: number): number
+  function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number): number
 
   /**
    * s
