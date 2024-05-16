@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.30.99.03
+ * @version v9.30.99.04
  */
 
 /**
@@ -15541,7 +15541,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    */
   function browserpanecommand(json_obj: IBrowserPaneCommandJsonArg | object): string
 
-  type IBrowserPaneCommandArg = "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy":
+  type IBrowserPaneCommandArg = "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy";
   
   /**
    * f    
@@ -36214,7 +36214,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    */
 declare function browserpanecommand(json_obj: IBrowserPaneCommandJsonArg | object): string
 
-  type IBrowserPaneCommandArg = "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy":
+  type IBrowserPaneCommandArg = "get_DOMContentLoaded" | "get_load" | "get_readyState" | "left" | "right" | "top" | "bottom" | "clear" | "refresh" | "focus" | "focusinputfield" | "watch" | "nowatch" | "watchsave" | "nowatchsave" | "maximize" | "restoremaximize" | "copy";
   
   /**
    * f    
