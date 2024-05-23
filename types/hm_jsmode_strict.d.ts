@@ -1478,10 +1478,10 @@ declare namespace hidemaru {
    * f  
    * [非同期]  
    * 
-   * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+   * setTotalTextは、現在の編集ペインのテキスト全体を、指定の文字列にします。    
    * 
    * @example
-   * var success = gettotaltext("abc\r\n");
+   * var success = hidemaru.setTotalText("abc\r\n");
    * 
    * @returns
    * 成功した場合は、0以外を返す。
@@ -22029,7 +22029,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * f  
    * [非同期]  
    * 
-   * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+   * settotaltextは、現在の編集ペインのテキスト全体を、指定の文字列にします。    
    * 
    * @example
    * var success = gettotaltext("abc\r\n");
