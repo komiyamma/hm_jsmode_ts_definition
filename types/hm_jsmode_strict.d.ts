@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.30.99.04
+ * @version v9.35.06.01
  */
 
 /**
@@ -1473,6 +1473,21 @@ declare namespace hidemaru {
    * 失敗した場合はundefinedになります
    */
   function getTotalText(): string | undefined
+
+  /**
+   * f  
+   * [非同期]  
+   * 
+   * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+   * 
+   * @example
+   * var success = gettotaltext("abc\r\n");
+   * 
+   * @returns
+   * 成功した場合は、0以外を返す。
+   * 失敗した場合は0を返す。
+   */
+  function setTotalText(text: string): number
 
   /**
    * f    
@@ -22009,6 +22024,21 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 失敗した場合は空文字列になります
    */
   function gettotaltext(): string
+
+  /**
+   * f  
+   * [非同期]  
+   * 
+   * gettotaltext関数は、現在の編集ペインのテキスト全体を文字列にして返します。    
+   * 
+   * @example
+   * var success = gettotaltext("abc\r\n");
+   * 
+   * @returns
+   * 成功した場合は、0以外を返す。
+   * 失敗した場合は0を返す。
+   */
+  function settotaltext(text: string): number
 
   /**
    * f  
