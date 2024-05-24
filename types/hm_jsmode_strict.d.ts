@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.06.02
+ * @version v9.35.06.03
  */
 
 /**
@@ -3994,6 +3994,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 0x00000008 桁位置（grep用）    
    * - 0x00000010 ヒット文字列のみ（grep用）    
    * - 0x00000020 日付順（grep用）    
+   * - 0x00000040 ファイル名なし（grep用）    
    * 
    * 以下は検索オプションを変数に設定しておく例です。    
    * @example
@@ -10743,8 +10744,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param is_multiline
    * 範囲選択されていない場合は、カーソル位置の行を行選択状態にしてから、行選択モードに移ります。    
    * 範囲選択されている場合は、パラメータによって動作が違います。    
-   * - 0を指定するか省略した場合、範囲選択されていないときと同様に、カーソル位置の行を行選択状態にします。    
-   * - 1を指定すると、範囲選択が含まれる行すべてを行単位の選択にしてから、行選択モードに移ります。
+   * - 0を指定するか省略した場合、範囲選択されていないときと同様に、カーソル位置の行だけを行選択状態にし、行選択モードに移ります。    
+   * - 1を指定すると、範囲選択が含まれる行（複数行）のすべてを行単位の選択にしてから、行選択モードに移ります。    
    *
    * @example
    * beginlinesel(1);
@@ -22074,6 +22075,26 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *    var a = getselectedtext();
    * }
    * 
+   * @example
+   * js{
+   *     function getselectedtextMulti() {
+   *         //複数選択のgetselectedtext
+   *         var s="";
+   *         if(selecting()){
+   *             if(multiselecting()||rectselecting()){
+   *                 tomultiselect();
+   *             }
+   *             var r=getselectedrange();
+   *             for(i=0;i<r.items.length;i++){
+   *                 var item=r.items[i];
+   *                 s+=gettext2(item.col1,item.line1,item.col2,item.line2)+"\r\n";
+   *             }
+   *         }
+   *         return s;
+   *     }
+   *     message(getselectedtextMulti());
+   * }
+   * 
    * @returns
    * 範囲選択の内容を文字列で返します。    
    * (選択していないなどの理由で)失敗した場合は空文字になります。
@@ -22166,10 +22187,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @example
    * js{
    *   //選択箇所に色を付ける（複数でも）
-   *   colormarker({
-   *     text: "#F00",
-   *     items: getselectedrange({}).items
-   *   });
+   *   cm = getselectedrange();
+   *   cm.text = "#0FF";
+   *   colormarker(cm);
    * }
    * 
    * @see setselectionrange
