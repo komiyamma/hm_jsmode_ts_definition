@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.06.03
+ * @version v9.35.06.04
  */
 
 /**
@@ -654,6 +654,7 @@ declare namespace hidemaru {
     onClose(callback: ()=>void): void
   }
 
+  type IRunProcessEncodeName = "utf16" | "utf8" | "sjis"
   /**
    * f    
    * [非同期]    
@@ -695,7 +696,7 @@ declare namespace hidemaru {
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
-  function runProcess(command: string, current_dir?: string, mode_name?: "gui" | "stdio" | "guiStdio", encode_name?: "utf8" | "utf16" | "sjis"): IProcessInfo;
+  function runProcess(command: string, current_dir?: string, mode_name?: "gui" | "stdio" | "guiStdio", encode_name?: IRunProcessEncodeName): IProcessInfo;
 
   /**
    * f    
@@ -1781,6 +1782,7 @@ declare namespace hidemaru {
    */
   function loadTextFile(filepath: string): string | undefined;
 
+  type ISaveTextFileEncodeName = "utf16" | "utf8" | "utf8bom" | "sjis";
   /**
    * f    
    * [非同期]  
@@ -1810,7 +1812,7 @@ declare namespace hidemaru {
    * 書き込みに成功した場合、0以外が返ります。  
    * 失敗した場合、0を返します。
    */
-  function saveTextFile(filepath: string, text: string, encode_name: "utf16" | "utf8" | "utf8bom" | "sjis"): number;
+  function saveTextFile(filepath: string, text: string, encode_name: ISaveTextFileEncodeName): number;
 
 
   /**
