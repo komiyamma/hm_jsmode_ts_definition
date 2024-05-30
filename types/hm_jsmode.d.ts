@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.06.05
+ * @version v9.35.07.01
  */
 
 /**
@@ -7236,7 +7236,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function enumcolormarkerlayer(colormarkerlayer_ix: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * fullpathのファイルが存在するかどうかを返します。    
    * また、target_attrに数値を指定することで、ファイルの様々な情報を取得することが出来ます。
@@ -27951,7 +27952,8 @@ declare function charcount(count_type: number, text?: string): number
 declare function enumcolormarkerlayer(colormarkerlayer_ix: number): string
 
   /**
-   * f
+   * f  
+   * [非同期]  
    * 
    * fullpathのファイルが存在するかどうかを返します。    
    * また、target_attrに数値を指定することで、ファイルの様々な情報を取得することが出来ます。
