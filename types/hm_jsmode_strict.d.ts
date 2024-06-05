@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.07.01
+ * @version v9.35.07.02
  */
 
 /**
@@ -695,7 +695,7 @@ declare namespace hidemaru {
    * @returns
    * プロセスの情報を表すIProcessInfoのインターフェイスを持つオブジェクトを返します。
    */
-  function runProcess(command: string, current_dir?: string, mode_name?: "gui" | "stdio" | "guiStdio", encode_name?: IRunProcessEncodeName): IProcessInfo;
+  function runProcess(command: string, current_dir?: string, mode_name?: "gui" | "stdio" | "guiStdio" | "stdioAlive", encode_name?: IRunProcessEncodeName): IProcessInfo;
 
   /**
    * f    
