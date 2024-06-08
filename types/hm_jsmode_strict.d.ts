@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.07.02
+ * @version v9.35.08.01
  */
 
 /**
@@ -1341,6 +1341,8 @@ declare namespace hidemaru {
    * 現在のマクロが終了した後、次に実行するマクロをあらかじめ指定する目的で利用できます。    
    * 
    * マクロ実行をスケジュールした後は速やかに現在実行中のメソッド、マクロを終わる必要があります。    
+   * postExecMacroFileのスケジュール数は１つですので、他のpostExecと衝突して、スケジュールに失敗することがあります。    
+   * 確実に実行するためには、hidemaru.setInterval を使って工夫する必要があります。    
    * 
    * @param filepath
    * マクロのファイル名を文字列で指定します。
@@ -1372,19 +1374,32 @@ declare namespace hidemaru {
    * }
    * endmacro;
    * 
+   * @example
+   * // postExecがまず失敗しないという書き方
+   * let peRetry = hidemaru.setInterval(()=>{
+   *     if (hidemaru.isScheduled?.()) return;
+   *     let isScheduled = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
+   *     if (isScheduled === 0) return; // 再挑戦
+   *     hidemaru.clearInterval(peRetry);
+   * }, 100);
+   * 
    * @comment
    * postExecMacroMemoryとは違い、jsmodeの引き継ぎなどは無く、マクロファイルで改めて指定する必要があります。
    * 
    * @returns
-   * 返り値はありません。
+   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。
+   * 秀丸エディタ V9.35β7以下では、nullを返す。
    */
-  function postExecMacroFile(filepath: string, arg?: string): void;
+  function postExecMacroFile(filepath: string, arg?: string): null | 1 | 0;
 
   /**
    * f    
    * [非同期]    
    * 
    * postExecMacroMemoryメソッドは、マクロの内容を文字列で指定して、マクロ実行をスケジュールします。    
+   * 
+   * postExecMacroMemoryのスケジュール数は１つですので、他のpostExecと衝突して、スケジュールに失敗することがあります。    
+   * 確実に実行するためには、hidemaru.setInterval を使って工夫する必要があります。    
    * 
    * @param expression
    * マクロの内容を文字列で指定します。
@@ -1414,15 +1429,25 @@ declare namespace hidemaru {
    * }
    * endmacro;
    * 
+   * @example
+   * // postExecがまず失敗しないという書き方
+   * let peRetry = hidemaru.setInterval(()=>{
+   *     if (hidemaru.isScheduled?.()) return;
+   *     let isScheduled = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
+   *     if (isScheduled === 0) return; // 再挑戦
+   *     hidemaru.clearInterval(peRetry);
+   * }, 100);
+   * 
    * @comment
    * jsmodeをそのまま引き継ぐ。    
    * 自動的にsetcompatiblemode 0x08000000;相当となり、他の秀丸エディタへの切り替え不可モード。    
    * 自動的にsetbackgroundmode 1;相当。    
    * 
    * @returns
-   * 返り値はありません。
+   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。
+   * 秀丸エディタ V9.35β7以下では、nullを返す。
    */
-  function postExecMacroMemory(expression: string): void;
+  function postExecMacroMemory(expression: string): null | 1 | 0;
 
   /**
    * f    
