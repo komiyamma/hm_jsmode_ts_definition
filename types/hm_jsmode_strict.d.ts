@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.08.01
+ * @version v9.35.08.02
  */
 
 /**
@@ -1387,7 +1387,7 @@ declare namespace hidemaru {
    * postExecMacroMemoryとは違い、jsmodeの引き継ぎなどは無く、マクロファイルで改めて指定する必要があります。
    * 
    * @returns
-   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。
+   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。  
    * 秀丸エディタ V9.35β7以下では、nullを返す。
    */
   function postExecMacroFile(filepath: string, arg?: string): null | 1 | 0;
@@ -1444,7 +1444,7 @@ declare namespace hidemaru {
    * 自動的にsetbackgroundmode 1;相当。    
    * 
    * @returns
-   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。
+   * 秀丸エディタ V9.35β8以降では、成功したときは0以外、失敗したときは0を返す。  
    * 秀丸エディタ V9.35β7以下では、nullを返す。
    */
   function postExecMacroMemory(expression: string): null | 1 | 0;
