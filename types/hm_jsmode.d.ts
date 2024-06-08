@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.08.02
+ * @version v9.35.08.03
  */
 
 /**
@@ -1378,9 +1378,9 @@ declare namespace hidemaru {
    * @example
    * // postExecがまず失敗しないという書き方
    * let peRetry = hidemaru.setInterval(()=>{
-   *     if (hidemaru.isScheduled?.()) return;
-   *     let isScheduled = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
-   *     if (isScheduled === 0) return; // 再挑戦
+   *     if (hidemaru.isScheduled?.()) return; // 再挑戦
+   *     let scheduledResult = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
+   *     if (scheduledResult === 0) return; // 再挑戦
    *     hidemaru.clearInterval(peRetry);
    * }, 100);
    * 
@@ -1433,9 +1433,9 @@ declare namespace hidemaru {
    * @example
    * // postExecがまず失敗しないという書き方
    * let peRetry = hidemaru.setInterval(()=>{
-   *     if (hidemaru.isScheduled?.()) return;
-   *     let isScheduled = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
-   *     if (isScheduled === 0) return; // 再挑戦
+   *     if (hidemaru.isScheduled?.()) return; // 再挑戦
+   *     let scheduledResult = hidemaru.postExecMacroMemory("js{ printTranslateText(); }");
+   *     if (scheduledResult === 0) return; // 再挑戦
    *     hidemaru.clearInterval(peRetry);
    * }, 100);
    * 
