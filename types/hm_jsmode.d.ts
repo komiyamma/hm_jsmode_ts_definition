@@ -1356,7 +1356,8 @@ declare namespace hidemaru {
    * }, 100);
    * 
    * @returns
-   * postExecMacroFileメソッドやpostExecMacroMemoryメソッドでマクロ実行をスケジュールしているかどうかを取得します。
+   * postExecMacroFileメソッドやpostExecMacroMemoryメソッドでマクロ実行をスケジュールしているかどうかを取得します。  
+   * スケジュールしている場合は0以外、スケジュールしていない場合は0を返します。
    */
   function isExecMacroScheduled(): number
 
