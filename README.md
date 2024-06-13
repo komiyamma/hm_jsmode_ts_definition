@@ -1,4 +1,4 @@
-# hm_jsmode.d.ts と hm_jsmode_strict.d.ts
+# hm_jsmode.d.ts v9.35.09.02]と hm_jsmode_strict.d.ts
 
 秀丸マクロの jsmode 用の TypeScript 定義ファイル とその構成一式。  
 JSの記述はvscodeでする想定。 
