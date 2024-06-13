@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.08.05
+ * @version v9.35.09.01
  */
 
 /**
@@ -1332,6 +1332,32 @@ declare namespace hidemaru {
    * マクロ実行中の場合は0以外、マクロ実行中でない場合は0を返します。
    */
   function isMacroExecuting(): number
+
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * postExecMacroFile や postExecMacroMemory は、これらの関数を実行することで、一端「実行予約」としてスケジュールされ、  
+   * その後、実行可能になれば、実行されます。  
+   * 
+   * この関数は、すでにpostExecMacroFile や postExecMacroMemory でマクロ実行がスケジュールされているかどうかを判断します。  
+   * この関数を使用するまでもなく、postExecMacroMemoryやpostExecMacroFile は、スケジュールされたかどうかを返り値で返しますので、  
+   * この isExecMacroScheduled は、使う機会は原則ありません。  
+   * (ヘルプに記載が無いのはそのためです)
+   * 
+   * @example
+   * // postExecがまず失敗しないという書き方
+   * let currmacdir = currentmacrodirectory();
+   * let peRetry = hidemaru.setInterval(()=>{
+   *     if (hidemaru.isExecMacroScheduled()) { return; }
+   *     let scheduledResult = hidemaru.postExecMacroFile(currmacdir + "\\test.mac") ?? 1;
+   *     if (scheduledResult) { hidemaru.clearInterval(peRetry); }
+   * }, 100);
+   * 
+   * @returns
+   * postExecMacroFileメソッドやpostExecMacroMemoryメソッドでマクロ実行をスケジュールしているかどうかを取得します。
+   */
+  function isExecMacroScheduled(): number
 
   /**
    * f    
