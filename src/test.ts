@@ -2,4 +2,4 @@
 
 if (hidemaru.isExecMacroScheduled()) {
     
-} s
+}
