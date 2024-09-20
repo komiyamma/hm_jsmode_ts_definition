@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.35.09.02
+ * @version v9.37.04.01
  */
 
 /**
@@ -20908,7 +20908,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]
    * 
    * setwindowsize文は、現在のウィンドウサイズを文字数単位で指定します。    
    * 
@@ -20930,7 +20931,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function setwindowsize(width_column: number, height_lineno: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]
    * 
    * setfocus文は、指定したウィンドウに入力フォーカスを設定します。    
    * 
@@ -41624,7 +41626,8 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number): number
 declare function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]
    * 
    * setwindowsize文は、現在のウィンドウサイズを文字数単位で指定します。    
    * 
@@ -41646,7 +41649,8 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number, width: numb
 declare function setwindowsize(width_column: number, height_lineno: number): number
 
   /**
-   * s
+   * s  
+   * [非同期]
    * 
    * setfocus文は、指定したウィンドウに入力フォーカスを設定します。    
    * 
