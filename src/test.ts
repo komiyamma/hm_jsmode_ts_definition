@@ -1,9 +1,5 @@
-class TempFile implements Disposable {
-    #path: string;
-    #handle: number;
-    constructor(path: string) {
-        this.#path = path;
-    }
-    [Symbol.d.dispose]() {
-    }
+/// <reference path="../types/hm_jsmode.d.ts" />
+
+if (column() == 3) {
+    menu("a", "b", "c");
 }
