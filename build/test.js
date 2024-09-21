@@ -1,3 +1,3 @@
-/// <reference path="../types/hm_jsmode.d.ts" />
-
 let a = 3;
+if (column() == 3) {
+}
