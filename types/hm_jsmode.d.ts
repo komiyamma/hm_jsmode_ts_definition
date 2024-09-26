@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.37.04.01
+ * @version v9.37.06.01
  */
 
 /**
@@ -112,7 +112,14 @@ declare namespace hidemaru {
    *     setVar( "$a", s );
    *     var num = getVar( "#b" );
    * }
-   *
+   *  
+   * @comment
+   * 配列の場合は、以下のように角括弧と数字で指定することができます。  
+   * 
+   * @example
+   * var a = hidemaru.getVar("$a[10]");
+   * // 角括弧の中に変数や式を書くことはできません。
+   * 
    * @returns
    * 指定した秀丸マクロ変数の値を返す
    */
@@ -138,6 +145,13 @@ declare namespace hidemaru {
    *     setVar( "#b", 333 );
    * }
    *
+   * @comment
+   * 配列の場合は、以下のように角括弧と数字で指定することができます。  
+   * 
+   * @example
+   * var a = hidemaru.setVar("$a[10]","あいうえお");
+   * // 角括弧の中に変数や式を書くことはできません。
+   * 
    * @returns
    * 値の設定が成功したら１，失敗したら０を返す
    */
@@ -2475,6 +2489,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在のファイルの、ワープロ的(折り返しも一行とする)に計算した行数を表します。    
    * 新規作成直後の内容が無い場合は１を返します。    
@@ -2489,6 +2504,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在のファイルの、エディタ的(改行だけを数える)に計算した行数を表します。    
    * 新規作成直後の内容が無い場合は１を返します。
@@ -16740,7 +16756,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function playsync(wav_filepath: string): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * debuginfo文は、デバッグ出力を行います。    
    * 
@@ -22679,7 +22696,14 @@ type ILiteralUnit = "xy" | "char" | "wcs" | "ucs4" | "cmu" | "gcu";
  *     setVar( "$a", s );
  *     var num = getVar( "#b" );
  * }
- *
+ *  
+ * @comment
+ * 配列の場合は、以下のように角括弧と数字で指定することができます。  
+ * 
+ * @example
+ * var a = hidemaru.getVar("$a[10]");
+ * // 角括弧の中に変数や式を書くことはできません。
+ * 
  * @returns
  * 指定した秀丸マクロ変数の値を返す
  */
@@ -22705,6 +22729,13 @@ declare function getVar(varname: string): number | string;
  *     setVar( "#b", 333 );
  * }
  *
+ * @comment
+ * 配列の場合は、以下のように角括弧と数字で指定することができます。  
+ * 
+ * @example
+ * var a = hidemaru.setVar("$a[10]","あいうえお");
+ * // 角括弧の中に変数や式を書くことはできません。
+ * 
  * @returns
  * 値の設定が成功したら１，失敗したら０を返す
  */
@@ -23193,6 +23224,7 @@ declare function mouselineno(): number
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在のファイルの、ワープロ的(折り返しも一行とする)に計算した行数を表します。    
    * 新規作成直後の内容が無い場合は１を返します。    
@@ -23207,6 +23239,7 @@ declare function linecount(): number
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在のファイルの、エディタ的(改行だけを数える)に計算した行数を表します。    
    * 新規作成直後の内容が無い場合は１を返します。
@@ -37458,7 +37491,8 @@ declare function play(wav_filepath: string): number
 declare function playsync(wav_filepath: string): number
 
   /**
-   * s
+   * s  
+   * [非同期]  
    * 
    * debuginfo文は、デバッグ出力を行います。    
    * 
