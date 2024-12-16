@@ -2,4 +2,5 @@
 
 if (column() == 3) {
     menu("a", "b", "c");
+    hidemaru.notifyAwait("abc");
 }

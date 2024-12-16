@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.39.06.01
+ * @version v9.39.99.01
  */
 
 /**
@@ -777,6 +777,49 @@ declare namespace hidemaru {
    */
   function isProcessIdValid(process_id: number): number;
 
+  /**
+   * f    
+   * [非同期]    
+   * 
+   * notifyAwaitメソッドは、js{}の外側にあるawaitjsに待機の完了を通知します。  
+   * 
+   * @param key_label
+   * awaitjsで使うものと同じ、任意キーワードを指定します。  
+   * currentmacrofilename()を使うなど、他者作成を含めて「いかなる他のマクロとも」被らない文字列にしてください。  
+   * 
+   * @example
+   * js {  
+   *   hidemaru.notifyAwait("TEST");  
+   * }
+   * 
+   * @example
+   * debuginfo 2;
+   * debuginfo "\n開始\n";
+   * js{
+   *   hidemaru.setTimeout(
+   *     function(){
+   *       try {
+   *         console.log("timeout");
+   *       } catch(e) {
+   *         console.log(e);
+   *       } finally {
+   *         // awaitjsの待機を抜ける。いかなる時でも抜ける必要があるため、原則 finally節内にいれることが多くなる
+   *         hidemaru.notifyAwait("KEYWORD");
+   *       }
+   *     }
+   *     , 1000 );
+   * }
+   * awaitjs "KEYWORD";
+   * debuginfo "\n終了\n";
+   * endmacro;
+   * 
+   * 参照：
+   * @see awaitjs
+   * 
+   * @returns
+   * 返り値はありません。
+   */
+  function notifyAwait(key_label: string): void;
 
   /**
    * HttpServerオブジェクトは、createHttpServerによって作成されます。
