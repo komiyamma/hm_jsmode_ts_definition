@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.39.99.01
+ * @version v9.39.99.02
  */
 
 /**
@@ -20416,7 +20416,6 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
-   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 
@@ -41151,7 +41150,6 @@ declare function configcolor(json_obj: IConfigColorJsonArg): number
 
   /**
    * f    
-   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 
