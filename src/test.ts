@@ -3,10 +3,6 @@
 
 hidemaruversion("9.25.2");
 
-function event() {
-    return 1;    
-}
-}
 message("OK");
 
 let ibpc: IBrowserPaneCommandJsonArg = {
@@ -19,8 +15,6 @@ browserpanecommand(ibpc);
 
 let a:number = menuarray(["1", "2"]);
 
-let c = event();
 
 console.log("OK");
 
-Type
