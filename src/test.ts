@@ -18,3 +18,7 @@ let a:number = menuarray(["1", "2"]);
 
 console.log("OK");
 
+let b = getimecandidate("", "ime");
+
+let d = getdpi();
+

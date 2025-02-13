@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.43.02.01
+ * @version v9.43.02.02
  */
 
 /**
@@ -8298,7 +8298,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * f  
    * [非同期]
    * 
-   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * getimecandidate関数は、IMEの変換候補を取得します。(V9.25以降)
    * 
    * @param clsid 
    * インストールされているIMEをclsidで指定します。  
@@ -8322,13 +8322,13 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
    * エラーは"-1"という文字列が返ります。
    */
-  function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
+  function getimecandidate(clsid: string, text?: ""): "0" | "1"
 
   /**
    * f  
    * [非同期]
    * 
-   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * getimecandidate関数は、IMEの変換候補を取得します。(V9.25以降)
    * 
    * @param clsid 
    * インストールされているIMEをclsidで指定します。  
@@ -8349,7 +8349,23 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
    * エラーは"-1"という文字列が返ります。
    */
-  function getimecandidatelist(clsid: string, text: string): "-1" | string
+  function getimecandidate(clsid: string, text: string): "-1" | string
+
+  /**
+   * f  
+   * [非同期]
+   * 
+   * getdpi関数は、現在の画面のDPIを取得します。
+   * 
+   * @example
+   * 
+   * var dpi = getdpi();
+   * var dpiscale = dpi/ 96;
+   * 
+   * @return
+   * DPIの値を返します。
+   */
+  function getdpi(): number
 
   /**
    * s
@@ -29035,7 +29051,7 @@ declare function strreplace(text: string, search_text: string, replace_text: str
    * f  
    * [非同期]
    * 
-   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * getimecandidate関数は、IMEの変換候補を取得します。(V9.25以降)
    * 
    * @param clsid 
    * インストールされているIMEをclsidで指定します。  
@@ -29059,13 +29075,13 @@ declare function strreplace(text: string, search_text: string, replace_text: str
    * 引数 text が""のときは、clsidの存在チェックを返すため、clsidが有効であれば"1"、無効であれば"0" を返します。
    * エラーは"-1"という文字列が返ります。
    */
-declare function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
+declare function getimecandidate(clsid: string, text?: ""): "0" | "1"
 
   /**
    * f  
    * [非同期]
    * 
-   * getimecandidatelist関数は、IMEの変換候補を取得します。(V9.25以降)
+   * getimecandidate関数は、IMEの変換候補を取得します。(V9.25以降)
    * 
    * @param clsid 
    * インストールされているIMEをclsidで指定します。  
@@ -29086,7 +29102,23 @@ declare function getimecandidatelist(clsid: string, text?: ""): "0" | "1"
    * 変換候補を改行文字("\r\n")区切の複数行で返します。
    * エラーは"-1"という文字列が返ります。
    */
-declare function getimecandidatelist(clsid: string, text: string): "-1" | string
+declare function getimecandidate(clsid: string, text: string): "-1" | string
+
+  /**
+   * f  
+   * [非同期]
+   * 
+   * getdpi関数は、現在の画面のDPIを取得します。
+   * 
+   * @example
+   * 
+   * var dpi = getdpi();
+   * var dpiscale = dpi/ 96;
+   * 
+   * @return
+   * DPIの値を返します。
+   */
+declare function getdpi(): number
 
   /**
    * s
