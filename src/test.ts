@@ -1,6 +1,26 @@
+
 /// <reference path="../types/hm_jsmode.d.ts" />
 
-if (column() == 3) {
-    menu("a", "b", "c");
-    hidemaru.notifyAwait("abc");
+hidemaruversion("9.25.2");
+
+function event() {
+    return 1;    
 }
+}
+message("OK");
+
+let ibpc: IBrowserPaneCommandJsonArg = {
+    "show": 1,
+    "invisible": 1,
+    "initialize": "async"
+};
+
+browserpanecommand(ibpc);
+
+let a:number = menuarray(["1", "2"]);
+
+let c = event();
+
+console.log("OK");
+
+Type

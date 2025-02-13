@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.39.99.02
+ * @version v9.43.02.01
  */
 
 /**
@@ -830,7 +830,7 @@ declare namespace hidemaru {
      * localhostの指定したポート番号で、listenを開始します。  
      * パラメータにポート番号を指定します。  
      * 0を指定するとポート番号が自動的に割り当てられます。  
-     * 返り値は決まっていません。
+     * 成功時は0、失敗時は0以外が返ります。
      */
     listen(): number;
 
@@ -5143,6 +5143,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * sprintfは書式で指定して変換された文字列を返します。
    * 
@@ -7590,6 +7591,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。   
    * 
@@ -20416,6 +20418,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 
@@ -21536,7 +21539,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @param hidemaru_handle 
    * 秀丸のウィンドウハンドル、もしくはウィンドウ番号を指定します。    
-   * 自分自身を指定することはできません。    
+   * 自分自身「=hidemaruhandle(0)」を指定することはできません。    
    * 指定した秀丸エディタがまだファイルを保存してない場合はclosehidemaruは失敗します。    
    * 
    * @example
@@ -21565,7 +21568,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @param hidemaru_handle 
    * 秀丸のウィンドウハンドル、もしくはウィンドウ番号を指定します。    
-   * 自分自身を指定することはできません。    
+   * 自分自身「=hidemaruhandle(0)」を指定することはできません。    
    * closehidemaruとは違い、「(更新)」のついたファイルの場合でもエラーにならずに強制的に（保存せずに）終了させます。
    * 
    * @example
@@ -25877,6 +25880,7 @@ declare function hex(num: number): string
 
   /**
    * f    
+   * [非同期]  
    * 
    * sprintfは書式で指定して変換された文字列を返します。
    * 
@@ -28324,6 +28328,7 @@ declare function getautocompitem(item_ix: number): string
 
   /**
    * f    
+   * [非同期]  
    * 
    * getcolormarker関数は、カーソル位置のカラーマーカーの情報を取得します。   
    * 
@@ -41150,6 +41155,7 @@ declare function configcolor(json_obj: IConfigColorJsonArg): number
 
   /**
    * f    
+   * [非同期]  
    * 
    * getconfigcolor関数は、ファイルタイプ別の設定のカラーを取得します。  
    * 
@@ -42270,7 +42276,7 @@ declare function hidemaruhandle(window_z_order: number): number
    * 
    * @param hidemaru_handle 
    * 秀丸のウィンドウハンドル、もしくはウィンドウ番号を指定します。    
-   * 自分自身を指定することはできません。    
+   * 自分自身「=hidemaruhandle(0)」を指定することはできません。    
    * 指定した秀丸エディタがまだファイルを保存してない場合はclosehidemaruは失敗します。    
    * 
    * @example
@@ -42299,7 +42305,7 @@ declare function closehidemaru(hidemaru_handle: number): number
    * 
    * @param hidemaru_handle 
    * 秀丸のウィンドウハンドル、もしくはウィンドウ番号を指定します。    
-   * 自分自身を指定することはできません。    
+   * 自分自身「=hidemaruhandle(0)」を指定することはできません。    
    * closehidemaruとは違い、「(更新)」のついたファイルの場合でもエラーにならずに強制的に（保存せずに）終了させます。
    * 
    * @example
