@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.43.02.02
+ * @version v9.43.02.03
  */
 
 /**
@@ -828,11 +828,13 @@ declare namespace hidemaru {
 
     /**
      * localhostの指定したポート番号で、listenを開始します。  
+     * 
+     * @param port
      * パラメータにポート番号を指定します。  
      * 0を指定するとポート番号が自動的に割り当てられます。  
      * 成功時は0、失敗時は0以外が返ります。
      */
-    listen(): number;
+    listen(port: number): number;
 
     /**
      * listenを停止して閉じます。  
