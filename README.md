@@ -9,3 +9,4 @@ JSの記述はvscodeでする想定。
 ![WebView2](https://img.shields.io/badge/WebView2-OK-6479ff.svg)
 
 https://秀丸マクロ.net/?page=nobu_tool_hm_jsmode_ts_difinition
+
