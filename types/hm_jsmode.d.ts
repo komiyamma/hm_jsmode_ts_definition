@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.43.02.03
+ * @version v9.44.99.01
  */
 
 /**
@@ -3680,7 +3680,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * k
    * 
    * 現在実行中のexecjs文によって呼ばれたjsファイルのファイル名をフルパスで表します。
-   * execjs文による実行中でない場合はcurrentmacrofilenameと同じです。
+   * execjs文による実行中でない場合は、「空文字」もしくは「currentmacrofilename」と同じです。
    * すべて小文字です。
    * 
    * @example
@@ -3688,6 +3688,9 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * function get_including_by_execjs() {
    *     var cjf = hidemaruGlobal.currentjsfilename();
    *     var cmf = hidemaruGlobal.currentmacrofilename();
+   *     if (cjf == "") {
+   *         return {};
+   *     }
    *     if (cjf != cmf) {
    *         var dir = cjf.replace(/[\/\\][^\/\\]+?$/, "");
    *         return {
@@ -3700,7 +3703,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * 
    * @returns
    * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
-   * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
+   * そうでない場合は、「空文字」もしくは「currentmacrofilename」と同じ文字列を返す。
    */
   function currentjsfilename(): string
 
@@ -24433,7 +24436,7 @@ declare function currentmacrodirectory(): string
    * k
    * 
    * 現在実行中のexecjs文によって呼ばれたjsファイルのファイル名をフルパスで表します。
-   * execjs文による実行中でない場合はcurrentmacrofilenameと同じです。
+   * execjs文による実行中でない場合は、「空文字」もしくは「currentmacrofilename」と同じです。
    * すべて小文字です。
    * 
    * @example
@@ -24441,6 +24444,9 @@ declare function currentmacrodirectory(): string
    * function get_including_by_execjs() {
    *     var cjf = hidemaruGlobal.currentjsfilename();
    *     var cmf = hidemaruGlobal.currentmacrofilename();
+   *     if (cjf == "") {
+   *         return {};
+   *     }
    *     if (cjf != cmf) {
    *         var dir = cjf.replace(/[\/\\][^\/\\]+?$/, "");
    *         return {
@@ -24453,7 +24459,7 @@ declare function currentmacrodirectory(): string
    * 
    * @returns
    * execjs文による実行中なら、実行中のファイルのフルパスを文字列で返す。    
-   * そうでない場合は、currentmacrofilenameと同じ文字列を返す。
+   * そうでない場合は、「空文字」もしくは「currentmacrofilename」と同じ文字列を返す。
    */
 declare function currentjsfilename(): string
 
