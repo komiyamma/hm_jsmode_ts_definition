@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.44.99.01
+ * @version v9.46.02.01
  */
 
 /**
@@ -2031,6 +2031,7 @@ declare namespace hidemaru {
    * - 0x00010000 何かマウスのボタンを押している    
    * - 0x00020000 マウスキャプチャ状態(ドラッグ状態)    
    * - 0x00040000 Hidemaru_CheckQueueStatus相当    
+   * - 0x00080000 デスクトップ復元中
    * 
    * @returns
    * 各種の入力ができるかどうかを判断するための状態値を返す
@@ -3048,6 +3049,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * ウィンドウの表示の具合を表します。
    * @example
@@ -3073,16 +3075,23 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]    
    * 
    * ウィンドウの表示の具合その２です。    
    * 以下の値の論理和です。    
-   * - 常に手前に表示　　　0x0001(ビット０)
-   * - 全画面表示かどうか　0x0002(ビット１)
+   * - 常に手前に表示　　　        0x0001
+   * - 全画面表示かどうか        　0x0002
+   * - 編集エリアが非表示かどうか　0x0004  (タブモードでアクティブではない状態としての非表示状態)  
+   *   0x0004のビットは、Windowsが管理するウィンドウとして非表示状態になっているかどうかを表します。  
+   *   例えば、if( windowstate() == 0 ) {}の判定はshowwindow(0);の状態かどうかを得ることはできますが、タブモードでアクティブではない状態は得ることができません。  
+   *   if( (windowstate2() & 0x0004) != 0 ){}の判定で、タブモードでアクティブではない状態としての非表示状態も得ることができます  
    * 
    * @example
    * var a = windowstate2() & 0x1; // aが1なら常に手前に表示
    * var b = windowstate2() & 0x2; // bが1なら全画面表示
    * var c = a & b; // cが1なら常に手前に表示で、かつ全画面表示
+   * 
+   * var d = windowstate2() & 0x4; // dが1ならタブモードでアクティブではない状態としての非表示状態
    * 
    * @param hidemaru_handle hidemaruhandleに相当する値を引数に与えることで、    
    * 他の秀丸エディタからも値を得ることができます。
@@ -3095,10 +3104,10 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * var a = windowstate2(handle);
    *
    * @returns    
-   * - 非表示の場合は０    
-   * - 通常の表示状態の場合は１
-   * - アイコン化されている場合は２
-   * - 最大化されている場合は３
+   * 以下の値の論理和を返す。  
+   * - 常に手前に表示　　　        0x0001
+   * - 全画面表示かどうか        　0x0002
+   * - 編集エリアが非表示かどうか　0x0004  (タブモードでアクティブではない状態としての非表示状態)  
    */
   function windowstate2(hidemaru_handle?: number): number
 
@@ -3894,6 +3903,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 0x0800 非アクティブなタブまたは非表示のウィンドウ
    * - 0x1000 検索ダイアログの疑似モードレス状態
    * - 0x2000 なめらかスクロール中
+   * - 0x00080000 デスクトップ復元中
    * 
    * @returns
    * 各種の入力ができるかどうかを判断するための状態値を返す
