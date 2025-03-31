@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.46.02.01
+ * @version v9.46.02.02
  */
 
 /**
@@ -2043,7 +2043,7 @@ declare namespace hidemaru {
    * f    
    * [非同期]
    * 
-   * getJsMode関数は、現在のJavaScriptの動作モードを表します。    
+   * getJsMode関数は、現在の(厳密には「最後に指定されたjsmode」空間の)JavaScriptの動作モードを表します。    
    * 
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    * 
