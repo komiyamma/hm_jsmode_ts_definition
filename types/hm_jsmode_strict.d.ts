@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.46.02.02
+ * @version v9.46.02.03
  */
 
 /**
@@ -2042,17 +2042,32 @@ declare namespace hidemaru {
    * f    
    * [非同期]
    * 
-   * getJsMode関数は、現在の(厳密には「最後に指定されたjsmode」空間の)JavaScriptの動作モードを表します。    
-   * 
+   * getJsMode関数は、その秀丸プロセス内で最後に指定されたJavaScriptの動作モードを返します。  
+   * getJsMode自体を「記述している実行空間ではないので注意」。  
+   * 非常に勘違いしやすいため、注意。
+   * @example を理解すること。
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    * 
    * @example
-   * js {
-   *     var a = hidemaru.getJsMode();
-   * }
+   * jsmode "WebView2\\" + currentmacrofilename + "ONE";
    * 
+   * js {
+   * 
+   * debuginfo(2);
+   * 
+   * hidemaru.setTimeout(() => {
+   *     // 「帰属空間」ではなく「最後に指定されたjsmode空間」なので、「_TWO」の方を指す
+   *     console.log(hidemaru.getJsMode());
+   * }, 0);
+   * 
+   * } // js
+   * 
+   * jsmode "WebView2\\" + currentmacrofilename + "_TWO";
+   * 
+   * js {}
+   *  
    * @returns
-   * 現在のJavaScriptの動作モード。    
+   * その秀丸プロセス内で最後に指定されたJavaScriptの動作モード。    
    * jsmode文で指定したスクリプトエンジンと、指定のスコープと、グローバル記述の有無を繋げた１つの文字列になります。    
    */
   function getJsMode(): string
