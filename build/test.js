@@ -1,58 +1,72 @@
 /// <reference path="../types/hm_jsmode.d.ts" />
-var currentMacroDirectory = currentmacrodirectory();
-if (typeof (server) != "undefined") {
-    server.close();
-}
-var server = hidemaru.createHttpServer({ makeKey: 1 }, function (req, res) {
-    if (req.url == "/" + server.key) {
-        res.writeHead(200); // OK
-        var obj = makeSendObject();
-        res.write(JSON.stringify(obj));
-        res.end("");
+const renderPaneTargetName = "HmXGrokWeb";
+const isOneAtTimeAIRenderPane = 1; // AI関連のレンダリング枠は(他の種類のAIも含め)１つだけにする。(複数起動しそうになると、前のものが閉じる）
+debuginfo(2);
+const currentMacroDirectory = currentmacrodirectory();
+// AIウィンドウを１つだけに絞る処理
+function oneAIWindowFrameCheck() {
+    try {
+        if (!isOneAtTimeAIRenderPane) {
+            return;
+        }
+        let lastAiRenderPaneTargetName = getstaticvariable("OneAtTimeAIRenderPane", 2);
+        console.log(lastAiRenderPaneTargetName);
+        // 自分だよ、何もしない。
+        if (lastAiRenderPaneTargetName == renderPaneTargetName) {
+            return;
+        }
+        // 他のAIマクロがAIパネル枠を利用しているなら、閉じる
+        if (lastAiRenderPaneTargetName) {
+            const param = {
+                target: lastAiRenderPaneTargetName,
+                show: 0,
+            };
+            renderpanecommand(param);
+        }
+        hidemaru.setTimeout(aaa, 1000);
     }
-    else {
-        res.writeHead(404); // Not found
-        res.end("");
+    catch (e) {
+        console.log(e);
     }
-});
-// 非同期関数なので非同期中に使える関数で構築する必要あり
-function makeSendObject() {
-    var obj = {
-        text: gettotaltext(),
-        column: column(),
-        lineno: lineno()
-    };
-    return obj;
 }
-function makeUrl(htmlFullPath, port, key) {
-    var htmlFullPath = htmlFullPath.replace(/\\/g, "/");
-    var absoluteUrl = sprintf("%s&port=%d&key=%s", htmlFullPath, port, key);
-    console.log(absoluteUrl);
-    return absoluteUrl;
+var timeHandle = 0;
+if (timeHandle) {
+    hidemaru.clearTimeout(timeHandle);
 }
-function outputAlert(msg) {
-    var dll = loaddll("HmOutputPane.dll");
-    dll.dllFuncW.OutputW(hidemaru.getCurrentWindowHandle(), msg + "\r\n");
-}
-// メインの処理
-function main() {
-    server.listen(0); //ランダムなポート
-    if (server.port == 0) {
-        outputAlert("サーバー構築失敗");
+debuginfo(2);
+function aaa() {
+    console.log("aaa");
+    let lastAiRenderPaneTargetName = getstaticvariable("OneAtTimeAIRenderPane", 2);
+    if (lastAiRenderPaneTargetName != renderPaneTargetName) {
+        hidemaru.clearTimeout(timeHandle);
+        console.log("食い違い");
+        const param = {
+            "get": "_each",
+        };
+        let url = browserpanecommand(param);
+        if (url.includes("https://grok.com")) {
+            browserpanecommand({ target: "_each", show: 0 });
+        }
         return;
     }
-    var absoluteUrl = makeUrl(currentMacroDirectory + "\\HmCustomRenderBrowser.html", server.port, server.key);
-    // 指定のパラメータでレンダーペインを開く。browserpanecommand にして、targetを "_each" にしてもほぼ同じこと
-    browserpanecommand({
-        target: "_each",
-        url: absoluteUrl,
-        show: 1,
-        size: 500,
-    });
+    hidemaru.setTimeout(aaa, 3000);
 }
-// 同期で処理せず、非同期で処理することで、マクロ実行で一瞬固まるのを回避する。
-var timerHandle;
-if (typeof (timerHandle) != "undefined") {
-    hidemaru.clearTimeout(timerHandle);
+function doMain() {
+    let text = getselectedtext();
+    if (text) {
+        // oneAIWindowFrameCheck();
+        let param = {
+            target: "_each",
+            url: "https://grok.com/?q=" + encodeURI(text),
+            initialize: "async",
+            show: 1,
+            size: 400
+        };
+        browserpanecommand(param);
+        // １つのウィンドウに絞るフラグがONなら、登録しておく
+        if (isOneAtTimeAIRenderPane) {
+            setstaticvariable("OneAtTimeAIRenderPane", renderPaneTargetName, 2);
+        }
+    }
 }
-timerHandle = hidemaru.setTimeout(main, 0);
+hidemaru.setTimeout(doMain, 0);
