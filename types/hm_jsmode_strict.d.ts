@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.46.02.03
+ * @version v9.48.01.01
  */
 
 /**
@@ -2023,7 +2023,7 @@ declare namespace hidemaru {
    * - 0x00000100 IME入力中    
    * - 0x00000200 何らかのダイアログ表示中    
    * - 0x00000400 ウィンドウがDisable状態    
-   * - 0x00000800 非アクティブなタブまたは非表示のウィンドウ    
+   * - 0x00000800 非アクティブなタブまたは非表示のウィンドウ  (windowstate2() & 0x0004 と同じ)
    * - 0x00001000 検索ダイアログの疑似モードレス状態    
    * - 0x00002000 なめらかスクロール中    
    * - 0x00004000 中ボタンによるオートスクロール中    
@@ -3099,7 +3099,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 編集エリアが非表示かどうか　0x0004  (タブモードでアクティブではない状態としての非表示状態)  
    *   0x0004のビットは、Windowsが管理するウィンドウとして非表示状態になっているかどうかを表します。  
    *   例えば、if( windowstate() == 0 ) {}の判定はshowwindow(0);の状態かどうかを得ることはできますが、タブモードでアクティブではない状態は得ることができません。  
-   *   if( (windowstate2() & 0x0004) != 0 ){}の判定で、タブモードでアクティブではない状態としての非表示状態も得ることができます  
+   *   if( (windowstate2() & 0x0004) != 0 ){}の判定で、タブモードでアクティブではない状態としての非表示状態も得ることができます。  
+   *   この値は、「inputstates() & 0x00000800」で得られる条件と同じ同じです。
    * 
    * @example
    * var a = windowstate2() & 0x1; // aが1なら常に手前に表示
@@ -3915,7 +3916,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * - 0x00000100 IME入力中    
    * - 0x00000200 何らかのダイアログ表示中    
    * - 0x00000400 ウィンドウがDisable状態    
-   * - 0x00000800 非アクティブなタブまたは非表示のウィンドウ    
+   * - 0x00000800 非アクティブなタブまたは非表示のウィンドウ  (windowstate2() & 0x0004 と同じ)
    * - 0x00001000 検索ダイアログの疑似モードレス状態    
    * - 0x00002000 なめらかスクロール中    
    * - 0x00004000 中ボタンによるオートスクロール中    
@@ -4304,6 +4305,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 上書き禁止かどうかを表します。
    * 
@@ -4728,6 +4730,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在の日付を表します。    
    * 
@@ -4739,6 +4742,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * 現在の時刻を表します。
    * 
@@ -16108,6 +16112,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * s
+   * [非同期]  
    * 
    * readonlyswitch文は、「ファイルの書換え禁止／許可の切り替え」を実行します。    
    * 起動オプション/rrで起動して、上書き禁止モードの切り替えができない状態になっている場合は失敗します。    
