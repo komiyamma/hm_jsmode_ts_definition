@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.48.01.01
+ * @version v9.48.01.02
  */
 
 /**
@@ -1603,7 +1603,7 @@ declare namespace hidemaru {
    * [非同期]    
    * 
    * getLineTextメソッドは、指定行のテキストを文字列にして取得します。    
-   * 
+   * 行末に改行コードがある場合、改行コードを含みます。  
    * @param line_num
    * 行番号を指定します。先頭が1です。    
    * 省略した場合には、現在カーソルがある行が対象となります。
@@ -1615,6 +1615,7 @@ declare namespace hidemaru {
    * 
    * @returns
    * 指定した行の内容を返します。    
+   * 行末に改行コードがある場合、改行コードを含みます。  
    * 失敗した場合はundefinedになります。
    */
   function getLineText(line_num?: number): string | undefined
@@ -22218,6 +22219,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * [非同期]  
    * 
    * getlinetext関数は、指定行のテキストを文字列にして取得します。    
+   * 行末に改行コードがある場合、改行コードを含みます。  
    * 
    * @param line_num
    * 行番号を指定します。先頭が1です。    
@@ -22229,7 +22231,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * var text2 = getlinetext(); // カーソルがある行のテキスト内容を返す
    * 
    * @returns
-   * 指定した行の内容を返します。    
+   * 指定した行の内容を返します。  
+   * 行末に改行コードがある場合、改行コードを含みます。  
    * 失敗した場合は空文字になります。
    */
   function getlinetext(line_num?: number): string
