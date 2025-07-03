@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.48.01.02
+ * @version v9.48.03.01
  */
 
 /**
@@ -3398,6 +3398,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * ブラウザ枠のウィンドウハンドルを表します。   
    * 
@@ -3414,6 +3415,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * ブラウザ枠のサイズをピクセル単位で表します。
    * 
@@ -3430,6 +3432,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
 
   /**
    * k    
+   * [非同期]  
    * 
    * ブラウザ枠に表示されている現在のコンテンツのURLを表します。   
    * 実行されたブックマークレットの場合は表されません。  
