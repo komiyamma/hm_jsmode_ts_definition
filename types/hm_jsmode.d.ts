@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.48.03.01
+ * @version v9.50.04.01
  */
 
 /**
@@ -15661,7 +15661,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string }
+  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string, focusinputfield:1 | string }
   /**
    * f    
    * [非同期]  
@@ -15697,7 +15697,8 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
    *  - watchsave:　[上書き保存で更新]の状態を0か1で指定します。（1を指定すると[上書き保存で更新]をON）
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
-   * 
+   *  - focusinputfield:　文字列を指定して、コンテンツ内の要素にフォーカスします。文字列は、querySelectorで指定できる文字列です。
+   *
    * @example
    * js {
    *   browserpanecommand({
@@ -36441,7 +36442,7 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string }
+  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string, focusinputfield:1 | string }
   /**
    * f    
    * [非同期]  
@@ -36477,7 +36478,8 @@ declare function setbrowserpaneurl(url: string, target_pane?: number): number
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
    *  - watchsave:　[上書き保存で更新]の状態を0か1で指定します。（1を指定すると[上書き保存で更新]をON）
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
-   * 
+   *  - focusinputfield:　文字列を指定して、コンテンツ内の要素にフォーカスします。文字列は、querySelectorで指定できる文字列です。
+   *
    * @example
    * js {
    *   browserpanecommand({
