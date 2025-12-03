@@ -8411,6 +8411,24 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   function getdpi(): number
 
   /**
+   * f  
+   * 
+   * getvd関数は、ウィンドウの仮想デスクトップIDを取得します。（
+   * 
+   * @param handle
+   * 秀丸エディタのウィンドウ番号またはウィンドウハンドルを指定します。  
+   * 省略した場合は自分自身になります。
+   * 
+   * @example
+   * 
+   * var strID = getvd();
+   * 
+   * @return
+   * 仮想デスクトップごとに固有にある文字列IDを返します。
+   */
+  function getvd(handle?: number): string
+
+  /**
    * s
    * 
    * newfile文は、新しい秀丸エディタを起動します。    
@@ -29190,6 +29208,24 @@ declare function getimecandidate(clsid: string, text: string): "-1" | string
    * DPIの値を返します。
    */
 declare function getdpi(): number
+
+  /**
+   * f  
+   * 
+   * getvd関数は、ウィンドウの仮想デスクトップIDを取得します。（
+   * 
+   * @param handle
+   * 秀丸エディタのウィンドウ番号またはウィンドウハンドルを指定します。  
+   * 省略した場合は自分自身になります。
+   * 
+   * @example
+   * 
+   * var strID = getvd();
+   * 
+   * @return
+   * 仮想デスクトップごとに固有にある文字列IDを返します。
+   */
+declare function getvd(handle?: number): string
 
   /**
    * s
