@@ -15678,7 +15678,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
   type IBrowserPaneTarget = IBrowserPaneTargetString | IBrowserPaneTargetNumber;
   type IBrowserPaneTargetString = "_common" | "_each";
   type IBrowserPaneTargetNumber = 0 | 1 | 2;
-  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, setinputfield?: string, focusinputfield:1 | string }
+  interface IBrowserPaneCommandJsonArg { target?: IBrowserPaneTargetString, show?: 1 | 0, invisible? : 1 | 0, uri?: string, url?: string, place?: "leftside" | "rightside" | "upside" | "downside", get?: "readyState" | "DOMContentLoaded" | "load" | "show" | "invisible" | "uri" | "url" | "size" | "initialized" | "title" | "watch" | "watchsave" | "maximize" , clear?: 1, refresh?: 1, focus?: 1 | 0, size?: number, syncsize?: 1, initialize?: "async", watch?: 0 | 1, watchsave?: 0 | 1, maximize?: 0 | 1, setinputfield?: string, focusinputfield:1 | string }
   /**
    * f    
    * [非同期]  
@@ -15713,6 +15713,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    *  - initialize: 個別ブラウザ枠の場合、"async"を指定すると初期化を待機せずにすぐに制御を戻します。
    *  - watch: 1を指定するとローカルファイルの自動更新をします。
    *  - watchsave:　[上書き保存で更新]の状態を0か1で指定します。（1を指定すると[上書き保存で更新]をON）
+   *  - maximize:　1を指定すると最大化します。（個別ブラウザ枠のみ）
    *  - setinputfield: 文字列を指定して、コンテンツ内のフォーカスのある要素が入力欄であれば設定します。（内容によってはうまくいくとは限りません）
    *  - focusinputfield:　文字列を指定して、コンテンツ内の要素にフォーカスします。文字列は、querySelectorで指定できる文字列です。
    *
