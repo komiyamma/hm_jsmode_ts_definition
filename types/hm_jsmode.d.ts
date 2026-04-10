@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.55.04.01
+ * @version v9.55.05.01
  */
 
 /**
@@ -21044,10 +21044,15 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * @param height 
    * ウィンドウの高さのピクセル数、
    * 
+   * @param option_flag
+   * その他の特殊なオプションフラグ
+   * 以下の値の論理和です。
+   * - Windows 10 以降の透明な枠を計算に入れない　0x0001 (ビット0)
+   *
    * @returns
    * 返り値は意味を持ちません。
    */
-  function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number): number
+  function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number, option_flag?: number): number
 
   /**
    * s  
@@ -41844,10 +41849,15 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number): number
    * @param height 
    * ウィンドウの高さのピクセル数、
    * 
+   * @param option_flag
+   * その他の特殊なオプションフラグ
+   * 以下の値の論理和です。
+   * - Windows 10 以降の透明な枠を計算に入れない　0x0001 (ビット0)
+   *
    * @returns
    * 返り値は意味を持ちません。
    */
-declare function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number): number
+declare function setwindowpos(pos_x_left: number, pos_y_top: number, width: number, height: number, option_flag?: number): number
 
   /**
    * s  
