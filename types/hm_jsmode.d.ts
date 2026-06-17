@@ -29,7 +29,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.55.05.01
+ * @version v9.55.99.01
  */
 
 /**
@@ -5065,6 +5065,7 @@ declare namespace hidemaruGlobal { /// <# HidemaruGlobalToGlobal bgn #>
    * f    
    * 
    * val関数は、文字列を数値に変換します。    
+   * JavaScriptのNumber関数と同一です。    
    * (秀丸マクロの互換のために実装されていますが、    
    *  JavaScriptは、「文字列の数字」に単項演算子として「+」を付けると数値に変換できますので、    
    *  そちらを使うのが一般的です。)
@@ -25870,6 +25871,7 @@ declare function str(num_value: number): string
    * f    
    * 
    * val関数は、文字列を数値に変換します。    
+   * JavaScriptのNumber関数と同一です。    
    * (秀丸マクロの互換のために実装されていますが、    
    *  JavaScriptは、「文字列の数字」に単項演算子として「+」を付けると数値に変換できますので、    
    *  そちらを使うのが一般的です。)
