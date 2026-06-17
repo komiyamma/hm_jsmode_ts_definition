@@ -28,7 +28,7 @@
  *                （ヘルプファイルから大量の説明文章の利用を伴っていても良い）
  *                 https://www.maruo.co.jp/hidesoft/1/x01458_.html?a=0#1458
  * 
- * @version v9.55.99.01
+ * @version v9.55.99.02
  */
 
 /**
@@ -580,6 +580,11 @@ declare namespace hidemaru {
      * 同一プロセスの秀丸エディタ上で、1から加算され、他のStdioと被ることはない値です。
      */
     readonly id: number
+
+    /*
+     * 相手が閉じられたときに呼ばれる関数を指定します。
+     */
+    onExit(callback: () => any): void
 
     /**
      * 標準入出力を閉じます。
